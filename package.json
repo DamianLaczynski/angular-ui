@@ -8,6 +8,7 @@
     "start:showcase": "ng serve showcase",
     "build": "ng build showcase",
     "build:showcase": "ng build showcase",
+    "build:gh-pages": "ng build showcase --configuration=production --base-href=/angular-ui/",
     "watch": "ng build showcase --watch --configuration development",
     "build:lib": "ng build angular-ui",
     "build:lib:watch": "ng build angular-ui --watch",
