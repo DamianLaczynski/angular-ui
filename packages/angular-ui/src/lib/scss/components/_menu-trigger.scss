@@ -1,0 +1,37 @@
+@use '../utils/variables' as *;
+
+.menu-trigger-host {
+  display: inline-flex;
+
+  &--split {
+    .menu-trigger-split {
+      display: inline-flex;
+      align-items: stretch;
+    }
+
+    .menu-trigger-split__divider {
+      width: 1px;
+      margin: 0;
+      background: var(--color-neutral-stroke-rest);
+    }
+
+    .menu-trigger-split__primary {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .menu-trigger-split__dropdown {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      padding-left: $spacing-1;
+      padding-right: $spacing-1;
+    }
+  }
+}
+
+.menu-trigger__shortcut {
+  margin-left: auto;
+  margin-right: $spacing-2;
+  font-size: $font-size-200;
+  color: var(--color-neutral-foreground3-rest);
+}

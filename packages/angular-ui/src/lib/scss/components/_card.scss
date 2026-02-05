@@ -1,0 +1,426 @@
+// ==========================================================================
+// Card Component - Fluent 2 Design System
+// ==========================================================================
+// Appearances: filled (default), transparent, tint, outline, subtle
+// Sizes: small, medium, large
+// Orientations: vertical (default), horizontal
+// States: selected, disabled, clickable
+
+@use 'sass:map';
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// ==========================================================================
+// Base Card
+// ==========================================================================
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-neutral-background-rest);
+  border-radius: $border-radius-400;
+  border: 1px solid var(--color-neutral-stroke-rest);
+  box-shadow: $elevation-2;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  &__header-container {
+    padding: $spacing-3;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+  }
+
+  &__header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+
+    ui-icon {
+      color: var(--color-neutral-foreground-rest);
+    }
+  }
+
+  &__text-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    color: var(--color-neutral-foreground-rest);
+    font-size: $font-size-300;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-300;
+  }
+
+  &__subtitle {
+    color: var(--color-neutral-foreground2-rest);
+    font-size: $font-size-200;
+    line-height: $line-height-200;
+  }
+
+  &__quick-action {
+    padding: 6px;
+    background: transparent;
+    border: none;
+    border-radius: $border-radius-400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    @include smooth-hover;
+
+    &:hover:not(:disabled) {
+      background: var(--color-neutral-background-hover);
+    }
+
+    &:active:not(:disabled) {
+      background: var(--color-neutral-background-pressed);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+
+      ui-icon {
+        color: var(--color-neutral-foreground-disabled);
+      }
+    }
+
+    ui-icon {
+      color: var(--color-neutral-foreground2-rest);
+    }
+  }
+
+  &__body-container {
+    padding: 0 $spacing-3 $spacing-3;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__body {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+  }
+
+  &__body-text {
+    flex: 1;
+    color: var(--color-neutral-foreground2-rest);
+    font-size: $font-size-200;
+    line-height: $line-height-200;
+  }
+
+  &__footer-container {
+    padding: 0 $spacing-3 $spacing-3;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+  }
+}
+
+// ==========================================================================
+// Sizes
+// ==========================================================================
+
+$card-sizes: (
+  'small': (
+    border-radius: $border-radius-200,
+    header-padding: $spacing-2,
+    body-padding: $spacing-2,
+    title-font-size: $font-size-200,
+  ),
+  'medium': (
+    border-radius: $border-radius-400,
+    header-padding: $spacing-3,
+    body-padding: $spacing-3,
+    title-font-size: $font-size-300,
+  ),
+  'large': (
+    border-radius: $border-radius-600,
+    header-padding: $spacing-4,
+    body-padding: $spacing-4,
+    title-font-size: $font-size-400,
+  ),
+);
+
+@each $size, $props in $card-sizes {
+  .card--#{$size} {
+    border-radius: map.get($props, border-radius);
+
+    .card__header-container {
+      padding: map.get($props, header-padding);
+    }
+
+    .card__body-container,
+    .card__footer-container {
+      padding: 0 map.get($props, body-padding) map.get($props, body-padding);
+    }
+
+    .card__title {
+      font-size: map.get($props, title-font-size);
+    }
+  }
+}
+
+// ==========================================================================
+// Appearances
+// ==========================================================================
+
+// Filled (default)
+.card--filled {
+  background: var(--color-neutral-background-rest);
+  @include smooth-hover;
+  @include transition-transform($duration-faster);
+
+  &:hover:not(.card--disabled) {
+    background: var(--color-neutral-background-hover);
+    box-shadow: $elevation-4;
+  }
+
+  &:active:not(.card--disabled) {
+    background: var(--color-neutral-background-pressed);
+  }
+}
+
+// Transparent
+.card--transparent {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+// Tint
+.card--tint {
+  background: var(--color-subtle-background-rest);
+  @include smooth-hover;
+
+  &:hover:not(.card--disabled) {
+    background: var(--color-subtle-background-hover);
+  }
+}
+
+// Outline
+.card--outline {
+  background: transparent;
+  border: 2px solid var(--color-neutral-stroke-rest);
+  box-shadow: none;
+  @include smooth-hover;
+  @include transition-transform($duration-faster);
+
+  &:hover:not(.card--disabled) {
+    border-color: var(--color-neutral-stroke-hover);
+    background: var(--color-neutral-background-hover);
+  }
+}
+
+// Subtle
+.card--subtle {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  @include smooth-hover;
+
+  &:hover:not(.card--disabled) {
+    background: var(--color-subtle-background-hover);
+  }
+}
+
+// Legacy alias
+.card--plain {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+// ==========================================================================
+// States
+// ==========================================================================
+
+.card--selected {
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 1px var(--color-brand-primary);
+}
+
+.card--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+
+  .card__title,
+  .card__subtitle,
+  .card__body-text {
+    color: var(--color-neutral-foreground-disabled);
+  }
+}
+
+.card--clickable {
+  cursor: pointer;
+  @include smooth-hover;
+  @include transition-transform($duration-faster);
+
+  @include focus-ring;
+
+  &:not(.card--disabled):hover {
+    transform: translateY(-1px);
+  }
+
+  &:not(.card--disabled):active {
+    transform: translateY(0);
+  }
+}
+
+// ==========================================================================
+// Orientations
+// ==========================================================================
+
+.card--horizontal {
+  flex-direction: row;
+
+  .card__header-container,
+  .card__body-container,
+  .card__footer-container {
+    flex: 1;
+  }
+
+  .card__header-container {
+    border-right: 1px solid var(--color-neutral-stroke-rest);
+  }
+}
+
+.card--vertical {
+  flex-direction: column;
+}
+
+// ==========================================================================
+// Variants
+// ==========================================================================
+
+// PRIMARY VARIANT
+.card--primary {
+  border-color: var(--color-brand-primary);
+
+  .card__header-icon ui-icon,
+  .card__title {
+    color: var(--color-brand-primary);
+  }
+
+  &.card--filled {
+    background: var(--color-neutral-background-brand-selected);
+
+    &:hover:not(.card--disabled) {
+      background: var(--color-neutral-background-brand-hover);
+    }
+
+    &:active:not(.card--disabled) {
+      background: var(--color-neutral-background-brand-pressed);
+    }
+  }
+
+  &.card--outline {
+    border-color: var(--color-brand-primary);
+
+    &:hover:not(.card--disabled) {
+      background: var(--color-neutral-background-brand-hover);
+    }
+  }
+
+  &.card--selected {
+    border-color: var(--color-brand-primary);
+    box-shadow: 0 0 0 1px var(--color-brand-primary);
+  }
+}
+
+// SECONDARY VARIANT
+.card--secondary {
+  border-color: var(--color-neutral-stroke-accessible);
+
+  .card__header-icon ui-icon,
+  .card__title {
+    color: var(--color-neutral-foreground2-rest);
+  }
+
+  &.card--filled {
+    background: var(--color-neutral-background2-rest);
+
+    &:hover:not(.card--disabled) {
+      background: var(--color-neutral-background2-hover);
+    }
+
+    &:active:not(.card--disabled) {
+      background: var(--color-neutral-background2-pressed);
+    }
+  }
+
+  &.card--outline {
+    border-color: var(--color-neutral-stroke-accessible);
+
+    &:hover:not(.card--disabled) {
+      background: var(--color-neutral-background2-hover);
+    }
+  }
+
+  &.card--selected {
+    border-color: var(--color-neutral-stroke-accessible);
+    box-shadow: 0 0 0 1px var(--color-neutral-stroke-accessible);
+  }
+}
+
+// SUCCESS, WARNING, DANGER, INFO - using shared color variants
+$card-color-variants: (
+  'success': 'green',
+  'warning': 'orange',
+  'danger': 'red',
+  'info': 'blue',
+);
+
+@each $variant, $color in $card-color-variants {
+  .card--#{$variant} {
+    border-color: var(--color-shared-#{$color}-foreground);
+
+    .card__header-icon ui-icon,
+    .card__title {
+      color: var(--color-shared-#{$color}-foreground);
+    }
+
+    &.card--filled {
+      background: var(--color-shared-#{$color}-background);
+
+      &:hover:not(.card--disabled) {
+        filter: brightness(0.95);
+      }
+
+      &:active:not(.card--disabled) {
+        filter: brightness(0.9);
+      }
+    }
+
+    &.card--outline {
+      border-color: var(--color-shared-#{$color}-foreground);
+
+      &:hover:not(.card--disabled) {
+        background: var(--color-shared-#{$color}-background);
+      }
+    }
+
+    &.card--selected {
+      border-color: var(--color-shared-#{$color}-foreground);
+      box-shadow: 0 0 0 1px var(--color-shared-#{$color}-foreground);
+    }
+  }
+}

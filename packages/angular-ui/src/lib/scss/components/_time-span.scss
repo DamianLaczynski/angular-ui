@@ -1,0 +1,103 @@
+// =============================================================================
+// Time Span Component Styles (Fluent 2 Design System)
+// =============================================================================
+
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+@use '../utils/functions' as *;
+
+// =============================================================================
+// Time Span Panel
+// =============================================================================
+
+// Time Span Panel (rendered via CDK Overlay)
+.timespan-panel {
+  background: var(--color-neutral-background-rest);
+  border-radius: $border-radius-400;
+  box-shadow:
+    0px 0px 2px rgba(0, 0, 0, 0.12),
+    0px 8px 16px rgba(0, 0, 0, 0.14);
+  max-width: 500px;
+  @include slide-down($duration-normal, $easing-decelerate-min);
+
+  &--small {
+    min-width: 300px;
+  }
+
+  &--medium {
+    min-width: 400px;
+  }
+
+  &--large {
+    min-width: 500px;
+  }
+
+  // =============================================================================
+  // Panel Content
+  // =============================================================================
+
+  &__content {
+    padding: $spacing-3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-3;
+    flex-wrap: wrap;
+  }
+
+  // =============================================================================
+  // Unit Input
+  // =============================================================================
+
+  &__unit {
+    display: flex;
+    align-items: center;
+  }
+
+  // =============================================================================
+  // Unit Controls (buttons + number input + label)
+  // =============================================================================
+
+  &__unit-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    // Limit width of input wrapper
+    .input-wrapper {
+      max-width: $spacing-10;
+      display: flex;
+      flex-shrink: 0;
+    }
+
+    // Style the number input
+    .number-input {
+      text-align: center;
+      width: 100%;
+
+      // Remove spinner arrows from number input
+      -moz-appearance: textfield;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }
+
+  // =============================================================================
+  // Unit Short Label (letter after input)
+  // =============================================================================
+
+  &__unit-short-label {
+    font-size: $font-size-300;
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-300;
+    color: var(--color-neutral-foreground-rest);
+    margin-left: $spacing-1;
+    min-width: $spacing-4;
+    text-align: center;
+  }
+}

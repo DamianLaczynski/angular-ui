@@ -1,0 +1,40 @@
+<div
+  [class]="tagClasses()"
+  [attr.aria-label]="effectiveAriaLabel()"
+  [attr.aria-disabled]="disabled() ? 'true' : null"
+  [attr.aria-readonly]="readonly() ? 'true' : null"
+  [attr.aria-selected]="isClickable() ? (selected() ? 'true' : 'false') : null"
+  [attr.role]="isClickable() ? 'button' : null"
+  [attr.tabindex]="effectiveTabIndex()"
+  (click)="onTagClick($event)"
+  (keydown)="onTagKeyDown($event)"
+>
+  <div class="tag__content">
+    @if (icon()) {
+      <ui-icon [icon]="icon()!" [size]="iconSize()" variant="regular" class="tag__icon" />
+    }
+
+    <div
+      class="tag__text-slot"
+      [class.tag__text-slot--with-secondary]="secondaryText() && size() === 'medium'"
+    >
+      <div class="tag__primary">{{ text() }}</div>
+      @if (secondaryText() && size() === 'medium') {
+        <div class="tag__secondary">{{ secondaryText() }}</div>
+      }
+    </div>
+
+    @if (dismissible() && !disabled() && !readonly()) {
+      <button
+        type="button"
+        class="tag__dismiss"
+        [attr.aria-label]="'Remove ' + text()"
+        (click)="onDismissClick($event)"
+        (keydown)="onDismissKeyDown($event)"
+        [attr.tabindex]="effectiveTabIndex() === -1 ? -1 : 0"
+      >
+        <ui-icon icon="dismiss" [size]="iconSize()" variant="regular" class="tag__dismiss-icon" />
+      </button>
+    }
+  </div>
+</div>

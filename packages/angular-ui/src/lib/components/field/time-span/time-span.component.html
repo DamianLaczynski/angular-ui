@@ -1,0 +1,104 @@
+<ui-field
+  [fieldType]="'text'"
+  [label]="label()"
+  [placeholder]="placeholder()"
+  [helpText]="helpText()"
+  [(errorText)]="errorText"
+  [required]="required()"
+  [disabled]="disabled()"
+  [readonly]="readonly()"
+  [autocomplete]="autocomplete()"
+  [id]="id()"
+  [name]="name()"
+  [size]="size()"
+  [variant]="variant()"
+>
+  <div class="input-wrapper" [class]="wrapperClasses">
+    <!-- Time Span Input (editable) -->
+    <input
+      #triggerElement
+      class="input timespan-input"
+      type="text"
+      [id]="id()"
+      [name]="name()"
+      [placeholder]="placeholder()"
+      [required]="required()"
+      [disabled]="disabled()"
+      [readonly]="readonly()"
+      [value]="displayText()"
+      [attr.tabindex]="getTabIndex()"
+      [attr.aria-label]="ariaLabel() || label()"
+      [attr.aria-describedby]="ariaDescribedBy()"
+      [attr.aria-invalid]="!!errorText()"
+      [attr.aria-expanded]="isOpen()"
+      [attr.aria-haspopup]="'dialog'"
+      (input)="onTimeSpanInputChange($event)"
+      (blur)="onBlur($event)"
+      (focus)="onFocus($event)"
+      (keydown)="onKeyDown($event)"
+    />
+    <!-- Actions: Clear button and chevron -->
+    @if (!disabled() && !readonly()) {
+      <div class="field__actions">
+        @if (clearable() && !isEmpty()) {
+          <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clearSelection()" />
+        }
+        <ui-action-button [icon]="'chevron_down'" [size]="size()" (click)="togglePanel()" />
+      </div>
+    }
+  </div>
+</ui-field>
+
+<!-- Time Span Panel - rendered via CDK Overlay -->
+<ng-template #panelTemplate>
+  <div
+    role="dialog"
+    class="timespan-panel"
+    [class.timespan-panel--small]="size() === 'small'"
+    [class.timespan-panel--medium]="size() === 'medium'"
+    [class.timespan-panel--large]="size() === 'large'"
+    [style.max-height]="maxHeight()"
+  >
+    <div class="timespan-panel__content">
+      @for (unit of availableUnits(); track unit.key) {
+        <div class="timespan-panel__unit">
+          <div class="timespan-panel__unit-controls">
+            <ui-button
+              appearance="subtle"
+              [size]="size()"
+              icon="chevron_up"
+              [disabled]="disabled() || readonly()"
+              (click)="incrementUnit(unit.key); $event.stopPropagation()"
+            />
+            <div class="input-wrapper" [class]="wrapperClasses">
+              <input
+                class="input number-input"
+                type="number"
+                inputmode="numeric"
+                [id]="id() + '-' + unit.key"
+                [name]="name() + '-' + unit.key"
+                [placeholder]="'0'"
+                [required]="false"
+                [disabled]="disabled()"
+                [readonly]="readonly()"
+                [value]="getUnitValue(unit.key) ?? ''"
+                [attr.min]="0"
+                [attr.aria-label]="unit.label"
+                (input)="onUnitInputChange(unit.key, $event); $event.stopPropagation()"
+                (click)="$event.stopPropagation()"
+              />
+            </div>
+            <ui-button
+              appearance="subtle"
+              [size]="size()"
+              icon="chevron_down"
+              [disabled]="disabled() || readonly()"
+              (click)="decrementUnit(unit.key); $event.stopPropagation()"
+            />
+          </div>
+          <span class="timespan-panel__unit-short-label">{{ unit.shortLabel }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</ng-template>

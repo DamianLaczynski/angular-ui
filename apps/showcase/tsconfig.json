@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "types": [],
+    "paths": {
+      "@scss/*": ["./src/scss/*"],
+      "@core/*": ["./src/app/core/*"],
+      "@features/*": ["./src/app/features/*"],
+      "@shared/*": ["./src/app/shared/*"],
+      "@showcase/*": ["./src/app/showcase/*"],
+      "@layout/*": ["./src/app/layout/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@environments/*": ["./src/environments/*"],
+      "angular-ui": ["../../dist/angular-ui"]
+    }
+  },
+  "files": [],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}

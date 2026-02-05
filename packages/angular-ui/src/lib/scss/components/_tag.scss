@@ -1,0 +1,630 @@
+// ==========================================================================
+// Tag Component - Fluent 2 Design System
+// ==========================================================================
+// Variants: primary, secondary, success, warning, danger, info
+// Appearances: filled, outline, subtle, transparent, tint
+// Sizes: extra-small, small, medium, large, extra-large
+// Shapes: rounded, circular
+
+@use 'sass:map';
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+@mixin tag-variant-filled($bg-color, $bg-hover, $bg-pressed, $fg-color) {
+  color: $fg-color;
+  background-color: $bg-color;
+  border-color: $bg-color;
+
+  .tag__primary,
+  .tag__secondary,
+  .tag__icon,
+  .tag__dismiss-icon {
+    color: $fg-color;
+  }
+
+  &:hover:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+    background-color: $bg-hover;
+    border-color: $bg-hover;
+  }
+
+  &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+    background-color: $bg-pressed;
+    border-color: $bg-pressed;
+  }
+
+  &.tag--selected {
+    background-color: $bg-pressed;
+    border-color: $bg-pressed;
+  }
+}
+
+@mixin tag-variant-outline(
+  $fg-color,
+  $border-color,
+  $bg-hover,
+  $fg-hover,
+  $fg-pressed,
+  $selected-bg,
+  $selected-fg
+) {
+  color: $fg-color;
+  background-color: transparent;
+  border-color: $border-color;
+
+  .tag__primary,
+  .tag__secondary,
+  .tag__icon,
+  .tag__dismiss-icon {
+    color: $fg-color;
+  }
+
+  &:hover:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+    background-color: $bg-hover;
+    border-color: $fg-hover;
+
+    .tag__primary,
+    .tag__secondary,
+    .tag__icon,
+    .tag__dismiss-icon {
+      color: $fg-hover;
+    }
+  }
+
+  &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+    background-color: $bg-hover;
+    border-color: $fg-pressed;
+    filter: brightness(0.95);
+
+    .tag__primary,
+    .tag__secondary,
+    .tag__icon,
+    .tag__dismiss-icon {
+      color: $fg-pressed;
+    }
+  }
+
+  &.tag--selected {
+    color: $selected-fg;
+    background-color: $selected-bg;
+    border-color: $selected-bg;
+
+    .tag__primary,
+    .tag__secondary,
+    .tag__icon,
+    .tag__dismiss-icon {
+      color: $selected-fg;
+    }
+  }
+}
+
+@mixin tag-variant-subtle($fg-color, $bg-hover) {
+  color: $fg-color;
+  background-color: transparent;
+  border-color: transparent;
+
+  .tag__primary,
+  .tag__secondary,
+  .tag__icon,
+  .tag__dismiss-icon {
+    color: $fg-color;
+  }
+
+  &:hover:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+    background-color: $bg-hover;
+  }
+
+  &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+    background-color: $bg-hover;
+    filter: brightness(0.95);
+  }
+
+  &.tag--selected {
+    background-color: $bg-hover;
+    filter: brightness(0.9);
+  }
+}
+
+@mixin tag-variant-transparent($fg-color, $fg-hover, $fg-pressed) {
+  color: $fg-color;
+  background-color: transparent;
+  border-color: transparent;
+
+  .tag__primary,
+  .tag__secondary,
+  .tag__icon,
+  .tag__dismiss-icon {
+    color: $fg-color;
+  }
+
+  &:hover:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+    color: $fg-hover;
+
+    .tag__primary,
+    .tag__secondary,
+    .tag__icon,
+    .tag__dismiss-icon {
+      color: $fg-hover;
+    }
+  }
+
+  &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected),
+  &.tag--selected {
+    color: $fg-pressed;
+
+    .tag__primary,
+    .tag__secondary,
+    .tag__icon,
+    .tag__dismiss-icon {
+      color: $fg-pressed;
+    }
+  }
+}
+
+@mixin tag-variant-tint($fg-color, $bg-color, $fg-hover, $fg-pressed, $selected-bg, $selected-fg) {
+  color: $fg-color;
+  background-color: $bg-color;
+  border-color: transparent;
+
+  .tag__primary,
+  .tag__secondary,
+  .tag__icon,
+  .tag__dismiss-icon {
+    color: $fg-color;
+  }
+
+  &:hover:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+    color: $fg-hover;
+    filter: brightness(0.95);
+
+    .tag__primary,
+    .tag__secondary,
+    .tag__icon,
+    .tag__dismiss-icon {
+      color: $fg-hover;
+    }
+  }
+
+  &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+    color: $fg-pressed;
+    filter: brightness(0.9);
+
+    .tag__primary,
+    .tag__secondary,
+    .tag__icon,
+    .tag__dismiss-icon {
+      color: $fg-pressed;
+    }
+  }
+
+  &.tag--selected {
+    color: $selected-fg;
+    background-color: $selected-bg;
+    filter: none;
+
+    .tag__primary,
+    .tag__secondary,
+    .tag__icon,
+    .tag__dismiss-icon {
+      color: $selected-fg;
+    }
+  }
+}
+
+// ==========================================================================
+// Base Tag
+// ==========================================================================
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: $font-family-base;
+  font-weight: $font-weight-regular;
+  user-select: none;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  @include smooth-hover;
+
+  &:not(.tag--disabled):not(.tag--readonly) {
+    cursor: pointer;
+  }
+
+  @include focus-ring;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &__text-slot {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 0 2px;
+  }
+
+  &__primary {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__secondary {
+    font-size: 11px;
+    line-height: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__dismiss {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: $border-radius-200;
+
+    @include focus-ring(1px);
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__dismiss-icon {
+    color: inherit;
+  }
+}
+
+// ==========================================================================
+// Sizes
+// ==========================================================================
+
+$tag-sizes: (
+  'extra-small': (
+    height: 20px,
+    padding: 0 6px,
+    gap: 2px,
+    font-size: $font-size-200,
+  ),
+  'small': (
+    height: 24px,
+    padding: 0 6px,
+    gap: 2px,
+    font-size: $font-size-200,
+  ),
+  'medium': (
+    height: 32px,
+    padding: 0 8px,
+    gap: 4px,
+    font-size: $font-size-300,
+  ),
+  'large': (
+    height: 40px,
+    padding: 0 10px,
+    gap: 6px,
+    font-size: $font-size-400,
+  ),
+  'extra-large': (
+    height: 48px,
+    padding: 0 12px,
+    gap: 8px,
+    font-size: $font-size-500,
+  ),
+);
+
+@each $size, $props in $tag-sizes {
+  .tag--#{$size} {
+    height: map.get($props, height);
+
+    .tag__content {
+      padding: map.get($props, padding);
+      gap: map.get($props, gap);
+    }
+
+    .tag__primary {
+      font-size: map.get($props, font-size);
+    }
+  }
+}
+
+// ==========================================================================
+// Shapes
+// ==========================================================================
+
+.tag--rounded {
+  border-radius: $border-radius-400;
+}
+
+.tag--circular {
+  border-radius: $border-radius-circular;
+}
+
+.tag--square {
+  border-radius: 0;
+}
+// ==========================================================================
+// Variants
+// ==========================================================================
+
+// PRIMARY
+.tag--primary {
+  &.tag--filled {
+    @include tag-variant-filled(
+      var(--color-brand-primary),
+      var(--color-brand-primary-hover),
+      var(--color-brand-primary-pressed),
+      var(--color-neutral-foreground-on-brand)
+    );
+  }
+
+  &.tag--outline {
+    @include tag-variant-outline(
+      var(--color-brand-primary),
+      var(--color-brand-primary),
+      var(--color-neutral-background-brand-hover),
+      var(--color-brand-primary-hover),
+      var(--color-brand-primary-pressed),
+      var(--color-brand-primary),
+      var(--color-neutral-foreground-on-brand)
+    );
+
+    &:hover:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      color: var(--color-brand-primary-hover);
+    }
+
+    &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      color: var(--color-brand-primary-pressed);
+      background-color: var(--color-neutral-background-brand-pressed);
+    }
+  }
+
+  &.tag--subtle {
+    @include tag-variant-subtle(
+      var(--color-brand-foreground),
+      var(--color-neutral-background-brand-hover)
+    );
+
+    &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      background-color: var(--color-neutral-background-brand-pressed);
+    }
+
+    &.tag--selected {
+      background-color: var(--color-neutral-background-brand-pressed);
+    }
+  }
+
+  &.tag--transparent {
+    @include tag-variant-transparent(
+      var(--color-brand-foreground),
+      var(--color-brand-foreground-hover),
+      var(--color-brand-foreground-pressed)
+    );
+  }
+
+  &.tag--tint {
+    @include tag-variant-tint(
+      var(--color-brand-foreground),
+      var(--color-neutral-background-brand-selected),
+      var(--color-brand-foreground),
+      var(--color-brand-foreground),
+      var(--color-brand-primary),
+      var(--color-neutral-foreground-on-brand)
+    );
+
+    &:hover:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      background-color: var(--color-neutral-background-brand-hover);
+    }
+
+    &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      background-color: var(--color-neutral-background-brand-pressed);
+    }
+  }
+}
+
+// SECONDARY
+.tag--secondary {
+  &.tag--filled {
+    @include tag-variant-filled(
+      var(--color-neutral-background2-rest),
+      var(--color-neutral-background2-hover),
+      var(--color-neutral-background2-pressed),
+      var(--color-neutral-foreground-rest)
+    );
+
+    border-color: transparent;
+
+    &:hover:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      border-color: var(--color-neutral-background2-hover);
+    }
+
+    &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      border-color: var(--color-neutral-background2-pressed);
+    }
+
+    &.tag--selected {
+      border-color: var(--color-neutral-background2-pressed);
+    }
+  }
+
+  &.tag--outline {
+    @include tag-variant-outline(
+      var(--color-neutral-foreground2-rest),
+      var(--color-neutral-stroke-accessible),
+      var(--color-subtle-background-hover),
+      var(--color-neutral-foreground-rest),
+      var(--color-neutral-foreground-rest),
+      var(--color-neutral-foreground-rest),
+      var(--color-neutral-background-rest)
+    );
+
+    &:hover:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      color: var(--color-neutral-foreground-rest);
+      border-color: var(--color-neutral-stroke-accessible-hover);
+    }
+
+    &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      color: var(--color-neutral-foreground-rest);
+      background-color: var(--color-subtle-background-pressed);
+      border-color: var(--color-neutral-stroke-accessible-pressed);
+    }
+  }
+
+  &.tag--subtle {
+    @include tag-variant-subtle(
+      var(--color-neutral-foreground2-rest),
+      var(--color-subtle-background-hover)
+    );
+
+    &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      background-color: var(--color-subtle-background-pressed);
+    }
+
+    &.tag--selected {
+      background-color: var(--color-subtle-background-pressed);
+    }
+  }
+
+  &.tag--transparent {
+    @include tag-variant-transparent(
+      var(--color-neutral-foreground2-rest),
+      var(--color-neutral-foreground-rest),
+      var(--color-neutral-foreground3-rest)
+    );
+  }
+
+  &.tag--tint {
+    @include tag-variant-tint(
+      var(--color-neutral-foreground2-rest),
+      var(--color-neutral-background2-rest),
+      var(--color-neutral-foreground2-rest),
+      var(--color-neutral-foreground2-rest),
+      var(--color-neutral-foreground2-rest),
+      var(--color-neutral-background-rest)
+    );
+
+    &:hover:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      background-color: var(--color-neutral-background2-hover);
+      filter: none;
+    }
+
+    &:active:not(.tag--disabled):not(.tag--readonly):not(.tag--selected) {
+      background-color: var(--color-neutral-background2-pressed);
+      filter: none;
+    }
+  }
+}
+
+// SUCCESS, WARNING, DANGER, INFO - using shared color variants
+$color-variants: (
+  'success': 'green',
+  'warning': 'orange',
+  'danger': 'red',
+  'info': 'blue',
+);
+
+@each $variant, $color in $color-variants {
+  .tag--#{$variant} {
+    &.tag--filled {
+      @include tag-variant-filled(
+        var(--color-shared-#{$color}-foreground),
+        var(--color-shared-#{$color}-foreground-hover),
+        var(--color-shared-#{$color}-foreground-pressed),
+        var(--color-neutral-foreground-on-brand)
+      );
+    }
+
+    &.tag--outline {
+      @include tag-variant-outline(
+        var(--color-shared-#{$color}-foreground),
+        var(--color-shared-#{$color}-border),
+        var(--color-shared-#{$color}-background),
+        var(--color-shared-#{$color}-foreground),
+        var(--color-shared-#{$color}-foreground-pressed),
+        var(--color-shared-#{$color}-foreground),
+        var(--color-neutral-foreground-on-brand)
+      );
+    }
+
+    &.tag--subtle {
+      @include tag-variant-subtle(
+        var(--color-shared-#{$color}-foreground),
+        var(--color-shared-#{$color}-background)
+      );
+    }
+
+    &.tag--transparent {
+      @include tag-variant-transparent(
+        var(--color-shared-#{$color}-foreground),
+        var(--color-shared-#{$color}-foreground-hover),
+        var(--color-shared-#{$color}-foreground-pressed)
+      );
+    }
+
+    &.tag--tint {
+      @include tag-variant-tint(
+        var(--color-shared-#{$color}-foreground),
+        var(--color-shared-#{$color}-background),
+        var(--color-shared-#{$color}-foreground-hover),
+        var(--color-shared-#{$color}-foreground-pressed),
+        var(--color-shared-#{$color}-foreground),
+        var(--color-neutral-foreground-on-brand)
+      );
+    }
+  }
+}
+
+// ==========================================================================
+// DISABLED & READONLY STATES
+// ==========================================================================
+
+.tag--disabled {
+  color: var(--color-neutral-foreground-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+
+  .tag__primary,
+  .tag__secondary,
+  .tag__icon,
+  .tag__dismiss-icon {
+    color: var(--color-neutral-foreground-disabled);
+  }
+
+  &.tag--filled {
+    background-color: var(--color-neutral-background-disabled);
+    border-color: var(--color-neutral-background-disabled);
+  }
+
+  &.tag--outline {
+    border-color: var(--color-neutral-stroke-disabled);
+  }
+
+  &.tag--tint {
+    background-color: var(--color-neutral-background-disabled);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.tag--readonly {
+  cursor: default;
+  pointer-events: none;
+
+  &:focus-visible {
+    outline: none;
+  }
+}

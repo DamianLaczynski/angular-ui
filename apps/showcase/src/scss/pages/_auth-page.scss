@@ -1,0 +1,335 @@
+// ==========================================================================
+// Auth Page Styles - BEM Block
+// Common styles for authentication pages (login, register, reset-password, welcome)
+// ==========================================================================
+
+@use 'utils/variables' as *;
+@use 'utils/mixins' as *;
+
+.auth-page {
+  // Base layout - centered full-height page
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: $spacing-6;
+  position: relative;
+
+  // Background SVG logo
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.1;
+    width: 100%;
+    height: 100%;
+    background-image: url('/logo.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(4px);
+
+    pointer-events: none;
+    z-index: 1;
+
+    // Dark theme adjustment
+    :root[data-theme='dark'] &,
+    :root.dark &,
+    body.dark-theme & {
+      opacity: 0.25;
+      filter: blur(4px) invert(1);
+    }
+  }
+
+  // Theme toggle button - fixed position in top-right corner
+  &__theme-toggle {
+    position: fixed;
+    top: $spacing-6;
+    right: $spacing-6;
+    z-index: 20;
+    display: flex;
+    gap: $spacing-2;
+  }
+
+  // Container - max-width wrapper with enhanced styling
+  &__container {
+    width: 100%;
+    max-width: 480px;
+    background: var(--color-neutral-background-rest);
+    border-radius: $border-radius-600;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--color-neutral-stroke-rest);
+    padding: $spacing-8;
+    position: relative;
+    z-index: 2;
+
+    // Subtle inner shadow for depth
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: $border-radius-600;
+      pointer-events: none;
+    }
+
+    // Dark theme enhancements
+    :root[data-theme='dark'] &,
+    :root.dark &,
+    body.dark-theme & {
+      background: linear-gradient(
+        135deg,
+        var(--color-neutral-background-rest) 0%,
+        var(--color-neutral-background2-rest) 50%,
+        var(--color-neutral-background3-rest) 100%
+      );
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
+
+      &::before {
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      }
+    }
+
+    // Container variant - wider for register page
+    &--wide {
+      max-width: 600px;
+    }
+  }
+
+  // Content wrapper
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-6;
+    position: relative;
+    z-index: 3;
+
+    // Content variant - centered text
+    &--centered {
+      text-align: center;
+    }
+  }
+
+  // Title with enhanced styling
+  &__title {
+    font-size: $font-size-700; // 32px
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-700; // 40px
+    color: var(--color-neutral-foreground-rest);
+    margin: 0;
+    text-align: center;
+    @include transition(color, $duration-normal, $easing-decelerate-min);
+
+    & {
+      // Subtle gradient text effect
+      background: linear-gradient(
+        135deg,
+        var(--color-neutral-foreground-rest) 0%,
+        var(--color-brand-primary) 50%,
+        var(--color-neutral-foreground-rest) 100%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    // Dark theme adjustment
+    :root[data-theme='dark'] &,
+    :root.dark &,
+    body.dark-theme & {
+      background: linear-gradient(
+        135deg,
+        var(--color-neutral-foreground-rest) 0%,
+        var(--color-brand-primary) 70%,
+        var(--color-neutral-foreground-rest) 100%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  // Description with enhanced styling
+  &__description {
+    font-size: $font-size-400; // 16px
+    line-height: $line-height-400; // 24px
+    color: var(--color-neutral-foreground3-rest);
+    margin: 0;
+    text-align: center;
+    @include transition(color, $duration-normal, $easing-decelerate-min);
+
+    & {
+      opacity: 0.8;
+    }
+
+    // Dark theme adjustment
+    :root[data-theme='dark'] &,
+    :root.dark &,
+    body.dark-theme & {
+      opacity: 0.9;
+    }
+  }
+
+  // Form wrapper with enhanced spacing
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-5; // 20px - increased gap for better breathing room
+    margin-top: $spacing-2; // 8px
+
+    // Smooth transitions for form elements
+    > * {
+      @include transition(all, $duration-fast, $easing-decelerate-min);
+    }
+  }
+
+  // Form row - for side-by-side fields (register page)
+  &__form-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-4; // 16px
+
+    @include respond-to(small) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Actions - button container with enhanced styling
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: $spacing-3; // 12px - increased for better spacing
+    gap: $spacing-3; // 12px
+
+    // Enhanced button styling within actions
+    ui-button {
+      @include transition(all, $duration-fast, $easing-decelerate-min);
+    }
+
+    // Actions variant - with gap between buttons
+    &--spaced {
+      gap: $spacing-4; // 16px
+      margin-top: $spacing-5; // 20px
+    }
+  }
+
+  // Link - for forgot password, etc. with enhanced interactions
+  &__link {
+    font-size: $font-size-300; // 14px
+    line-height: $line-height-300; // 20px
+    color: var(--color-brand-foreground-rest);
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    text-align: center;
+    margin-top: $spacing-4; // 16px - increased spacing
+    @include transition(all, $duration-fast, $easing-decelerate-min);
+
+    & {
+      padding: $spacing-2; // 8px
+      border-radius: $border-radius-400; // 4px
+    }
+
+    @include focus-ring(2px, $border-radius-400);
+
+    @include hover-focus {
+      color: var(--color-brand-foreground-hover);
+      text-decoration: none;
+      background: var(--color-subtle-background-hover);
+    }
+
+    &:active {
+      color: var(--color-brand-foreground-pressed);
+    }
+  }
+
+  // Footer with enhanced styling
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3; // 12px - increased gap
+    text-align: center;
+    margin-top: $spacing-6; // 24px - increased top margin
+    padding-top: $spacing-4; // 16px
+    border-top: 1px solid var(--color-neutral-stroke-rest);
+    opacity: 0.9;
+    @include transition(opacity, $duration-normal, $easing-decelerate-min);
+
+    // Dark theme adjustment
+    :root[data-theme='dark'] &,
+    :root.dark &,
+    body.dark-theme & {
+      border-top-color: var(--color-neutral-stroke2-rest);
+      opacity: 1;
+    }
+  }
+
+  // Footer text
+  &__footer-text {
+    font-size: $font-size-300; // 14px
+    line-height: $line-height-300; // 20px
+    color: var(--color-neutral-foreground3-rest);
+    margin: 0;
+    @include transition(color, $duration-normal, $easing-decelerate-min);
+  }
+
+  // Footer link with enhanced interactions
+  &__footer-link {
+    color: var(--color-brand-foreground-rest);
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    @include transition(all, $duration-fast, $easing-decelerate-min);
+
+    & {
+      padding: $spacing-1 $spacing-2; // 4px 8px
+      border-radius: $border-radius-400; // 4px
+    }
+
+    @include focus-ring(2px, $border-radius-400);
+
+    @include hover-focus {
+      color: var(--color-brand-foreground-hover);
+      text-decoration: none;
+      background: var(--color-subtle-background-hover);
+    }
+
+    &:active {
+      color: var(--color-brand-foreground-pressed);
+    }
+  }
+
+  // Error message
+  &__error {
+    padding: $spacing-3; // 12px
+    background-color: var(--color-shared-red-background);
+    border: 1px solid var(--color-shared-red-border);
+    border-radius: $border-radius-400; // 4px
+    margin-bottom: $spacing-4; // 16px
+  }
+
+  // Error text
+  &__error-text {
+    font-size: $font-size-300; // 14px
+    line-height: $line-height-300; // 20px
+    color: var(--color-shared-red-foreground);
+    margin: 0;
+  }
+
+  // Success message
+  &__success {
+    padding: $spacing-6; // 24px
+    text-align: center;
+  }
+
+  // Success text
+  &__success-text {
+    font-size: $font-size-400; // 16px
+    line-height: $line-height-400; // 24px
+    color: var(--color-neutral-foreground-rest);
+    margin: 0 0 $spacing-6 0; // 24px margin below
+  }
+}

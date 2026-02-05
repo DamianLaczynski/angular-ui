@@ -1,0 +1,32 @@
+{
+  "name": "@laczynski/angular-ui",
+  "version": "0.0.1",
+  "description": "Angular UI component library",
+  "main": "./fesm2022/angular-ui.mjs",
+  "types": "./index.d.ts",
+  "module": "./fesm2022/angular-ui.mjs",
+  "files": [
+    "**/*"
+  ],
+  "keywords": [
+    "angular",
+    "ui",
+    "components",
+    "library"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "peerDependencies": {
+    "@angular/cdk": "^21.1.0",
+    "@angular/common": "^21.1.0",
+    "@angular/core": "^21.1.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

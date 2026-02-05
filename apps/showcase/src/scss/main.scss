@@ -1,0 +1,35 @@
+// ==========================================================================
+// 7-1 Pattern SCSS Architecture with BEM Methodology
+// ==========================================================================
+
+// Import library styles first (from angular-ui package)
+// The includePath in angular.json allows importing from packages/angular-ui/src/lib/scss
+//@use 'angular-ui/main' as *;
+
+// ==========================================================================
+// Showcase Application Styles
+// ==========================================================================
+
+// 1. Utils - Variables, functions, mixins, and utilities
+// (Using library utils, override here if needed)
+
+// 2. Vendors - Third-party styles
+// (Using library vendors, override here if needed)
+
+// 3. Base - Boilerplate code
+// (Using library base, override here if needed)
+
+// 4. Layout - Layout-related sections
+// (Add showcase-specific layout styles here if needed)
+
+// 5. Components - Showcase-specific components
+@use 'components/interactive-showcase';
+@use 'components/ds';
+@use 'components/ds-sidebar';
+
+// 6. Pages - Page-specific styles
+@use 'pages/showcase';
+@use 'pages/auth-page';
+
+// 7. Themes - Theme-related styles
+// (Using library themes, override here if needed)
