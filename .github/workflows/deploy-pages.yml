@@ -33,7 +33,7 @@ jobs:
         run: npm run build:lib
 
       - name: Build showcase for GitHub Pages
-        run: npx ng build showcase --configuration=production --base-href=/${{ github.event.repository.name }}/
+        run: npx ng build showcase --configuration=production --base-href=/
 
       - name: Prepare artifact
         run: |
