@@ -5,6 +5,7 @@
     "baseUrl": ".",
     "types": [],
     "composite": true,
+    "resolveJsonModule": true,
     "paths": {
       "@scss/*": ["./src/scss/*"],
       "@core/*": ["./src/app/core/*"],
@@ -14,7 +15,9 @@
       "@layout/*": ["./src/app/layout/*"],
       "@styles/*": ["./src/styles/*"],
       "@environments/*": ["./src/environments/*"],
-      "angular-ui": ["../../packages/angular-ui/src/public-api.ts"]
+      "angular-ui": ["../../packages/angular-ui/src/public-api.ts"],
+      "angular-ui-package": ["../../packages/angular-ui/package.json"],
+      "monorepo-package": ["../../package.json"]
     }
   },
   "files": [

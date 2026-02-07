@@ -6,6 +6,8 @@ import { ButtonComponent } from 'angular-ui';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { ThemeMode, ThemeService } from '@shared/theme/theme.service';
+import libPackage from 'angular-ui-package';
+import rootPackage from 'monorepo-package';
 
 const REPO_URL = 'https://github.com/DamianLaczynski/angular-ui';
 
@@ -19,6 +21,8 @@ export class DsComponent implements OnInit, OnDestroy {
   private readonly themeService = inject(ThemeService);
 
   readonly repoUrl = REPO_URL;
+  readonly libVersion = `v${rootPackage.version}`;
+  readonly libName = libPackage.name;
   isDarkMode = computed(() => this.themeService.$themeMode() === ThemeMode.Dark);
   themeLabel = computed(() => (this.isDarkMode() ? 'Light mode' : 'Dark mode'));
   themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));

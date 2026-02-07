@@ -23,10 +23,11 @@
     "e2e:ui": "npx playwright test -c e2e/playwright.config.ts --ui",
     "e2e:debug": "npx playwright test -c e2e/playwright.config.ts --debug",
     "e2e:report": "npx playwright show-report e2e/test-results",
-    "publish:lib": "cd dist/angular-ui && npm publish",
-    "publish:lib:patch": "cd packages/angular-ui && npm version patch && cd ../.. && npm run build:lib && npm run publish:lib",
-    "publish:lib:minor": "cd packages/angular-ui && npm version minor && cd ../.. && npm run build:lib && npm run publish:lib",
-    "publish:lib:major": "cd packages/angular-ui && npm version major && cd ../.. && npm run build:lib && npm run publish:lib"
+    "sync-version": "node -e \"const r=require('./package.json');const p=require('./packages/angular-ui/package.json');p.version=r.version;require('fs').writeFileSync('./packages/angular-ui/package.json',JSON.stringify(p,null,2));\"",
+    "publish:lib": "npm run sync-version && npm run build:lib && cd dist/angular-ui && npm publish",
+    "publish:lib:patch": "npm version patch && npm run sync-version && npm run build:lib && cd dist/angular-ui && npm publish",
+    "publish:lib:minor": "npm version minor && npm run sync-version && npm run build:lib && cd dist/angular-ui && npm publish",
+    "publish:lib:major": "npm version major && npm run sync-version && npm run build:lib && cd dist/angular-ui && npm publish"
   },
   "private": true,
   "dependencies": {
