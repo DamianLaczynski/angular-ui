@@ -27,9 +27,7 @@
       >
         {{ themeLabel() }}
       </ui-button>
-      <a [href]="repoUrl" target="_blank" rel="noopener noreferrer" class="shell__repo" aria-label="GitHub">
-        <ui-button variant="secondary" appearance="subtle" icon="code" size="medium" text="GitHub"></ui-button>
-      </a>
+      <ui-button variant="secondary" appearance="subtle" icon="code" size="medium" text="GitHub" (click)="onRepoClick()"></ui-button>
     </div>
   </header>
   <main class="shell__main">

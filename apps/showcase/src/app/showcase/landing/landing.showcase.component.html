@@ -8,12 +8,8 @@
         Component library built on Microsoft Fluent 2. Consistent look, accessibility and themes — ready to use in your app.
       </p>
       <div class="landing__hero__actions">
-        <a routerLink="/components" class="landing__hero__cta">
-          <ui-button variant="primary" size="large" icon="apps" text="Browse components"></ui-button>
-        </a>
-        <a [href]="repoUrl" target="_blank" rel="noopener noreferrer" class="landing__hero__secondary">
-          <ui-button variant="secondary" appearance="outline" size="large" icon="code" text="GitHub"></ui-button>
-        </a>
+          <ui-button routerLink="/components" variant="primary" size="large" icon="apps" text="Browse components"></ui-button>
+          <ui-button variant="secondary" appearance="outline" size="large" icon="code" text="GitHub" (click)="onRepoClick()"></ui-button>
       </div>
     </div>
   </section>

@@ -1,7 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { ButtonComponent } from 'angular-ui';
 import { ThemeMode, ThemeService } from '@shared/theme/theme.service';
+import { ButtonComponent } from 'angular-ui';
 import libPackage from 'angular-ui-package';
 import rootPackage from 'monorepo-package';
 
@@ -26,12 +26,13 @@ export class ShellComponent {
 
   navLinks = [
     { path: '/components', label: 'Components' },
-    { path: '/docs/usage', label: 'Docs' },
-    { path: '/changelog', label: 'Changelog' },
-    { path: '/design-system', label: 'Design system' },
   ];
 
   onThemeToggle(): void {
     this.themeService.toggleTheme();
+  }
+
+  onRepoClick(): void {
+    window.open(this.repoUrl, '_blank');
   }
 }

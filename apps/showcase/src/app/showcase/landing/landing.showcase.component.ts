@@ -11,4 +11,8 @@ import { ButtonComponent } from 'angular-ui';
 })
 export class LandingShowcaseComponent {
   readonly repoUrl = 'https://github.com/DamianLaczynski/angular-ui';
+
+  onRepoClick(): void {
+    window.open(this.repoUrl, '_blank');
+  }
 }
