@@ -32,9 +32,6 @@ export class DsSidebarComponent {
   themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));
 
   private readonly allNavItems: NavNode[] = [
-    // Design System Section
-    { id: 'design-system', isSectionHeader: true, label: 'Design System' },
-    { id: 'colors', label: 'Colors', icon: 'color' },
     // Form Components Section
     { id: 'form-components', isSectionHeader: true, label: 'Form Components' },
     { id: 'checkbox', label: 'Checkbox', icon: 'checkbox_checked' },
