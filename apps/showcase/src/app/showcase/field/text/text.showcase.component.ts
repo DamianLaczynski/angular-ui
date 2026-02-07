@@ -3,7 +3,10 @@ import { TextComponent } from 'angular-ui';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size } from 'angular-ui';
 import { InputVariant } from 'angular-ui';
 
@@ -609,4 +612,3 @@ export class TextShowcaseComponent {
     this.showcase()?.logEvent('change', { value });
   }
 }
-

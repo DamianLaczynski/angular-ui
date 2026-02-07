@@ -101,7 +101,7 @@
   .switch-thumb {
     fill: var(--color-neutral-stroke-rest);
     @include transition-colors($duration-ultra-slow);
-  @include transition-transform($duration-ultra-slow);
+    @include transition-transform($duration-ultra-slow);
   }
 
   .switch-container:hover:not(:has(.switch-input:disabled)) & {
@@ -132,7 +132,7 @@
   .switch-thumb-checked {
     fill: var(--color-neutral-foreground-on-brand);
     @include transition-colors($duration-ultra-slow);
-  @include transition-transform($duration-ultra-slow);
+    @include transition-transform($duration-ultra-slow);
   }
 
   .switch-container:hover:not(:has(.switch-input:disabled)) & {

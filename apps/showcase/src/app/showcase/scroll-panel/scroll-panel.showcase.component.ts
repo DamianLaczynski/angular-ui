@@ -286,4 +286,3 @@ export class ScrollPanelShowcaseComponent {
     this.scrollEndCount++;
   }
 }
-

@@ -1,7 +1,21 @@
 import { Component, signal, computed, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TreeComponent, TreeNode, ButtonComponent, TableOfContentComponent, Appearance, Shape, Size, Variant, ChevronPosition, Orientation} from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  TreeComponent,
+  TreeNode,
+  ButtonComponent,
+  TableOfContentComponent,
+  Appearance,
+  Shape,
+  Size,
+  Variant,
+  ChevronPosition,
+  Orientation,
+} from 'angular-ui';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 
 @Component({
   selector: 'app-tree-showcase',
@@ -509,4 +523,3 @@ export class TreeShowcaseComponent {
     this.eventLog.update(log => [{ time, message }, ...log.slice(0, 9)]);
   }
 }
-

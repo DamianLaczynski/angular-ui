@@ -3,7 +3,10 @@ import { Component, signal, computed, viewChild } from '@angular/core';
 import { VideoComponent } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
 import { IconName } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 
 @Component({
   selector: 'app-video-showcase',
@@ -441,4 +444,3 @@ export class VideoShowcaseComponent {
     this.showcase()?.logEvent('volumeChange', { volume: Math.round(vol * 100) });
   }
 }
-

@@ -178,7 +178,7 @@ export class TimeSpanComponent extends FieldComponent implements OnDestroy {
         positions: DEFAULT_CONNECTED_POSITIONS,
         viewportMargin: DEFAULT_VIEWPORT_MARGIN,
       },
-      onClose: (focusTrigger) => this.closePanel(focusTrigger),
+      onClose: focusTrigger => this.closePanel(focusTrigger),
     });
 
     this.isOpen.set(true);

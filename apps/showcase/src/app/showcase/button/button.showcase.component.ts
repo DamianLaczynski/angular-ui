@@ -1,7 +1,18 @@
 import { Component, signal, computed, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Appearance, ButtonComponent, IconName, Shape, Size, TableOfContentComponent, Variant } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  Appearance,
+  ButtonComponent,
+  IconName,
+  Shape,
+  Size,
+  TableOfContentComponent,
+  Variant,
+} from 'angular-ui';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 
 @Component({
   selector: 'app-button-showcase',
@@ -73,9 +84,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" appearance="filled" icon="star">Primary</ui-button>
-              <ui-button variant="success" appearance="filled" icon="checkmark"
-                >Success</ui-button
-              >
+              <ui-button variant="success" appearance="filled" icon="checkmark">Success</ui-button>
               <ui-button variant="danger" appearance="filled" icon="delete">Danger</ui-button>
               <ui-button variant="info" appearance="filled" icon="info">Info</ui-button>
             </div>
@@ -129,9 +138,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" appearance="outline" icon="star">Primary</ui-button>
-              <ui-button variant="success" appearance="outline" icon="checkmark"
-                >Success</ui-button
-              >
+              <ui-button variant="success" appearance="outline" icon="checkmark">Success</ui-button>
               <ui-button variant="danger" appearance="outline" icon="delete">Danger</ui-button>
               <ui-button variant="info" appearance="outline" icon="info">Info</ui-button>
             </div>
@@ -158,9 +165,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" appearance="subtle" icon="star">Primary</ui-button>
-              <ui-button variant="success" appearance="subtle" icon="checkmark"
-                >Success</ui-button
-              >
+              <ui-button variant="success" appearance="subtle" icon="checkmark">Success</ui-button>
               <ui-button variant="danger" appearance="subtle" icon="delete">Danger</ui-button>
               <ui-button variant="info" appearance="subtle" icon="info">Info</ui-button>
             </div>
@@ -210,11 +215,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" size="small" icon="star"></ui-button>
-              <ui-button
-                variant="primary"
-                size="medium"
-                icon="star"
-              ></ui-button>
+              <ui-button variant="primary" size="medium" icon="star"></ui-button>
               <ui-button variant="primary" size="large" icon="star"></ui-button>
             </div>
           </div>
@@ -228,11 +229,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" shape="rounded">Rounded</ui-button>
-              <ui-button
-                variant="primary"
-                shape="rounded"
-                icon="star"
-              ></ui-button>
+              <ui-button variant="primary" shape="rounded" icon="star"></ui-button>
             </div>
           </div>
 
@@ -240,11 +237,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" shape="circular">Circular</ui-button>
-              <ui-button
-                variant="primary"
-                shape="circular"
-                icon="star"
-              ></ui-button>
+              <ui-button variant="primary" shape="circular" icon="star"></ui-button>
             </div>
           </div>
         </div>
@@ -283,12 +276,8 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="danger" appearance="subtle">Normal</ui-button>
-              <ui-button variant="danger" appearance="subtle" [selected]="true"
-                >Selected</ui-button
-              >
-              <ui-button variant="danger" appearance="subtle" [disabled]="true"
-                >Disabled</ui-button
-              >
+              <ui-button variant="danger" appearance="subtle" [selected]="true">Selected</ui-button>
+              <ui-button variant="danger" appearance="subtle" [disabled]="true">Disabled</ui-button>
               <ui-button variant="danger" appearance="subtle" [loading]="true">Loading</ui-button>
             </div>
           </div>
@@ -391,24 +380,9 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <h3 class="showcase__subsection__title">Icon Only</h3>
           <div class="showcase__preview">
             <div class="showcase__grid">
-              <ui-button
-                variant="primary"
-                size="small"
-                icon="star"
-                [loading]="true"
-              ></ui-button>
-              <ui-button
-                variant="primary"
-                size="medium"
-                icon="star"
-                [loading]="true"
-              ></ui-button>
-              <ui-button
-                variant="primary"
-                size="large"
-                icon="star"
-                [loading]="true"
-              ></ui-button>
+              <ui-button variant="primary" size="small" icon="star" [loading]="true"></ui-button>
+              <ui-button variant="primary" size="medium" icon="star" [loading]="true"></ui-button>
+              <ui-button variant="primary" size="large" icon="star" [loading]="true"></ui-button>
             </div>
           </div>
 
@@ -416,9 +390,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" appearance="filled" [loading]="true">Filled</ui-button>
-              <ui-button variant="primary" appearance="outline" [loading]="true"
-                >Outline</ui-button
-              >
+              <ui-button variant="primary" appearance="outline" [loading]="true">Outline</ui-button>
               <ui-button variant="primary" appearance="subtle" [loading]="true">Subtle</ui-button>
               <ui-button variant="primary" appearance="tint" [loading]="true">Tint</ui-button>
               <ui-button variant="primary" appearance="transparent" [loading]="true"
@@ -637,4 +609,3 @@ export class ButtonShowcaseComponent {
     this.showcase()?.logEvent('click', { text: this.currentText() });
   }
 }
-

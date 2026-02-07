@@ -235,4 +235,3 @@ export class ProgressBarShowcaseComponent implements OnInit, OnDestroy {
     if (this.intervalId) clearInterval(this.intervalId);
   }
 }
-

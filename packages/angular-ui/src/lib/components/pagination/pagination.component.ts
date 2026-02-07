@@ -54,7 +54,7 @@ export class PaginationComponent {
     } else {
       // Calculate range to show
       let start = Math.max(1, current - Math.floor(maxVisible / 2));
-      let end = Math.min(total, start + maxVisible - 1);
+      const end = Math.min(total, start + maxVisible - 1);
 
       // Adjust start if we're near the end
       if (end === total) {

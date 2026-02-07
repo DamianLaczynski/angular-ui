@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { ValidationError } from '../models/api-response.model';
 
@@ -29,7 +29,7 @@ export class FormValidationService {
 
     for (const validationError of validationErrors) {
       // Normalize field name (convert PascalCase to camelCase if needed)
-      let normalizedIdentifier = this.normalizeFieldName(validationError.identifier);
+      const normalizedIdentifier = this.normalizeFieldName(validationError.identifier);
 
       // Get the form control name (either from mapping or use normalized identifier)
       const controlName =
@@ -91,7 +91,7 @@ export class FormValidationService {
       if (control) {
         const errors = control.errors;
         if (errors && errors['serverError']) {
-          const { serverError, ...remainingErrors } = errors;
+          const { serverError: _serverError, ...remainingErrors } = errors;
           if (Object.keys(remainingErrors).length > 0) {
             control.setErrors(remainingErrors);
           } else {

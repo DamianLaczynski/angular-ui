@@ -8,5 +8,4 @@ import { ToastContainerComponent } from 'angular-ui';
   templateUrl: './app.component.html',
   imports: [RouterOutlet, ToastContainerComponent, TranslateModule],
 })
-export class AppComponent {
-}
+export class AppComponent {}

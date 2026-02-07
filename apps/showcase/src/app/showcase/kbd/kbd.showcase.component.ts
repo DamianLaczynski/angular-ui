@@ -291,4 +291,3 @@ import { KbdComponent } from '../kbd';
 })
 export class MyComponent {}`;
 }
-

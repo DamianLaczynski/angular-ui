@@ -3,7 +3,10 @@ import { TotpComponent } from 'angular-ui';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size } from 'angular-ui';
 
 @Component({
@@ -276,11 +279,7 @@ import { Size } from 'angular-ui';
           <h2 class="showcase__section__title">All Variants Combined</h2>
           <div class="showcase__grid showcase__grid--large">
             <div class="showcase__item">
-              <ui-totp
-                label="Small + Error"
-                size="small"
-                [(errorText)]="smallErrorText"
-              ></ui-totp>
+              <ui-totp label="Small + Error" size="small" [(errorText)]="smallErrorText"></ui-totp>
             </div>
             <div class="showcase__item">
               <ui-totp
@@ -464,4 +463,3 @@ export class TotpShowcaseComponent {
     this.showcase()?.logEvent('change', { value });
   }
 }
-

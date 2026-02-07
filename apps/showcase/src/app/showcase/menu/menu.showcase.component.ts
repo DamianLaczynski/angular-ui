@@ -12,7 +12,10 @@ import {
   Shape,
   IconName,
 } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 
 @Component({
   selector: 'app-menu-showcase',
@@ -34,15 +37,17 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
       <div class="showcase-content">
         <h1 class="showcase__title">Menu Component</h1>
         <p class="showcase__description">
-          ui-menu = przyciski: triggerVariant="dropdown" (dropdown z chevron), triggerVariant="split" (akcja + dropdown)
-          lub triggerVariant="button" (pojedynczy przycisk bez chevron). ui-menu-list = lista pozycji (sekcje,
-          ikony, skróty, submenu), używana w overlay i submenu.
+          ui-menu = przyciski: triggerVariant="dropdown" (dropdown z chevron),
+          triggerVariant="split" (akcja + dropdown) lub triggerVariant="button" (pojedynczy przycisk
+          bez chevron). ui-menu-list = lista pozycji (sekcje, ikony, skróty, submenu), używana w
+          overlay i submenu.
         </p>
 
         <section class="showcase__section">
           <h2 class="showcase__section__title">Interactive Demo (ui-menu)</h2>
           <p class="showcase__section__description">
-            TriggerVariant: dropdown / split (trigger z dropdown) lub button (przycisk bez chevron). Wariant, appearance, size.
+            TriggerVariant: dropdown / split (trigger z dropdown) lub button (przycisk bez chevron).
+            Wariant, appearance, size.
           </p>
           <app-interactive-showcase
             #showcase
@@ -66,7 +71,9 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
                 [selected]="currentSelected()"
                 [ariaLabel]="currentAriaLabel()"
                 [menuMaxHeight]="currentMenuMaxHeight()"
-                (menuItemClick)="onInteractiveItemClick($event); logMenuEvent('menuItemClick', $event)"
+                (menuItemClick)="
+                  onInteractiveItemClick($event); logMenuEvent('menuItemClick', $event)
+                "
                 (primaryClick)="onInteractiveButtonClick($event); logMenuEvent('primaryClick')"
                 (menuOpened)="logMenuEvent('menuOpened')"
                 (menuClosed)="logMenuEvent('menuClosed')"
@@ -91,15 +98,17 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
             />
           </div>
           @if (lastAction) {
-            <p class="showcase__section__feedback"><strong>Ostatnia akcja:</strong> {{ lastAction }}</p>
+            <p class="showcase__section__feedback">
+              <strong>Ostatnia akcja:</strong> {{ lastAction }}
+            </p>
           }
         </section>
 
         <section class="showcase__section">
           <h2 class="showcase__section__title">Trigger menu i split</h2>
           <p class="showcase__section__description">
-            ui-menu z triggerVariant="dropdown" lub triggerVariant="split", text / ikona. CDK Overlay – pozycjonowanie
-            i zachowanie przy overflow.
+            ui-menu z triggerVariant="dropdown" lub triggerVariant="split", text / ikona. CDK
+            Overlay – pozycjonowanie i zachowanie przy overflow.
           </p>
           <div class="showcase__preview showcase__preview--integrations">
             <ui-menu
@@ -335,7 +344,9 @@ export class MenuShowcaseComponent {
     ],
   };
 
-  currentTriggerVariant = computed(() => (this.values()['triggerVariant'] as 'dropdown' | 'split' | 'button') ?? 'dropdown');
+  currentTriggerVariant = computed(
+    () => (this.values()['triggerVariant'] as 'dropdown' | 'split' | 'button') ?? 'dropdown',
+  );
   currentText = computed(() => (this.values()['text'] as string) ?? 'Open Menu');
   currentIcon = computed((): IconName | undefined => {
     const icon = this.values()['icon'] as string;
@@ -369,7 +380,10 @@ export class MenuShowcaseComponent {
   onInteractiveButtonClick(_event: MouseEvent): void {}
 
   logMenuEvent(name: string, data?: MenuItem | MouseEvent): void {
-    const payload = data && typeof data === 'object' && 'label' in data ? { label: (data as MenuItem).label, id: (data as MenuItem).id } : undefined;
+    const payload =
+      data && typeof data === 'object' && 'label' in data
+        ? { label: (data as MenuItem).label, id: (data as MenuItem).id }
+        : undefined;
     this.interactiveShowcase?.logEvent(name, payload);
   }
 
@@ -444,23 +458,65 @@ export class MenuShowcaseComponent {
           icon: 'document',
           shortcut: 'Ctrl+N',
           submenuItems: [
-            { id: 'new-text', label: 'Text File', icon: 'document', action: () => this.handleAction('New → Text File') },
-            { id: 'new-folder', label: 'Folder', icon: 'folder', action: () => this.handleAction('New → Folder') },
-            { id: 'new-project', label: 'Project', icon: 'document', action: () => this.handleAction('New → Project') },
+            {
+              id: 'new-text',
+              label: 'Text File',
+              icon: 'document',
+              action: () => this.handleAction('New → Text File'),
+            },
+            {
+              id: 'new-folder',
+              label: 'Folder',
+              icon: 'folder',
+              action: () => this.handleAction('New → Folder'),
+            },
+            {
+              id: 'new-project',
+              label: 'Project',
+              icon: 'document',
+              action: () => this.handleAction('New → Project'),
+            },
           ],
         },
-        { id: 'file-open', label: 'Open', icon: 'folder', shortcut: 'Ctrl+O', action: () => this.handleAction('Open') },
+        {
+          id: 'file-open',
+          label: 'Open',
+          icon: 'folder',
+          shortcut: 'Ctrl+O',
+          action: () => this.handleAction('Open'),
+        },
         {
           id: 'file-recent',
           label: 'Open Recent',
           icon: 'folder',
           submenuItems: [
-            { id: 'recent-1', label: 'Report.docx', icon: 'document', action: () => this.handleAction('Open Report.docx') },
-            { id: 'recent-2', label: 'Budget.xlsx', icon: 'document', action: () => this.handleAction('Open Budget.xlsx') },
-            { id: 'recent-3', label: 'Slides.pptx', icon: 'document', action: () => this.handleAction('Open Slides.pptx') },
+            {
+              id: 'recent-1',
+              label: 'Report.docx',
+              icon: 'document',
+              action: () => this.handleAction('Open Report.docx'),
+            },
+            {
+              id: 'recent-2',
+              label: 'Budget.xlsx',
+              icon: 'document',
+              action: () => this.handleAction('Open Budget.xlsx'),
+            },
+            {
+              id: 'recent-3',
+              label: 'Slides.pptx',
+              icon: 'document',
+              action: () => this.handleAction('Open Slides.pptx'),
+            },
           ],
         },
-        { id: 'file-save', label: 'Save', icon: 'save', shortcut: 'Ctrl+S', action: () => this.handleAction('Save') },
+        {
+          id: 'file-save',
+          label: 'Save',
+          icon: 'save',
+          shortcut: 'Ctrl+S',
+          action: () => this.handleAction('Save'),
+        },
         {
           id: 'file-doc',
           type: 'split',
@@ -470,9 +526,24 @@ export class MenuShowcaseComponent {
           action: () => this.handleAction('Open Report.docx'),
           submenuAction: () => this.handleAction('Submenu: Report.docx'),
           submenuItems: [
-            { id: 'doc-open', label: 'Open', icon: 'document', action: () => this.handleAction('Open Report.docx') },
-            { id: 'doc-location', label: 'Open File Location', icon: 'folder', action: () => this.handleAction('Open location') },
-            { id: 'doc-copy', label: 'Copy path', icon: 'document', action: () => this.handleAction('Copy path') },
+            {
+              id: 'doc-open',
+              label: 'Open',
+              icon: 'document',
+              action: () => this.handleAction('Open Report.docx'),
+            },
+            {
+              id: 'doc-location',
+              label: 'Open File Location',
+              icon: 'folder',
+              action: () => this.handleAction('Open location'),
+            },
+            {
+              id: 'doc-copy',
+              label: 'Copy path',
+              icon: 'document',
+              action: () => this.handleAction('Copy path'),
+            },
           ],
         },
         {
@@ -484,30 +555,88 @@ export class MenuShowcaseComponent {
           action: () => this.handleAction('Open Budget.xlsx'),
           submenuAction: () => this.handleAction('Submenu: Budget.xlsx'),
           submenuItems: [
-            { id: 'sheet-open', label: 'Open', icon: 'document', action: () => this.handleAction('Open Budget.xlsx') },
-            { id: 'sheet-export', label: 'Export', icon: 'arrow_download', action: () => this.handleAction('Export Budget') },
+            {
+              id: 'sheet-open',
+              label: 'Open',
+              icon: 'document',
+              action: () => this.handleAction('Open Budget.xlsx'),
+            },
+            {
+              id: 'sheet-export',
+              label: 'Export',
+              icon: 'arrow_download',
+              action: () => this.handleAction('Export Budget'),
+            },
           ],
         },
-        { id: 'file-close', label: 'Close', icon: 'dismiss', action: () => this.handleAction('Close') },
+        {
+          id: 'file-close',
+          label: 'Close',
+          icon: 'dismiss',
+          action: () => this.handleAction('Close'),
+        },
       ],
       divider: true,
     },
     {
       header: 'Edit',
       items: [
-        { id: 'edit-undo', label: 'Undo', icon: 'document', shortcut: 'Ctrl+Z', action: () => this.handleAction('Undo') },
+        {
+          id: 'edit-undo',
+          label: 'Undo',
+          icon: 'document',
+          shortcut: 'Ctrl+Z',
+          action: () => this.handleAction('Undo'),
+        },
         { id: 'edit-redo', label: 'Redo', icon: 'document', shortcut: 'Ctrl+Y', disabled: true },
-        { id: 'edit-cut', label: 'Cut', icon: 'document', shortcut: 'Ctrl+X', action: () => this.handleAction('Cut') },
-        { id: 'edit-copy', label: 'Copy', icon: 'document', shortcut: 'Ctrl+C', action: () => this.handleAction('Copy') },
-        { id: 'edit-paste', label: 'Paste', icon: 'document', shortcut: 'Ctrl+V', action: () => this.handleAction('Paste'), selected: true },
+        {
+          id: 'edit-cut',
+          label: 'Cut',
+          icon: 'document',
+          shortcut: 'Ctrl+X',
+          action: () => this.handleAction('Cut'),
+        },
+        {
+          id: 'edit-copy',
+          label: 'Copy',
+          icon: 'document',
+          shortcut: 'Ctrl+C',
+          action: () => this.handleAction('Copy'),
+        },
+        {
+          id: 'edit-paste',
+          label: 'Paste',
+          icon: 'document',
+          shortcut: 'Ctrl+V',
+          action: () => this.handleAction('Paste'),
+          selected: true,
+        },
         {
           id: 'edit-find',
           label: 'Find',
           icon: 'document',
           submenuItems: [
-            { id: 'find-file', label: 'Find in File', icon: 'document', shortcut: 'Ctrl+F', action: () => this.handleAction('Find in File') },
-            { id: 'find-project', label: 'Find in Project', icon: 'document', shortcut: 'Ctrl+Shift+F', action: () => this.handleAction('Find in Project') },
-            { id: 'find-replace', label: 'Replace', icon: 'document', shortcut: 'Ctrl+H', action: () => this.handleAction('Replace') },
+            {
+              id: 'find-file',
+              label: 'Find in File',
+              icon: 'document',
+              shortcut: 'Ctrl+F',
+              action: () => this.handleAction('Find in File'),
+            },
+            {
+              id: 'find-project',
+              label: 'Find in Project',
+              icon: 'document',
+              shortcut: 'Ctrl+Shift+F',
+              action: () => this.handleAction('Find in Project'),
+            },
+            {
+              id: 'find-replace',
+              label: 'Replace',
+              icon: 'document',
+              shortcut: 'Ctrl+H',
+              action: () => this.handleAction('Replace'),
+            },
           ],
         },
       ],
@@ -516,9 +645,27 @@ export class MenuShowcaseComponent {
     {
       header: 'View',
       items: [
-        { id: 'view-zoom-in', label: 'Zoom In', icon: 'document', shortcut: 'Ctrl++', action: () => this.handleAction('Zoom In') },
-        { id: 'view-zoom-out', label: 'Zoom Out', icon: 'document', shortcut: 'Ctrl+-', action: () => this.handleAction('Zoom Out') },
-        { id: 'view-reset', label: 'Reset Zoom', icon: 'document', shortcut: 'Ctrl+0', disabled: true },
+        {
+          id: 'view-zoom-in',
+          label: 'Zoom In',
+          icon: 'document',
+          shortcut: 'Ctrl++',
+          action: () => this.handleAction('Zoom In'),
+        },
+        {
+          id: 'view-zoom-out',
+          label: 'Zoom Out',
+          icon: 'document',
+          shortcut: 'Ctrl+-',
+          action: () => this.handleAction('Zoom Out'),
+        },
+        {
+          id: 'view-reset',
+          label: 'Reset Zoom',
+          icon: 'document',
+          shortcut: 'Ctrl+0',
+          disabled: true,
+        },
       ],
     },
   ];
@@ -539,4 +686,3 @@ export class MenuShowcaseComponent {
     this.lastAction = action;
   }
 }
-

@@ -38,23 +38,19 @@
     />
     <!-- Actions: Calendar icon and clear button -->
     @if (!disabled() && !readonly()) {
-      <div class="field__actions">
-        <!-- Calendar Icon Button -->
-        <ui-action-button
-          [size]="size()"
-          [icon]="getIcon()"
-          (click)="togglePanel()"
-        ></ui-action-button>
+    <div class="field__actions">
+      <!-- Calendar Icon Button -->
+      <ui-action-button
+        [size]="size()"
+        [icon]="getIcon()"
+        (click)="togglePanel()"
+      ></ui-action-button>
 
-        <!-- Clear Button -->
-        @if (value) {
-          <ui-action-button
-            [icon]="'dismiss'"
-            [size]="size()"
-            (click)="clear()"
-          ></ui-action-button>
-        }
-      </div>
+      <!-- Clear Button -->
+      @if (value) {
+      <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clear()"></ui-action-button>
+      }
+    </div>
     }
   </div>
 </ui-field>
@@ -63,51 +59,74 @@
 <ng-template #panelTemplate>
   <div class="date-panel" [attr.data-size]="size()" cdkTrapFocus>
     @if (dateType() === 'time') {
-      <!-- Custom Time Picker -->
-      <ui-time
-        [value]="selectedTime()"
-        [step]="step()"
-        [size]="size()"
-        [use24HourFormat]="use24HourFormat()"
-        (timeChange)="onTimeChange($event)"
-      ></ui-time>
+    <!-- Custom Time Picker -->
+    <ui-time
+      [value]="selectedTime()"
+      [step]="step()"
+      [size]="size()"
+      [use24HourFormat]="use24HourFormat()"
+      (timeChange)="onTimeChange($event)"
+    ></ui-time>
     } @else if (dateType() === 'week') {
-      <!-- Week Picker -->
-      <div class="date-calendar">
-        <!-- Calendar Header -->
-        <div class="date-calendar__header">
-          <button type="button" class="date-calendar__nav" (click)="onCalendarPreviousYear()">
-            <ui-icon [icon]="'chevron_left'" [size]="size()" />
-          </button>
-          <span class="date-calendar__title">{{ currentMonth().getFullYear() }}</span>
-          <button type="button" class="date-calendar__nav" (click)="onCalendarNextYear()">
-            <ui-icon [icon]="'chevron_right'" [size]="size()" />
-          </button>
-        </div>
-
-        <!-- Week List -->
-        <div class="date-calendar__weeks">
-          @for (week of calendarWeeks(); track week.weekNumber) {
-            <button type="button" [class]="getWeekClasses(week)" (click)="selectWeek(week)">
-              <span class="date-calendar__week-number">W{{ week.weekNumber }}</span>
-              <span class="date-calendar__week-range">
-                {{ week.startDate | date: 'MMM d' }} - {{ week.endDate | date: 'MMM d' }}
-              </span>
-            </button>
-          }
-        </div>
-
-        <!-- Calendar Footer -->
-        <div class="date-calendar__footer">
-          <button type="button" class="date-calendar__today-btn" (click)="goToToday()">
-            This Week
-          </button>
-        </div>
+    <!-- Week Picker -->
+    <div class="date-calendar">
+      <!-- Calendar Header -->
+      <div class="date-calendar__header">
+        <button type="button" class="date-calendar__nav" (click)="onCalendarPreviousYear()">
+          <ui-icon [icon]="'chevron_left'" [size]="size()" />
+        </button>
+        <span class="date-calendar__title">{{ currentMonth().getFullYear() }}</span>
+        <button type="button" class="date-calendar__nav" (click)="onCalendarNextYear()">
+          <ui-icon [icon]="'chevron_right'" [size]="size()" />
+        </button>
       </div>
-    } @else if (
-      dateType() === 'month' || calendarView() === 'months' || calendarView() === 'years'
+
+      <!-- Week List -->
+      <div class="date-calendar__weeks">
+        @for (week of calendarWeeks(); track week.weekNumber) {
+        <button type="button" [class]="getWeekClasses(week)" (click)="selectWeek(week)">
+          <span class="date-calendar__week-number">W{{ week.weekNumber }}</span>
+          <span class="date-calendar__week-range">
+            {{ week.startDate | date: 'MMM d' }} - {{ week.endDate | date: 'MMM d' }}
+          </span>
+        </button>
+        }
+      </div>
+
+      <!-- Calendar Footer -->
+      <div class="date-calendar__footer">
+        <button type="button" class="date-calendar__today-btn" (click)="goToToday()">
+          This Week
+        </button>
+      </div>
+    </div>
+    } @else if ( dateType() === 'month' || calendarView() === 'months' || calendarView() === 'years'
     ) {
-      <!-- Month/Year Picker -->
+    <!-- Month/Year Picker -->
+    <ui-calendar
+      [currentMonth]="currentMonth()"
+      [selectedDate]="selectedDate()"
+      [calendarView]="calendarView()"
+      [min]="min()"
+      [max]="max()"
+      [size]="size()"
+      [showMonthYearPicker]="true"
+      (dateSelect)="onCalendarDateSelect($event)"
+      (monthSelect)="onCalendarMonthSelect($event)"
+      (yearSelect)="onCalendarYearSelect($event)"
+      (previousMonth)="onCalendarPreviousMonth()"
+      (nextMonth)="onCalendarNextMonth()"
+      (previousYear)="onCalendarPreviousYear()"
+      (nextYear)="onCalendarNextYear()"
+      (previousYearRange)="onCalendarPreviousYearRange()"
+      (nextYearRange)="onCalendarNextYearRange()"
+      (switchToMonthsView)="onCalendarSwitchToMonthsView()"
+      (switchToYearsView)="onCalendarSwitchToYearsView()"
+      (switchToDaysView)="onCalendarSwitchToDaysView()"
+    ></ui-calendar>
+    } @else {
+    <!-- Date Calendar (Days View) -->
+    <div class="date-calendar">
       <ui-calendar
         [currentMonth]="currentMonth()"
         [selectedDate]="selectedDate()"
@@ -129,51 +148,25 @@
         (switchToYearsView)="onCalendarSwitchToYearsView()"
         (switchToDaysView)="onCalendarSwitchToDaysView()"
       ></ui-calendar>
-    } @else {
-      <!-- Date Calendar (Days View) -->
-      <div class="date-calendar">
-        <ui-calendar
-          [currentMonth]="currentMonth()"
-          [selectedDate]="selectedDate()"
-          [calendarView]="calendarView()"
-          [min]="min()"
-          [max]="max()"
-          [size]="size()"
-          [showMonthYearPicker]="true"
-          (dateSelect)="onCalendarDateSelect($event)"
-          (monthSelect)="onCalendarMonthSelect($event)"
-          (yearSelect)="onCalendarYearSelect($event)"
-          (previousMonth)="onCalendarPreviousMonth()"
-          (nextMonth)="onCalendarNextMonth()"
-          (previousYear)="onCalendarPreviousYear()"
-          (nextYear)="onCalendarNextYear()"
-          (previousYearRange)="onCalendarPreviousYearRange()"
-          (nextYearRange)="onCalendarNextYearRange()"
-          (switchToMonthsView)="onCalendarSwitchToMonthsView()"
-          (switchToYearsView)="onCalendarSwitchToYearsView()"
-          (switchToDaysView)="onCalendarSwitchToDaysView()"
-        ></ui-calendar>
 
-        <!-- Calendar Footer -->
-        <div class="date-calendar__footer">
-          <button type="button" class="date-calendar__today-btn" (click)="goToToday()">
-            Today
-          </button>
-        </div>
-
-        <!-- Custom Time Picker for datetime-local -->
-        @if (dateType() === 'datetime-local') {
-          <ui-time
-            [value]="selectedTime()"
-            [step]="step()"
-            [size]="size()"
-            [use24HourFormat]="use24HourFormat()"
-            [inline]="true"
-            [showLabel]="true"
-            (timeChange)="onTimeChange($event)"
-          ></ui-time>
-        }
+      <!-- Calendar Footer -->
+      <div class="date-calendar__footer">
+        <button type="button" class="date-calendar__today-btn" (click)="goToToday()">Today</button>
       </div>
+
+      <!-- Custom Time Picker for datetime-local -->
+      @if (dateType() === 'datetime-local') {
+      <ui-time
+        [value]="selectedTime()"
+        [step]="step()"
+        [size]="size()"
+        [use24HourFormat]="use24HourFormat()"
+        [inline]="true"
+        [showLabel]="true"
+        (timeChange)="onTimeChange($event)"
+      ></ui-time>
+      }
+    </div>
     }
   </div>
 </ng-template>

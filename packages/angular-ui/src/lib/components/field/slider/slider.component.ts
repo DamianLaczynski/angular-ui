@@ -3,11 +3,9 @@ import {
   forwardRef,
   input,
   model,
-  output,
   OnInit,
   ViewChild,
   ElementRef,
-  effect,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';

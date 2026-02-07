@@ -156,7 +156,7 @@
 @mixin icon-rotate($duration: $duration-normal, $from: 0deg, $to: 180deg) {
   @include transition-transform($duration);
   transform: rotate($from);
-  
+
   &--rotated,
   .accordion--expanded &,
   .node--expanded & {
@@ -189,7 +189,11 @@
 /// @param {Duration} $duration - Animation duration
 /// @param {Function} $easing - Easing function
 /// @param {String} $translate - Translate value (default: translate(-50%, -50%))
-@mixin fade-scale-in-translate($duration: $duration-fast, $easing: $easing-decelerate-mid, $translate: translate(-50%, -50%)) {
+@mixin fade-scale-in-translate(
+  $duration: $duration-fast,
+  $easing: $easing-decelerate-mid,
+  $translate: translate(-50%, -50%)
+) {
   animation: fadeScaleInTranslate $duration $easing;
   @include respect-reduced-motion;
 }
@@ -198,7 +202,11 @@
 /// @param {Duration} $duration - Animation duration
 /// @param {Function} $easing - Easing function
 /// @param {String} $translate - Translate value (default: translate(-50%, -50%))
-@mixin fade-scale-out-translate($duration: $duration-fast, $easing: $easing-decelerate-mid, $translate: translate(-50%, -50%)) {
+@mixin fade-scale-out-translate(
+  $duration: $duration-fast,
+  $easing: $easing-decelerate-mid,
+  $translate: translate(-50%, -50%)
+) {
   animation: fadeScaleOutTranslate $duration $easing;
   @include respect-reduced-motion;
 }
@@ -394,7 +402,6 @@
   }
 }
 
-
 @keyframes progressIndeterminate {
   0% {
     left: -33.33%;
@@ -422,7 +429,6 @@
     transform: translateX(33.333%);
   }
 }
-
 
 @keyframes scaleXOut {
   from {

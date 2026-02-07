@@ -5,7 +5,10 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from 'angular-ui';
 import { ToastService } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Variant, Appearance, Size } from 'angular-ui';
 
 @Component({
@@ -380,4 +383,3 @@ export class ToastShowcaseComponent {
     this.toastService.error('Error', 'Something went wrong. Please try again.');
   }
 }
-

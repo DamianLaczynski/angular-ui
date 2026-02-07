@@ -1,5 +1,4 @@
 import { Component, signal, computed } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {
   StateContainerComponent,
   SpinnerComponent,
@@ -8,14 +7,11 @@ import {
   Size,
   TableOfContentComponent,
 } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
 import {
-  State,
-  errorState,
-  initialState,
-  loadedState,
-  loadingState,
-} from 'angular-ui';
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
+import { State, errorState, initialState, loadedState, loadingState } from 'angular-ui';
 
 interface User {
   id: number;
@@ -243,4 +239,3 @@ export class StateContainerShowcaseComponent {
     console.log('Empty action clicked:', action.label);
   }
 }
-

@@ -4,7 +4,10 @@ import { JsonPipe } from '@angular/common';
 import { DropdownComponent } from 'angular-ui';
 import { DropdownItem, DropdownMode } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { InputVariant } from 'angular-ui';
 import { Size } from 'angular-ui';
 
@@ -745,4 +748,3 @@ export class DropdownShowcaseComponent {
     this.tagFormData.selectedTags = selectedValues;
   }
 }
-

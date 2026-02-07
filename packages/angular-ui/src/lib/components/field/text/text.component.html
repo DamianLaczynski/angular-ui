@@ -38,9 +38,9 @@
     />
     <!-- Actions: Clear button -->
     @if (value && !disabled() && !readonly() && showClearButton()) {
-      <div class="field__actions">
-        <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clear()"></ui-action-button>
-      </div>
+    <div class="field__actions">
+      <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clear()"></ui-action-button>
+    </div>
     }
   </div>
 </ui-field>

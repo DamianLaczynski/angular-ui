@@ -5,14 +5,13 @@
  * Presets, and Column Factory.
  */
 
-import { Component, signal, OnInit, computed, inject } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DataGridComponent } from 'angular-ui';
 import { DataGridRow } from 'angular-ui';
 import { DataGridActiveFilter } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
 import { DataGridColumnFactory } from 'angular-ui';
-import { ApiService } from '@shared/api/services/api.service';
 import { createDataGridConfig } from 'angular-ui';
 import { Observable, of } from 'rxjs';
 import { QueryParams, QueryResult } from '@shared/api/models/query-params.model';
@@ -203,7 +202,6 @@ interface SampleData {
             <p class="showcase__info">{{ advancedInfo() }}</p>
           }
         </section>
-
       </div>
     </div>
   `,
@@ -609,7 +607,4 @@ export class DataGridShowcaseComponent {
       },
     });
   });
-
-
 }
-

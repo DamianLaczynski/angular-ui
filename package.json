@@ -1,6 +1,6 @@
 {
   "name": "angular-ui-monorepo",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Angular UI component library monorepo with showcase application",
   "scripts": {
     "ng": "ng",
@@ -15,8 +15,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
-    "format": "npx prettier --write 'apps/showcase/src/**/*.{ts,html,scss,json}' 'packages/angular-ui/src/**/*.{ts,html,scss,json}'",
-    "format:check": "npx prettier --check 'apps/showcase/src/**/*.{ts,html,scss,json}' 'packages/angular-ui/src/**/*.{ts,html,scss,json}'",
+    "format": "prettier --write \"apps/showcase/src\" \"packages/angular-ui/src\"",
+    "format:check": "prettier --check \"apps/showcase/src\" \"packages/angular-ui/src\"",
     "test:coverage": "ng test --code-coverage --watch=false --browsers=ChromeHeadless --source-map",
     "precommit": "npm run lint && npm run format:check",
     "e2e": "npx playwright test -c e2e/playwright.config.ts",
@@ -75,6 +75,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^21.1.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
     "prettier": "^3.5.3",
     "typescript": "~5.9.3",
     "vitest": "^4.0.8",

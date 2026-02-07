@@ -834,7 +834,6 @@
 // Animations
 // ==========================================================================
 
-
 // Animation classes
 .toast--slide-in-left {
   @include slide-in-left($duration-normal, $easing-decelerate-mid);

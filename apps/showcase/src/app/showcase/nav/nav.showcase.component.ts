@@ -3,7 +3,10 @@ import { NavComponent, NavNode } from 'angular-ui';
 
 import { ButtonComponent } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Variant, Appearance, Shape, Size, ChevronPosition } from 'angular-ui';
 
 @Component({
@@ -899,4 +902,3 @@ export class NavShowcaseComponent {
     return colors[id] || '605e5c';
   }
 }
-

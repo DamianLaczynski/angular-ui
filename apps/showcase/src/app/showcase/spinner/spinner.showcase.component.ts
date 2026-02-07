@@ -2,7 +2,10 @@ import { Component, signal, computed, viewChild } from '@angular/core';
 
 import { SpinnerComponent } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Variant, ExtendedSize, ContentPosition } from 'angular-ui';
 
 @Component({
@@ -219,4 +222,3 @@ export class SpinnerShowcaseComponent {
     // Values are reset by the showcase component
   }
 }
-

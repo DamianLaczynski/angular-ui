@@ -3,7 +3,10 @@ import { DialogComponent, DialogBackdrop } from 'angular-ui';
 import { ButtonComponent } from 'angular-ui';
 import { QuickAction } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 
 @Component({
   selector: 'app-dialog-showcase',
@@ -67,9 +70,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           </p>
 
           <div class="showcase__demo">
-            <ui-button variant="primary" (click)="showBasicDialog()">
-              Open Basic Dialog
-            </ui-button>
+            <ui-button variant="primary" (click)="showBasicDialog()"> Open Basic Dialog </ui-button>
 
             <ui-dialog
               title="Main question or action"
@@ -120,9 +121,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__demo" style="display: flex; gap: 8px;">
             <ui-button appearance="outline" (click)="showSmallDialog()"> Small Dialog </ui-button>
 
-            <ui-button appearance="outline" (click)="showMediumDialog()">
-              Medium Dialog
-            </ui-button>
+            <ui-button appearance="outline" (click)="showMediumDialog()"> Medium Dialog </ui-button>
 
             <ui-button appearance="outline" (click)="showLargeDialog()"> Large Dialog </ui-button>
 
@@ -485,4 +484,3 @@ export class DialogShowcaseComponent {
     this.infoDialogVisible.set(true);
   }
 }
-

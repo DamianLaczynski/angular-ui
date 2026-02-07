@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { TableOfContentComponent } from 'angular-ui';
 import { CheckboxComponent } from 'angular-ui';
@@ -138,10 +138,7 @@ import { FormsModule } from '@angular/forms';
           </div>
           <div class="showcase__item">
             <h3>Vertical Indicator (Default)</h3>
-            <ui-table-of-content
-              [showSelectionIndicator]="true"
-              [indicatorPosition]="'vertical'"
-            />
+            <ui-table-of-content [showSelectionIndicator]="true" [indicatorPosition]="'vertical'" />
           </div>
           <div class="showcase__item">
             <h3>No Indicator</h3>
@@ -412,4 +409,3 @@ export class TableOfContentShowcaseComponent {
     { value: 'vertical', label: 'Vertical' },
   ];
 }
-

@@ -6,7 +6,7 @@ import { Component, input, output, Type, inject, computed } from '@angular/core'
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataGridColumn } from '../models/data-grid-column.model';
-import { DataGridFilterConfig, DataGridFilterValue } from '../models/data-grid-filter.model';
+import { DataGridFilterConfig } from '../models/data-grid-filter.model';
 import { DataGridFilterTemplateContext } from '../models/data-grid-config.model';
 import { FilterFactory } from '../filters/filter-factory';
 import { DataGridFilterService } from '../services/data-grid-filter.service';

@@ -43,7 +43,17 @@ export function openConnectedOverlay(params: {
   onClose: (focusTrigger: boolean) => void;
   onDetach?: () => void;
 }): OverlayHandle {
-  const { overlay, scrollDispatcher, ngZone, trigger, template, viewContainerRef, config, onClose, onDetach } = params;
+  const {
+    overlay,
+    scrollDispatcher,
+    ngZone,
+    trigger,
+    template,
+    viewContainerRef,
+    config,
+    onClose,
+    onDetach,
+  } = params;
   const sub = new Subscription();
   let scrollCleanup: (() => void) | null = null;
 
@@ -80,15 +90,18 @@ export function openConnectedOverlay(params: {
   scrollCleanup = registerScrollableAncestors(trigger.nativeElement, scrollDispatcher, ngZone);
 
   sub.add(
-    overlayRef.outsidePointerEvents().subscribe((event) => {
+    overlayRef.outsidePointerEvents().subscribe(event => {
       const target = event.target as HTMLElement;
       if (!trigger.nativeElement.contains(target)) {
         onClose(false);
       }
-    })
+    }),
   );
   sub.add(
-    overlayRef.keydownEvents().pipe(filter((e) => e.key === 'Escape')).subscribe(() => onClose(true))
+    overlayRef
+      .keydownEvents()
+      .pipe(filter(e => e.key === 'Escape'))
+      .subscribe(() => onClose(true)),
   );
   if (onDetach) {
     sub.add(overlayRef.detachments().subscribe(() => onDetach()));

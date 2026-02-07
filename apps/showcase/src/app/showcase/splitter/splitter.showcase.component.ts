@@ -4,10 +4,14 @@ import {
   SplitterComponent,
   SplitterPanelDirective,
   SplitterPanel,
-  SplitterResizeEvent} from 'angular-ui';
+  SplitterResizeEvent,
+} from 'angular-ui';
 import { CardComponent } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Orientation } from 'angular-ui';
 
 @Component({
@@ -480,4 +484,3 @@ export class SplitterShowcaseComponent {
     this.verticalPanelSizes.set(sizes);
   }
 }
-

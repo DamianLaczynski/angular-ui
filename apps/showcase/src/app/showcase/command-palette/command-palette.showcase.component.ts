@@ -456,4 +456,3 @@ export class CommandPaletteShowcaseComponent {
     this.router().navigate([path]);
   }
 }
-

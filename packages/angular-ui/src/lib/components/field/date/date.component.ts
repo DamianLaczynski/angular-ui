@@ -184,7 +184,11 @@ export class DateComponent extends FieldComponent implements OnDestroy {
     this.overlayHandle = null;
     this.isOpen.set(false);
 
-    if (shouldFocusTrigger && this.triggerElement?.nativeElement && document.contains(this.triggerElement.nativeElement)) {
+    if (
+      shouldFocusTrigger &&
+      this.triggerElement?.nativeElement &&
+      document.contains(this.triggerElement.nativeElement)
+    ) {
       try {
         setTimeout(() => this.triggerElement.nativeElement.focus({ preventScroll: true }), 0);
       } catch {
@@ -386,7 +390,7 @@ export class DateComponent extends FieldComponent implements OnDestroy {
     const firstDay = new Date(currentYear, 0, 1);
     const lastDay = new Date(currentYear, 11, 31);
 
-    let currentDate = new Date(firstDay);
+    const currentDate = new Date(firstDay);
     // Adjust to Monday of the first week
     const dayOfWeek = currentDate.getDay();
     const daysToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
@@ -551,7 +555,7 @@ export class DateComponent extends FieldComponent implements OnDestroy {
         width: this.panelWidth(),
         hasBackdrop: false,
       },
-      onClose: (focusTrigger) => {
+      onClose: focusTrigger => {
         if (focusTrigger) {
           this.closePanel(true);
         } else {

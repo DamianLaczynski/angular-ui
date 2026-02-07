@@ -1,6 +1,6 @@
 import { Component, signal, viewChild, TemplateRef } from '@angular/core';
 
-import { Observable, delay, of } from 'rxjs';
+import { delay, of } from 'rxjs';
 import { ScrollContainerComponent, ScrollContainerDataSource } from 'angular-ui';
 import { ButtonComponent } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
@@ -436,4 +436,3 @@ export class ScrollContainerShowcaseComponent {
     this.programmaticScroll()?.refresh();
   }
 }
-

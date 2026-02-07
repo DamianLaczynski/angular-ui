@@ -1,7 +1,21 @@
 import { Component, signal, viewChild, TemplateRef, computed } from '@angular/core';
-import { AccordionComponent, ButtonComponent, TextComponent, EmailComponent, TableOfContentComponent, Size, Appearance, Shape, ChevronPosition, Orientation, IconName
-   } from 'angular-ui'; 
-import {   InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  AccordionComponent,
+  ButtonComponent,
+  TextComponent,
+  EmailComponent,
+  TableOfContentComponent,
+  Size,
+  Appearance,
+  Shape,
+  ChevronPosition,
+  Orientation,
+  IconName,
+} from 'angular-ui';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 
 @Component({
   selector: 'app-accordion-showcase',
@@ -560,4 +574,3 @@ export class AccordionShowcaseComponent {
     alert(`Quick action: ${action}`);
   }
 }
-

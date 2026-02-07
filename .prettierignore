@@ -1,0 +1,9 @@
+node_modules
+dist
+.angular
+coverage
+package-lock.json
+*.min.js
+e2e/test-results
+e2e/playwright-report
+*.md

@@ -1,7 +1,6 @@
 import {
   Component,
   input,
-  output,
   contentChild,
   TemplateRef,
   ChangeDetectionStrategy,

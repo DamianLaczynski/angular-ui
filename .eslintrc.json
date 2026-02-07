@@ -1,8 +1,12 @@
 {
   "root": true,
   "ignorePatterns": [
-    "projects/**/*",
-    "packages/**/*"
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.angular/**",
+    "**/coverage/**",
+    "**/e2e/test-results/**",
+    "**/e2e/playwright-report/**"
   ],
   "overrides": [
     {
@@ -21,7 +25,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": ["app", "ui"],
             "style": "camelCase"
           }
         ],
@@ -29,7 +33,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": ["app", "ui"],
             "style": "kebab-case"
           }
         ],

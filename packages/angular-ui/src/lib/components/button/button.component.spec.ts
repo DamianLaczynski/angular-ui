@@ -348,7 +348,6 @@ describe('ButtonComponent', () => {
 
       expect(nativeButton.classList.contains('button--disabled')).toBe(true);
     });
-
   });
 
   describe('FullWidth Input', () => {

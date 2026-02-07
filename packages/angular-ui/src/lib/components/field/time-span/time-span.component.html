@@ -39,12 +39,12 @@
     />
     <!-- Actions: Clear button and chevron -->
     @if (!disabled() && !readonly()) {
-      <div class="field__actions">
-        @if (clearable() && !isEmpty()) {
-          <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clearSelection()" />
-        }
-        <ui-action-button [icon]="'chevron_down'" [size]="size()" (click)="togglePanel()" />
-      </div>
+    <div class="field__actions">
+      @if (clearable() && !isEmpty()) {
+      <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clearSelection()" />
+      }
+      <ui-action-button [icon]="'chevron_down'" [size]="size()" (click)="togglePanel()" />
+    </div>
     }
   </div>
 </ui-field>
@@ -61,43 +61,43 @@
   >
     <div class="timespan-panel__content">
       @for (unit of availableUnits(); track unit.key) {
-        <div class="timespan-panel__unit">
-          <div class="timespan-panel__unit-controls">
-            <ui-button
-              appearance="subtle"
-              [size]="size()"
-              icon="chevron_up"
-              [disabled]="disabled() || readonly()"
-              (click)="incrementUnit(unit.key); $event.stopPropagation()"
-            />
-            <div class="input-wrapper" [class]="wrapperClasses">
-              <input
-                class="input number-input"
-                type="number"
-                inputmode="numeric"
-                [id]="id() + '-' + unit.key"
-                [name]="name() + '-' + unit.key"
-                [placeholder]="'0'"
-                [required]="false"
-                [disabled]="disabled()"
-                [readonly]="readonly()"
-                [value]="getUnitValue(unit.key) ?? ''"
-                [attr.min]="0"
-                [attr.aria-label]="unit.label"
-                (input)="onUnitInputChange(unit.key, $event); $event.stopPropagation()"
-                (click)="$event.stopPropagation()"
-              />
-            </div>
-            <ui-button
-              appearance="subtle"
-              [size]="size()"
-              icon="chevron_down"
-              [disabled]="disabled() || readonly()"
-              (click)="decrementUnit(unit.key); $event.stopPropagation()"
+      <div class="timespan-panel__unit">
+        <div class="timespan-panel__unit-controls">
+          <ui-button
+            appearance="subtle"
+            [size]="size()"
+            icon="chevron_up"
+            [disabled]="disabled() || readonly()"
+            (click)="incrementUnit(unit.key); $event.stopPropagation()"
+          />
+          <div class="input-wrapper" [class]="wrapperClasses">
+            <input
+              class="input number-input"
+              type="number"
+              inputmode="numeric"
+              [id]="id() + '-' + unit.key"
+              [name]="name() + '-' + unit.key"
+              [placeholder]="'0'"
+              [required]="false"
+              [disabled]="disabled()"
+              [readonly]="readonly()"
+              [value]="getUnitValue(unit.key) ?? ''"
+              [attr.min]="0"
+              [attr.aria-label]="unit.label"
+              (input)="onUnitInputChange(unit.key, $event); $event.stopPropagation()"
+              (click)="$event.stopPropagation()"
             />
           </div>
-          <span class="timespan-panel__unit-short-label">{{ unit.shortLabel }}</span>
+          <ui-button
+            appearance="subtle"
+            [size]="size()"
+            icon="chevron_down"
+            [disabled]="disabled() || readonly()"
+            (click)="decrementUnit(unit.key); $event.stopPropagation()"
+          />
         </div>
+        <span class="timespan-panel__unit-short-label">{{ unit.shortLabel }}</span>
+      </div>
       }
     </div>
   </div>
