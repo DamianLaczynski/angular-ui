@@ -1,52 +1,4 @@
 <div class="ds">
-  <!-- Header -->
-  <header class="ds__header">
-    <a routerLink="/ds/home" class="ds__header__brand">
-      <h1 class="ds__header__title">Angular UI</h1>
-      <span class="ds__header__meta">{{ libName }} {{ libVersion }} · MIT License</span>
-    </a>
-    <div class="ds__header__actions">
-      <ui-button
-        variant="secondary"
-        [appearance]="'subtle'"
-        [icon]="themeIcon()"
-        size="medium"
-        (click)="onThemeToggle()"
-        [attr.aria-label]="themeLabel()"
-      >
-        {{ themeLabel() }}
-      </ui-button>
-      <a
-        class="ds__header__repo-link"
-        [href]="repoUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Open repository"
-      >
-        <ui-button
-          [text]="'Repository'"
-          variant="secondary"
-          [appearance]="'subtle'"
-          icon="code"
-          size="medium"
-          ariaLabel="Open repository"
-          (click)="onRepoClick()"
-        ></ui-button>
-      </a>
-      @if (isMobile()) {
-        <ui-button
-          class="ds__header__menu-button"
-          variant="primary"
-          [icon]="isSidebarOpen() ? 'dismiss' : 'navigation'"
-          size="medium"
-          (click)="toggleSidebar()"
-          [attr.aria-label]="isSidebarOpen() ? 'Close sidebar' : 'Open sidebar'"
-        ></ui-button>
-      }
-    </div>
-  </header>
-
-  <!-- Overlay (visible on mobile when sidebar is open) -->
   <div
     class="ds__overlay"
     [class.ds__overlay--visible]="isSidebarOpen() && isMobile()"
@@ -66,6 +18,17 @@
 
     <!-- Main Content -->
     <div class="ds__main-content">
+      @if (isMobile()) {
+        <div class="ds__mobile-bar">
+          <ui-button
+            variant="primary"
+            icon="navigation"
+            size="medium"
+            (click)="toggleSidebar()"
+            ariaLabel="Open menu"
+          ></ui-button>
+        </div>
+      }
       <router-outlet></router-outlet>
     </div>
   </div>

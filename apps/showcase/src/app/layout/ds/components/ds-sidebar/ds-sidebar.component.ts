@@ -24,7 +24,6 @@ export class DsSidebarComponent {
   }
 
   private readonly allNavItems: NavNode[] = [
-    { id: 'home', label: 'Home', icon: 'home' },
     { id: 'design-system', isSectionHeader: true, label: 'Design System' },
     { id: 'colors', label: 'Colors', icon: 'color' },
     // Form Components Section
@@ -145,14 +144,14 @@ export class DsSidebarComponent {
         ? undefined
         : () => {
             this.selectedItemId.set(item.id as string);
-            this.router.navigate(['ds', item.id]);
+            this.router.navigate(['/components', item.id]);
           },
       selected: this.selectedItemId() === item.id,
       children: item.children?.map(child => ({
         ...child,
         onClick: () => {
           this.selectedItemId.set(child.id as string);
-          this.router.navigate(['ds', child.id]);
+          this.router.navigate(['/components', child.id]);
         },
         selected: this.selectedItemId() === child.id,
       })),
@@ -161,8 +160,9 @@ export class DsSidebarComponent {
 
   constructor() {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      const url = event.url;
-      const item = this.navItems().find(item => item.id === url.split('/').pop());
+      const url = (event as NavigationEnd).url;
+      const segment = url.split('/').filter(Boolean).pop();
+      const item = this.navItems().find(item => item.id === segment);
       if (item) {
         this.selectedItemId.set(item.id as string);
       }

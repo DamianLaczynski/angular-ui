@@ -8,7 +8,7 @@
 .ds {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
   min-height: 0;
   overflow: hidden;
   position: relative;
@@ -101,7 +101,6 @@
   &__content {
     flex: 1;
     min-height: 0;
-    height: calc(100vh - var(--ds-header-height, 73px));
     min-width: 0;
     display: flex;
     flex-direction: row;
@@ -114,6 +113,19 @@
     height: 100%;
     overflow: auto;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__mobile-bar {
+    flex-shrink: 0;
+    padding: $spacing-2 $spacing-4;
+    border-bottom: 1px solid var(--color-neutral-stroke-rest);
+    background-color: var(--color-neutral-background-rest);
+
+    @include respond-to(medium) {
+      display: none;
+    }
   }
 
   &__overlay {

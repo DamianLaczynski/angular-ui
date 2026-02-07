@@ -1,0 +1,34 @@
+<main class="landing">
+  <section class="landing__hero">
+    <div class="landing__hero__glow" aria-hidden="true"></div>
+    <div class="landing__hero__content">
+      <span class="landing__hero__badge">Fluent 2 · Angular</span>
+      <h1 class="landing__hero__title">Angular UI</h1>
+      <p class="landing__hero__tagline">
+        Component library built on Microsoft Fluent 2. Consistent look, accessibility and themes — ready to use in your app.
+      </p>
+      <div class="landing__hero__actions">
+        <a routerLink="/components" class="landing__hero__cta">
+          <ui-button variant="primary" size="large" icon="apps" text="Browse components"></ui-button>
+        </a>
+        <a [href]="repoUrl" target="_blank" rel="noopener noreferrer" class="landing__hero__secondary">
+          <ui-button variant="secondary" appearance="outline" size="large" icon="code" text="GitHub"></ui-button>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="landing__highlights" aria-label="Information">
+    <span class="landing__highlights__item">50+ components</span>
+    <span class="landing__highlights__dot" aria-hidden="true"></span>
+    <span class="landing__highlights__item">Fluent 2</span>
+    <span class="landing__highlights__dot" aria-hidden="true"></span>
+    <span class="landing__highlights__item">MIT License</span>
+    <span class="landing__highlights__dot" aria-hidden="true"></span>
+    <span class="landing__highlights__item">Angular 21</span>
+  </section>
+
+  <p class="landing__disclaimer">
+    This is not an official Microsoft product. Fluent is a trademark of Microsoft Corporation.
+  </p>
+</main>

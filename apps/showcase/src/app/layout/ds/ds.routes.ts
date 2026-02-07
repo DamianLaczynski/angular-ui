@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { HomeShowcaseComponent } from '@showcase/home/home.showcase.component';
 import { AccordionShowcaseComponent } from '@showcase/accordion/accordion.showcase.component';
 import { AvatarShowcaseComponent } from '@showcase/avatar/avatar.showcase.component';
 import { ButtonShowcaseComponent } from '@showcase/button/button.showcase.component';
@@ -66,11 +65,7 @@ export const dsRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home',
-  },
-  {
-    path: 'home',
-    component: HomeShowcaseComponent,
+    redirectTo: 'button',
   },
   {
     path: 'accordion',
