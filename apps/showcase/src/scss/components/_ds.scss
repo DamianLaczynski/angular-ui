@@ -23,6 +23,14 @@
     flex-shrink: 0;
     z-index: calc($z-index-fixed + 1);
 
+    &__brand {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-1;
+      text-decoration: none;
+      color: inherit;
+    }
+
     &__title {
       font-size: $font-size-600;
       font-weight: $font-weight-semibold;
@@ -33,6 +41,28 @@
       @include respond-to(small) {
         font-size: $font-size-500;
       }
+    }
+
+    &__meta {
+      font-size: $font-size-200;
+      color: var(--color-neutral-foreground2-rest);
+      line-height: 1.2;
+
+      @include respond-to(small) {
+        font-size: 11px;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+    }
+
+    &__repo-link {
+      display: inline-flex;
+      text-decoration: none;
+      color: inherit;
     }
 
     &__menu-button {

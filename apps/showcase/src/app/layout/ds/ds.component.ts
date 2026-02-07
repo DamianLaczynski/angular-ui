@@ -1,19 +1,27 @@
-import { Component, signal, inject, OnInit, OnDestroy } from '@angular/core';
-
-import { RouterOutlet } from '@angular/router';
+import { Component, signal, inject, OnInit, OnDestroy, computed } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { DsSidebarComponent } from './components/ds-sidebar/ds-sidebar.component';
 import { SplitterPanel } from 'angular-ui';
 import { ButtonComponent } from 'angular-ui';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
+import { ThemeMode, ThemeService } from '@shared/theme/theme.service';
+
+const REPO_URL = 'https://github.com/DamianLaczynski/angular-ui';
 
 @Component({
   selector: 'app-ds',
-  imports: [RouterOutlet, DsSidebarComponent, ButtonComponent],
+  imports: [RouterOutlet, RouterLink, DsSidebarComponent, ButtonComponent],
   templateUrl: './ds.component.html',
 })
 export class DsComponent implements OnInit, OnDestroy {
   private readonly breakpointObserver = inject(BreakpointObserver);
+  private readonly themeService = inject(ThemeService);
+
+  readonly repoUrl = REPO_URL;
+  isDarkMode = computed(() => this.themeService.$themeMode() === ThemeMode.Dark);
+  themeLabel = computed(() => (this.isDarkMode() ? 'Light mode' : 'Dark mode'));
+  themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));
   private breakpointSubscription?: Subscription;
 
   panels = signal<SplitterPanel[]>([
@@ -56,5 +64,13 @@ export class DsComponent implements OnInit, OnDestroy {
 
   closeSidebar(): void {
     this.isSidebarOpen.set(false);
+  }
+
+  onThemeToggle(): void {
+    this.themeService.toggleTheme();
+  }
+
+  onRepoClick(): void {
+    window.open(this.repoUrl, '_blank');
   }
 }

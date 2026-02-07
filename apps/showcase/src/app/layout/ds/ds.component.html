@@ -1,17 +1,49 @@
 <div class="ds">
   <!-- Header -->
   <header class="ds__header">
-    <h1 class="ds__header__title">Angular UI</h1>
-    @if (isMobile()) {
+    <a routerLink="/ds/home" class="ds__header__brand">
+      <h1 class="ds__header__title">Angular UI</h1>
+      <span class="ds__header__meta">@laczynski/angular-ui v0.0.1 · MIT License</span>
+    </a>
+    <div class="ds__header__actions">
       <ui-button
-        class="ds__header__menu-button"
-        variant="primary"
-        [icon]="isSidebarOpen() ? 'dismiss' : 'navigation'"
+        variant="secondary"
+        [appearance]="'subtle'"
+        [icon]="themeIcon()"
         size="medium"
-        (click)="toggleSidebar()"
-        [attr.aria-label]="isSidebarOpen() ? 'Close sidebar' : 'Open sidebar'"
-      ></ui-button>
-    }
+        (click)="onThemeToggle()"
+        [attr.aria-label]="themeLabel()"
+      >
+        {{ themeLabel() }}
+      </ui-button>
+      <a
+        class="ds__header__repo-link"
+        [href]="repoUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Open repository"
+      >
+        <ui-button
+          [text]="'Repository'"
+          variant="secondary"
+          [appearance]="'subtle'"
+          icon="code"
+          size="medium"
+          ariaLabel="Open repository"
+          (click)="onRepoClick()"
+        ></ui-button>
+      </a>
+      @if (isMobile()) {
+        <ui-button
+          class="ds__header__menu-button"
+          variant="primary"
+          [icon]="isSidebarOpen() ? 'dismiss' : 'navigation'"
+          size="medium"
+          (click)="toggleSidebar()"
+          [attr.aria-label]="isSidebarOpen() ? 'Close sidebar' : 'Open sidebar'"
+        ></ui-button>
+      }
+    </div>
   </header>
 
   <!-- Overlay (visible on mobile when sidebar is open) -->

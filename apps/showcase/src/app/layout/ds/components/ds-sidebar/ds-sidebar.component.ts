@@ -2,19 +2,16 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavComponent, NavNode } from 'angular-ui';
 import { filter } from 'rxjs/operators';
-import { ThemeMode, ThemeService } from '@shared/theme/theme.service';
 import { SearchComponent } from 'angular-ui';
 import { FormsModule } from '@angular/forms';
-import { ButtonComponent } from 'angular-ui';
 
 @Component({
   selector: 'app-ds-sidebar',
-  imports: [NavComponent, SearchComponent, FormsModule, ButtonComponent],
+  imports: [NavComponent, SearchComponent, FormsModule],
   templateUrl: './ds-sidebar.component.html',
 })
 export class DsSidebarComponent {
   private readonly router = inject(Router);
-  private readonly themeService = inject(ThemeService);
   selectedItemId = signal<string | null>(null);
   private _searchQuery = signal<string>('');
 
@@ -26,13 +23,8 @@ export class DsSidebarComponent {
     this._searchQuery.set(value);
   }
 
-  // Dark mode state - computed from layout service
-  isDarkMode = computed(() => this.themeService.$themeMode() === ThemeMode.Dark);
-  themeLabel = computed(() => (this.isDarkMode() ? 'Light mode' : 'Dark mode'));
-  themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));
-
   private readonly allNavItems: NavNode[] = [
-    // Design System Section
+    { id: 'home', label: 'Home', icon: 'home' },
     { id: 'design-system', isSectionHeader: true, label: 'Design System' },
     { id: 'colors', label: 'Colors', icon: 'color' },
     // Form Components Section
@@ -175,9 +167,5 @@ export class DsSidebarComponent {
         this.selectedItemId.set(item.id as string);
       }
     });
-  }
-
-  onDarkModeToggle(): void {
-    this.themeService.toggleTheme();
   }
 }
