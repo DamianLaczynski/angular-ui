@@ -620,4 +620,3 @@ export class ColorsShowcaseComponent implements OnInit {
     return luminance > 0.9;
   }
 }
-
