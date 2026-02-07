@@ -1,23 +1,25 @@
-<div class="ds-sidebar">
-  <div class="ds-sidebar__search">
+<aside class="ds-sidebar">
+  <header class="ds-sidebar__header">
     <ui-search
       variant="filled-gray"
       placeholder="Search components..."
       [size]="'medium'"
       [(ngModel)]="searchQuery"
       [ngModelOptions]="{ standalone: true }"
-    ></ui-search>
-  </div>
-  <ui-nav [items]="navItems()"></ui-nav>
-  <div class="ds-sidebar__theme-toggle">
+    />
+  </header>
+  <nav class="ds-sidebar__nav" aria-label="Component navigation">
+    <ui-nav [items]="navItems()" />
+  </nav>
+  <footer class="ds-sidebar__footer">
     <ui-button
-      [fullWidth]="true"
       variant="primary"
-      [icon]="themeIcon()"
       size="medium"
+      [fullWidth]="true"
+      [icon]="themeIcon()"
       (click)="onDarkModeToggle()"
     >
       {{ themeLabel() }}
     </ui-button>
-  </div>
-</div>
+  </footer>
+</aside>
