@@ -26,12 +26,10 @@ export class TagComponent {
   selected = model<boolean>(false);
   disabled = model<boolean>(false);
 
-
   ariaLabel = input<string>('');
 
   dismiss = output<void>();
   tagClick = output<MouseEvent>();
-  selectedChange = output<boolean>();
 
   private baseButtonClasses = computed(() => {
     const c = [
@@ -48,7 +46,7 @@ export class TagComponent {
 
   tagClasses = computed(() => {
     const c = ['tag', ...this.baseButtonClasses()];
-    if (this.selectable() || this.dismissible() && !this.disabled()) c.push('tag--interactive');
+    if (!this.disabled() && (this.selectable() || this.dismissible())) c.push('tag--interactive');
     return c.join(' ');
   });
 
@@ -60,12 +58,16 @@ export class TagComponent {
     return this.ariaLabel() || this.text();
   });
 
-  tabIndex = computed(() => {
+  tabIndex = input<number | null | undefined>(undefined);
+
+  private defaultTabIndex = computed(() => {
     if (!this.selectable() && !this.dismissible()) {
       return null;
     }
     return this.disabled() ? -1 : 0;
   });
+
+  effectiveTabIndex = computed(() => this.tabIndex() ?? this.defaultTabIndex());
 
   onTagClick(event: MouseEvent): void {
     if (!this.isClickable()) {
@@ -74,6 +76,9 @@ export class TagComponent {
       return;
     }
 
+    if (this.selectable()) {
+      this.selected.set(!this.selected());
+    }
     this.tagClick.emit(event);
   }
 
@@ -85,6 +90,9 @@ export class TagComponent {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       event.stopPropagation();
+      if (this.selectable()) {
+        this.selected.set(!this.selected());
+      }
       this.tagClick.emit(event as any);
     }
   }

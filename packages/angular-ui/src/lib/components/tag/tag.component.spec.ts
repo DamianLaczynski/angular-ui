@@ -48,7 +48,8 @@ describe('TagComponent', () => {
       expect(component.selectable()).toBe(false);
       expect(component.dismissible()).toBe(false);
       expect(component.ariaLabel()).toBe('');
-      expect(component.tabIndex()).toBeNull();
+      expect(component.tabIndex()).toBeUndefined();
+      expect(component.effectiveTabIndex()).toBeNull();
     });
   });
 
@@ -216,7 +217,7 @@ describe('TagComponent', () => {
       fixture.componentRef.setInput('size', 'small');
       fixture.detectChanges();
 
-      expect(component.iconSize()).toBe('small');
+      expect(component.size()).toBe('small');
     });
 
     it('should return medium for medium size', () => {
@@ -224,7 +225,7 @@ describe('TagComponent', () => {
       fixture.componentRef.setInput('size', 'medium');
       fixture.detectChanges();
 
-      expect(component.iconSize()).toBe('medium');
+      expect(component.size()).toBe('medium');
     });
 
     it('should return large for large size', () => {
@@ -232,7 +233,7 @@ describe('TagComponent', () => {
       fixture.componentRef.setInput('size', 'large');
       fixture.detectChanges();
 
-      expect(component.iconSize()).toBe('large');
+      expect(component.size()).toBe('large');
     });
   });
 
@@ -764,7 +765,7 @@ describe('TagComponent', () => {
       const classes = component.tagClasses();
       expect(classes).toContain('button--selected');
       expect(classes).toContain('button--disabled');
-      expect(classes).toContain('tag--interactive');
+      expect(classes).not.toContain('tag--interactive');
     });
   });
 
@@ -1027,11 +1028,11 @@ describe('TagComponent', () => {
       fixture.componentRef.setInput('text', 'Tag');
       fixture.componentRef.setInput('size', 'small');
       fixture.detectChanges();
-      expect(component.iconSize()).toBe('small');
+      expect(component.size()).toBe('small');
 
       fixture.componentRef.setInput('size', 'large');
       fixture.detectChanges();
-      expect(component.iconSize()).toBe('large');
+      expect(component.size()).toBe('large');
     });
   });
 

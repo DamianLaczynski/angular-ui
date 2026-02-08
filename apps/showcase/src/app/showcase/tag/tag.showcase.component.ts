@@ -210,20 +210,6 @@ import { IconName } from 'angular-ui';
               />
             }
           </div>
-
-          <h3 class="showcase__subsection__title">Readonly State</h3>
-          <div class="showcase__grid">
-            @for (a of appearances; track a) {
-              <ui-tag
-                variant="primary"
-                [appearance]="a"
-                size="medium"
-                [text]="a | titlecase"
-                [selectable]="false"
-                [dismissible]="true"
-              />
-            }
-          </div>
         </div>
 
         <!-- Two-Line Layout -->
