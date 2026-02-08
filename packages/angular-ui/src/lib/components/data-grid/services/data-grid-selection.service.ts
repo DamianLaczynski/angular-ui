@@ -2,7 +2,7 @@
 // DataGrid Selection Service
 // =============================================================================
 
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { DataGridRow } from '../models/data-grid-column.model';
 
 /**

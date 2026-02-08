@@ -4,11 +4,15 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators} from '@angular/forms';
+  Validators,
+} from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { TimeSpanComponent, TimeSpanValue } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size } from 'angular-ui';
 
 @Component({
@@ -547,4 +551,3 @@ export class TimeSpanShowcaseComponent {
     this.showcase()?.logEvent('change', { value });
   }
 }
-

@@ -3,7 +3,6 @@ import {
   input,
   output,
   signal,
-  computed,
   ChangeDetectionStrategy,
   HostListener,
   ElementRef,

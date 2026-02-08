@@ -1,9 +1,12 @@
 import { Component, signal, computed, viewChild } from '@angular/core';
 import { RadioGroupComponent, RadioItem } from 'angular-ui';
 import { CommonModule, JsonPipe } from '@angular/common';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size, Orientation, ContentPosition } from 'angular-ui';
 
 @Component({
@@ -561,4 +564,3 @@ export class RadioShowcaseComponent {
     this.showcase()?.logEvent('change', { value });
   }
 }
-

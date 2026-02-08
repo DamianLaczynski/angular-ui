@@ -2,7 +2,10 @@ import { Component, signal, computed, viewChild } from '@angular/core';
 import { BadgeComponent } from 'angular-ui';
 import { CommonModule } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Variant, Appearance, Size, Shape, ContentPosition } from 'angular-ui';
 import { IconName } from 'angular-ui';
 
@@ -120,13 +123,7 @@ import { IconName } from 'angular-ui';
 
           <h3 class="showcase__subsection__title">With Icons</h3>
           <div class="showcase__grid">
-            <ui-badge
-              text="Primary"
-              variant="primary"
-              icon="star"
-              size="large"
-              appearance="tint"
-            />
+            <ui-badge text="Primary" variant="primary" icon="star" size="large" appearance="tint" />
             <ui-badge
               text="Success"
               variant="success"
@@ -372,13 +369,7 @@ import { IconName } from 'angular-ui';
 
           <h3 class="showcase__subsection__title">After</h3>
           <div class="showcase__grid">
-            <ui-badge
-              text="Star"
-              variant="primary"
-              icon="star"
-              iconPosition="after"
-              size="large"
-            />
+            <ui-badge text="Star" variant="primary" icon="star" iconPosition="after" size="large" />
             <ui-badge
               text="Check"
               variant="success"
@@ -538,4 +529,3 @@ export class BadgeShowcaseComponent {
     // Values are reset by the showcase component
   }
 }
-

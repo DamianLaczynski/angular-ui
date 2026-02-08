@@ -1,4 +1,4 @@
-import { Component, forwardRef, input, model, effect, output, OnInit } from '@angular/core';
+import { Component, forwardRef, input, model, effect, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Shape } from '../../utils';
 import { FieldComponent } from '../field/field.component';

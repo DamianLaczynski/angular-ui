@@ -6,7 +6,8 @@ function isScrollable(el: HTMLElement): boolean {
   const { overflowY, overflow } = getComputedStyle(el);
   const canScrollY = el.scrollHeight > el.clientHeight;
   const canScrollX = el.scrollWidth > el.clientWidth;
-  const overflowScroll = overflowY === 'auto' || overflowY === 'scroll' || overflow === 'auto' || overflow === 'scroll';
+  const overflowScroll =
+    overflowY === 'auto' || overflowY === 'scroll' || overflow === 'auto' || overflow === 'scroll';
   return (canScrollY || canScrollX) && overflowScroll;
 }
 
@@ -28,7 +29,7 @@ interface ScrollAdapter {
 export function registerScrollableAncestors(
   origin: HTMLElement,
   scrollDispatcher: ScrollDispatcher,
-  ngZone: NgZone
+  ngZone: NgZone,
 ): () => void {
   const elements = getScrollableAncestors(origin);
   const entries: { adapter: ScrollAdapter; removeListener: () => void }[] = [];
@@ -48,12 +49,14 @@ export function registerScrollableAncestors(
       removeListener: () => {
         el.removeEventListener('scroll', listener);
         subject.complete();
-        scrollDispatcher.deregister(adapter as unknown as Parameters<ScrollDispatcher['deregister']>[0]);
+        scrollDispatcher.deregister(
+          adapter as unknown as Parameters<ScrollDispatcher['deregister']>[0],
+        );
       },
     });
   }
 
   return () => {
-    entries.forEach((e) => e.removeListener());
+    entries.forEach(e => e.removeListener());
   };
 }

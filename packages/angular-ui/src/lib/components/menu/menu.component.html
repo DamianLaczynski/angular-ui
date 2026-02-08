@@ -53,7 +53,11 @@
       [attr.aria-expanded]="isMenuOpen()"
       (click)="onDropdownClick($event)"
     >
-      <ui-icon [icon]="triggerIcon()" [size]="size()" [variant]="selected() ? 'filled' : 'regular'" />
+      <ui-icon
+        [icon]="triggerIcon()"
+        [size]="size()"
+        [variant]="selected() ? 'filled' : 'regular'"
+      />
     </button>
   </div>
 } @else {
@@ -80,15 +84,15 @@
   </button>
 }
 
-  <ng-template #menuTemplate>
-    <ui-menu-list
-      [items]="menuItems()"
-      [visible]="true"
-      [maxHeight]="menuMaxHeight()"
-      [size]="size()"
-      [variant]="'secondary'"
-      [appearance]="'subtle'"
-      (itemClick)="onMenuItemClick($event)"
-      (closed)="closeMenu()"
-    />
-  </ng-template>
+<ng-template #menuTemplate>
+  <ui-menu-list
+    [items]="menuItems()"
+    [visible]="true"
+    [maxHeight]="menuMaxHeight()"
+    [size]="size()"
+    [variant]="'secondary'"
+    [appearance]="'subtle'"
+    (itemClick)="onMenuItemClick($event)"
+    (closed)="closeMenu()"
+  />
+</ng-template>

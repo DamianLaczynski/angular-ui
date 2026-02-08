@@ -3,7 +3,10 @@ import { ColorComponent, ColorFormat } from 'angular-ui';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size } from 'angular-ui';
 
 @Component({
@@ -155,11 +158,7 @@ import { Size } from 'angular-ui';
               />
             </div>
             <div class="showcase__item">
-              <ui-color
-                label="Underlined"
-                variant="underlined"
-                [formControl]="underlinedControl"
-              />
+              <ui-color label="Underlined" variant="underlined" [formControl]="underlinedControl" />
             </div>
           </div>
         </section>
@@ -415,4 +414,3 @@ export class ColorShowcaseComponent {
     this.showcase()?.logEvent('change', { value });
   }
 }
-

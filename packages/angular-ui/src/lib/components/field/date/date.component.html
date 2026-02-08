@@ -48,11 +48,7 @@
 
         <!-- Clear Button -->
         @if (value) {
-          <ui-action-button
-            [icon]="'dismiss'"
-            [size]="size()"
-            (click)="clear()"
-          ></ui-action-button>
+          <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clear()"></ui-action-button>
         }
       </div>
     }

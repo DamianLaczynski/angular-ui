@@ -16,9 +16,7 @@
       >
         <!-- Header -->
         <div [class]="headerClasses()">
-          <h2 id="dialog-title" class="dialog__title">
-            {{ title() }}
-          </h2>
+          <h2 id="dialog-title" class="dialog__title">{{ title() }}</h2>
 
           @if (closable()) {
             <div class="dialog__close-container">
@@ -74,7 +72,6 @@
                   {{ primaryAction()!.label }}
                 </ui-button>
               }
-
               @if (secondaryAction()) {
                 <ui-button
                   [variant]="secondaryAction()!.variant || 'secondary'"

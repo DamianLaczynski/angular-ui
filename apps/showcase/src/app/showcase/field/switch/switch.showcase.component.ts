@@ -3,7 +3,10 @@ import { SwitchComponent } from 'angular-ui';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size, ContentPosition } from 'angular-ui';
 
 @Component({
@@ -460,4 +463,3 @@ export class SwitchShowcaseComponent {
     this.showcase()?.logEvent('change', { checked: value });
   }
 }
-

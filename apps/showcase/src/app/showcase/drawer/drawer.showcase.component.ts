@@ -5,7 +5,10 @@ import { ButtonComponent } from 'angular-ui';
 import { QuickAction } from 'angular-ui';
 import { DividerComponent } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { IconName } from 'angular-ui';
 
 @Component({
@@ -70,9 +73,7 @@ import { IconName } from 'angular-ui';
             Simple drawer with title, body text and action buttons.
           </p>
           <div class="showcase__preview">
-            <ui-button variant="primary" (click)="showBasicDrawer()">
-              Open Basic Drawer
-            </ui-button>
+            <ui-button variant="primary" (click)="showBasicDrawer()"> Open Basic Drawer </ui-button>
 
             <ui-drawer
               title="Drawer Title"
@@ -587,4 +588,3 @@ export class MyComponent {
   }
 }`;
 }
-

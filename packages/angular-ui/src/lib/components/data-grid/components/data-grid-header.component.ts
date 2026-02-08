@@ -9,7 +9,6 @@ import {
   ChangeDetectionStrategy,
   inject,
   computed,
-  Type,
   signal,
   DestroyRef,
 } from '@angular/core';
@@ -22,7 +21,6 @@ import { ButtonComponent } from '../../button/button.component';
 import { DropdownComponent, DropdownItem } from '../../field/dropdown/dropdown.component';
 import { DataGridFilterService } from '../services/data-grid-filter.service';
 import { FilterFactory } from '../filters/filter-factory';
-import { DataGridFilterConfig, DataGridFilterValue } from '../models/data-grid-filter.model';
 
 /**
  * Component for rendering data grid header row with column labels and sorting

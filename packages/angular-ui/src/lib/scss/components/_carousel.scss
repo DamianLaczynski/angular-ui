@@ -218,7 +218,7 @@
     border-radius: $border-radius-400;
     background: var(--color-neutral-foreground2-rest);
     @include transition-colors($duration-fast);
-  @include transition-transform($duration-fast);
+    @include transition-transform($duration-fast);
     width: $spacing-2;
     height: $spacing-2;
     opacity: 0.3;

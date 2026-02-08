@@ -1,7 +1,7 @@
 import { Component, input, output, signal, effect } from '@angular/core';
 
 import { Size, Appearance, Orientation, Variant, Shape } from '../utils';
-import { NodeComponent, Node } from '../node/node.component';
+import { NodeComponent } from '../node/node.component';
 import { IconName } from '../icon';
 
 export interface Tab<T = any> {
@@ -168,7 +168,7 @@ export class TabsComponent<T extends Tab> {
 
     // Store previous tab ID for direction detection
     this._previousTabId.set(this._selectedTabId());
-    
+
     // Determine slide direction
     const tabs = this.tabs().filter(t => !t.disabled);
     const previousIndex = tabs.findIndex(t => t.id === this._previousTabId());

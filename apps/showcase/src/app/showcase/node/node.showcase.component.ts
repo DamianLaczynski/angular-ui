@@ -1,9 +1,12 @@
-import { Component, signal, computed, viewChild, TemplateRef } from '@angular/core';
+import { Component, signal, computed, viewChild } from '@angular/core';
 import { NodeComponent, Node } from 'angular-ui';
 import { MenuComponent } from 'angular-ui';
 import { CommonModule } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { MenuItem } from 'angular-ui';
 import { Appearance, Shape, Size, Variant, Orientation } from 'angular-ui';
 import { IconName } from 'angular-ui';
@@ -716,4 +719,3 @@ export class NodeShowcaseComponent {
     this.eventLog.update(log => [{ time, message }, ...log.slice(0, 9)]);
   }
 }
-

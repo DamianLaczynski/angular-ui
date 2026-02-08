@@ -69,7 +69,7 @@ export class NumberComponent extends FieldComponent {
 
   override onInputChange(event: Event): void {
     const target = event.target as HTMLInputElement;
-    let inputValue = target.value;
+    const inputValue = target.value;
 
     if (inputValue === '' || inputValue === '-' || inputValue === '.') {
       this.value = inputValue;

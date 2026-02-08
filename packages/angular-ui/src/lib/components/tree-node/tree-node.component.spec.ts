@@ -1273,9 +1273,7 @@ describe('TreeNodeComponent', () => {
       fixture.componentRef.setInput('node', mockNode);
       fixture.detectChanges();
 
-      let childNodes = fixture.debugElement.queryAll(
-        By.css('.tree-node__children > ui-tree-node'),
-      );
+      let childNodes = fixture.debugElement.queryAll(By.css('.tree-node__children > ui-tree-node'));
       expect(childNodes.length).toBe(1);
 
       const child2 = createMockNode({ id: 'child-2' });

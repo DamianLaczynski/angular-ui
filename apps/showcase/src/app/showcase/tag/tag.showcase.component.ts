@@ -2,7 +2,10 @@ import { Component, signal, computed, viewChild } from '@angular/core';
 import { TagComponent } from 'angular-ui';
 import { CommonModule } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Variant, Appearance, Shape, ExtendedSize } from 'angular-ui';
 import { IconName } from 'angular-ui';
 
@@ -594,4 +597,3 @@ export class TagShowcaseComponent {
     }
   }
 }
-

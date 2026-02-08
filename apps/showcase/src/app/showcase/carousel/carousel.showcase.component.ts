@@ -3,7 +3,10 @@ import { Component, signal, computed, viewChild } from '@angular/core';
 import { CarouselComponent } from 'angular-ui';
 import { CarouselItem } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { IconName } from 'angular-ui';
 
 @Component({
@@ -436,4 +439,3 @@ export class MyComponent {
     console.log('Carousel item changed:', event.item.id, 'at index', event.index);
   }
 }
-

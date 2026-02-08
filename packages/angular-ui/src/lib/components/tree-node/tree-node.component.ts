@@ -5,7 +5,6 @@ import {
   signal,
   effect,
   TemplateRef,
-  contentChild,
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';

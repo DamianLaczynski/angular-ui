@@ -3,7 +3,10 @@ import { DateRangeComponent, DateRange } from 'angular-ui';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size } from 'angular-ui';
 
 @Component({
@@ -501,4 +504,3 @@ export class DateRangeShowcaseComponent {
     this.showcase()?.logEvent('change', { value });
   }
 }
-

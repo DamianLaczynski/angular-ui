@@ -184,7 +184,7 @@ export class DateRangeComponent extends FieldComponent implements OnDestroy {
         minWidth: 280,
         maxWidth: 320,
       },
-      onClose: (focusTrigger) => this.closePanel(focusTrigger),
+      onClose: focusTrigger => this.closePanel(focusTrigger),
     });
 
     this.isOpen.set(true);

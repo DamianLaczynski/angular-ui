@@ -6,9 +6,9 @@
  * in the GraphQL schema.
  */
 
-import { DataGridColumn, SortType } from '../models/data-grid-column.model';
+import { DataGridColumn } from '../models/data-grid-column.model';
 import { GraphQLService } from '@shared/api/services/graphql.service';
-import { Observable, forkJoin, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 /**

@@ -1,4 +1,4 @@
-import { Component, forwardRef, input, output, OnInit } from '@angular/core';
+import { Component, forwardRef, input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RadioComponent } from './radio.component';
