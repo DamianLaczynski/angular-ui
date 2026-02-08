@@ -51,7 +51,6 @@ import { DataGridShowcaseComponent } from '@showcase/data-grid/data-grid.showcas
 import { PaginationShowcaseComponent } from '@showcase/pagination/pagination.showcase.component';
 import { ToolbarShowcaseComponent } from '@showcase/toolbar/toolbar.showcase.component';
 import { IconShowcaseComponent } from '@showcase/icon/icon.showcase.component';
-import { ColorsShowcaseComponent } from '@showcase/colors/colors.showcase.component';
 import { TableOfContentShowcaseComponent } from '@showcase/table-of-content/table-of-content.showcase.component';
 import { BreadcrumbShowcaseComponent } from '@showcase/breadcrumb/breadcrumb.showcase.component';
 import { CarouselShowcaseComponent } from '@showcase/carousel/carousel.showcase.component';
@@ -278,10 +277,6 @@ export const dsRoutes: Routes = [
   {
     path: 'icon',
     component: IconShowcaseComponent,
-  },
-  {
-    path: 'colors',
-    component: ColorsShowcaseComponent,
   },
   {
     path: 'table-of-content',
