@@ -42,13 +42,13 @@
     />
     <!-- Actions: Clear button and stepper -->
     @if (!disabled() && !readonly()) {
-    <div class="field__actions">
-      <ui-action-button [icon]="'number_symbol'" [size]="size()"></ui-action-button>
+      <div class="field__actions">
+        <ui-action-button [icon]="'number_symbol'" [size]="size()"></ui-action-button>
 
-      @if (value) {
-      <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clear()"></ui-action-button>
-      }
-    </div>
+        @if (value) {
+          <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clear()"></ui-action-button>
+        }
+      </div>
     }
   </div>
 </ui-field>

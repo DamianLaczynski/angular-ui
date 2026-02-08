@@ -5,29 +5,29 @@
 >
   <ol class="breadcrumb__list">
     @for (item of items(); track item.id; let isLast = $last) {
-    <li class="breadcrumb__item">
-      <ui-node
-        [node]="item"
-        [size]="size()"
-        [variant]="variant()"
-        [appearance]="appearance()"
-        [shape]="shape()"
-        [showSelectionIndicator]="showSelectionIndicator()"
-        [indicatorPosition]="indicatorPosition()"
-        [asButton]="asButton()"
-        [selectOnClick]="selectOnClick()"
-        [showQuickActions]="showQuickActions()"
-        [quickActionsTemplate]="quickActionsTemplate()"
-        (nodeClick)="onNodeClick(item)"
-      />
+      <li class="breadcrumb__item">
+        <ui-node
+          [node]="item"
+          [size]="size()"
+          [variant]="variant()"
+          [appearance]="appearance()"
+          [shape]="shape()"
+          [showSelectionIndicator]="showSelectionIndicator()"
+          [indicatorPosition]="indicatorPosition()"
+          [asButton]="asButton()"
+          [selectOnClick]="selectOnClick()"
+          [showQuickActions]="showQuickActions()"
+          [quickActionsTemplate]="quickActionsTemplate()"
+          (nodeClick)="onNodeClick(item)"
+        />
 
-      <!-- Divider (chevron) - not shown for last item -->
-      @if (!isLast) {
-      <div class="breadcrumb__divider">
-        <ui-icon [icon]="'chevron_right'" [size]="size()" variant="regular" />
-      </div>
-      }
-    </li>
+        <!-- Divider (chevron) - not shown for last item -->
+        @if (!isLast) {
+          <div class="breadcrumb__divider">
+            <ui-icon [icon]="'chevron_right'" [size]="size()" variant="regular" />
+          </div>
+        }
+      </li>
     }
   </ol>
 </nav>

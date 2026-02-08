@@ -3,14 +3,14 @@
   <header class="ds__header">
     <h1 class="ds__header__title">Angular UI</h1>
     @if (isMobile()) {
-    <ui-button
-      class="ds__header__menu-button"
-      variant="primary"
-      [icon]="isSidebarOpen() ? 'dismiss' : 'navigation'"
-      size="medium"
-      (click)="toggleSidebar()"
-      [attr.aria-label]="isSidebarOpen() ? 'Close sidebar' : 'Open sidebar'"
-    ></ui-button>
+      <ui-button
+        class="ds__header__menu-button"
+        variant="primary"
+        [icon]="isSidebarOpen() ? 'dismiss' : 'navigation'"
+        size="medium"
+        (click)="toggleSidebar()"
+        [attr.aria-label]="isSidebarOpen() ? 'Close sidebar' : 'Open sidebar'"
+      ></ui-button>
     }
   </header>
 
