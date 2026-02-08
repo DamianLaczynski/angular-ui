@@ -92,6 +92,7 @@ export class InteractiveShowcaseComponent {
   // Outputs
   valuesChange = output<Record<string, any>>();
   resetRequested = output<void>();
+  reset = output<void>();
   copyCode = output<void>();
 
   // Internal state
@@ -327,6 +328,7 @@ export class InteractiveShowcaseComponent {
     this.customWidth.set(800);
     this.valuesChange.emit(this.controlValues());
     this.resetRequested.emit();
+    this.reset.emit();
   }
 
   // Viewport methods
