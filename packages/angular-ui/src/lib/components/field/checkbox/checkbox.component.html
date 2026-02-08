@@ -32,42 +32,54 @@
       <!-- Visual checkbox element -->
       <div class="checkbox-visual">
         <!-- Rounded Shape (default) -->
-        @if (shape() === 'rounded') { @if (isUnchecked) {
-        <ui-icon [icon]="'checkbox_unchecked'" [size]="size()" />
-        } @if (isChecked) {
-        <ui-icon [icon]="'checkbox_checked'" [size]="size()" variant="filled" />
-        } @if (isIndeterminate) {
-        <ui-icon [icon]="'subtract_square'" [size]="size()" />
-        } }
+        @if (shape() === 'rounded') {
+          @if (isUnchecked) {
+            <ui-icon [icon]="'checkbox_unchecked'" [size]="size()" />
+          }
+          @if (isChecked) {
+            <ui-icon [icon]="'checkbox_checked'" [size]="size()" variant="filled" />
+          }
+          @if (isIndeterminate) {
+            <ui-icon [icon]="'subtract_square'" [size]="size()" />
+          }
+        }
 
         <!-- Circular Shape -->
-        @if (shape() === 'circular') { @if (isUnchecked) {
-        <ui-icon [icon]="'circle'" [size]="size()" />
-        } @if (isChecked) {
-        <ui-icon [icon]="'checkmark_circle'" [size]="size()" variant="filled" />
-        } @if (isIndeterminate) {
-        <ui-icon [icon]="'subtract_circle'" [size]="size()" />
-        } }
+        @if (shape() === 'circular') {
+          @if (isUnchecked) {
+            <ui-icon [icon]="'circle'" [size]="size()" />
+          }
+          @if (isChecked) {
+            <ui-icon [icon]="'checkmark_circle'" [size]="size()" variant="filled" />
+          }
+          @if (isIndeterminate) {
+            <ui-icon [icon]="'subtract_circle'" [size]="size()" />
+          }
+        }
 
         <!-- Square Shape -->
-        @if (shape() === 'square') { @if (isUnchecked) {
-        <ui-icon [icon]="'square'" [size]="size()" />
-        } @if (isChecked) {
-        <ui-icon [icon]="'checkmark_square'" [size]="size()" variant="filled" />
-        } @if (isIndeterminate) {
-        <ui-icon [icon]="'subtract_square'" [size]="size()" />
-        } }
+        @if (shape() === 'square') {
+          @if (isUnchecked) {
+            <ui-icon [icon]="'square'" [size]="size()" />
+          }
+          @if (isChecked) {
+            <ui-icon [icon]="'checkmark_square'" [size]="size()" variant="filled" />
+          }
+          @if (isIndeterminate) {
+            <ui-icon [icon]="'subtract_square'" [size]="size()" />
+          }
+        }
       </div>
 
       <!-- Label text -->
       @if (label()) {
-      <span
-        class="checkbox-label"
-        [class.checkbox-label--disabled]="disabled()"
-        [class.checkbox-label--required]="required()"
-      >
-        {{ label() }}
-      </span>
+        <span
+          class="checkbox-label"
+          [class.checkbox-label--disabled]="disabled()"
+          [class.checkbox-label--required]="required()"
+        >
+          {{ label() }}
+        </span>
       }
     </label>
   </div>

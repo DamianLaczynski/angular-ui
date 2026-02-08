@@ -36,13 +36,13 @@
       (keydown)="onKeyDown($event)"
     />
     @if (!disabled() && !readonly()) {
-    <div class="field__actions">
-      @if (value) {
-      <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clear()"></ui-action-button>
-      }
+      <div class="field__actions">
+        @if (value) {
+          <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clear()"></ui-action-button>
+        }
 
-      <ui-action-button [icon]="'search'" [size]="size()"></ui-action-button>
-    </div>
+        <ui-action-button [icon]="'search'" [size]="size()"></ui-action-button>
+      </div>
     }
   </div>
 </ui-field>

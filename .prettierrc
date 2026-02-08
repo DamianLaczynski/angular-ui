@@ -9,6 +9,17 @@
   "arrowParens": "avoid",
   "endOfLine": "lf",
   "overrides": [
-    { "files": "*.html", "options": { "parser": "html" } }
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "html"
+      }
+    },
+    {
+      "files": "*.component.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
   ]
 }

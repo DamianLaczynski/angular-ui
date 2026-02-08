@@ -92,7 +92,7 @@ export class InteractiveShowcaseComponent {
   // Outputs
   valuesChange = output<Record<string, any>>();
   resetRequested = output<void>();
-  copyCode = output<void>();
+  codeCopyRequested = output<void>();
 
   // Internal state
   isDarkTheme = signal<boolean>(false);
@@ -384,7 +384,7 @@ export class InteractiveShowcaseComponent {
 
   onCopyCode(): void {
     this.copyCodeToClipboard();
-    this.copyCode.emit();
+    this.codeCopyRequested.emit();
   }
 
   // Event log methods

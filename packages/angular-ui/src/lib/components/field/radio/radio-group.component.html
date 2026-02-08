@@ -19,21 +19,21 @@
       [ngClass]="groupClasses"
     >
       @for (item of items(); track item.id) {
-      <ui-radio
-        [id]="item.id"
-        [name]="getGroupName()"
-        [value]="item.value"
-        [label]="item.label"
-        [labelPosition]="item.labelPosition ?? 'after'"
-        [checked]="isRadioChecked(item.value)"
-        [disabled]="disabled() || item.disabled || false"
-        [readonly]="readonly()"
-        [required]="required()"
-        [size]="size()"
-        [ariaLabel]="item.ariaLabel ?? ''"
-        [ariaDescribedBy]="item.ariaDescribedBy ?? ''"
-        (valueChange)="onRadioSelected($event)"
-      />
+        <ui-radio
+          [id]="item.id"
+          [name]="getGroupName()"
+          [value]="item.value"
+          [label]="item.label"
+          [labelPosition]="item.labelPosition ?? 'after'"
+          [checked]="isRadioChecked(item.value)"
+          [disabled]="disabled() || item.disabled || false"
+          [readonly]="readonly()"
+          [required]="required()"
+          [size]="size()"
+          [ariaLabel]="item.ariaLabel ?? ''"
+          [ariaDescribedBy]="item.ariaDescribedBy ?? ''"
+          (valueChange)="onRadioSelected($event)"
+        />
       }
     </div>
   </div>

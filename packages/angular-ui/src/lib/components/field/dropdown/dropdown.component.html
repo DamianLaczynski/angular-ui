@@ -1,95 +1,96 @@
 @if (compact()) {
-<!-- Compact mode: Button trigger wrapped in div for positioning -->
-<div #triggerElement class="dropdown-trigger-wrapper">
-  <ui-button
-    appearance="subtle"
-    [size]="size()"
-    [icon]="computedCompactIcon()"
-    [disabled]="disabled()"
-    [ariaLabel]="ariaLabel() || label() || 'Filter'"
-    [attr.aria-expanded]="isOpen()"
-    [attr.aria-haspopup]="'listbox'"
-    [attr.aria-controls]="getListboxId()"
-    [attr.aria-activedescendant]="activeDescendant()"
-    [attr.role]="mode() === 'multi' ? 'listbox' : 'combobox'"
-    [attr.aria-autocomplete]="mode() === 'single' ? 'list' : null"
-    [attr.aria-multiselectable]="mode() === 'multi' ? 'true' : null"
-    [selected]="isOpen() || selectedValues().size > 0"
-    (click)="toggleDropdown(); $event.stopPropagation()"
-    class="dropdown-trigger--compact"
-  />
-</div>
-} @else {
-<!-- Standard mode: Input trigger -->
-<ui-field
-  [fieldType]="'select'"
-  [label]="label()"
-  [placeholder]="placeholder()"
-  [helpText]="helpText()"
-  [(errorText)]="errorText"
-  [required]="required()"
-  [disabled]="disabled()"
-  [readonly]="readonly()"
-  [autocomplete]="autocomplete()"
-  [id]="id()"
-  [name]="name()"
-  [size]="size()"
-  [variant]="variant()"
->
-  <div class="input-wrapper" [class]="wrapperClasses">
-    <!-- Dropdown Trigger (styled as input with chevron inside) -->
-    <div
-      #triggerElement
-      class="input dropdown-trigger"
-      [attr.role]="mode() === 'multi' ? 'listbox' : 'combobox'"
-      [attr.tabindex]="getTabIndex()"
+  <!-- Compact mode: Button trigger wrapped in div for positioning -->
+  <div #triggerElement class="dropdown-trigger-wrapper">
+    <ui-button
+      appearance="subtle"
+      [size]="size()"
+      [icon]="computedCompactIcon()"
+      [disabled]="disabled()"
+      [ariaLabel]="ariaLabel() || label() || 'Filter'"
       [attr.aria-expanded]="isOpen()"
       [attr.aria-haspopup]="'listbox'"
       [attr.aria-controls]="getListboxId()"
       [attr.aria-activedescendant]="activeDescendant()"
+      [attr.role]="mode() === 'multi' ? 'listbox' : 'combobox'"
       [attr.aria-autocomplete]="mode() === 'single' ? 'list' : null"
       [attr.aria-multiselectable]="mode() === 'multi' ? 'true' : null"
-      [attr.aria-label]="ariaLabel() || label()"
-      [attr.aria-labelledby]="id() ? id() + '-label' : null"
-      (click)="!disabled() && !readonly() ? toggleDropdown() : null; $event.stopPropagation()"
-      (focus)="onFocus($event)"
-      (keydown)="onKeyDown($event)"
-    >
-      <!-- Display text or tags for multi-select -->
-      @if (mode() === 'multi' && selectedItemsForTags().length > 0) {
-      <div class="dropdown-tags-container">
-        @for (item of selectedItemsForTags(); track item.value) {
-        <ui-tag
-          [text]="item.label"
-          [icon]="item.icon"
-          [size]="size() === 'large' ? 'medium' : 'small'"
-          [dismissible]="!disabled() && !readonly()"
-          [disabled]="disabled()"
-          [tabIndex]="-1"
-          (dismiss)="removeItem(item)"
-          (tagClick)="$event.stopPropagation()"
-        />
+      [selected]="isOpen() || selectedValues().size > 0"
+      (click)="toggleDropdown(); $event.stopPropagation()"
+      class="dropdown-trigger--compact"
+    />
+  </div>
+} @else {
+  <!-- Standard mode: Input trigger -->
+  <ui-field
+    [fieldType]="'select'"
+    [label]="label()"
+    [placeholder]="placeholder()"
+    [helpText]="helpText()"
+    [(errorText)]="errorText"
+    [required]="required()"
+    [disabled]="disabled()"
+    [readonly]="readonly()"
+    [autocomplete]="autocomplete()"
+    [id]="id()"
+    [name]="name()"
+    [size]="size()"
+    [variant]="variant()"
+  >
+    <div class="input-wrapper" [class]="wrapperClasses">
+      <!-- Dropdown Trigger (styled as input with chevron inside) -->
+      <div
+        #triggerElement
+        class="input dropdown-trigger"
+        [attr.role]="mode() === 'multi' ? 'listbox' : 'combobox'"
+        [attr.tabindex]="getTabIndex()"
+        [attr.aria-expanded]="isOpen()"
+        [attr.aria-haspopup]="'listbox'"
+        [attr.aria-controls]="getListboxId()"
+        [attr.aria-activedescendant]="activeDescendant()"
+        [attr.aria-autocomplete]="mode() === 'single' ? 'list' : null"
+        [attr.aria-multiselectable]="mode() === 'multi' ? 'true' : null"
+        [attr.aria-label]="ariaLabel() || label()"
+        [attr.aria-labelledby]="id() ? id() + '-label' : null"
+        (click)="!disabled() && !readonly() ? toggleDropdown() : null; $event.stopPropagation()"
+        (focus)="onFocus($event)"
+        (keydown)="onKeyDown($event)"
+      >
+        <!-- Display text or tags for multi-select -->
+        @if (mode() === 'multi' && selectedItemsForTags().length > 0) {
+          <div class="dropdown-tags-container">
+            @for (item of selectedItemsForTags(); track item.value) {
+              <ui-tag
+                [text]="item.label"
+                [icon]="item.icon"
+                [size]="size() === 'large' ? 'medium' : 'small'"
+                [dismissible]="!disabled() && !readonly()"
+                [disabled]="disabled()"
+                [tabIndex]="-1"
+                (dismiss)="removeItem(item)"
+                (tagClick)="$event.stopPropagation()"
+              />
+            }
+          </div>
+        } @else {
+          <span
+            class="dropdown-display-text"
+            [class.dropdown-placeholder]="selectedValues().size === 0"
+          >
+            {{ displayText() }}
+          </span>
+        }
+        @if (!disabled() && !readonly()) {
+          <!-- Clear button (inside input) -->
+          @if (clearable() && selectedValues().size > 0 && !disabled()) {
+            <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clearSelection()" />
+          }
+
+          <!-- Actions: Chevron button -->
+          <ui-action-button [icon]="'chevron_down'" [size]="size()" (click)="toggleDropdown()" />
         }
       </div>
-      } @else {
-      <span
-        class="dropdown-display-text"
-        [class.dropdown-placeholder]="selectedValues().size === 0"
-      >
-        {{ displayText() }}
-      </span>
-      } @if (!disabled() && !readonly()) {
-      <!-- Clear button (inside input) -->
-      @if (clearable() && selectedValues().size > 0 && !disabled()) {
-      <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clearSelection()" />
-      }
-
-      <!-- Actions: Chevron button -->
-      <ui-action-button [icon]="'chevron_down'" [size]="size()" (click)="toggleDropdown()" />
-      }
     </div>
-  </div>
-</ui-field>
+  </ui-field>
 }
 
 <!-- Dropdown Panel - rendered via CDK Overlay -->
@@ -110,15 +111,15 @@
   >
     <!-- Search input -->
     @if (searchable()) {
-    <div class="dropdown-panel__search">
-      <ui-search
-        [size]="size()"
-        variant="filled-gray"
-        placeholder="Search..."
-        (input)="onSearchInput($event)"
-        (click)="$event.stopPropagation()"
-      />
-    </div>
+      <div class="dropdown-panel__search">
+        <ui-search
+          [size]="size()"
+          variant="filled-gray"
+          placeholder="Search..."
+          (input)="onSearchInput($event)"
+          (click)="$event.stopPropagation()"
+        />
+      </div>
     }
     <!-- Items list -->
     <ui-scroll-container
@@ -147,25 +148,25 @@
           (mouseenter)="onItemMouseEnter()"
         >
           @if (itemTemplate(); as customTemplate) {
-          <ng-template #content>
-            <ng-container
-              *ngTemplateOutlet="
+            <ng-template #content>
+              <ng-container
+                *ngTemplateOutlet="
                   customTemplate;
                   context: { $implicit: item, selected: isItemSelected(item) }
                 "
-            ></ng-container>
-          </ng-template>
+              ></ng-container>
+            </ng-template>
           }
           <ng-template #before>
             @if (shouldShowCheckmark(item)) {
-            <ui-icon [icon]="'checkmark'" [size]="size()" />
+              <ui-icon [icon]="'checkmark'" [size]="size()" />
             } @else if (shouldShowCheckbox(item)) {
-            <ui-checkbox
-              size="medium"
-              [ngModel]="isItemSelected(item)"
-              (ngModelChange)="selectItem(item, $event)"
-              (click)="$event.stopPropagation()"
-            />
+              <ui-checkbox
+                size="medium"
+                [ngModel]="isItemSelected(item)"
+                (ngModelChange)="selectItem(item, $event)"
+                (click)="$event.stopPropagation()"
+              />
             }
           </ng-template>
         </ui-node>

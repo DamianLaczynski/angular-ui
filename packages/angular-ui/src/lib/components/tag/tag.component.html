@@ -10,7 +10,7 @@
 >
   <div class="tag__content">
     @if (icon()) {
-    <ui-icon [icon]="icon()!" [size]="size()" variant="regular" class="tag__icon" />
+      <ui-icon [icon]="icon()!" [size]="size()" variant="regular" class="tag__icon" />
     }
 
     <div
@@ -19,21 +19,21 @@
     >
       <span class="button__text tag__primary">{{ text() }}</span>
       @if (secondaryText()) {
-      <span class="tag__secondary">{{ secondaryText() }}</span>
+        <span class="tag__secondary">{{ secondaryText() }}</span>
       }
     </div>
 
     @if (dismissible() && !disabled()) {
-    <button
-      type="button"
-      class="tag__dismiss"
-      [attr.aria-label]="'Remove ' + text()"
-      (click)="onDismissClick($event)"
-      (keydown)="onDismissKeyDown($event)"
-      [attr.tabindex]="tabIndex()"
-    >
-      <ui-icon icon="dismiss" [size]="size()" variant="regular" class="tag__dismiss-icon" />
-    </button>
+      <button
+        type="button"
+        class="tag__dismiss"
+        [attr.aria-label]="'Remove ' + text()"
+        (click)="onDismissClick($event)"
+        (keydown)="onDismissKeyDown($event)"
+        [attr.tabindex]="tabIndex()"
+      >
+        <ui-icon icon="dismiss" [size]="size()" variant="regular" class="tag__dismiss-icon" />
+      </button>
     }
   </div>
 </div>
