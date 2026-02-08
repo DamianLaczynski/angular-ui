@@ -1,4 +1,5 @@
-import { Component, input, output, signal, computed, effect } from '@angular/core';
+import { Component, input, output, signal, computed, effect, TemplateRef } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 
 import { CarouselItem } from './models/carousel-item.model';
 import { ButtonComponent } from '../button';
@@ -6,11 +7,11 @@ import { ButtonComponent } from '../button';
 @Component({
   selector: 'ui-carousel',
   templateUrl: './carousel.component.html',
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, NgTemplateOutlet],
 })
 export class CarouselComponent {
-  // Inputs
   items = input<CarouselItem[]>([]);
+  slideTemplate = input<TemplateRef<{ $implicit: CarouselItem; index: number }> | null>(null);
   activeIndex = input<number>(0);
   autoPlay = input<boolean>(false);
   autoPlayInterval = input<number>(3000); // milliseconds
