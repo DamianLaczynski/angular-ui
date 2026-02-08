@@ -64,7 +64,6 @@
                 [icon]="item.icon"
                 [size]="size() === 'large' ? 'medium' : 'small'"
                 [dismissible]="!disabled() && !readonly()"
-                [readonly]="readonly()"
                 [disabled]="disabled()"
                 [tabIndex]="-1"
                 (dismiss)="removeItem(item)"

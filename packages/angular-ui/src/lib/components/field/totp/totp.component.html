@@ -1,6 +1,8 @@
 <div class="totp-wrapper">
   @if (label()) {
-    <label class="totp-wrapper__label" [ngClass]="labelClasses"> {{ label() }} </label>
+    <label class="totp-wrapper__label" [ngClass]="labelClasses" [attr.for]="id() + '-0'">
+      {{ label() }}
+    </label>
   }
   <div [class]="getTotpContainerClasses()">
     @for (digit of digits(); track $index) {

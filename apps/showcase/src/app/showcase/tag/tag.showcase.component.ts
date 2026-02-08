@@ -6,7 +6,7 @@ import {
   InteractiveShowcaseComponent,
   ShowcaseConfig,
 } from '@shared/components/interactive-showcase';
-import { Variant, Appearance, Shape, ExtendedSize } from 'angular-ui';
+import { Variant, Appearance, Shape, Size } from 'angular-ui';
 import { IconName } from 'angular-ui';
 
 @Component({
@@ -50,7 +50,7 @@ import { IconName } from 'angular-ui';
                 [dismissible]="currentDismissible()"
                 [selected]="currentSelected()"
                 [disabled]="currentDisabled()"
-                [readonly]="currentReadonly()"
+                [selectable]="currentSelectable()"
                 (tagClick)="onInteractiveTagClick($event)"
                 (dismiss)="onInteractiveDismiss()"
               />
@@ -219,7 +219,7 @@ import { IconName } from 'angular-ui';
                 [appearance]="a"
                 size="medium"
                 [text]="a | titlecase"
-                [readonly]="true"
+                [selectable]="false"
                 [dismissible]="true"
               />
             }
@@ -369,7 +369,7 @@ import { IconName } from 'angular-ui';
 export class TagShowcaseComponent {
   variants: Variant[] = ['primary', 'secondary', 'success', 'warning', 'danger', 'info'];
   appearances: Appearance[] = ['filled', 'tint', 'outline', 'subtle', 'transparent'];
-  sizes: ExtendedSize[] = ['extra-small', 'small', 'medium', 'large', 'extra-large'];
+  sizes: Size[] = ['small', 'medium', 'large'];
   shapes: Shape[] = ['rounded', 'circular', 'square'];
 
   // Reference to showcase for event logging
@@ -480,10 +480,10 @@ export class TagShowcaseComponent {
         group: 'state',
       },
       {
-        key: 'readonly',
-        label: 'Readonly',
+        key: 'selectable',
+        label: 'Selectable',
         type: 'switch',
-        description: 'Readonly state',
+        description: 'Tag is clickable when selectable',
         defaultValue: false,
         group: 'state',
       },
@@ -502,7 +502,7 @@ export class TagShowcaseComponent {
     dismissible: true,
     selected: false,
     disabled: false,
-    readonly: false,
+    selectable: false,
   });
 
   // Computed values for the tag
@@ -517,12 +517,12 @@ export class TagShowcaseComponent {
   });
   currentVariant = computed(() => this.values()['variant'] as Variant);
   currentAppearance = computed(() => this.values()['appearance'] as Appearance);
-  currentSize = computed(() => this.values()['size'] as ExtendedSize);
+  currentSize = computed(() => this.values()['size'] as Size);
   currentShape = computed(() => this.values()['shape'] as Shape);
   currentDismissible = computed(() => this.values()['dismissible'] as boolean);
   currentSelected = computed(() => this.values()['selected'] as boolean);
   currentDisabled = computed(() => this.values()['disabled'] as boolean);
-  currentReadonly = computed(() => this.values()['readonly'] as boolean);
+  currentSelectable = computed(() => this.values()['selectable'] as boolean);
 
   onValuesChange(newValues: Record<string, any>): void {
     this.values.set(newValues);
