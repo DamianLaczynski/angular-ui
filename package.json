@@ -18,7 +18,8 @@
     "format": "prettier --write \"apps/showcase/src\" \"packages/angular-ui/src\"",
     "format:check": "prettier --check \"apps/showcase/src\" \"packages/angular-ui/src\"",
     "test:coverage": "ng test --code-coverage --watch=false --browsers=ChromeHeadless --source-map",
-    "precommit": "npm run lint && npm run format:check",
+    "prepare": "husky",
+    "precommit": "lint-staged",
     "e2e": "npx playwright test -c e2e/playwright.config.ts",
     "e2e:ui": "npx playwright test -c e2e/playwright.config.ts --ui",
     "e2e:debug": "npx playwright test -c e2e/playwright.config.ts --debug",
@@ -29,6 +30,13 @@
     "publish:lib:major": "cd packages/angular-ui && npm version major && cd ../.. && npm run build:lib && npm run publish:lib"
   },
   "private": true,
+  "lint-staged": {
+    "*.{ts,html}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{scss,json}": "prettier --write"
+  },
   "dependencies": {
     "@angular/animations": "^21.1.0",
     "@angular/cdk": "^21.1.0",
@@ -76,6 +84,8 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^21.1.0",
     "eslint-plugin-unused-imports": "^4.1.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
     "prettier": "^3.5.3",
     "typescript": "~5.9.3",
     "vitest": "^4.0.8",
