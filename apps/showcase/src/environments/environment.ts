@@ -5,4 +5,5 @@ export const environment = {
   mockUser: true,
   appVersion: packageJson.version,
   apiUrl: 'http://localhost:5000',
+  githubRepoUrl: 'https://github.com/DamianLaczynski/angular-ui/',
 };
