@@ -109,6 +109,19 @@
     }
   }
 
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+    min-width: 0;
+    overflow-x: auto;
+  }
+
+  &__item-label {
+    font-size: $font-size-300;
+    color: var(--color-neutral-foreground2-rest);
+  }
+
   &__section {
     margin-bottom: $spacing-16;
 

@@ -1,16 +1,43 @@
-import { Component, signal, viewChild, computed } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TabsComponent, Tab } from 'angular-ui';
-
-import { Variant, Appearance, Shape, Size, Orientation } from 'angular-ui';
+import type { Appearance, Orientation, Shape, Size, Variant } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
+import { SectionWithDrawerComponent } from '@shared/components/section-with-drawer';
+import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
+import {
+  TABS_APPEARANCE_DRAWER_FORM_CONFIG,
+  TABS_VARIANT_DRAWER_FORM_CONFIG,
+  TABS_SIZE_DRAWER_FORM_CONFIG,
+  TABS_SHAPE_DRAWER_FORM_CONFIG,
+  TABS_ORIENTATION_DRAWER_FORM_CONFIG,
+  TABS_ORIENTATIONS,
+} from './tabs-drawer-form.config';
+import {
+  APPEARANCES,
+  SHAPES,
+  SIZES,
+  VARIANTS,
+} from '@shared/utils/showcase/component-options.utils';
 import {
   InteractiveShowcaseComponent,
   ShowcaseConfig,
 } from '@shared/components/interactive-showcase';
+import { DEFAULT_TABS, EXTENDED_TABS, LABELS_ONLY_TABS } from './tabs-showcase-presets';
 
 @Component({
   selector: 'app-tabs-showcase',
-  imports: [TabsComponent, TableOfContentComponent, InteractiveShowcaseComponent],
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    TabsComponent,
+    TableOfContentComponent,
+    SectionWithDrawerComponent,
+    ShowcaseHeaderComponent,
+    InteractiveShowcaseComponent,
+  ],
   template: `
     <div class="showcase showcase--responsive showcase__with-toc">
       <ui-table-of-content
@@ -21,18 +48,156 @@ import {
         [maxLevel]="2"
       />
       <div class="showcase-content">
-        <h1 class="showcase__title">Tabs Component Showcase</h1>
-        <p class="showcase__description">
-          Comprehensive showcase of the Tabs component built with Fluent 2 Design System. Supports
-          both horizontal and vertical orientations with various layouts, sizes, and interaction
-          patterns.
-        </p>
+        <app-showcase-header title="Tabs" />
 
-        <!-- Interactive Demo -->
-        <section class="showcase__section">
+        <app-section-with-drawer
+          sectionTitle="Appearance"
+          [formConfig]="appearanceDrawerFormConfig"
+          [formValues]="appearanceFormValues()"
+          (formValuesChange)="appearanceFormValues.set($event)"
+        >
+          <div class="showcase__grid">
+            @for (appearance of appearances; track appearance) {
+              <div class="showcase__item">
+                <ui-tabs
+                  [tabs]="defaultTabs"
+                  [variant]="appearanceForm().variant"
+                  [appearance]="appearance"
+                  [size]="appearanceForm().size"
+                  [shape]="appearanceForm().shape"
+                  [orientation]="appearanceForm().orientation"
+                  [showSelectionIndicator]="appearanceForm().showSelectionIndicator"
+                  [fullWidth]="appearanceForm().fullWidth"
+                />
+              </div>
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <app-section-with-drawer
+          sectionTitle="Variant"
+          [formConfig]="variantDrawerFormConfig"
+          [formValues]="variantFormValues()"
+          (formValuesChange)="variantFormValues.set($event)"
+        >
+          <div class="showcase__grid">
+            @for (variant of variants; track variant) {
+              <div class="showcase__item">
+                <ui-tabs
+                  [tabs]="defaultTabs"
+                  [variant]="variant"
+                  [appearance]="variantForm().appearance"
+                  [size]="variantForm().size"
+                  [shape]="variantForm().shape"
+                  [orientation]="variantForm().orientation"
+                  [showSelectionIndicator]="variantForm().showSelectionIndicator"
+                  [fullWidth]="variantForm().fullWidth"
+                />
+              </div>
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <app-section-with-drawer
+          sectionTitle="Size"
+          [formConfig]="sizeDrawerFormConfig"
+          [formValues]="sizeFormValues()"
+          (formValuesChange)="sizeFormValues.set($event)"
+        >
+          <div class="showcase__grid">
+            @for (size of sizes; track size) {
+              <div class="showcase__item">
+                <ui-tabs
+                  [tabs]="defaultTabs"
+                  [variant]="sizeForm().variant"
+                  [appearance]="sizeForm().appearance"
+                  [size]="size"
+                  [shape]="sizeForm().shape"
+                  [orientation]="sizeForm().orientation"
+                  [showSelectionIndicator]="sizeForm().showSelectionIndicator"
+                  [fullWidth]="sizeForm().fullWidth"
+                />
+              </div>
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <app-section-with-drawer
+          sectionTitle="Shape"
+          [formConfig]="shapeDrawerFormConfig"
+          [formValues]="shapeFormValues()"
+          (formValuesChange)="shapeFormValues.set($event)"
+        >
+          <div class="showcase__grid">
+            @for (shape of shapes; track shape) {
+              <div class="showcase__item">
+                <ui-tabs
+                  [tabs]="defaultTabs"
+                  [variant]="shapeForm().variant"
+                  [appearance]="shapeForm().appearance"
+                  [size]="shapeForm().size"
+                  [shape]="shape"
+                  [orientation]="shapeForm().orientation"
+                  [showSelectionIndicator]="shapeForm().showSelectionIndicator"
+                  [fullWidth]="shapeForm().fullWidth"
+                />
+              </div>
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <app-section-with-drawer
+          sectionTitle="Orientation"
+          [formConfig]="orientationDrawerFormConfig"
+          [formValues]="orientationFormValues()"
+          (formValuesChange)="orientationFormValues.set($event)"
+        >
+          <div class="showcase__grid">
+            @for (orientation of orientations; track orientation) {
+              <div class="showcase__item">
+                <ui-tabs
+                  [tabs]="defaultTabs"
+                  [variant]="orientationForm().variant"
+                  [appearance]="orientationForm().appearance"
+                  [size]="orientationForm().size"
+                  [shape]="orientationForm().shape"
+                  [orientation]="orientation"
+                  [showSelectionIndicator]="orientationForm().showSelectionIndicator"
+                  [fullWidth]="orientationForm().fullWidth"
+                />
+              </div>
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <section id="tab-options" class="showcase__section">
+          <h2 class="showcase__section__title">Tab options</h2>
+          <div class="showcase__option-section__box">
+            <div class="showcase__grid">
+              <div class="showcase__item">
+                <span class="showcase__item-label">Default set</span>
+                <ui-tabs [tabs]="defaultTabs" variant="primary" appearance="subtle" />
+              </div>
+              <div class="showcase__item">
+                <span class="showcase__item-label">With disabled and closable</span>
+                <ui-tabs
+                  [tabs]="extendedTabs()"
+                  variant="primary"
+                  appearance="subtle"
+                  (tabClose)="onTabClose($event)"
+                />
+              </div>
+              <div class="showcase__item">
+                <span class="showcase__item-label">Labels only</span>
+                <ui-tabs [tabs]="labelsOnlyTabs" variant="primary" appearance="subtle" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="interactive-demo" class="showcase__section">
           <h2 class="showcase__section__title">Interactive Demo</h2>
           <app-interactive-showcase
-            #showcase
             [config]="showcaseConfig"
             [showEventLog]="true"
             (valuesChange)="onValuesChange($event)"
@@ -49,347 +214,135 @@ import {
                 [orientation]="currentOrientation()"
                 [showSelectionIndicator]="currentShowIndicator()"
                 (tabChange)="onInteractiveTabChange($event)"
+                (tabClose)="onTabClose($event)"
               />
             </div>
           </app-interactive-showcase>
         </section>
-
-        <!-- ========================================= -->
-        <!-- HORIZONTAL TABS -->
-        <!-- ========================================= -->
-
-        <h2 class="showcase__title" style="margin-top: 48px;">Horizontal Tabs</h2>
-
-        <!-- Basic Tabs -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Basic Horizontal Tabs (Icon Before)</h2>
-          <div class="showcase__grid">
-            <div class="showcase__item">
-              <ui-tabs
-                [tabs]="basicTabs()"
-                [selectedTabId]="selectedBasicTab()"
-                (tabChange)="onBasicTabChange($event)"
-              ></ui-tabs>
-              <p style="margin-top: 16px;">Selected: {{ selectedBasicTab() }}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Size Variants -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Horizontal Size Variants</h2>
-          <div class="showcase__grid">
-            <div class="showcase__item">
-              <h3>Small</h3>
-              <ui-tabs [tabs]="sizeTabs()" size="small"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Medium (Default)</h3>
-              <ui-tabs [tabs]="sizeTabs()" size="medium"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Large</h3>
-              <ui-tabs [tabs]="sizeTabs()" size="large"></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- Appearance Variants -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Appearance Variants</h2>
-          <div class="showcase__grid showcase__grid--large">
-            <div class="showcase__item">
-              <h3>Transparent (Default)</h3>
-              <ui-tabs [tabs]="styleTabs()" appearance="transparent"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Subtle</h3>
-              <ui-tabs [tabs]="styleTabs()" appearance="subtle"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Filled</h3>
-              <ui-tabs [tabs]="styleTabs()" appearance="filled"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Outline</h3>
-              <ui-tabs [tabs]="styleTabs()" appearance="outline"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Tint</h3>
-              <ui-tabs [tabs]="styleTabs()" appearance="tint"></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- Shape Variants -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Shape Variants</h2>
-          <div class="showcase__grid showcase__grid--large">
-            <div class="showcase__item">
-              <h3>Rounded (Default)</h3>
-              <ui-tabs [tabs]="styleTabs()" appearance="subtle" shape="rounded"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Circular</h3>
-              <ui-tabs [tabs]="styleTabs()" appearance="subtle" shape="circular"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Filled + Circular</h3>
-              <ui-tabs [tabs]="styleTabs()" appearance="filled" shape="circular"></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- Variant (Color) Options -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Variant (Color) Options</h2>
-          <div class="showcase__grid showcase__grid--large">
-            <div class="showcase__item">
-              <h3>Primary (Default)</h3>
-              <ui-tabs [tabs]="styleTabs()" variant="primary" appearance="subtle"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Secondary</h3>
-              <ui-tabs [tabs]="styleTabs()" variant="secondary" appearance="subtle"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Success</h3>
-              <ui-tabs [tabs]="styleTabs()" variant="success" appearance="subtle"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Warning</h3>
-              <ui-tabs [tabs]="styleTabs()" variant="warning" appearance="subtle"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Danger</h3>
-              <ui-tabs [tabs]="styleTabs()" variant="danger" appearance="subtle"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Info</h3>
-              <ui-tabs [tabs]="styleTabs()" variant="info" appearance="subtle"></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- Variant + Appearance Combinations -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Variant + Appearance Combinations</h2>
-          <div class="showcase__grid showcase__grid--large">
-            <div class="showcase__item">
-              <h3>Success + Filled + Circular</h3>
-              <ui-tabs
-                [tabs]="styleTabs()"
-                variant="success"
-                appearance="filled"
-                shape="circular"
-              ></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Danger + Tint</h3>
-              <ui-tabs [tabs]="styleTabs()" variant="danger" appearance="tint"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Info + Outline</h3>
-              <ui-tabs [tabs]="styleTabs()" variant="info" appearance="outline"></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- ========================================= -->
-        <!-- VERTICAL TABS -->
-        <!-- ========================================= -->
-
-        <h2 class="showcase__title" style="margin-top: 48px;">Vertical Tabs</h2>
-
-        <!-- Basic Vertical Tabs -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Basic Vertical Tabs (Icon Before)</h2>
-          <div class="showcase__grid">
-            <div class="showcase__item">
-              <ui-tabs
-                [tabs]="verticalBasicTabs()"
-                [selectedTabId]="selectedVerticalTab()"
-                orientation="vertical"
-                (tabChange)="onVerticalTabChange($event)"
-              ></ui-tabs>
-              <p style="margin-top: 16px;">Selected: {{ selectedVerticalTab() }}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Vertical Size Variants -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Vertical Size Variants</h2>
-          <div class="showcase__grid showcase__grid--large">
-            <div class="showcase__item">
-              <h3>Small</h3>
-              <ui-tabs [tabs]="verticalSizeTabs()" size="small" orientation="vertical"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Medium (Default)</h3>
-              <ui-tabs [tabs]="verticalSizeTabs()" size="medium" orientation="vertical"></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- Vertical Appearance Variants -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Vertical Appearance Variants</h2>
-          <div class="showcase__grid showcase__grid--large">
-            <div class="showcase__item">
-              <h3>Transparent (Default)</h3>
-              <ui-tabs
-                [tabs]="verticalStyleTabs()"
-                appearance="transparent"
-                orientation="vertical"
-              ></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Subtle</h3>
-              <ui-tabs
-                [tabs]="verticalStyleTabs()"
-                appearance="subtle"
-                orientation="vertical"
-              ></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Filled</h3>
-              <ui-tabs
-                [tabs]="verticalStyleTabs()"
-                appearance="filled"
-                orientation="vertical"
-              ></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- Vertical Shape Variants -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Vertical Shape Variants</h2>
-          <div class="showcase__grid showcase__grid--large">
-            <div class="showcase__item">
-              <h3>Subtle + Circular</h3>
-              <ui-tabs
-                [tabs]="verticalStyleTabs()"
-                appearance="subtle"
-                shape="circular"
-                orientation="vertical"
-              ></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Filled + Circular</h3>
-              <ui-tabs
-                [tabs]="verticalStyleTabs()"
-                appearance="filled"
-                shape="circular"
-                orientation="vertical"
-              ></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- Vertical Variant (Color) Options -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Vertical Variant (Color) Options</h2>
-          <div class="showcase__grid showcase__grid--large">
-            <div class="showcase__item">
-              <h3>Success + Subtle</h3>
-              <ui-tabs
-                [tabs]="verticalCircularTabs()"
-                variant="success"
-                appearance="subtle"
-                orientation="vertical"
-              ></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Danger + Filled + Circular</h3>
-              <ui-tabs
-                [tabs]="verticalCircularTabs()"
-                variant="danger"
-                appearance="filled"
-                shape="circular"
-                orientation="vertical"
-              ></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mixed Examples -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Combined Examples</h2>
-          <div class="showcase__grid showcase__grid--large">
-            <div class="showcase__item">
-              <h3>Horizontal: Small</h3>
-              <ui-tabs [tabs]="combinedTabs()" size="small"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Vertical: Medium + Transparent</h3>
-              <ui-tabs
-                [tabs]="combinedTabs()"
-                size="medium"
-                appearance="transparent"
-                orientation="vertical"
-              ></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- With Disabled Tabs -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">With Disabled Tabs</h2>
-          <div class="showcase__grid showcase__grid--large">
-            <div class="showcase__item">
-              <h3>Horizontal</h3>
-              <ui-tabs [tabs]="disabledTabs()"></ui-tabs>
-            </div>
-            <div class="showcase__item">
-              <h3>Vertical</h3>
-              <ui-tabs [tabs]="disabledTabs()" orientation="vertical"></ui-tabs>
-            </div>
-          </div>
-        </div>
-
-        <!-- Event Logging -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Event Logging</h2>
-          <div class="showcase__grid">
-            <div class="showcase__item">
-              <p><strong>Last Event:</strong> {{ lastEvent() }}</p>
-              <p><strong>Selected Tab:</strong> {{ lastSelectedTab() }}</p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   `,
 })
 export class TabsShowcaseComponent {
-  // Reference to showcase
-  private showcaseRef = viewChild<InteractiveShowcaseComponent>('showcase');
+  defaultTabs = DEFAULT_TABS;
+  labelsOnlyTabs = LABELS_ONLY_TABS;
+  extendedTabs = signal<Tab[]>([...EXTENDED_TABS]);
+  appearances = APPEARANCES;
+  variants = VARIANTS;
+  sizes = SIZES;
+  shapes = SHAPES;
+  orientations = TABS_ORIENTATIONS;
 
-  // Interactive demo options
-  variants: Variant[] = ['primary', 'secondary', 'success', 'warning', 'danger', 'info'];
-  appearances: Appearance[] = ['transparent', 'filled', 'tint', 'outline', 'subtle'];
-  shapes: Shape[] = ['rounded', 'circular', 'square'];
-  sizes: Size[] = ['small', 'medium', 'large'];
-  orientations: Orientation[] = ['horizontal', 'vertical'];
+  appearanceDrawerFormConfig = TABS_APPEARANCE_DRAWER_FORM_CONFIG;
+  variantDrawerFormConfig = TABS_VARIANT_DRAWER_FORM_CONFIG;
+  sizeDrawerFormConfig = TABS_SIZE_DRAWER_FORM_CONFIG;
+  shapeDrawerFormConfig = TABS_SHAPE_DRAWER_FORM_CONFIG;
+  orientationDrawerFormConfig = TABS_ORIENTATION_DRAWER_FORM_CONFIG;
 
-  // Values from showcase
-  private values = signal<Record<string, any>>({});
+  appearanceFormValues = signal<Record<string, unknown>>({
+    variant: 'primary',
+    size: 'medium',
+    shape: 'rounded',
+    orientation: 'horizontal',
+    showSelectionIndicator: true,
+    fullWidth: false,
+  });
 
-  // Showcase configuration
+  appearanceForm = computed(() => this.toTabsForm(this.appearanceFormValues()));
+
+  variantFormValues = signal<Record<string, unknown>>({
+    appearance: 'subtle',
+    size: 'medium',
+    shape: 'rounded',
+    orientation: 'horizontal',
+    showSelectionIndicator: true,
+    fullWidth: false,
+  });
+
+  variantForm = computed(() => this.toTabsForm(this.variantFormValues()));
+
+  sizeFormValues = signal<Record<string, unknown>>({
+    variant: 'primary',
+    appearance: 'subtle',
+    shape: 'rounded',
+    orientation: 'horizontal',
+    showSelectionIndicator: true,
+    fullWidth: false,
+  });
+
+  sizeForm = computed(() => this.toTabsForm(this.sizeFormValues()));
+
+  shapeFormValues = signal<Record<string, unknown>>({
+    variant: 'primary',
+    appearance: 'subtle',
+    size: 'medium',
+    orientation: 'horizontal',
+    showSelectionIndicator: true,
+    fullWidth: false,
+  });
+
+  shapeForm = computed(() => this.toTabsForm(this.shapeFormValues()));
+
+  orientationFormValues = signal<Record<string, unknown>>({
+    variant: 'primary',
+    appearance: 'subtle',
+    size: 'medium',
+    shape: 'rounded',
+    showSelectionIndicator: true,
+    fullWidth: false,
+  });
+
+  orientationForm = computed(() => this.toTabsForm(this.orientationFormValues()));
+
+  private toTabsForm(v: Record<string, unknown>) {
+    return {
+      variant: v['variant'] as Variant,
+      appearance: v['appearance'] as Appearance,
+      size: v['size'] as Size,
+      shape: v['shape'] as Shape,
+      orientation: (v['orientation'] as Orientation) ?? 'horizontal',
+      showSelectionIndicator: !!v['showSelectionIndicator'],
+      fullWidth: !!v['fullWidth'],
+    };
+  }
+
+  private values = signal<Record<string, unknown>>({});
+  currentVariant = computed(() => this.values()['variant'] as Variant);
+  currentAppearance = computed(() => this.values()['appearance'] as Appearance);
+  currentShape = computed(() => this.values()['shape'] as Shape);
+  currentSize = computed(() => this.values()['size'] as Size);
+  currentOrientation = computed(() => this.values()['orientation'] as Orientation);
+  currentShowIndicator = computed(() => this.values()['showIndicator'] as boolean);
+
   showcaseConfig: ShowcaseConfig = {
     componentSelector: 'ui-tabs',
     controlGroups: [
-      { id: 'appearance', label: 'Appearance', icon: 'color' as any, expanded: true },
-      { id: 'layout', label: 'Layout', icon: 'resize' as any },
+      {
+        id: 'appearance',
+        label: 'Appearance',
+        icon: 'color' as import('angular-ui').IconName,
+        expanded: true,
+      },
+      { id: 'layout', label: 'Layout', icon: 'resize' as import('angular-ui').IconName },
     ],
     controls: [
+      {
+        key: 'tabSet',
+        label: 'Tab set',
+        type: 'dropdown',
+        options: [
+          { value: 'default', label: 'Default' },
+          { value: 'extended', label: 'Extended (disabled, closable)' },
+          { value: 'labelsOnly', label: 'Labels only' },
+        ],
+        defaultValue: 'default',
+        group: 'layout',
+      },
       {
         key: 'variant',
         label: 'Variant',
         type: 'dropdown',
-        options: this.variants.map(v => ({ value: v, label: v })),
+        options: VARIANTS.map(v => ({ value: v, label: v })),
         defaultValue: 'primary',
         group: 'appearance',
       },
@@ -397,7 +350,7 @@ export class TabsShowcaseComponent {
         key: 'appearance',
         label: 'Appearance',
         type: 'dropdown',
-        options: this.appearances.map(a => ({ value: a, label: a })),
+        options: APPEARANCES.map(a => ({ value: a, label: a })),
         defaultValue: 'subtle',
         group: 'appearance',
       },
@@ -405,7 +358,7 @@ export class TabsShowcaseComponent {
         key: 'shape',
         label: 'Shape',
         type: 'dropdown',
-        options: this.shapes.map(s => ({ value: s, label: s })),
+        options: SHAPES.map(s => ({ value: s, label: s })),
         defaultValue: 'rounded',
         group: 'appearance',
       },
@@ -413,7 +366,7 @@ export class TabsShowcaseComponent {
         key: 'size',
         label: 'Size',
         type: 'dropdown',
-        options: this.sizes.map(s => ({ value: s, label: s })),
+        options: SIZES.map(s => ({ value: s, label: s })),
         defaultValue: 'medium',
         group: 'layout',
       },
@@ -421,7 +374,10 @@ export class TabsShowcaseComponent {
         key: 'orientation',
         label: 'Orientation',
         type: 'dropdown',
-        options: this.orientations.map(o => ({ value: o, label: o })),
+        options: [
+          { value: 'horizontal', label: 'horizontal' },
+          { value: 'vertical', label: 'vertical' },
+        ],
         defaultValue: 'horizontal',
         group: 'layout',
       },
@@ -435,145 +391,31 @@ export class TabsShowcaseComponent {
     ],
   };
 
-  // Computed values
-  currentVariant = computed(() => this.values()['variant'] as Variant);
-  currentAppearance = computed(() => this.values()['appearance'] as Appearance);
-  currentShape = computed(() => this.values()['shape'] as Shape);
-  currentSize = computed(() => this.values()['size'] as Size);
-  currentOrientation = computed(() => this.values()['orientation'] as Orientation);
-  currentShowIndicator = computed(() => this.values()['showIndicator'] as boolean);
+  selectedInteractiveTab = signal<string | number>('itab1');
+  interactiveTabs = computed<Tab[]>(() => {
+    const set = this.values()['tabSet'] as string;
+    if (set === 'extended') return this.extendedTabs();
+    if (set === 'labelsOnly') return LABELS_ONLY_TABS;
+    return DEFAULT_TABS;
+  });
 
-  onValuesChange(newValues: Record<string, any>): void {
+  onValuesChange(newValues: Record<string, unknown>): void {
     this.values.set(newValues);
   }
 
-  onReset(): void {
-    // Reset is handled by showcase component
-  }
-
-  selectedInteractiveTab = signal<string | number>('itab1');
-
-  interactiveTabs = signal<Tab[]>([
-    { id: 'itab1', label: 'Dashboard', icon: 'home' },
-    { id: 'itab2', label: 'Analytics', icon: 'info' },
-    { id: 'itab3', label: 'Settings', icon: 'settings' },
-  ]);
-
-  lastEvent = signal<string>('None');
-  lastSelectedTab = signal<string>('None');
-  selectedBasicTab = signal<string | number>('tab1');
-  selectedVerticalTab = signal<string | number>('vtab1');
+  onReset(): void {}
 
   onInteractiveTabChange(tab: Tab): void {
     this.selectedInteractiveTab.set(tab.id);
   }
 
-  removeTab(): void {
-    const tabs = this.interactiveTabs();
-    if (tabs.length > 1) {
-      this.interactiveTabs.set(tabs.slice(0, -1));
-      this.lastEvent.set(`Removed last tab`);
-    }
-  }
-
-  // Basic tabs
-  basicTabs = signal<Tab[]>([
-    { id: 'tab1', label: 'First tab', icon: 'home' },
-    { id: 'tab2', label: 'Second tab', icon: 'settings' },
-    { id: 'tab3', label: 'Third tab', icon: 'settings' },
-    { id: 'tab4', label: 'Fourth tab', icon: 'settings' },
-    { id: 'tab5', label: 'Fifth tab', icon: 'settings' },
-  ]);
-
-  // Size tabs
-  sizeTabs = signal<Tab[]>([
-    { id: 1, label: 'Home', icon: 'home' },
-    { id: 2, label: 'Profile', icon: 'person' },
-    { id: 3, label: 'Settings', icon: 'settings' },
-  ]);
-
-  // Layout tabs
-  layoutTabs = signal<Tab[]>([
-    { id: 'a', label: 'Dashboard', icon: 'home' },
-    { id: 'b', label: 'Analytics', icon: 'document' },
-    { id: 'c', label: 'Reports', icon: 'home' },
-    { id: 'd', label: 'Team', icon: 'home' },
-  ]);
-
-  // Style tabs
-  styleTabs = signal<Tab[]>([
-    { id: 'style1', label: 'Overview', icon: 'book' },
-    { id: 'style2', label: 'Details', icon: 'book' },
-    { id: 'style3', label: 'Settings', icon: 'settings' },
-  ]);
-
-  // Vertical basic tabs
-  verticalBasicTabs = signal<Tab[]>([
-    { id: 'vtab1', label: 'First tab', icon: 'home' },
-    { id: 'vtab2', label: 'Second tab', icon: 'settings' },
-    { id: 'vtab3', label: 'Third tab', icon: 'settings' },
-    { id: 'vtab4', label: 'Fourth tab', icon: 'settings' },
-    { id: 'vtab5', label: 'Fifth tab', icon: 'settings' },
-  ]);
-
-  // Vertical size tabs
-  verticalSizeTabs = signal<Tab[]>([
-    { id: 'vsize1', label: 'Home', icon: 'home' },
-    { id: 'vsize2', label: 'Profile', icon: 'person' },
-    { id: 'vsize3', label: 'Settings', icon: 'settings' },
-  ]);
-
-  // Vertical layout tabs
-  verticalLayoutTabs = signal<Tab[]>([
-    { id: 'vlayout1', label: 'Dashboard', icon: 'home' },
-    { id: 'vlayout2', label: 'Analytics', icon: 'line' },
-    { id: 'vlayout3', label: 'Reports', icon: 'document_copy' },
-    { id: 'vlayout4', label: 'Team', icon: 'people_team' },
-  ]);
-
-  // Vertical style tabs
-  verticalStyleTabs = signal<Tab[]>([
-    { id: 'vstyle1', label: 'Overview', icon: 'book' },
-    { id: 'vstyle2', label: 'Details', icon: 'book' },
-    { id: 'vstyle3', label: 'Settings', icon: 'settings' },
-  ]);
-
-  // Vertical circular tabs
-  verticalCircularTabs = signal<Tab[]>([
-    { id: 'vcir1', label: 'First tab', icon: 'home' },
-    { id: 'vcir2', label: 'Second tab', icon: 'settings' },
-    { id: 'vcir3', label: 'Third tab', icon: 'settings' },
-    { id: 'vcir4', label: 'Fourth tab', icon: 'settings' },
-    { id: 'vcir5', label: 'Fifth tab', icon: 'settings' },
-  ]);
-
-  // Disabled tabs
-  disabledTabs = signal<Tab[]>([
-    { id: 'd1', label: 'Active', icon: 'home' },
-    { id: 'd2', label: 'Disabled', disabled: true },
-    { id: 'd3', label: 'Active', icon: 'home' },
-    { id: 'd4', label: 'Disabled', disabled: true },
-  ]);
-
-  // Combined tabs
-  combinedTabs = signal<Tab[]>([
-    { id: 'cb1', label: 'All', icon: 'home' },
-    { id: 'cb2', label: 'Active', icon: 'home' },
-    { id: 'cb3', label: 'Completed', icon: 'home' },
-  ]);
-
-  // Event handlers
-  onBasicTabChange(tab: Tab): void {
-    this.selectedBasicTab.set(tab.id);
-    this.lastEvent.set(`Horizontal tab changed: ${tab.label}`);
-    this.lastSelectedTab.set(tab.label);
-    console.log('Horizontal tab changed:', tab);
-  }
-
-  onVerticalTabChange(tab: Tab): void {
-    this.selectedVerticalTab.set(tab.id);
-    this.lastEvent.set(`Vertical tab changed: ${tab.label}`);
-    this.lastSelectedTab.set(tab.label);
-    console.log('Vertical tab changed:', tab);
+  onTabClose(tab: Tab): void {
+    this.extendedTabs.update(list => {
+      const next = list.filter(t => t.id !== tab.id);
+      if (this.selectedInteractiveTab() === tab.id && next.length > 0) {
+        this.selectedInteractiveTab.set(next[0].id);
+      }
+      return next;
+    });
   }
 }
