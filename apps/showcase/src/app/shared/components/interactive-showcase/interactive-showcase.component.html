@@ -1,75 +1,77 @@
 <div class="interactive-showcase">
-  <!-- Header -->
-  <div class="interactive-showcase__header">
-    <div class="interactive-showcase__toolbar">
-      <!-- Viewport Controls -->
-      @if (showViewportControls()) {
-        <div class="interactive-showcase__viewport-controls">
-          @for (option of viewportOptions; track option.value) {
-            <ui-button
-              variant="secondary"
-              [appearance]="currentViewport() === option.value ? 'filled' : 'subtle'"
-              [icon]="option.icon"
-              [ariaLabel]="option.label"
-              (click)="setViewport(option.value)"
-            />
-          }
-        </div>
-        <div class="interactive-showcase__separator"></div>
-      }
+  @if (showPreview()) {
+    <!-- Header -->
+    <div class="interactive-showcase__header">
+      <div class="interactive-showcase__toolbar">
+        <!-- Viewport Controls -->
+        @if (showViewportControls()) {
+          <div class="interactive-showcase__viewport-controls">
+            @for (option of viewportOptions; track option.value) {
+              <ui-button
+                variant="secondary"
+                [appearance]="currentViewport() === option.value ? 'filled' : 'subtle'"
+                [icon]="option.icon"
+                [ariaLabel]="option.label"
+                (click)="setViewport(option.value)"
+              />
+            }
+          </div>
+          <div class="interactive-showcase__separator"></div>
+        }
 
-      <ui-button
-        variant="secondary"
-        appearance="subtle"
-        icon="arrow_reset"
-        ariaLabel="Reset"
-        (click)="onReset()"
-      />
-      <ui-button
-        variant="secondary"
-        appearance="subtle"
-        [icon]="isDarkTheme() ? 'weather_sunny' : 'weather_moon'"
-        ariaLabel="Toggle theme"
-        (click)="toggleTheme()"
-      />
-      @if (showCopyCode() && config()?.componentSelector) {
         <ui-button
-          variant="primary"
-          [appearance]="isCodePanelOpen() ? 'filled' : 'subtle'"
-          icon="code"
-          ariaLabel="Toggle code"
-          (click)="toggleCodePanel()"
+          variant="secondary"
+          appearance="subtle"
+          icon="arrow_reset"
+          ariaLabel="Reset"
+          (click)="onReset()"
         />
-      }
+        <ui-button
+          variant="secondary"
+          appearance="subtle"
+          [icon]="isDarkTheme() ? 'weather_sunny' : 'weather_moon'"
+          ariaLabel="Toggle theme"
+          (click)="toggleTheme()"
+        />
+        @if (showCopyCode() && config()?.componentSelector) {
+          <ui-button
+            variant="primary"
+            [appearance]="isCodePanelOpen() ? 'filled' : 'subtle'"
+            icon="code"
+            ariaLabel="Toggle code"
+            (click)="toggleCodePanel()"
+          />
+        }
+      </div>
     </div>
-  </div>
 
-  <!-- Preview Area with Viewport -->
-  <div class="interactive-showcase__preview-wrapper">
-    <div
-      #previewContainer
-      class="interactive-showcase__preview"
-      [class.interactive-showcase__preview--dark]="isDarkTheme()"
-      [class.interactive-showcase__preview--resizing]="isResizing()"
-      [style.width]="previewWidth()"
-    >
-      <ng-content select="[preview]"></ng-content>
+    <!-- Preview Area with Viewport -->
+    <div class="interactive-showcase__preview-wrapper">
+      <div
+        #previewContainer
+        class="interactive-showcase__preview"
+        [class.interactive-showcase__preview--dark]="isDarkTheme()"
+        [class.interactive-showcase__preview--resizing]="isResizing()"
+        [style.width]="previewWidth()"
+      >
+        <ng-content select="[preview]"></ng-content>
 
-      <!-- Resize Handle -->
-      @if (currentViewport() === 'custom' || currentViewport() !== 'desktop') {
-        <div class="interactive-showcase__resize-handle" (mousedown)="onResizeStart($event)">
-          <div class="interactive-showcase__resize-handle-bar"></div>
+        <!-- Resize Handle -->
+        @if (currentViewport() === 'custom' || currentViewport() !== 'desktop') {
+          <div class="interactive-showcase__resize-handle" (mousedown)="onResizeStart($event)">
+            <div class="interactive-showcase__resize-handle-bar"></div>
+          </div>
+        }
+      </div>
+
+      <!-- Viewport Width Indicator -->
+      @if (currentViewport() !== 'desktop') {
+        <div class="interactive-showcase__viewport-indicator">
+          {{ currentViewport() === 'custom' ? customWidth() + 'px' : previewWidth() }}
         </div>
       }
     </div>
-
-    <!-- Viewport Width Indicator -->
-    @if (currentViewport() !== 'desktop') {
-      <div class="interactive-showcase__viewport-indicator">
-        {{ currentViewport() === 'custom' ? customWidth() + 'px' : previewWidth() }}
-      </div>
-    }
-  </div>
+  }
 
   <!-- Code Panel (Accordion) -->
   @if (showCopyCode() && config()?.componentSelector) {
