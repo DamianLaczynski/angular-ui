@@ -152,7 +152,12 @@ export class DateRangeComponent extends FieldComponent implements OnDestroy {
     if (this.disabled() || this.readonly()) {
       return;
     }
-    this.isOpen() ? this.closePanel() : this.openPanel();
+
+    if (this.isOpen()) {
+      this.closePanel();
+    } else {
+      this.openPanel();
+    }
   }
 
   openPanel(): void {

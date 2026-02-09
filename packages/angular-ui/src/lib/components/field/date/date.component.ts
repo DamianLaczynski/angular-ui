@@ -176,7 +176,11 @@ export class DateComponent extends FieldComponent implements OnDestroy {
       return;
     }
 
-    this.isOpen() ? this.closePanel(false) : this.openPanel();
+    if (this.isOpen()) {
+      this.closePanel(false);
+    } else {
+      this.openPanel();
+    }
   }
 
   closePanel(shouldFocusTrigger: boolean = false): void {

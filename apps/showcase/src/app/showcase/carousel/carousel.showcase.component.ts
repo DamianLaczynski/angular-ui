@@ -1,17 +1,75 @@
 import { Component, signal, computed, viewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-import { CarouselComponent } from 'angular-ui';
-import { CarouselItem } from 'angular-ui';
-import { TableOfContentComponent } from 'angular-ui';
+import {
+  CarouselComponent,
+  CarouselItem,
+  TableOfContentComponent,
+  ButtonComponent,
+  DateComponent,
+  SliderComponent,
+  TotpComponent,
+  TabsComponent,
+  Tab,
+  AvatarComponent,
+  MenuComponent,
+  TagComponent,
+  IconName,
+  MenuItem,
+} from 'angular-ui';
 import {
   InteractiveShowcaseComponent,
   ShowcaseConfig,
 } from '@shared/components/interactive-showcase';
-import { IconName } from 'angular-ui';
 
 @Component({
   selector: 'app-carousel-showcase',
-  imports: [CarouselComponent, TableOfContentComponent, InteractiveShowcaseComponent],
+  imports: [
+    CarouselComponent,
+    TableOfContentComponent,
+    InteractiveShowcaseComponent,
+    ButtonComponent,
+    DateComponent,
+    SliderComponent,
+    TotpComponent,
+    TabsComponent,
+    AvatarComponent,
+    MenuComponent,
+    TagComponent,
+    FormsModule,
+  ],
+  styles: [
+    `
+      .carousel-showcase-slide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 280px;
+        padding: 2rem;
+        gap: 1.5rem;
+      }
+      .carousel-showcase-slide__title {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+      .carousel-showcase-slide__content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+      }
+      .carousel-showcase-slide__content--wide {
+        width: 100%;
+        min-width: 280px;
+        max-width: 420px;
+      }
+      .carousel-showcase-slide__content--wide ui-slider {
+        width: 100%;
+      }
+    `,
+  ],
   template: `
     <div class="showcase showcase--responsive showcase__with-toc">
       <ui-table-of-content
@@ -220,6 +278,109 @@ import { IconName } from 'angular-ui';
           </div>
         </div>
 
+        <div class="showcase__section">
+          <h2 class="showcase__section__title">Carousel with custom template</h2>
+          <p class="showcase__section__description">
+            Use the <code>slideTemplate</code> input to render custom content per slide. Each slide
+            receives the item and index; you can render any component or markup.
+          </p>
+          <div class="showcase__preview">
+            <ng-template #componentSlide let-item let-index="index">
+              <div class="carousel-showcase-slide">
+                <h3 class="carousel-showcase-slide__title">{{ item.title }}</h3>
+                @switch (item.componentType) {
+                  @case ('button') {
+                    <div class="carousel-showcase-slide__content">
+                      <ui-button variant="primary" appearance="filled" text="Primary" />
+                      <ui-button variant="secondary" appearance="filled" text="Secondary" />
+                      <ui-button variant="success" appearance="filled" text="Success" />
+                      <ui-button variant="warning" appearance="filled" text="Warning" />
+                      <ui-button variant="danger" appearance="filled" text="Danger" />
+                      <ui-button variant="info" appearance="filled" text="Info" />
+                    </div>
+                  }
+                  @case ('date') {
+                    <div class="carousel-showcase-slide__content">
+                      <ui-date label="Date" />
+                    </div>
+                  }
+                  @case ('slider') {
+                    <div
+                      class="carousel-showcase-slide__content carousel-showcase-slide__content--wide"
+                    >
+                      <ui-slider label="Slider" [min]="0" [max]="100" />
+                    </div>
+                  }
+                  @case ('totp') {
+                    <div class="carousel-showcase-slide__content">
+                      <ui-totp label="TOTP" />
+                    </div>
+                  }
+                  @case ('tabs') {
+                    <div
+                      class="carousel-showcase-slide__content"
+                      style="width: 100%; max-width: 360px;"
+                    >
+                      <ui-tabs
+                        [tabs]="showcaseTabs"
+                        [selectedTabId]="showcaseSelectedTabId()"
+                        (tabChange)="onShowcaseTabChange($event)"
+                      />
+                    </div>
+                  }
+                  @case ('avatar') {
+                    <div class="carousel-showcase-slide__content">
+                      <ui-avatar name="John Doe" />
+                      <ui-avatar initials="AB" />
+                      <ui-avatar image="https://picsum.photos/64?random=1" />
+                      <ui-avatar icon="person" />
+                    </div>
+                  }
+                  @case ('menu') {
+                    <div class="carousel-showcase-slide__content">
+                      <ui-menu
+                        triggerVariant="dropdown"
+                        text="Dropdown"
+                        [menuItems]="componentShowcaseMenuItems"
+                        [size]="'medium'"
+                      />
+                      <ui-menu
+                        triggerVariant="split"
+                        text="Split"
+                        [menuItems]="componentShowcaseMenuItems"
+                        [size]="'medium'"
+                      />
+                      <ui-menu
+                        triggerVariant="button"
+                        text="Button"
+                        [menuItems]="componentShowcaseMenuItems"
+                        [size]="'medium'"
+                      />
+                    </div>
+                  }
+                  @case ('tag') {
+                    <div class="carousel-showcase-slide__content">
+                      <ui-tag text="Tag 1" />
+                      <ui-tag text="Tag 2" variant="primary" />
+                      <ui-tag text="Remove" [dismissible]="true" (dismiss)="onTagDismiss()" />
+                    </div>
+                  }
+                }
+              </div>
+            </ng-template>
+            <ui-carousel
+              [items]="componentShowcaseItems()"
+              [slideTemplate]="componentSlide"
+              [showControls]="true"
+              [showIndicators]="true"
+              [loop]="true"
+              [autoPlay]="true"
+              size="large"
+              (itemChange)="onItemChange($event)"
+            />
+          </div>
+        </div>
+
         <!-- Usage Example -->
         <div class="showcase__section">
           <h2 class="showcase__section__title">Usage Example</h2>
@@ -323,9 +484,37 @@ export class CarouselShowcaseComponent {
     this.values.set(newValues);
   }
 
-  onReset(): void {
-    // Values are reset by the showcase component
+  onReset(): void {}
+
+  componentShowcaseItems = signal<CarouselItem[]>([
+    { id: 'btn', title: 'Button', componentType: 'button' },
+    { id: 'date', title: 'Date', componentType: 'date' },
+    { id: 'slider', title: 'Slider', componentType: 'slider' },
+    { id: 'totp', title: 'TOTP', componentType: 'totp' },
+    { id: 'tabs', title: 'Tabs', componentType: 'tabs' },
+    { id: 'avatar', title: 'Avatar', componentType: 'avatar' },
+    { id: 'menu', title: 'Menu', componentType: 'menu' },
+    { id: 'tag', title: 'Tag', componentType: 'tag' },
+  ]);
+
+  showcaseTabs: Tab[] = [
+    { id: '1', label: 'Tab 1' },
+    { id: '2', label: 'Tab 2' },
+    { id: '3', label: 'Tab 3' },
+  ];
+  showcaseSelectedTabId = signal<string | number>('1');
+  onShowcaseTabChange(tab: Tab): void {
+    this.showcaseSelectedTabId.set(tab.id);
   }
+
+  componentShowcaseMenuItems: MenuItem[] = [
+    { id: '1', type: 'button', label: 'Option 1' },
+    { id: '2', type: 'button', label: 'Option 2' },
+    { id: '3', type: 'button', label: 'Option 3' },
+  ];
+
+  onTagDismiss(): void {}
+
   basicItems = signal<CarouselItem[]>([
     {
       id: 'slide1',

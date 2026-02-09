@@ -184,7 +184,7 @@ export class DataGridFilterRowComponent<T = any> {
   getFilterTemplateContext(column: DataGridColumn<T>): DataGridFilterTemplateContext<T> {
     const config = this.filterConfigs().get(column.id)!;
     const filterValue = this.filterValues().get(column.id);
-    const filter = FilterFactory.getDefinition(column.filterable?.type!);
+    const filter = FilterFactory.getDefinition(column.filterable?.type ?? '');
     if (!filter) {
       throw new Error(`Filter definition not found for column ${column.id}`);
     }

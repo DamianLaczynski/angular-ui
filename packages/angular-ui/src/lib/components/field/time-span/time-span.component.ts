@@ -161,7 +161,11 @@ export class TimeSpanComponent extends FieldComponent implements OnDestroy {
     if (this.disabled()) {
       return;
     }
-    this.isOpen() ? this.closePanel() : this.openPanel();
+    if (this.isOpen()) {
+      this.closePanel();
+    } else {
+      this.openPanel();
+    }
   }
 
   openPanel(): void {

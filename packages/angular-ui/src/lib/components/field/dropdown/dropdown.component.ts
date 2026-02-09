@@ -331,7 +331,11 @@ export class DropdownComponent extends FieldComponent implements OnDestroy {
     if (this.disabled()) {
       return;
     }
-    this.isOpen() ? this.closeDropdown(false) : this.openDropdown(false);
+    if (this.isOpen()) {
+      this.closeDropdown(false);
+    } else {
+      this.openDropdown(false);
+    }
   }
 
   openDropdown(setActiveDescendant: boolean = false): void {
