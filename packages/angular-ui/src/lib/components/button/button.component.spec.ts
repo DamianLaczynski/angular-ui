@@ -49,7 +49,7 @@ describe('ButtonComponent', () => {
       expect(component.icon()).toBeUndefined();
       expect(component.text()).toBeUndefined();
       expect(component.selected()).toBe(false);
-      expect(component.toggle()).toBe(false);
+      expect(component.selectable()).toBe(false);
       expect(component.type()).toBe('button');
       expect(component.disabled()).toBe(false);
       expect(component.fullWidth()).toBe(false);
@@ -251,13 +251,15 @@ describe('ButtonComponent', () => {
     });
 
     it('should set aria-pressed="true" when selected is true', () => {
+      fixture.componentRef.setInput('selectable', true);
       fixture.componentRef.setInput('selected', true);
       fixture.detectChanges();
 
       expect(nativeButton.getAttribute('aria-pressed')).toBe('true');
     });
 
-    it('should not set aria-pressed when selected is false', () => {
+    it('should not set aria-pressed when selectable is false', () => {
+      fixture.componentRef.setInput('selectable', false);
       fixture.componentRef.setInput('selected', false);
       fixture.detectChanges();
 
@@ -265,9 +267,9 @@ describe('ButtonComponent', () => {
     });
   });
 
-  describe('Toggle', () => {
-    it('should toggle selected state on click when toggle is true', () => {
-      fixture.componentRef.setInput('toggle', true);
+  describe('Selectable', () => {
+    it('should toggle selected state on click when selectable is true', () => {
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       expect(component.selected()).toBe(false);
@@ -281,9 +283,9 @@ describe('ButtonComponent', () => {
       expect(component.selected()).toBe(false);
     });
 
-    it('should not toggle selected state when toggle is false', () => {
+    it('should not toggle selected state when selectable is false', () => {
       fixture.componentRef.setInput('selected', true);
-      fixture.componentRef.setInput('toggle', false);
+      fixture.componentRef.setInput('selectable', false);
       fixture.detectChanges();
 
       nativeButton.click();
@@ -292,7 +294,7 @@ describe('ButtonComponent', () => {
     });
 
     it('should not toggle when disabled', () => {
-      fixture.componentRef.setInput('toggle', true);
+      fixture.componentRef.setInput('selectable', true);
       fixture.componentRef.setInput('disabled', true);
       fixture.detectChanges();
 
@@ -302,7 +304,7 @@ describe('ButtonComponent', () => {
     });
 
     it('should not toggle when loading', () => {
-      fixture.componentRef.setInput('toggle', true);
+      fixture.componentRef.setInput('selectable', true);
       fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 

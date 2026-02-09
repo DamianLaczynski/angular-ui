@@ -22,7 +22,7 @@ export class ButtonComponent {
   text = input<string | undefined>(undefined);
   ariaLabel = input<string>();
 
-  toggle = input<boolean>(false);
+  selectable = input<boolean>(false);
   type = input<ButtonType>('button');
   fullWidth = input<boolean>(false);
 
@@ -79,7 +79,7 @@ export class ButtonComponent {
       event.stopPropagation();
     }
 
-    if (this.toggle()) {
+    if (this.selectable()) {
       this.selected.set(!this.selected());
     }
 
