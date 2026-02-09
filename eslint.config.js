@@ -63,6 +63,7 @@ module.exports = [
   {
     files: ["packages/angular-ui/**/*.ts"],
     rules: {
+      "@angular-eslint/no-output-native": "off",
       "@angular-eslint/directive-selector": [
         "error",
         { type: "attribute", prefix: "ui", style: "camelCase" },

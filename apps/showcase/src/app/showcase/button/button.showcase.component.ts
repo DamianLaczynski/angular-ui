@@ -56,7 +56,7 @@ import {
                 [loading]="currentLoading()"
                 [selected]="selectedModel()"
                 (selectedChange)="selectedModel.set($event)"
-                [toggle]="currentToggle()"
+                [selectable]="currentSelectable()"
                 [fullWidth]="currentFullWidth()"
                 (click)="onButtonClick()"
               />
@@ -283,11 +283,11 @@ import {
           </div>
         </div>
 
-        <!-- Toggle -->
+        <!-- Selectable -->
         <div class="showcase__section">
-          <h2 class="showcase__section__title">Toggle</h2>
+          <h2 class="showcase__section__title">Selectable</h2>
           <p class="showcase__section__description">
-            With <code>toggle</code> enabled, the button switches <code>selected</code> on each
+            With <code>selectable</code> enabled, the button switches <code>selected</code> on each
             click. Use <code>[(selected)]</code> to bind the state.
           </p>
 
@@ -296,7 +296,7 @@ import {
             <div class="showcase__grid">
               <ui-button
                 variant="primary"
-                [toggle]="true"
+                [selectable]="true"
                 [selected]="toggle1Selected()"
                 (selectedChange)="toggle1Selected.set($event)"
               >
@@ -304,7 +304,7 @@ import {
               </ui-button>
               <ui-button
                 variant="secondary"
-                [toggle]="true"
+                [selectable]="true"
                 [selected]="toggle2Selected()"
                 (selectedChange)="toggle2Selected.set($event)"
                 icon="star"
@@ -320,7 +320,7 @@ import {
               <ui-button
                 variant="primary"
                 appearance="outline"
-                [toggle]="true"
+                [selectable]="true"
                 [selected]="toggle3Selected()"
                 (selectedChange)="toggle3Selected.set($event)"
               >
@@ -329,7 +329,7 @@ import {
               <ui-button
                 variant="secondary"
                 appearance="outline"
-                [toggle]="true"
+                [selectable]="true"
                 [selected]="toggle4Selected()"
                 (selectedChange)="toggle4Selected.set($event)"
                 icon="checkmark"
@@ -532,8 +532,8 @@ export class ButtonShowcaseComponent {
         group: 'state',
       },
       {
-        key: 'toggle',
-        label: 'Toggle',
+        key: 'selectable',
+        label: 'Selectable',
         type: 'switch',
         description: 'Click toggles selected state',
         defaultValue: false,
@@ -571,7 +571,7 @@ export class ButtonShowcaseComponent {
     shape: 'rounded',
     icon: '',
     disabled: false,
-    toggle: false,
+    selectable: false,
     selected: false,
     loading: false,
     fullWidth: false,
@@ -590,7 +590,7 @@ export class ButtonShowcaseComponent {
     return icon ? (icon as IconName) : undefined;
   });
   currentDisabled = computed(() => this.values()['disabled'] as boolean);
-  currentToggle = computed(() => this.values()['toggle'] as boolean);
+  currentSelectable = computed(() => this.values()['selectable'] as boolean);
   currentLoading = computed(() => this.values()['loading'] as boolean);
   currentFullWidth = computed(() => this.values()['fullWidth'] as boolean);
 
