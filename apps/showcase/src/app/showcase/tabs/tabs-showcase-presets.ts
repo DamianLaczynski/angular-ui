@@ -10,7 +10,6 @@ export const EXTENDED_TABS: Tab[] = [
   { id: 'e1', label: 'Home', icon: 'home' },
   { id: 'e2', label: 'Disabled', icon: 'lock_closed', disabled: true },
   { id: 'e3', label: 'Closable', icon: 'dismiss', closable: true },
-  { id: 'e4', label: 'More', icon: 'more_horizontal', closable: true },
 ];
 
 export const LABELS_ONLY_TABS: Tab[] = [
