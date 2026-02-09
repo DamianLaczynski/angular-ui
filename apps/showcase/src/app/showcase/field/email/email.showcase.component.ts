@@ -5,10 +5,14 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  Validators} from '@angular/forms';
+  Validators,
+} from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { InputVariant } from 'angular-ui';
 import { Size } from 'angular-ui';
 
@@ -386,4 +390,3 @@ export class EmailShowcaseComponent {
     this.showcase()?.logEvent('change', { value });
   }
 }
-

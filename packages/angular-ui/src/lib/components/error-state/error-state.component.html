@@ -9,11 +9,9 @@
     @if (title()) {
       <h3 class="error-state__title">{{ title() }}</h3>
     }
-
     @if (description()) {
       <p class="error-state__description">{{ description() }}</p>
     }
-
     @if (content(); as contentTemplate) {
       <div class="error-state__custom-content">
         <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
@@ -35,7 +33,6 @@
           {{ primary.label }}
         </ui-button>
       }
-
       @if (secondaryAction(); as secondary) {
         <ui-button
           [variant]="secondary.variant || 'secondary'"

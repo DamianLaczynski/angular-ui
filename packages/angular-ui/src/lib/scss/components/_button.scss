@@ -14,7 +14,14 @@
 // Mixins
 // ==========================================================================
 
-@mixin button-variant-filled($bg-color, $bg-hover, $bg-pressed, $bg-selected, $border-selected: null, $fg-selected: null) {
+@mixin button-variant-filled(
+  $bg-color,
+  $bg-hover,
+  $bg-pressed,
+  $bg-selected,
+  $border-selected: null,
+  $fg-selected: null
+) {
   color: var(--color-neutral-foreground-on-brand);
   background-color: $bg-color;
   border-color: $bg-color;
@@ -109,7 +116,14 @@
   }
 }
 
-@mixin button-variant-subtle($fg-color, $bg-hover, $fg-hover, $fg-pressed, $bg-pressed, $bg-selected) {
+@mixin button-variant-subtle(
+  $fg-color,
+  $bg-hover,
+  $fg-hover,
+  $fg-pressed,
+  $bg-pressed,
+  $bg-selected
+) {
   color: $fg-color;
   background-color: transparent;
   border-color: transparent;
@@ -167,7 +181,15 @@
   }
 }
 
-@mixin button-variant-tint($fg-color, $bg-color, $bg-hover, $bg-pressed, $bg-selected, $use-filter: false, $border-selected: null) {
+@mixin button-variant-tint(
+  $fg-color,
+  $bg-color,
+  $bg-hover,
+  $bg-pressed,
+  $bg-selected,
+  $use-filter: false,
+  $border-selected: null
+) {
   color: $fg-color;
   background-color: $bg-color;
   border-color: transparent;
@@ -487,7 +509,7 @@ $color-variants: (
         var(--color-shared-#{$color}-foreground-hover),
         var(--color-shared-#{$color}-foreground-pressed),
         var(--color-shared-#{$color}-foreground-selected),
-        var(--color-shared-#{$color}-foreground-selected),
+        var(--color-shared-#{$color}-foreground-selected)
       );
     }
 

@@ -331,7 +331,11 @@ export class DropdownComponent extends FieldComponent implements OnDestroy {
     if (this.disabled()) {
       return;
     }
-    this.isOpen() ? this.closeDropdown(false) : this.openDropdown(false);
+    if (this.isOpen()) {
+      this.closeDropdown(false);
+    } else {
+      this.openDropdown(false);
+    }
   }
 
   openDropdown(setActiveDescendant: boolean = false): void {
@@ -379,7 +383,7 @@ export class DropdownComponent extends FieldComponent implements OnDestroy {
         maxWidth,
         width,
       },
-      onClose: (focusTrigger) => {
+      onClose: focusTrigger => {
         if (focusTrigger) {
           this.closeDropdown(true);
         } else {
@@ -585,9 +589,7 @@ export class DropdownComponent extends FieldComponent implements OnDestroy {
       return;
     }
 
-    const activeElement = overlayRef.overlayElement.querySelector(
-      `#${this.activeDescendant()}`,
-    );
+    const activeElement = overlayRef.overlayElement.querySelector(`#${this.activeDescendant()}`);
     if (activeElement) {
       activeElement.scrollIntoView({
         block: 'nearest',
@@ -606,7 +608,7 @@ export class DropdownComponent extends FieldComponent implements OnDestroy {
       return;
     }
 
-    let currentIndex = this.activeItemIndex();
+    const currentIndex = this.activeItemIndex();
 
     switch (event.key) {
       case 'ArrowDown':

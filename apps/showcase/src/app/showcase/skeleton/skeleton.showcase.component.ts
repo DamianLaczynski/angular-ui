@@ -1,8 +1,11 @@
-import { Component, signal, viewChild, computed } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { SkeletonComponent } from 'angular-ui';
 import { CommonModule } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Shape } from 'angular-ui';
 
 @Component({
@@ -218,4 +221,3 @@ export class SkeletonShowcaseComponent {
     // Reset is handled by showcase component
   }
 }
-

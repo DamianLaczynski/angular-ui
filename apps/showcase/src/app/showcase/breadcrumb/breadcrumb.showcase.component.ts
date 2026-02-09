@@ -3,7 +3,10 @@ import { BreadcrumbComponent, Breadcrumb } from 'angular-ui';
 import { CommonModule } from '@angular/common';
 import { ButtonComponent } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Variant, Appearance, Shape, Size, Orientation } from 'angular-ui';
 
 @Component({
@@ -440,4 +443,3 @@ export class BreadcrumbShowcaseComponent {
     this.eventLog.set([]);
   }
 }
-

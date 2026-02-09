@@ -3,7 +3,10 @@ import { TabsComponent, Tab } from 'angular-ui';
 
 import { Variant, Appearance, Shape, Size, Orientation } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 
 @Component({
   selector: 'app-tabs-showcase',
@@ -574,4 +577,3 @@ export class TabsShowcaseComponent {
     console.log('Vertical tab changed:', tab);
   }
 }
-

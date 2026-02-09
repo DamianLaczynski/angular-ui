@@ -3,7 +3,10 @@ import { DateComponent, DateFieldType } from 'angular-ui';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size } from 'angular-ui';
 
 @Component({
@@ -116,10 +119,7 @@ import { Size } from 'angular-ui';
           <h3 class="showcase__subsection-title">Bottom Position (Flip Test)</h3>
           <p>Scroll this section to bottom and open - panel should flip up if needed.</p>
           <div style="height: 300px;"></div>
-          <ui-date
-            label="At bottom"
-            helpText="Panel should flip above if no space below"
-          ></ui-date>
+          <ui-date label="At bottom" helpText="Panel should flip above if no space below"></ui-date>
         </div>
 
         <!-- Basic Examples -->
@@ -401,4 +401,3 @@ export class DateShowcaseComponent {
     this.showcase()?.logEvent('change', { value });
   }
 }
-

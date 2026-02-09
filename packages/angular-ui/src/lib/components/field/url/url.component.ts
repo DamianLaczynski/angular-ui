@@ -1,4 +1,4 @@
-import { Component, forwardRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FieldComponent } from '../field/field.component';
 import { ActionButtonComponent } from '../action-button.component';

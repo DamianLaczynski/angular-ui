@@ -222,7 +222,6 @@
       align-items: center;
       justify-content: center;
       color: var(--color-brand-primary);
-
     }
 
     &-text {
@@ -233,7 +232,6 @@
       white-space: nowrap;
     }
   }
-
 
   // Center Control (Large Play Button)
   &__center-control {
@@ -258,7 +256,6 @@
     gap: $spacing-3; // 12px
     padding: $spacing-5 $spacing-6; // 20px vertical, 24px horizontal
     z-index: 20;
-    
   }
 
   // Progress Row (first row - full width slider)
@@ -287,7 +284,6 @@
   // Progress Slider (using slider component) - pierwsza linia, pełna szerokość
   &__progress-slider {
     width: 100%;
-
   }
 
   &__progress-bar {
@@ -432,7 +428,6 @@
   &__volume-slider {
     width: 80px;
     min-width: 80px;
-
   }
 
   &__volume-bar {

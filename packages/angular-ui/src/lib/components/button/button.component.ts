@@ -1,11 +1,4 @@
-import {
-  Component,
-  input,
-  output,
-  model,
-  computed,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, input, output, model, computed, ChangeDetectionStrategy } from '@angular/core';
 import { Variant, Appearance, Size, Shape, ExtendedSize, ButtonType } from '../utils';
 import { IconComponent, IconName } from '../icon';
 import { SpinnerComponent } from '../spinner';
@@ -20,7 +13,6 @@ import { SpinnerComponent } from '../spinner';
   },
 })
 export class ButtonComponent {
-
   variant = input<Variant>('secondary');
   appearance = input<Appearance>('filled');
   size = input<Size>('medium');
@@ -30,7 +22,7 @@ export class ButtonComponent {
   text = input<string | undefined>(undefined);
   ariaLabel = input<string>();
 
-  toggle = input<boolean>(false);
+  selectable = input<boolean>(false);
   type = input<ButtonType>('button');
   fullWidth = input<boolean>(false);
 
@@ -87,7 +79,7 @@ export class ButtonComponent {
       event.stopPropagation();
     }
 
-    if (this.toggle()) {
+    if (this.selectable()) {
       this.selected.set(!this.selected());
     }
 

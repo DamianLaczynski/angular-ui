@@ -3,7 +3,10 @@ import { NumberComponent } from 'angular-ui';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { InputVariant } from 'angular-ui';
 import { Size } from 'angular-ui';
 
@@ -591,4 +594,3 @@ export class NumberShowcaseComponent {
     this.showcase()?.logEvent('change', { value });
   }
 }
-

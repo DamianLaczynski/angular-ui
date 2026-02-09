@@ -11,11 +11,8 @@
       <!-- Header -->
       <div [class]="headerClasses()">
         @if (title()) {
-          <h2 id="drawer-title" class="drawer__title">
-            {{ title() }}
-          </h2>
+          <h2 id="drawer-title" class="drawer__title">{{ title() }}</h2>
         }
-
         @if (closable()) {
           <div class="drawer__close-container">
             <ui-button
@@ -70,7 +67,6 @@
                 {{ primaryAction()!.label }}
               </ui-button>
             }
-
             @if (secondaryAction()) {
               <ui-button
                 [variant]="secondaryAction()!.variant ?? 'secondary'"

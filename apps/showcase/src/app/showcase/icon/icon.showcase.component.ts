@@ -38,16 +38,18 @@ import { ToastContainerComponent } from 'angular-ui';
         </div>
         <div class="showcase__icon-showcase__dropdowns">
           <div class="showcase__icon-showcase__dropdown">
-            <label class="showcase__icon-showcase__label">Size:</label>
+            <label for="size" class="showcase__icon-showcase__label">Size:</label>
             <ui-dropdown
+              id="size"
               [items]="sizeOptions"
               [(ngModel)]="selectedSizeValue"
               [ngModelOptions]="{ standalone: true }"
             />
           </div>
           <div class="showcase__icon-showcase__dropdown">
-            <label class="showcase__icon-showcase__label">Style:</label>
+            <label for="style" class="showcase__icon-showcase__label">Style:</label>
             <ui-dropdown
+              id="style"
               [items]="variantOptions"
               [(ngModel)]="selectedVariantValue"
               [ngModelOptions]="{ standalone: true }"
@@ -251,4 +253,3 @@ export class IconShowcaseComponent {
       });
   }
 }
-

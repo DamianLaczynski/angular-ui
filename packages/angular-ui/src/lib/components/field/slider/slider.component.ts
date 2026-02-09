@@ -1,14 +1,4 @@
-import {
-  Component,
-  forwardRef,
-  input,
-  model,
-  output,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  effect,
-} from '@angular/core';
+import { Component, forwardRef, input, model, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FieldComponent } from '../field/field.component';

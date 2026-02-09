@@ -91,8 +91,8 @@ export class InteractiveShowcaseComponent {
 
   // Outputs
   valuesChange = output<Record<string, any>>();
-  reset = output<void>();
-  copyCode = output<void>();
+  resetRequested = output<void>();
+  codeCopyRequested = output<void>();
 
   // Internal state
   isDarkTheme = signal<boolean>(false);
@@ -196,7 +196,10 @@ export class InteractiveShowcaseComponent {
       const cfg = this.config();
       if (!cfg?.controls?.length) return;
       const current = this.controlValues();
-      const configKeys = cfg.controls.map(c => c.key).sort().join(',');
+      const configKeys = cfg.controls
+        .map(c => c.key)
+        .sort()
+        .join(',');
       const currentKeys = Object.keys(current).sort().join(',');
       if (currentKeys !== configKeys) {
         this.initializeDefaults();
@@ -323,7 +326,7 @@ export class InteractiveShowcaseComponent {
     this.currentViewport.set('desktop');
     this.customWidth.set(800);
     this.valuesChange.emit(this.controlValues());
-    this.reset.emit();
+    this.resetRequested.emit();
   }
 
   // Viewport methods
@@ -381,7 +384,7 @@ export class InteractiveShowcaseComponent {
 
   onCopyCode(): void {
     this.copyCodeToClipboard();
-    this.copyCode.emit();
+    this.codeCopyRequested.emit();
   }
 
   // Event log methods

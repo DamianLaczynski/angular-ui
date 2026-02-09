@@ -2,7 +2,6 @@
   [class]="tagClasses()"
   [attr.aria-label]="effectiveAriaLabel()"
   [attr.aria-disabled]="disabled() ? 'true' : null"
-  [attr.aria-readonly]="readonly() ? 'true' : null"
   [attr.aria-selected]="isClickable() ? (selected() ? 'true' : 'false') : null"
   [attr.role]="isClickable() ? 'button' : null"
   [attr.tabindex]="effectiveTabIndex()"
@@ -11,29 +10,29 @@
 >
   <div class="tag__content">
     @if (icon()) {
-      <ui-icon [icon]="icon()!" [size]="iconSize()" variant="regular" class="tag__icon" />
+      <ui-icon [icon]="icon()!" [size]="size()" variant="regular" class="tag__icon" />
     }
 
     <div
       class="tag__text-slot"
       [class.tag__text-slot--with-secondary]="secondaryText() && size() === 'medium'"
     >
-      <div class="tag__primary">{{ text() }}</div>
+      <span class="button__text tag__primary">{{ text() }}</span>
       @if (secondaryText() && size() === 'medium') {
-        <div class="tag__secondary">{{ secondaryText() }}</div>
+        <span class="tag__secondary">{{ secondaryText() }}</span>
       }
     </div>
 
-    @if (dismissible() && !disabled() && !readonly()) {
+    @if (dismissible() && !disabled()) {
       <button
         type="button"
         class="tag__dismiss"
         [attr.aria-label]="'Remove ' + text()"
         (click)="onDismissClick($event)"
         (keydown)="onDismissKeyDown($event)"
-        [attr.tabindex]="effectiveTabIndex() === -1 ? -1 : 0"
+        [attr.tabindex]="effectiveTabIndex()"
       >
-        <ui-icon icon="dismiss" [size]="iconSize()" variant="regular" class="tag__dismiss-icon" />
+        <ui-icon icon="dismiss" [size]="size()" variant="regular" class="tag__dismiss-icon" />
       </button>
     }
   </div>

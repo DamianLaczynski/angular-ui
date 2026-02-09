@@ -204,10 +204,6 @@ import { Router } from '@angular/router';
 export class CommandPaletteShowcaseComponent {
   private router = signal<Router>({} as Router);
 
-  constructor(router: Router) {
-    this.router.set(router);
-  }
-
   // Visibility signals
   basicVisible = signal(false);
   groupedVisible = signal(false);
@@ -456,4 +452,3 @@ export class CommandPaletteShowcaseComponent {
     this.router().navigate([path]);
   }
 }
-

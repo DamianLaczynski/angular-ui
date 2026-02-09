@@ -173,7 +173,7 @@ export class ColorComponent extends FieldComponent implements OnDestroy {
         width: this.panelWidth(),
         hasBackdrop: false,
       },
-      onClose: (focusTrigger) => {
+      onClose: focusTrigger => {
         if (focusTrigger) {
           this.closePanel(true);
         } else {
@@ -190,7 +190,11 @@ export class ColorComponent extends FieldComponent implements OnDestroy {
     this.overlayHandle = null;
     this.isExpanded.set(false);
 
-    if (shouldFocusTrigger && this.triggerElement?.nativeElement && document.contains(this.triggerElement.nativeElement)) {
+    if (
+      shouldFocusTrigger &&
+      this.triggerElement?.nativeElement &&
+      document.contains(this.triggerElement.nativeElement)
+    ) {
       try {
         setTimeout(() => this.triggerElement.nativeElement.focus({ preventScroll: true }), 0);
       } catch {

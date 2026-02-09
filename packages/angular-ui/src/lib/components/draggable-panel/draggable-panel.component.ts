@@ -3,13 +3,11 @@ import {
   input,
   output,
   signal,
-  computed,
   ChangeDetectionStrategy,
   HostListener,
   ElementRef,
   inject,
   OnInit,
-  OnDestroy,
 } from '@angular/core';
 
 import { IconComponent } from '../icon/icon.component';
@@ -155,7 +153,7 @@ export interface PanelPosition {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DraggablePanelComponent implements OnInit, OnDestroy {
+export class DraggablePanelComponent implements OnInit {
   private readonly elementRef = inject(ElementRef);
 
   title = input<string>('Panel');
@@ -179,10 +177,6 @@ export class DraggablePanelComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.position.set(this.initialPosition());
     this.collapsed.set(this.initialCollapsed());
-  }
-
-  ngOnDestroy(): void {
-    // Cleanup if needed
   }
 
   toggleCollapse(): void {

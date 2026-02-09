@@ -18,7 +18,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DataGridColumn, DataGridRow, DataGridColumnAction } from './models/data-grid-column.model';
 import { DataGridActiveFilter } from './models/data-grid-filter.model';
 import { DataGridConfig } from './models/data-grid-config.model';
-import { QueryParams, QueryResult } from '../../api';
+import { QueryParams } from '../../api';
 import { CheckboxComponent } from '../field/checkbox/checkbox.component';
 import { LoadingStateComponent } from '../loading-state/loading-state.component';
 import { StateContainerComponent } from '../state-container/state-container.component';

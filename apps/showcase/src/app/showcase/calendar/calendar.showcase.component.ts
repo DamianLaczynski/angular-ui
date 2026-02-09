@@ -464,4 +464,3 @@ export class CalendarShowcaseComponent {
     this.interactiveCalendarView.set('days');
   }
 }
-

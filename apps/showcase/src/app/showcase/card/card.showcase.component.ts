@@ -317,4 +317,3 @@ export class CardShowcaseComponent {
     if (this.eventLog.length > 10) this.eventLog.pop();
   }
 }
-

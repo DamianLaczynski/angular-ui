@@ -3,7 +3,7 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { TagComponent } from './tag.component';
 import { IconComponent } from '../icon/icon.component';
-import { Variant, Appearance, Shape, ExtendedSize } from '../utils';
+import { Variant, Appearance, Shape, Size } from '../utils';
 import { IconName } from '../icon';
 
 describe('TagComponent', () => {
@@ -45,10 +45,11 @@ describe('TagComponent', () => {
       expect(component.icon()).toBeUndefined();
       expect(component.selected()).toBe(false);
       expect(component.disabled()).toBe(false);
-      expect(component.readonly()).toBe(false);
+      expect(component.selectable()).toBe(false);
       expect(component.dismissible()).toBe(false);
       expect(component.ariaLabel()).toBe('');
-      expect(component.tabIndex()).toBeNull();
+      expect(component.tabIndex()).toBeUndefined();
+      expect(component.effectiveTabIndex()).toBeNull();
     });
   });
 
@@ -128,7 +129,7 @@ describe('TagComponent', () => {
         fixture.detectChanges();
 
         const classes = component.tagClasses();
-        expect(classes).toContain(`tag--${variant}`);
+        expect(classes).toContain(`button--${variant}`);
       });
     });
   });
@@ -143,22 +144,22 @@ describe('TagComponent', () => {
         fixture.detectChanges();
 
         const classes = component.tagClasses();
-        expect(classes).toContain(`tag--${appearance}`);
+        expect(classes).toContain(`button--${appearance}`);
       });
     });
   });
 
   describe('Size Input', () => {
-    const sizes: ExtendedSize[] = ['extra-small', 'small', 'medium', 'large', 'extra-large'];
+    const sizes: Size[] = ['small', 'medium', 'large'];
 
     sizes.forEach(size => {
-      it(`should apply ${size} size class`, () => {
+      it(`should apply button size class for ${size}`, () => {
         fixture.componentRef.setInput('text', 'Tag');
         fixture.componentRef.setInput('size', size);
         fixture.detectChanges();
 
         const classes = component.tagClasses();
-        expect(classes).toContain(`tag--${size}`);
+        expect(classes).toContain(`button--${size}`);
       });
     });
   });
@@ -173,7 +174,7 @@ describe('TagComponent', () => {
         fixture.detectChanges();
 
         const classes = component.tagClasses();
-        expect(classes).toContain(`tag--${shape}`);
+        expect(classes).toContain(`button--${shape}`);
       });
     });
   });
@@ -211,20 +212,12 @@ describe('TagComponent', () => {
   });
 
   describe('IconSize Computed', () => {
-    it('should return small for extra-small size', () => {
-      fixture.componentRef.setInput('text', 'Tag');
-      fixture.componentRef.setInput('size', 'extra-small');
-      fixture.detectChanges();
-
-      expect(component.iconSize()).toBe('small');
-    });
-
     it('should return small for small size', () => {
       fixture.componentRef.setInput('text', 'Tag');
       fixture.componentRef.setInput('size', 'small');
       fixture.detectChanges();
 
-      expect(component.iconSize()).toBe('small');
+      expect(component.size()).toBe('small');
     });
 
     it('should return medium for medium size', () => {
@@ -232,7 +225,7 @@ describe('TagComponent', () => {
       fixture.componentRef.setInput('size', 'medium');
       fixture.detectChanges();
 
-      expect(component.iconSize()).toBe('medium');
+      expect(component.size()).toBe('medium');
     });
 
     it('should return large for large size', () => {
@@ -240,15 +233,7 @@ describe('TagComponent', () => {
       fixture.componentRef.setInput('size', 'large');
       fixture.detectChanges();
 
-      expect(component.iconSize()).toBe('large');
-    });
-
-    it('should return large for extra-large size', () => {
-      fixture.componentRef.setInput('text', 'Tag');
-      fixture.componentRef.setInput('size', 'extra-large');
-      fixture.detectChanges();
-
-      expect(component.iconSize()).toBe('large');
+      expect(component.size()).toBe('large');
     });
   });
 
@@ -258,7 +243,7 @@ describe('TagComponent', () => {
       fixture.detectChanges();
 
       const classes = component.tagClasses();
-      expect(classes).not.toContain('tag--selected');
+      expect(classes).not.toContain('button--selected');
     });
 
     it('should apply selected class when selected is true', () => {
@@ -267,7 +252,7 @@ describe('TagComponent', () => {
       fixture.detectChanges();
 
       const classes = component.tagClasses();
-      expect(classes).toContain('tag--selected');
+      expect(classes).toContain('button--selected');
     });
 
     it('should set aria-selected when clickable', () => {
@@ -287,7 +272,7 @@ describe('TagComponent', () => {
 
       expect(component.disabled()).toBe(false);
       const classes = component.tagClasses();
-      expect(classes).not.toContain('tag--disabled');
+      expect(classes).not.toContain('button--disabled');
     });
 
     it('should apply disabled class when disabled is true', () => {
@@ -296,7 +281,7 @@ describe('TagComponent', () => {
       fixture.detectChanges();
 
       const classes = component.tagClasses();
-      expect(classes).toContain('tag--disabled');
+      expect(classes).toContain('button--disabled');
     });
 
     it('should set aria-disabled when disabled', () => {
@@ -317,37 +302,28 @@ describe('TagComponent', () => {
     });
   });
 
-  describe('Readonly Input', () => {
-    it('should not be readonly by default', () => {
+  describe('Selectable Input', () => {
+    it('should not be selectable by default', () => {
       fixture.componentRef.setInput('text', 'Tag');
       fixture.detectChanges();
 
-      expect(component.readonly()).toBe(false);
+      expect(component.selectable()).toBe(false);
       const classes = component.tagClasses();
-      expect(classes).not.toContain('tag--readonly');
+      expect(classes).not.toContain('tag--interactive');
     });
 
-    it('should apply readonly class when readonly is true', () => {
+    it('should apply interactive class when selectable is true', () => {
       fixture.componentRef.setInput('text', 'Tag');
-      fixture.componentRef.setInput('readonly', true);
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const classes = component.tagClasses();
-      expect(classes).toContain('tag--readonly');
+      expect(classes).toContain('tag--interactive');
     });
 
-    it('should set aria-readonly when readonly', () => {
+    it('should set tabindex to -1 when not selectable', () => {
       fixture.componentRef.setInput('text', 'Tag');
-      fixture.componentRef.setInput('readonly', true);
-      fixture.detectChanges();
-
-      const tagEl = fixture.debugElement.query(By.css('.tag'));
-      expect(tagEl.nativeElement.getAttribute('aria-readonly')).toBe('true');
-    });
-
-    it('should set tabindex to -1 when readonly', () => {
-      fixture.componentRef.setInput('text', 'Tag');
-      fixture.componentRef.setInput('readonly', true);
+      fixture.componentRef.setInput('selectable', false);
       fixture.detectChanges();
 
       expect(component.effectiveTabIndex()).toBe(-1);
@@ -382,14 +358,14 @@ describe('TagComponent', () => {
       expect(dismissBtn).toBeFalsy();
     });
 
-    it('should not show dismiss button when readonly', () => {
+    it('should show dismiss button when selectable is false and dismissible', () => {
       fixture.componentRef.setInput('text', 'Tag');
       fixture.componentRef.setInput('dismissible', true);
-      fixture.componentRef.setInput('readonly', true);
+      fixture.componentRef.setInput('selectable', false);
       fixture.detectChanges();
 
       const dismissBtn = fixture.debugElement.query(By.css('.tag__dismiss'));
-      expect(dismissBtn).toBeFalsy();
+      expect(dismissBtn).toBeTruthy();
     });
 
     it('should have correct aria-label on dismiss button', () => {
@@ -410,6 +386,7 @@ describe('TagComponent', () => {
       });
 
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const tagEl = fixture.debugElement.query(By.css('.tag'));
@@ -435,14 +412,14 @@ describe('TagComponent', () => {
       expect(clickEmitted).toBe(false);
     });
 
-    it('should not emit tagClick when readonly', () => {
+    it('should not emit tagClick when selectable is false', () => {
       let clickEmitted = false;
       component.tagClick.subscribe(() => {
         clickEmitted = true;
       });
 
       fixture.componentRef.setInput('text', 'Tag');
-      fixture.componentRef.setInput('readonly', true);
+      fixture.componentRef.setInput('selectable', false);
       fixture.detectChanges();
 
       const tagEl = fixture.debugElement.query(By.css('.tag'));
@@ -475,6 +452,7 @@ describe('TagComponent', () => {
       });
 
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const event = new KeyboardEvent('keydown', { key: 'Enter' });
@@ -495,6 +473,7 @@ describe('TagComponent', () => {
       });
 
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const event = new KeyboardEvent('keydown', { key: ' ' });
@@ -625,8 +604,16 @@ describe('TagComponent', () => {
   });
 
   describe('IsClickable Computed', () => {
-    it('should be clickable by default', () => {
+    it('should not be clickable by default', () => {
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.detectChanges();
+
+      expect(component.isClickable()).toBe(false);
+    });
+
+    it('should be clickable when selectable is true', () => {
+      fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       expect(component.isClickable()).toBe(true);
@@ -640,9 +627,9 @@ describe('TagComponent', () => {
       expect(component.isClickable()).toBe(false);
     });
 
-    it('should not be clickable when readonly', () => {
+    it('should not be clickable when selectable is false', () => {
       fixture.componentRef.setInput('text', 'Tag');
-      fixture.componentRef.setInput('readonly', true);
+      fixture.componentRef.setInput('selectable', false);
       fixture.detectChanges();
 
       expect(component.isClickable()).toBe(false);
@@ -650,6 +637,7 @@ describe('TagComponent', () => {
 
     it('should set role="button" when clickable', () => {
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const tagEl = fixture.debugElement.query(By.css('.tag'));
@@ -659,6 +647,15 @@ describe('TagComponent', () => {
     it('should not set role when not clickable', () => {
       fixture.componentRef.setInput('text', 'Tag');
       fixture.componentRef.setInput('disabled', true);
+      fixture.detectChanges();
+
+      const tagEl = fixture.debugElement.query(By.css('.tag'));
+      expect(tagEl.nativeElement.getAttribute('role')).toBeNull();
+    });
+
+    it('should not set role when selectable is false', () => {
+      fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', false);
       fixture.detectChanges();
 
       const tagEl = fixture.debugElement.query(By.css('.tag'));
@@ -696,6 +693,7 @@ describe('TagComponent', () => {
   describe('TabIndex Input', () => {
     it('should use 0 as default tabindex when clickable', () => {
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       expect(component.effectiveTabIndex()).toBe(0);
@@ -709,9 +707,9 @@ describe('TagComponent', () => {
       expect(component.effectiveTabIndex()).toBe(-1);
     });
 
-    it('should use -1 when readonly', () => {
+    it('should use -1 when not selectable', () => {
       fixture.componentRef.setInput('text', 'Tag');
-      fixture.componentRef.setInput('readonly', true);
+      fixture.componentRef.setInput('selectable', false);
       fixture.detectChanges();
 
       expect(component.effectiveTabIndex()).toBe(-1);
@@ -750,23 +748,24 @@ describe('TagComponent', () => {
 
       const classes = component.tagClasses();
       expect(classes).toContain('tag');
-      expect(classes).toContain('tag--secondary');
-      expect(classes).toContain('tag--filled');
-      expect(classes).toContain('tag--medium');
-      expect(classes).toContain('tag--rounded');
+      expect(classes).toContain('button');
+      expect(classes).toContain('button--secondary');
+      expect(classes).toContain('button--filled');
+      expect(classes).toContain('button--medium');
+      expect(classes).toContain('button--rounded');
     });
 
     it('should include multiple state classes when applicable', () => {
       fixture.componentRef.setInput('text', 'Tag');
       fixture.componentRef.setInput('selected', true);
       fixture.componentRef.setInput('disabled', true);
-      fixture.componentRef.setInput('readonly', true);
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const classes = component.tagClasses();
-      expect(classes).toContain('tag--selected');
-      expect(classes).toContain('tag--disabled');
-      expect(classes).toContain('tag--readonly');
+      expect(classes).toContain('button--selected');
+      expect(classes).toContain('button--disabled');
+      expect(classes).not.toContain('tag--interactive');
     });
   });
 
@@ -785,11 +784,11 @@ describe('TagComponent', () => {
       fixture.detectChanges();
 
       const classes = component.tagClasses();
-      expect(classes).toContain('tag--success');
-      expect(classes).toContain('tag--outline');
-      expect(classes).toContain('tag--medium');
-      expect(classes).toContain('tag--circular');
-      expect(classes).toContain('tag--selected');
+      expect(classes).toContain('button--success');
+      expect(classes).toContain('button--outline');
+      expect(classes).toContain('button--medium');
+      expect(classes).toContain('button--circular');
+      expect(classes).toContain('button--selected');
 
       const primaryText = fixture.debugElement.query(By.css('.tag__primary'));
       expect(primaryText.nativeElement.textContent).toContain('Complete Tag');
@@ -825,13 +824,13 @@ describe('TagComponent', () => {
 
       fixture.componentRef.setInput('variant', 'danger');
       fixture.detectChanges();
-      expect(component.tagClasses()).toContain('tag--danger');
-      expect(component.tagClasses()).not.toContain('tag--primary');
+      expect(component.tagClasses()).toContain('button--danger');
+      expect(component.tagClasses()).not.toContain('button--primary');
 
       fixture.componentRef.setInput('disabled', true);
       fixture.detectChanges();
-      expect(component.tagClasses()).toContain('tag--danger');
-      expect(component.tagClasses()).toContain('tag--disabled');
+      expect(component.tagClasses()).toContain('button--danger');
+      expect(component.tagClasses()).toContain('button--disabled');
     });
 
     it('should handle dismissible with disabled state correctly', () => {
@@ -859,6 +858,7 @@ describe('TagComponent', () => {
   describe('Accessibility', () => {
     it('should be keyboard accessible when clickable', () => {
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const tagEl = fixture.debugElement.query(By.css('.tag'));
@@ -867,6 +867,7 @@ describe('TagComponent', () => {
 
     it('should have proper ARIA attributes when selected', () => {
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.componentRef.setInput('selected', true);
       fixture.detectChanges();
 
@@ -876,6 +877,7 @@ describe('TagComponent', () => {
 
     it('should have role="button" when clickable', () => {
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const tagEl = fixture.debugElement.query(By.css('.tag'));
@@ -952,6 +954,7 @@ describe('TagComponent', () => {
       component.tagClick.subscribe(() => clickCount++);
 
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const tagEl = fixture.debugElement.query(By.css('.tag'));
@@ -967,6 +970,7 @@ describe('TagComponent', () => {
       component.tagClick.subscribe(() => clickCount++);
 
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const tagEl = fixture.debugElement.query(By.css('.tag'));
@@ -985,7 +989,7 @@ describe('TagComponent', () => {
     });
 
     it('should handle secondary text with different sizes', () => {
-      const sizes: ExtendedSize[] = ['extra-small', 'small', 'medium', 'large', 'extra-large'];
+      const sizes: Size[] = ['small', 'medium', 'large'];
 
       sizes.forEach(size => {
         fixture.componentRef.setInput('text', 'Primary');
@@ -1013,22 +1017,22 @@ describe('TagComponent', () => {
       fixture.componentRef.setInput('text', 'Tag');
       fixture.componentRef.setInput('variant', 'primary');
       fixture.detectChanges();
-      expect(component.tagClasses()).toContain('tag--primary');
+      expect(component.tagClasses()).toContain('button--primary');
 
       fixture.componentRef.setInput('variant', 'danger');
       fixture.detectChanges();
-      expect(component.tagClasses()).toContain('tag--danger');
+      expect(component.tagClasses()).toContain('button--danger');
     });
 
     it('should update computed values when inputs change', () => {
       fixture.componentRef.setInput('text', 'Tag');
       fixture.componentRef.setInput('size', 'small');
       fixture.detectChanges();
-      expect(component.iconSize()).toBe('small');
+      expect(component.size()).toBe('small');
 
       fixture.componentRef.setInput('size', 'large');
       fixture.detectChanges();
-      expect(component.iconSize()).toBe('large');
+      expect(component.size()).toBe('large');
     });
   });
 
@@ -1036,6 +1040,7 @@ describe('TagComponent', () => {
     it('should have tabindex 0 when tag is clickable', () => {
       fixture.componentRef.setInput('text', 'Tag');
       fixture.componentRef.setInput('dismissible', true);
+      fixture.componentRef.setInput('selectable', true);
       fixture.detectChanges();
 
       const dismissBtn = fixture.debugElement.query(By.css('.tag__dismiss'));

@@ -15,7 +15,6 @@
             <div class="menu__section-header-text">{{ section.header }}</div>
           </div>
         }
-
         @for (item of section.items; track trackByItemId($index, item); let itemIndex = $index) {
           <ui-menu
             [triggerVariant]="getItemTriggerVariant(item)"
@@ -35,9 +34,8 @@
             (primaryClick)="onRowPrimaryClick(item)"
           />
         }
-
         @if (section.divider && sectionIndex < allSections().length - 1) {
-          <ui-divider orientation="horizontal"/>
+          <ui-divider orientation="horizontal" />
         }
       </div>
     }

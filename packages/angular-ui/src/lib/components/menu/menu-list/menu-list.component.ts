@@ -26,33 +26,34 @@ import { Variant, Size, Appearance } from '../../utils';
   imports: [A11yModule, forwardRef(() => MenuComponent), DividerComponent],
   styles: [
     `
-    :host {
-      ::ng-deep ui-menu {
-        .button {
-          font-weight: 400;
-        }
+      :host {
+        ::ng-deep ui-menu {
+          .button {
+            font-weight: 400;
+          }
 
-        .button:not(.menu-trigger-split__dropdown) {
-          justify-content: flex-start;
-          width: 100%;
-        }
+          .button:not(.menu-trigger-split__dropdown) {
+            justify-content: flex-start;
+            width: 100%;
+          }
 
-        .button:not(.menu-trigger-split__dropdown):not(:has(.menu-trigger__shortcut)) > *:last-child {
-          margin-left: auto;
-        }
+          .button:not(.menu-trigger-split__dropdown):not(:has(.menu-trigger__shortcut))
+            > *:last-child {
+            margin-left: auto;
+          }
 
-        .menu-trigger-host--split {
-          justify-content: flex-start;
-          width: 100%;
-        }
-        
-        .menu-trigger-split {
-          justify-content: flex-start;
-          width: 100%;
+          .menu-trigger-host--split {
+            justify-content: flex-start;
+            width: 100%;
+          }
+
+          .menu-trigger-split {
+            justify-content: flex-start;
+            width: 100%;
+          }
         }
       }
-    }
-    `
+    `,
   ],
   host: {
     '[style.max-height]': 'maxHeight()',
@@ -81,7 +82,9 @@ export class MenuListComponent implements AfterViewInit {
 
   hasContent = computed(() => this.sections().length > 0 || this.items().length > 0);
 
-  menuClasses = computed(() => `menu menu--${this.size()} menu--${this.variant()} menu--${this.appearance()}`);
+  menuClasses = computed(
+    () => `menu menu--${this.size()} menu--${this.variant()} menu--${this.appearance()}`,
+  );
 
   allSections = computed(() => {
     if (this.items().length > 0 && this.sections().length === 0) {

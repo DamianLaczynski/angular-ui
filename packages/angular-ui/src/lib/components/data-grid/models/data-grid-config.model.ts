@@ -130,8 +130,9 @@ export interface DataGridConfigInput<T> {
   expandable?: boolean;
 }
 
-export interface DataGridConfig<T>
-  extends Required<Omit<DataGridConfigInput<T>, 'columns' | 'dataSource'>> {
+export interface DataGridConfig<T> extends Required<
+  Omit<DataGridConfigInput<T>, 'columns' | 'dataSource'>
+> {
   columns: DataGridColumn<T>[];
   dataSource: (params: QueryParams<T>) => Observable<QueryResult<T>>;
 }

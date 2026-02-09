@@ -1,7 +1,10 @@
 import { Component, signal, computed } from '@angular/core';
 import { DividerComponent } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Orientation, Alignment } from 'angular-ui';
 
 @Component({
@@ -209,4 +212,3 @@ export class DividerShowcaseComponent {
     // Reset is handled by showcase component
   }
 }
-

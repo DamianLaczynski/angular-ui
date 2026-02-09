@@ -152,7 +152,12 @@ export class DateRangeComponent extends FieldComponent implements OnDestroy {
     if (this.disabled() || this.readonly()) {
       return;
     }
-    this.isOpen() ? this.closePanel() : this.openPanel();
+
+    if (this.isOpen()) {
+      this.closePanel();
+    } else {
+      this.openPanel();
+    }
   }
 
   openPanel(): void {
@@ -184,7 +189,7 @@ export class DateRangeComponent extends FieldComponent implements OnDestroy {
         minWidth: 280,
         maxWidth: 320,
       },
-      onClose: (focusTrigger) => this.closePanel(focusTrigger),
+      onClose: focusTrigger => this.closePanel(focusTrigger),
     });
 
     this.isOpen.set(true);

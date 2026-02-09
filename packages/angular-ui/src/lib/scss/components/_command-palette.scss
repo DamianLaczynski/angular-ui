@@ -14,7 +14,7 @@
   box-shadow: $elevation-16;
   border-radius: $border-radius-800;
   overflow: hidden;
-    @include transition-transform($duration-normal);
+  @include transition-transform($duration-normal);
 
   &__backdrop {
     position: fixed;

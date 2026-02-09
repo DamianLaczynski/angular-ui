@@ -3,7 +3,10 @@ import { CommonModule, JsonPipe } from '@angular/common';
 import { SliderComponent } from 'angular-ui';
 import { FormsModule } from '@angular/forms';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size } from 'angular-ui';
 
 @Component({
@@ -502,4 +505,3 @@ export class SliderShowcaseComponent {
     this.showcase()?.logEvent('change', { value });
   }
 }
-

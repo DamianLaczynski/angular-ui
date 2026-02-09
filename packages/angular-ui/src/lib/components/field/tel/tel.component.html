@@ -40,11 +40,7 @@
     @if (!disabled() && !readonly()) {
       <div class="field__actions">
         @if (value) {
-          <ui-action-button
-            [icon]="'dismiss'"
-            [size]="size()"
-            (click)="clear()"
-          ></ui-action-button>
+          <ui-action-button [icon]="'dismiss'" [size]="size()" (click)="clear()"></ui-action-button>
         }
         <ui-action-button [icon]="'call'" [size]="size()"></ui-action-button>
       </div>

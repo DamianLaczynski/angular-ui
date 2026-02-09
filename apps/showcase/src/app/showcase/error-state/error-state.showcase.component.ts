@@ -415,4 +415,3 @@ export class MyComponent {
     console.log('Action clicked:', action.label);
   }
 }
-

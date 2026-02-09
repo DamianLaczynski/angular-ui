@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { InputVariant, Size } from '../../utils';
 import { getValidationErrorMessage, shouldShowValidationError } from './validation-helper';
 
-
 export type FieldType =
   | 'text'
   | 'email'

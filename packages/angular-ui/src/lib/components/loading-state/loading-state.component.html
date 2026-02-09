@@ -11,11 +11,9 @@
           @if (hasTitle()) {
             <h3 class="loading-state__title">{{ title() }}</h3>
           }
-
           @if (hasDescription()) {
             <p class="loading-state__description">{{ description() }}</p>
           }
-
           @if (content(); as contentTemplate) {
             <div class="loading-state__custom-content">
               <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
@@ -42,11 +40,9 @@
               @if (hasTitle()) {
                 <h3 class="loading-state__title">{{ title() }}</h3>
               }
-
               @if (hasDescription()) {
                 <p class="loading-state__description">{{ description() }}</p>
               }
-
               @if (content(); as contentTemplate) {
                 <div class="loading-state__custom-content">
                   <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
@@ -68,11 +64,9 @@
       @if (hasTitle()) {
         <h3 class="loading-state__title">{{ title() }}</h3>
       }
-
       @if (hasDescription()) {
         <p class="loading-state__description">{{ description() }}</p>
       }
-
       @if (content(); as contentTemplate) {
         <div class="loading-state__custom-content">
           <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>

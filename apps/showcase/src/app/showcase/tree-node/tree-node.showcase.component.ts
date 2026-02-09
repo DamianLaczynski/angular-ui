@@ -2,7 +2,10 @@ import { Component, signal, computed, viewChild, TemplateRef } from '@angular/co
 import { TreeNodeComponent, TreeNode } from 'angular-ui';
 import { CommonModule } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Appearance, Shape, Size, Variant, ChevronPosition, Orientation } from 'angular-ui';
 import { IconName } from 'angular-ui';
 import { IconComponent } from 'angular-ui';
@@ -184,10 +187,7 @@ interface CustomTreeNode extends TreeNode<CustomTreeNode> {
             </div>
             <div class="showcase__item">
               <h3>Selected</h3>
-              <ui-tree-node
-                [node]="createNode('selected', 'Selected', true)"
-                appearance="subtle"
-              />
+              <ui-tree-node [node]="createNode('selected', 'Selected', true)" appearance="subtle" />
             </div>
             <div class="showcase__item">
               <h3>Disabled</h3>
@@ -809,4 +809,3 @@ export class TreeNodeShowcaseComponent {
     this.eventLog.update(log => [{ time, message }, ...log.slice(0, 9)]);
   }
 }
-

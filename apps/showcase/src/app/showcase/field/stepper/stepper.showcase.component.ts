@@ -4,7 +4,10 @@ import { ButtonComponent } from 'angular-ui';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size } from 'angular-ui';
 
 @Component({
@@ -666,4 +669,3 @@ export class StepperShowcaseComponent {
     this.showcase()?.logEvent('stepChange', { step: event.index });
   }
 }
-

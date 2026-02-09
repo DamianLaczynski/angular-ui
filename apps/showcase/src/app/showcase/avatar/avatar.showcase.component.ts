@@ -2,7 +2,10 @@ import { Component, signal, computed, viewChild } from '@angular/core';
 import { AvatarComponent } from 'angular-ui';
 import { CommonModule } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Variant, Appearance, Size, Shape } from 'angular-ui';
 import { IconName } from 'angular-ui';
 
@@ -248,12 +251,7 @@ import { IconName } from 'angular-ui';
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-avatar initials="JD" name="John Doe" appearance="outline" variant="primary" />
-              <ui-avatar
-                initials="JS"
-                name="Jane Smith"
-                appearance="outline"
-                variant="secondary"
-              />
+              <ui-avatar initials="JS" name="Jane Smith" appearance="outline" variant="secondary" />
               <ui-avatar initials="BJ" name="Bob Johnson" appearance="outline" variant="success" />
             </div>
           </div>
@@ -270,12 +268,7 @@ import { IconName } from 'angular-ui';
           <h3 class="showcase__subsection__title">Transparent</h3>
           <div class="showcase__preview">
             <div class="showcase__grid">
-              <ui-avatar
-                initials="JD"
-                name="John Doe"
-                appearance="transparent"
-                variant="primary"
-              />
+              <ui-avatar initials="JD" name="John Doe" appearance="transparent" variant="primary" />
               <ui-avatar
                 initials="JS"
                 name="Jane Smith"
@@ -583,4 +576,3 @@ export class AvatarShowcaseComponent {
     return map[variant] || 'John Doe';
   }
 }
-

@@ -40,9 +40,11 @@ export type MenuTriggerVariant = 'dropdown' | 'split' | 'button';
   imports: [OverlayModule, IconComponent, MenuListComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[class.menu-trigger-host]': 'triggerVariant() === "dropdown" || triggerVariant() === "split" || triggerVariant() === "button"',
+    '[class.menu-trigger-host]':
+      'triggerVariant() === "dropdown" || triggerVariant() === "split" || triggerVariant() === "button"',
     '[class.menu-trigger-host--split]': 'triggerVariant() === "split"',
-    '[class.menu-trigger-host--menu]': 'triggerVariant() === "dropdown" || triggerVariant() === "button"',
+    '[class.menu-trigger-host--menu]':
+      'triggerVariant() === "dropdown" || triggerVariant() === "button"',
   },
 })
 export class MenuComponent implements OnDestroy {
@@ -91,7 +93,13 @@ export class MenuComponent implements OnDestroy {
   hasMenuItems = computed(() => this.menuItems().length > 0);
 
   private baseButtonClasses = computed(() => {
-    const c = ['button', `button--${this.variant()}`, `button--${this.appearance()}`, `button--${this.size()}`, `button--${this.shape()}`];
+    const c = [
+      'button',
+      `button--${this.variant()}`,
+      `button--${this.appearance()}`,
+      `button--${this.size()}`,
+      `button--${this.shape()}`,
+    ];
     if (this.disabled()) c.push('button--disabled');
     return c;
   });
@@ -111,7 +119,13 @@ export class MenuComponent implements OnDestroy {
   });
 
   splitContainerClasses = computed(() => {
-    const c = ['menu-trigger-split', `menu-trigger-split--${this.variant()}`, `menu-trigger-split--${this.appearance()}`, `menu-trigger-split--${this.size()}`, `menu-trigger-split--${this.shape()}`];
+    const c = [
+      'menu-trigger-split',
+      `menu-trigger-split--${this.variant()}`,
+      `menu-trigger-split--${this.appearance()}`,
+      `menu-trigger-split--${this.size()}`,
+      `menu-trigger-split--${this.shape()}`,
+    ];
     if (this.disabled()) c.push('menu-trigger-split--disabled');
     return c.join(' ');
   });
@@ -163,7 +177,11 @@ export class MenuComponent implements OnDestroy {
   }
 
   toggleMenu(): void {
-    this.isMenuOpen() ? this.closeMenu() : this.openMenu();
+    if (this.isMenuOpen()) {
+      this.closeMenu();
+    } else {
+      this.openMenu();
+    }
   }
 
   openMenu(): void {
@@ -173,12 +191,17 @@ export class MenuComponent implements OnDestroy {
     const triggerWidth = triggerEl.offsetWidth;
     const isSubmenu = this.openAsSubmenu();
     const positions = isSubmenu ? MENU_SUBMENU_POSITIONS : MENU_OVERLAY_POSITIONS;
-    const minWidth = isSubmenu ? MENU_SUBMENU_MIN_WIDTH : (this.isSplit() ? MENU_OVERLAY_MIN_WIDTH : Math.max(triggerWidth, MENU_OVERLAY_MIN_WIDTH));
+    const minWidth = isSubmenu
+      ? MENU_SUBMENU_MIN_WIDTH
+      : this.isSplit()
+        ? MENU_OVERLAY_MIN_WIDTH
+        : Math.max(triggerWidth, MENU_OVERLAY_MIN_WIDTH);
     const viewportMargin = isSubmenu ? MENU_SUBMENU_VIEWPORT_MARGIN : MENU_OVERLAY_VIEWPORT_MARGIN;
     const preferredMaxHeight = parseInt(this.menuMaxHeight(), 10) || 250;
-    const maxHeight = isSubmenu && isPlatformBrowser(this.platformId) && typeof window !== 'undefined'
-      ? Math.min(preferredMaxHeight, window.innerHeight - viewportMargin * 2)
-      : this.menuMaxHeight();
+    const maxHeight =
+      isSubmenu && isPlatformBrowser(this.platformId) && typeof window !== 'undefined'
+        ? Math.min(preferredMaxHeight, window.innerHeight - viewportMargin * 2)
+        : this.menuMaxHeight();
 
     this.overlayHandle = openConnectedOverlay({
       overlay: this.overlay,
@@ -195,7 +218,7 @@ export class MenuComponent implements OnDestroy {
         maxWidth: MENU_OVERLAY_MAX_WIDTH,
         maxHeight,
       },
-      onClose: (focusTrigger) => this.closeMenu(focusTrigger ? 'escape' : 'outside'),
+      onClose: focusTrigger => this.closeMenu(focusTrigger ? 'escape' : 'outside'),
       onDetach: () => this.syncStateAfterDetach(),
     });
 

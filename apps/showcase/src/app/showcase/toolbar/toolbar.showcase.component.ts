@@ -10,7 +10,7 @@ import {
   InteractiveShowcaseComponent,
   ShowcaseConfig,
 } from '@shared/components/interactive-showcase';
-import { Size, Variant, MenuItem } from 'angular-ui';
+import { Size, MenuItem } from 'angular-ui';
 
 @Component({
   selector: 'app-toolbar-showcase',
@@ -139,7 +139,8 @@ import { Size, Variant, MenuItem } from 'angular-ui';
         <div class="showcase__section">
           <h2 class="showcase__section__title">Toolbar with Variants</h2>
           <p class="showcase__section__description">
-            Toolbar items can use different variants to convey semantic meaning: primary, secondary, success, warning, danger, and info.
+            Toolbar items can use different variants to convey semantic meaning: primary, secondary,
+            success, warning, danger, and info.
           </p>
           <div class="showcase__preview">
             <ui-toolbar [items]="variantItems()" (itemClick)="onItemClick($event)" />
@@ -236,7 +237,8 @@ import { Size, Variant, MenuItem } from 'angular-ui';
         <div class="showcase__section">
           <h2 class="showcase__section__title">All Toolbar Item Types</h2>
           <p class="showcase__section__description">
-            Comprehensive example showing all available ToolbarItem types: button (default), divider, toggle, custom, and split.
+            Comprehensive example showing all available ToolbarItem types: button (default),
+            divider, toggle, custom, and split.
           </p>
           <div class="showcase__preview">
             <ui-toolbar [items]="allTypesItems()" (itemClick)="onItemClick($event)" />
@@ -882,4 +884,3 @@ export class MyComponent {
     },
   ]);
 }
-

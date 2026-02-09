@@ -4,7 +4,10 @@ import { TooltipComponent } from 'angular-ui';
 import { ButtonComponent } from 'angular-ui';
 import { IconComponent } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { IconName } from 'angular-ui';
 import { TooltipPosition, TooltipSize } from 'angular-ui';
 
@@ -77,7 +80,7 @@ import { TooltipPosition, TooltipSize } from 'angular-ui';
               </ui-tooltip>
 
               <ui-tooltip text="Tooltip on icon button">
-                <ui-button appearance="subtle" icon="info"/>
+                <ui-button appearance="subtle" icon="info" />
               </ui-tooltip>
             </div>
           </div>
@@ -439,4 +442,3 @@ import { ButtonComponent } from '../button';
 })
 export class MyComponent {}`;
 }
-

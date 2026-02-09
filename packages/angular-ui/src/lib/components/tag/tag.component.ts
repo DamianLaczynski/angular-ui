@@ -1,6 +1,6 @@
-import { Component, input, output, computed, ChangeDetectionStrategy } from '@angular/core';
+import { Component, input, output, computed, ChangeDetectionStrategy, model } from '@angular/core';
 
-import { Variant, Appearance, Shape, Size, ExtendedSize } from '../utils';
+import { Variant, Appearance, Shape, Size } from '../utils';
 import { IconComponent } from '../icon/icon.component';
 import { IconName } from '../icon';
 
@@ -11,105 +11,94 @@ import { IconName } from '../icon';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagComponent {
-  // Component inputs - Unified Design System
   variant = input<Variant>('secondary');
   appearance = input<Appearance>('filled');
-  size = input<ExtendedSize>('medium');
+  size = input<Size>('medium');
   shape = input<Shape>('rounded');
+
   text = input.required<string>();
   secondaryText = input<string | undefined>(undefined);
   icon = input<IconName | undefined>(undefined);
-  selected = input<boolean>(false);
-  disabled = input<boolean>(false);
-  readonly = input<boolean>(false);
-  dismissible = input<boolean>(false);
-  ariaLabel = input<string>('');
-  tabIndex = input<number | null>(null);
 
-  // Component outputs
+  selectable = input<boolean>(false);
+  dismissible = input<boolean>(false);
+
+  selected = model<boolean>(false);
+  disabled = model<boolean>(false);
+
+  ariaLabel = input<string>('');
+
   dismiss = output<void>();
   tagClick = output<MouseEvent>();
-  selectedChange = output<boolean>();
 
-  // Computed properties
-  tagClasses = computed(() => {
-    const classes = ['tag'];
-
-    classes.push(`tag--${this.variant()}`);
-    classes.push(`tag--${this.appearance()}`);
-    classes.push(`tag--${this.size()}`);
-    classes.push(`tag--${this.shape()}`);
-
-    if (this.selected()) {
-      classes.push('tag--selected');
-    }
-
-    if (this.disabled()) {
-      classes.push('tag--disabled');
-    }
-
-    if (this.readonly()) {
-      classes.push('tag--readonly');
-    }
-
-    return classes.join(' ');
+  private baseButtonClasses = computed(() => {
+    const c = [
+      'button',
+      `button--${this.variant()}`,
+      `button--${this.appearance()}`,
+      `button--${this.size()}`,
+      `button--${this.shape()}`,
+    ];
+    if (this.disabled()) c.push('button--disabled');
+    if (this.selected()) c.push('button--selected');
+    return c;
   });
 
-  iconSize = computed<Size>(() => {
-    switch (this.size()) {
-      case 'extra-small':
-      case 'small':
-        return 'small';
-      case 'medium':
-        return 'medium';
-      case 'large':
-      case 'extra-large':
-        return 'large';
-      default:
-        return 'medium';
-    }
+  tagClasses = computed(() => {
+    const c = ['tag', ...this.baseButtonClasses()];
+    if (!this.disabled() && (this.selectable() || this.dismissible())) c.push('tag--interactive');
+    return c.join(' ');
   });
 
   isClickable = computed(() => {
-    return !this.disabled() && !this.readonly();
+    return !this.disabled() && this.selectable();
   });
 
   effectiveAriaLabel = computed(() => {
     return this.ariaLabel() || this.text();
   });
 
-  effectiveTabIndex = computed(() => {
-    const externalTabIndex = this.tabIndex();
-    if (externalTabIndex !== null) {
-      return externalTabIndex;
+  tabIndex = input<number | null | undefined>(undefined);
+
+  private defaultTabIndex = computed(() => {
+    if (!this.selectable() && !this.dismissible()) {
+      return null;
     }
-    return this.disabled() || this.readonly() ? -1 : this.isClickable() ? 0 : -1;
+    return this.disabled() ? -1 : 0;
   });
 
+  effectiveTabIndex = computed(() => this.tabIndex() ?? this.defaultTabIndex());
+
   onTagClick(event: MouseEvent): void {
-    if (this.disabled() || this.readonly()) {
+    if (!this.isClickable()) {
       event.preventDefault();
       event.stopPropagation();
       return;
     }
 
+    if (this.selectable()) {
+      this.selected.set(!this.selected());
+    }
     this.tagClick.emit(event);
   }
 
   onTagKeyDown(event: KeyboardEvent): void {
-    if (this.disabled() || this.readonly()) {
+    if (!this.isClickable()) {
       return;
     }
 
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       event.stopPropagation();
+      if (this.selectable()) {
+        this.selected.set(!this.selected());
+      }
       this.tagClick.emit(event as any);
     }
   }
 
   onDismissClick(event: MouseEvent): void {
-    if (this.disabled() || this.readonly()) {
+    if (this.disabled()) {
       event.preventDefault();
       event.stopPropagation();
       return;
@@ -120,7 +109,7 @@ export class TagComponent {
   }
 
   onDismissKeyDown(event: KeyboardEvent): void {
-    if (this.disabled() || this.readonly()) {
+    if (this.disabled()) {
       return;
     }
 

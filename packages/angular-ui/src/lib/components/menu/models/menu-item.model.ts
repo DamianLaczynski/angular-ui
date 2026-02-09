@@ -22,4 +22,3 @@ export interface MenuSection {
   items: MenuItem[];
   divider?: boolean;
 }
-

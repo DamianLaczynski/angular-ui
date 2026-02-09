@@ -1,7 +1,18 @@
 import { Component, signal, computed, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Appearance, ButtonComponent, IconName, Shape, Size, TableOfContentComponent, Variant } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  Appearance,
+  ButtonComponent,
+  IconName,
+  Shape,
+  Size,
+  TableOfContentComponent,
+  Variant,
+} from 'angular-ui';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 
 @Component({
   selector: 'app-button-showcase',
@@ -45,7 +56,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
                 [loading]="currentLoading()"
                 [selected]="selectedModel()"
                 (selectedChange)="selectedModel.set($event)"
-                [toggle]="currentToggle()"
+                [selectable]="currentSelectable()"
                 [fullWidth]="currentFullWidth()"
                 (click)="onButtonClick()"
               />
@@ -73,9 +84,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" appearance="filled" icon="star">Primary</ui-button>
-              <ui-button variant="success" appearance="filled" icon="checkmark"
-                >Success</ui-button
-              >
+              <ui-button variant="success" appearance="filled" icon="checkmark">Success</ui-button>
               <ui-button variant="danger" appearance="filled" icon="delete">Danger</ui-button>
               <ui-button variant="info" appearance="filled" icon="info">Info</ui-button>
             </div>
@@ -129,9 +138,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" appearance="outline" icon="star">Primary</ui-button>
-              <ui-button variant="success" appearance="outline" icon="checkmark"
-                >Success</ui-button
-              >
+              <ui-button variant="success" appearance="outline" icon="checkmark">Success</ui-button>
               <ui-button variant="danger" appearance="outline" icon="delete">Danger</ui-button>
               <ui-button variant="info" appearance="outline" icon="info">Info</ui-button>
             </div>
@@ -158,9 +165,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" appearance="subtle" icon="star">Primary</ui-button>
-              <ui-button variant="success" appearance="subtle" icon="checkmark"
-                >Success</ui-button
-              >
+              <ui-button variant="success" appearance="subtle" icon="checkmark">Success</ui-button>
               <ui-button variant="danger" appearance="subtle" icon="delete">Danger</ui-button>
               <ui-button variant="info" appearance="subtle" icon="info">Info</ui-button>
             </div>
@@ -210,11 +215,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" size="small" icon="star"></ui-button>
-              <ui-button
-                variant="primary"
-                size="medium"
-                icon="star"
-              ></ui-button>
+              <ui-button variant="primary" size="medium" icon="star"></ui-button>
               <ui-button variant="primary" size="large" icon="star"></ui-button>
             </div>
           </div>
@@ -228,11 +229,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" shape="rounded">Rounded</ui-button>
-              <ui-button
-                variant="primary"
-                shape="rounded"
-                icon="star"
-              ></ui-button>
+              <ui-button variant="primary" shape="rounded" icon="star"></ui-button>
             </div>
           </div>
 
@@ -240,11 +237,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" shape="circular">Circular</ui-button>
-              <ui-button
-                variant="primary"
-                shape="circular"
-                icon="star"
-              ></ui-button>
+              <ui-button variant="primary" shape="circular" icon="star"></ui-button>
             </div>
           </div>
         </div>
@@ -283,22 +276,18 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="danger" appearance="subtle">Normal</ui-button>
-              <ui-button variant="danger" appearance="subtle" [selected]="true"
-                >Selected</ui-button
-              >
-              <ui-button variant="danger" appearance="subtle" [disabled]="true"
-                >Disabled</ui-button
-              >
+              <ui-button variant="danger" appearance="subtle" [selected]="true">Selected</ui-button>
+              <ui-button variant="danger" appearance="subtle" [disabled]="true">Disabled</ui-button>
               <ui-button variant="danger" appearance="subtle" [loading]="true">Loading</ui-button>
             </div>
           </div>
         </div>
 
-        <!-- Toggle -->
+        <!-- Selectable -->
         <div class="showcase__section">
-          <h2 class="showcase__section__title">Toggle</h2>
+          <h2 class="showcase__section__title">Selectable</h2>
           <p class="showcase__section__description">
-            With <code>toggle</code> enabled, the button switches <code>selected</code> on each
+            With <code>selectable</code> enabled, the button switches <code>selected</code> on each
             click. Use <code>[(selected)]</code> to bind the state.
           </p>
 
@@ -307,7 +296,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
             <div class="showcase__grid">
               <ui-button
                 variant="primary"
-                [toggle]="true"
+                [selectable]="true"
                 [selected]="toggle1Selected()"
                 (selectedChange)="toggle1Selected.set($event)"
               >
@@ -315,7 +304,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
               </ui-button>
               <ui-button
                 variant="secondary"
-                [toggle]="true"
+                [selectable]="true"
                 [selected]="toggle2Selected()"
                 (selectedChange)="toggle2Selected.set($event)"
                 icon="star"
@@ -331,7 +320,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
               <ui-button
                 variant="primary"
                 appearance="outline"
-                [toggle]="true"
+                [selectable]="true"
                 [selected]="toggle3Selected()"
                 (selectedChange)="toggle3Selected.set($event)"
               >
@@ -340,7 +329,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
               <ui-button
                 variant="secondary"
                 appearance="outline"
-                [toggle]="true"
+                [selectable]="true"
                 [selected]="toggle4Selected()"
                 (selectedChange)="toggle4Selected.set($event)"
                 icon="checkmark"
@@ -391,24 +380,9 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <h3 class="showcase__subsection__title">Icon Only</h3>
           <div class="showcase__preview">
             <div class="showcase__grid">
-              <ui-button
-                variant="primary"
-                size="small"
-                icon="star"
-                [loading]="true"
-              ></ui-button>
-              <ui-button
-                variant="primary"
-                size="medium"
-                icon="star"
-                [loading]="true"
-              ></ui-button>
-              <ui-button
-                variant="primary"
-                size="large"
-                icon="star"
-                [loading]="true"
-              ></ui-button>
+              <ui-button variant="primary" size="small" icon="star" [loading]="true"></ui-button>
+              <ui-button variant="primary" size="medium" icon="star" [loading]="true"></ui-button>
+              <ui-button variant="primary" size="large" icon="star" [loading]="true"></ui-button>
             </div>
           </div>
 
@@ -416,9 +390,7 @@ import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components
           <div class="showcase__preview">
             <div class="showcase__grid">
               <ui-button variant="primary" appearance="filled" [loading]="true">Filled</ui-button>
-              <ui-button variant="primary" appearance="outline" [loading]="true"
-                >Outline</ui-button
-              >
+              <ui-button variant="primary" appearance="outline" [loading]="true">Outline</ui-button>
               <ui-button variant="primary" appearance="subtle" [loading]="true">Subtle</ui-button>
               <ui-button variant="primary" appearance="tint" [loading]="true">Tint</ui-button>
               <ui-button variant="primary" appearance="transparent" [loading]="true"
@@ -560,8 +532,8 @@ export class ButtonShowcaseComponent {
         group: 'state',
       },
       {
-        key: 'toggle',
-        label: 'Toggle',
+        key: 'selectable',
+        label: 'Selectable',
         type: 'switch',
         description: 'Click toggles selected state',
         defaultValue: false,
@@ -599,7 +571,7 @@ export class ButtonShowcaseComponent {
     shape: 'rounded',
     icon: '',
     disabled: false,
-    toggle: false,
+    selectable: false,
     selected: false,
     loading: false,
     fullWidth: false,
@@ -618,7 +590,7 @@ export class ButtonShowcaseComponent {
     return icon ? (icon as IconName) : undefined;
   });
   currentDisabled = computed(() => this.values()['disabled'] as boolean);
-  currentToggle = computed(() => this.values()['toggle'] as boolean);
+  currentSelectable = computed(() => this.values()['selectable'] as boolean);
   currentLoading = computed(() => this.values()['loading'] as boolean);
   currentFullWidth = computed(() => this.values()['fullWidth'] as boolean);
 
@@ -637,4 +609,3 @@ export class ButtonShowcaseComponent {
     this.showcase()?.logEvent('click', { text: this.currentText() });
   }
 }
-

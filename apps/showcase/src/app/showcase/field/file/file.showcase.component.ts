@@ -3,7 +3,10 @@ import { FileComponent } from 'angular-ui';
 import { FormControl, FormGroup, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { TableOfContentComponent } from 'angular-ui';
-import { InteractiveShowcaseComponent, ShowcaseConfig } from '@shared/components/interactive-showcase';
+import {
+  InteractiveShowcaseComponent,
+  ShowcaseConfig,
+} from '@shared/components/interactive-showcase';
 import { Size } from 'angular-ui';
 
 @Component({
@@ -403,4 +406,3 @@ export class FileShowcaseComponent {
     this.showcase()?.logEvent('fileSelect', { count: files.length });
   }
 }
-

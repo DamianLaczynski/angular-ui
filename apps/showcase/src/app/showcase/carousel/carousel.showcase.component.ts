@@ -281,7 +281,8 @@ import {
         <div class="showcase__section">
           <h2 class="showcase__section__title">Carousel with custom template</h2>
           <p class="showcase__section__description">
-            Use the <code>slideTemplate</code> input to render custom content per slide. Each slide receives the item and index; you can render any component or markup.
+            Use the <code>slideTemplate</code> input to render custom content per slide. Each slide
+            receives the item and index; you can render any component or markup.
           </p>
           <div class="showcase__preview">
             <ng-template #componentSlide let-item let-index="index">
@@ -304,7 +305,9 @@ import {
                     </div>
                   }
                   @case ('slider') {
-                    <div class="carousel-showcase-slide__content carousel-showcase-slide__content--wide">
+                    <div
+                      class="carousel-showcase-slide__content carousel-showcase-slide__content--wide"
+                    >
                       <ui-slider label="Slider" [min]="0" [max]="100" />
                     </div>
                   }
@@ -314,7 +317,10 @@ import {
                     </div>
                   }
                   @case ('tabs') {
-                    <div class="carousel-showcase-slide__content" style="width: 100%; max-width: 360px;">
+                    <div
+                      class="carousel-showcase-slide__content"
+                      style="width: 100%; max-width: 360px;"
+                    >
                       <ui-tabs
                         [tabs]="showcaseTabs"
                         [selectedTabId]="showcaseSelectedTabId()"
@@ -478,7 +484,7 @@ export class CarouselShowcaseComponent {
     this.values.set(newValues);
   }
 
-  onReset(): void { }
+  onReset(): void {}
 
   componentShowcaseItems = signal<CarouselItem[]>([
     { id: 'btn', title: 'Button', componentType: 'button' },
@@ -507,7 +513,7 @@ export class CarouselShowcaseComponent {
     { id: '3', type: 'button', label: 'Option 3' },
   ];
 
-  onTagDismiss(): void { }
+  onTagDismiss(): void {}
 
   basicItems = signal<CarouselItem[]>([
     {
@@ -622,4 +628,3 @@ export class MyComponent {
     console.log('Carousel item changed:', event.item.id, 'at index', event.index);
   }
 }
-

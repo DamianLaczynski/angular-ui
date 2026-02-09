@@ -161,7 +161,11 @@ export class TimeSpanComponent extends FieldComponent implements OnDestroy {
     if (this.disabled()) {
       return;
     }
-    this.isOpen() ? this.closePanel() : this.openPanel();
+    if (this.isOpen()) {
+      this.closePanel();
+    } else {
+      this.openPanel();
+    }
   }
 
   openPanel(): void {
@@ -178,7 +182,7 @@ export class TimeSpanComponent extends FieldComponent implements OnDestroy {
         positions: DEFAULT_CONNECTED_POSITIONS,
         viewportMargin: DEFAULT_VIEWPORT_MARGIN,
       },
-      onClose: (focusTrigger) => this.closePanel(focusTrigger),
+      onClose: focusTrigger => this.closePanel(focusTrigger),
     });
 
     this.isOpen.set(true);

@@ -1,6 +1,6 @@
 <div class="time-picker" [class.time-picker--inline]="inline()">
   @if (showLabel()) {
-    <label class="time-picker__label">{{ label() }}:</label>
+    <label class="time-picker__label" [attr.for]="'time-input'">{{ label() }}</label>
   }
   <div class="time-picker__spinners">
     <!-- Hour Spinner -->
