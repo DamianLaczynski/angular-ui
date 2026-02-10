@@ -15,7 +15,7 @@ import { DataGridFilterTemplateContext } from '../../models/data-grid-config.mod
   imports: [FormsModule, DropdownComponent],
   template: `
     <ui-dropdown
-      variant="filled-gray"
+      inputVariant="filled-gray"
       [items]="context().parameters || []"
       [mode]="'multi'"
       [size]="size()"

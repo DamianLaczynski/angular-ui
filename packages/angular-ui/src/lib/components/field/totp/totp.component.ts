@@ -228,7 +228,7 @@ export class TotpComponent extends FieldComponent implements OnInit, ControlValu
 
   // Override wrapperClasses to get it from FieldComponent
   override get wrapperClasses(): string {
-    const classes = [`input-wrapper--${this.size()}`, `input-wrapper--${this.variant()}`];
+    const classes = [`input-wrapper--${this.size()}`, `input-wrapper--${this.inputVariant()}`];
 
     if (this.disabled()) {
       classes.push('input-wrapper--disabled');

@@ -8,7 +8,6 @@ import {
   ElementRef,
   ViewChild,
   HostListener,
-  OnDestroy,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
@@ -54,7 +53,7 @@ export type FileComponentMode = 'inline' | 'area';
     `,
   ],
 })
-export class FileComponent extends FieldComponent implements ControlValueAccessor, OnDestroy {
+export class FileComponent extends FieldComponent implements ControlValueAccessor {
   // Inputs
   mode = input<FileComponentMode>('area'); // 'inline' or 'area'
   accept = input<string>('');
@@ -103,7 +102,7 @@ export class FileComponent extends FieldComponent implements ControlValueAccesso
 
   fileWrapperClasses = computed(() => {
     const size = this.size();
-    const variant = this.variant();
+    const variant = this.inputVariant();
     const mode = this.mode();
     const classes = [
       mode === 'inline' ? 'file-input-wrapper' : 'file',
@@ -328,10 +327,6 @@ export class FileComponent extends FieldComponent implements ControlValueAccesso
     }
     if (fileType.includes('zip') || fileType.includes('archive')) return 'archive';
     return 'document';
-  }
-
-  override ngOnDestroy(): void {
-    // Component cleanup if needed
   }
 
   // ControlValueAccessor implementation

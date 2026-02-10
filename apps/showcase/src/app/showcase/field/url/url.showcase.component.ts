@@ -48,7 +48,7 @@ import { Size } from 'angular-ui';
               <ui-url
                 [label]="currentLabel()"
                 [placeholder]="currentPlaceholder()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [disabled]="currentDisabled()"
                 [readonly]="currentReadonly()"
@@ -94,7 +94,7 @@ import { Size } from 'angular-ui';
                 placeholder="https://example.com"
                 size="small"
                 helpText="This is a small URL field"
-                variant="underlined"
+                inputVariant="underlined"
               ></ui-url>
             </div>
             <div class="showcase__item">
@@ -103,7 +103,7 @@ import { Size } from 'angular-ui';
                 placeholder="https://example.com"
                 size="medium"
                 helpText="This is a medium URL field"
-                variant="filled-gray"
+                inputVariant="filled-gray"
               ></ui-url>
             </div>
             <div class="showcase__item">
@@ -112,7 +112,7 @@ import { Size } from 'angular-ui';
                 placeholder="https://example.com"
                 size="large"
                 helpText="This is a large URL field"
-                variant="filled"
+                inputVariant="filled"
               ></ui-url>
             </div>
           </div>

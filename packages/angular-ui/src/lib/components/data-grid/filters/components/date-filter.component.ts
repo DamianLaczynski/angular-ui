@@ -20,7 +20,7 @@ import { DataGridFilterTemplateContext } from '../../models/data-grid-config.mod
       <ui-date-range
         [placeholder]="context().placeholder"
         [size]="size()"
-        [variant]="'filled-gray'"
+        [inputVariant]="'filled-gray'"
         [ngModel]="context().filterValue"
         (ngModelChange)="context().onValueChange($event)"
       />
@@ -29,7 +29,7 @@ import { DataGridFilterTemplateContext } from '../../models/data-grid-config.mod
         [dateType]="'date'"
         [placeholder]="context().placeholder"
         [size]="size()"
-        [variant]="'filled-gray'"
+        [inputVariant]="'filled-gray'"
         [ngModel]="context().filterValue"
         (ngModelChange)="context().onValueChange($event)"
       />

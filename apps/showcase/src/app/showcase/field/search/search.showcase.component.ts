@@ -49,7 +49,7 @@ import { Size } from 'angular-ui';
               <ui-search
                 [label]="currentLabel()"
                 [placeholder]="currentPlaceholder()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [disabled]="currentDisabled()"
                 [readonly]="currentReadonly()"
@@ -95,7 +95,7 @@ import { Size } from 'angular-ui';
                 placeholder="Search..."
                 size="small"
                 helpText="This is a small search field"
-                variant="underlined"
+                inputVariant="underlined"
               ></ui-search>
             </div>
             <div class="showcase__item">
@@ -104,7 +104,7 @@ import { Size } from 'angular-ui';
                 placeholder="Search..."
                 size="medium"
                 helpText="This is a medium search field"
-                variant="filled-gray"
+                inputVariant="filled-gray"
               ></ui-search>
             </div>
             <div class="showcase__item">
@@ -113,7 +113,7 @@ import { Size } from 'angular-ui';
                 placeholder="Search..."
                 size="large"
                 helpText="This is a large search field"
-                variant="filled"
+                inputVariant="filled"
               ></ui-search>
             </div>
           </div>

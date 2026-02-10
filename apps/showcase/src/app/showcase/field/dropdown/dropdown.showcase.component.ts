@@ -58,7 +58,7 @@ import { SIZES } from '@shared/utils/showcase/component-options.utils';
                 <ui-dropdown
                   [label]="variant"
                   [items]="basicItems"
-                  [variant]="variant"
+                  [inputVariant]="variant"
                   [size]="variantForm().size"
                   [mode]="variantForm().mode"
                   [searchable]="variantForm().searchable"
@@ -84,7 +84,7 @@ import { SIZES } from '@shared/utils/showcase/component-options.utils';
                 <ui-dropdown
                   [label]="size"
                   [items]="basicItems"
-                  [variant]="sizeForm().variant"
+                  [inputVariant]="sizeForm().variant"
                   [size]="size"
                   [mode]="sizeForm().mode"
                   [searchable]="sizeForm().searchable"
@@ -110,7 +110,7 @@ import { SIZES } from '@shared/utils/showcase/component-options.utils';
                 <ui-dropdown
                   [label]="mode"
                   [items]="basicItems"
-                  [variant]="modeForm().variant"
+                  [inputVariant]="modeForm().variant"
                   [size]="modeForm().size"
                   [mode]="mode"
                   [searchable]="modeForm().searchable"
@@ -136,7 +136,7 @@ import { SIZES } from '@shared/utils/showcase/component-options.utils';
                 <ui-dropdown
                   [label]="state.label"
                   [items]="basicItems"
-                  [variant]="statesForm().variant"
+                  [inputVariant]="statesForm().variant"
                   [size]="statesForm().size"
                   [mode]="statesForm().mode"
                   [searchable]="statesForm().searchable"
@@ -165,7 +165,7 @@ import { SIZES } from '@shared/utils/showcase/component-options.utils';
                 [placeholder]="currentPlaceholder()"
                 [items]="basicItems"
                 [mode]="currentMode()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [searchable]="currentSearchable()"
                 [clearable]="currentClearable()"

@@ -56,7 +56,7 @@ import { Size } from 'angular-ui';
               <ui-email
                 [label]="currentLabel()"
                 [placeholder]="currentPlaceholder()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [disabled]="currentDisabled()"
                 [readonly]="currentReadonly()"
@@ -102,7 +102,7 @@ import { Size } from 'angular-ui';
                 placeholder="example@domain.com"
                 size="small"
                 helpText="This is a small email field"
-                variant="underlined"
+                inputVariant="underlined"
               ></ui-email>
             </div>
             <div class="showcase__item">
@@ -111,7 +111,7 @@ import { Size } from 'angular-ui';
                 placeholder="example@domain.com"
                 size="medium"
                 helpText="This is a medium email field"
-                variant="filled-gray"
+                inputVariant="filled-gray"
               ></ui-email>
             </div>
             <div class="showcase__item">
@@ -120,7 +120,7 @@ import { Size } from 'angular-ui';
                 placeholder="example@domain.com"
                 size="large"
                 helpText="This is a large email field"
-                variant="filled"
+                inputVariant="filled"
               ></ui-email>
             </div>
           </div>

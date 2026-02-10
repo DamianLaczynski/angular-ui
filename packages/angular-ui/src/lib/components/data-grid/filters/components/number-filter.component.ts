@@ -19,7 +19,7 @@ import { DataGridFilterTemplateContext } from '../../models/data-grid-config.mod
       <ui-number
         [placeholder]="context().placeholder"
         [size]="size()"
-        [variant]="'filled-gray'"
+        [inputVariant]="'filled-gray'"
         [ngModel]="rangeValue().start"
         (ngModelChange)="onRangeStartChange($event)"
       />
@@ -27,7 +27,7 @@ import { DataGridFilterTemplateContext } from '../../models/data-grid-config.mod
       <ui-number
         [placeholder]="'To'"
         [size]="size()"
-        [variant]="'filled-gray'"
+        [inputVariant]="'filled-gray'"
         [ngModel]="rangeValue().end"
         (ngModelChange)="onRangeEndChange($event)"
       />
@@ -35,7 +35,7 @@ import { DataGridFilterTemplateContext } from '../../models/data-grid-config.mod
       <ui-number
         [placeholder]="context().placeholder"
         [size]="size()"
-        [variant]="'filled-gray'"
+        [inputVariant]="'filled-gray'"
         [ngModel]="context().filterValue"
         (ngModelChange)="context().onValueChange($event)"
       />
