@@ -54,7 +54,7 @@ import { Size } from 'angular-ui';
             <div preview>
               <ui-time-span
                 [label]="currentLabel()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [showYears]="currentShowYears()"
                 [showMonths]="currentShowMonths()"
@@ -83,7 +83,7 @@ import { Size } from 'angular-ui';
                 [showDays]="true"
                 [showHours]="true"
                 [showMinutes]="true"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Set duration..."
                 helpText="Select days, hours, and minutes"
                 [(ngModel)]="basicValue"
@@ -103,7 +103,7 @@ import { Size } from 'angular-ui';
                 [showHours]="true"
                 [showMinutes]="true"
                 [showSeconds]="true"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Set time span..."
                 [(ngModel)]="fullValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -126,7 +126,7 @@ import { Size } from 'angular-ui';
                 [showDays]="false"
                 [showHours]="true"
                 [showMinutes]="true"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Set time..."
                 helpText="Only hours and minutes are available"
                 [(ngModel)]="hoursMinutesValue"
@@ -143,7 +143,7 @@ import { Size } from 'angular-ui';
                 [showDays]="true"
                 [showHours]="false"
                 [showMinutes]="false"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Set days..."
                 [(ngModel)]="daysOnlyValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -161,7 +161,7 @@ import { Size } from 'angular-ui';
                 [showDays]="false"
                 [showHours]="false"
                 [showMinutes]="false"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Set period..."
                 [(ngModel)]="yearsMonthsValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -182,7 +182,7 @@ import { Size } from 'angular-ui';
               <ui-time-span
                 label="Small Time Span"
                 size="small"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Small size"
                 [(ngModel)]="smallValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -192,7 +192,7 @@ import { Size } from 'angular-ui';
               <ui-time-span
                 label="Medium Time Span (Default)"
                 size="medium"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Medium size"
                 [(ngModel)]="mediumValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -202,7 +202,7 @@ import { Size } from 'angular-ui';
               <ui-time-span
                 label="Large Time Span"
                 size="large"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Large size"
                 [(ngModel)]="largeValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -218,7 +218,7 @@ import { Size } from 'angular-ui';
             <div class="showcase__item">
               <ui-time-span
                 label="Normal State"
-                variant="filled"
+                inputVariant="filled"
                 helpText="This is a normal time span"
                 [(ngModel)]="normalValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -227,7 +227,7 @@ import { Size } from 'angular-ui';
             <div class="showcase__item">
               <ui-time-span
                 label="Error State"
-                variant="filled"
+                inputVariant="filled"
                 [errorText]="errorStateText"
                 [(ngModel)]="errorValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -244,7 +244,7 @@ import { Size } from 'angular-ui';
               <ui-time-span
                 label="Disabled Time Span"
                 [disabled]="true"
-                variant="filled"
+                inputVariant="filled"
                 helpText="This time span is disabled"
                 [(ngModel)]="disabledValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -254,7 +254,7 @@ import { Size } from 'angular-ui';
               <ui-time-span
                 label="Required Time Span"
                 [required]="true"
-                variant="filled"
+                inputVariant="filled"
                 helpText="This field is required"
                 [(ngModel)]="requiredValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -264,7 +264,7 @@ import { Size } from 'angular-ui';
               <ui-time-span
                 label="Clearable Time Span"
                 [clearable]="true"
-                variant="filled"
+                inputVariant="filled"
                 helpText="You can clear the selection"
                 [(ngModel)]="clearableValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -280,7 +280,7 @@ import { Size } from 'angular-ui';
             <div class="showcase__item">
               <ui-time-span
                 label="Filled Variant"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Filled style"
                 [(ngModel)]="filledValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -289,7 +289,7 @@ import { Size } from 'angular-ui';
             <div class="showcase__item">
               <ui-time-span
                 label="Underlined Variant"
-                variant="underlined"
+                inputVariant="underlined"
                 placeholder="Underlined style"
                 [(ngModel)]="underlinedValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -298,7 +298,7 @@ import { Size } from 'angular-ui';
             <div class="showcase__item">
               <ui-time-span
                 label="Filled Gray Variant"
-                variant="filled-gray"
+                inputVariant="filled-gray"
                 placeholder="Filled gray style"
                 [(ngModel)]="filledGrayValue"
                 [ngModelOptions]="{ standalone: true }"
@@ -319,7 +319,7 @@ import { Size } from 'angular-ui';
                   [showMinutes]="true"
                   [showSeconds]="true"
                   formControlName="accessTokenExpiration"
-                  variant="filled"
+                  inputVariant="filled"
                   placeholder="Set expiration time"
                   helpText="Output: ISO 8601 duration string (e.g., 'PT1H30M' for 1 hour 30 minutes)"
                 />
@@ -329,7 +329,7 @@ import { Size } from 'angular-ui';
                   [showHours]="true"
                   [showMinutes]="true"
                   formControlName="refreshTokenExpiration"
-                  variant="filled"
+                  inputVariant="filled"
                   placeholder="Set expiration time"
                   helpText="Output: ISO 8601 duration string (e.g., 'P7D' for 7 days)"
                 />
@@ -338,7 +338,7 @@ import { Size } from 'angular-ui';
                   [showMinutes]="true"
                   [showSeconds]="true"
                   formControlName="passwordResetTokenExpiration"
-                  variant="filled"
+                  inputVariant="filled"
                   placeholder="Set expiration time"
                   helpText="Output: ISO 8601 duration string (e.g., 'PT10M' for 10 minutes)"
                 />
@@ -371,7 +371,7 @@ import { Size } from 'angular-ui';
                   [(ngModel)]="formData.projectDuration"
                   [ngModelOptions]="{ standalone: true }"
                   [required]="true"
-                  variant="filled"
+                  inputVariant="filled"
                   placeholder="Set project duration"
                 />
                 <ui-time-span
@@ -380,7 +380,7 @@ import { Size } from 'angular-ui';
                   [showMinutes]="true"
                   [(ngModel)]="formData.workingHours"
                   [ngModelOptions]="{ standalone: true }"
-                  variant="filled"
+                  inputVariant="filled"
                   placeholder="Set working hours"
                 />
                 <ui-time-span
@@ -389,7 +389,7 @@ import { Size } from 'angular-ui';
                   [showSeconds]="true"
                   [(ngModel)]="formData.breakDuration"
                   [ngModelOptions]="{ standalone: true }"
-                  variant="filled"
+                  inputVariant="filled"
                   placeholder="Set break duration"
                 />
                 <div class="showcase__form-output">

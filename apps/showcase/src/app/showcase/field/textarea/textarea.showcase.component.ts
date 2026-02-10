@@ -48,7 +48,7 @@ import { Size } from 'angular-ui';
               <ui-textarea
                 [label]="currentLabel()"
                 [placeholder]="currentPlaceholder()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [rows]="currentRows()"
                 [disabled]="currentDisabled()"
@@ -96,7 +96,7 @@ import { Size } from 'angular-ui';
                 size="small"
                 [rows]="3"
                 helpText="This is a small textarea"
-                variant="underlined"
+                inputVariant="underlined"
               ></ui-textarea>
             </div>
             <div class="showcase__item">
@@ -106,7 +106,7 @@ import { Size } from 'angular-ui';
                 size="medium"
                 [rows]="4"
                 helpText="This is a medium textarea"
-                variant="filled-gray"
+                inputVariant="filled-gray"
               ></ui-textarea>
             </div>
             <div class="showcase__item">
@@ -116,7 +116,7 @@ import { Size } from 'angular-ui';
                 size="large"
                 [rows]="6"
                 helpText="This is a large textarea"
-                variant="filled"
+                inputVariant="filled"
               ></ui-textarea>
             </div>
           </div>

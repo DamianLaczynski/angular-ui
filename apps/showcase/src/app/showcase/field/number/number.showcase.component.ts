@@ -50,7 +50,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 [label]="currentLabel()"
                 [placeholder]="currentPlaceholder()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [min]="currentMin()"
                 [max]="currentMax()"
@@ -159,7 +159,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Quantity (Step: 1)"
                 placeholder="0"
-                variant="filled-lighter"
+                inputVariant="filled-lighter"
                 [(ngModel)]="quantity"
                 [ngModelOptions]="{ standalone: true }"
                 [step]="1"
@@ -172,7 +172,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Price (Step: 0.01)"
                 placeholder="0.00"
-                variant="filled-lighter"
+                inputVariant="filled-lighter"
                 [(ngModel)]="price"
                 [ngModelOptions]="{ standalone: true }"
                 [step]="0.01"
@@ -184,7 +184,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Temperature (Step: 5)"
                 placeholder="0"
-                variant="filled-lighter"
+                inputVariant="filled-lighter"
                 [(ngModel)]="temperature"
                 [ngModelOptions]="{ standalone: true }"
                 [step]="5"
@@ -204,7 +204,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Quantity (Step: 1)"
                 placeholder="0"
-                variant="filled-gray"
+                inputVariant="filled-gray"
                 [(ngModel)]="quantity"
                 [ngModelOptions]="{ standalone: true }"
                 [step]="1"
@@ -217,7 +217,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Price (Step: 0.01)"
                 placeholder="0.00"
-                variant="filled-gray"
+                inputVariant="filled-gray"
                 [(ngModel)]="price"
                 [ngModelOptions]="{ standalone: true }"
                 [step]="0.01"
@@ -229,7 +229,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Temperature (Step: 5)"
                 placeholder="0"
-                variant="filled-gray"
+                inputVariant="filled-gray"
                 [(ngModel)]="temperature"
                 [ngModelOptions]="{ standalone: true }"
                 [step]="5"
@@ -249,7 +249,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Quantity (Step: 1)"
                 placeholder="0"
-                variant="filled"
+                inputVariant="filled"
                 [(ngModel)]="quantityFilled"
                 [ngModelOptions]="{ standalone: true }"
                 [step]="1"
@@ -262,7 +262,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Price (Step: 0.01)"
                 placeholder="0.00"
-                variant="filled"
+                inputVariant="filled"
                 [(ngModel)]="priceFilled"
                 [ngModelOptions]="{ standalone: true }"
                 [step]="0.01"
@@ -274,7 +274,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Temperature (Step: 5)"
                 placeholder="0"
-                variant="filled"
+                inputVariant="filled"
                 [(ngModel)]="temperatureFilled"
                 [ngModelOptions]="{ standalone: true }"
                 [step]="5"
@@ -294,7 +294,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Quantity (Step: 1)"
                 placeholder="0"
-                variant="underlined"
+                inputVariant="underlined"
                 [(ngModel)]="quantityUnderline"
                 [ngModelOptions]="{ standalone: true }"
                 [step]="1"
@@ -307,7 +307,7 @@ import { Size } from 'angular-ui';
               <ui-number
                 label="Small Size (Step: 1)"
                 placeholder="0"
-                variant="underlined"
+                inputVariant="underlined"
                 size="small"
                 [(ngModel)]="quantitySmall"
                 [ngModelOptions]="{ standalone: true }"

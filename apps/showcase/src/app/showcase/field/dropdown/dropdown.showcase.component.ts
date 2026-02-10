@@ -53,7 +53,7 @@ import { Size } from 'angular-ui';
                 [placeholder]="currentPlaceholder()"
                 [items]="basicItems"
                 [mode]="currentMode()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [searchable]="currentSearchable()"
                 [clearable]="currentClearable()"
@@ -76,7 +76,7 @@ import { Size } from 'angular-ui';
                 label="Single Select"
                 [items]="basicItems"
                 mode="single"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Select an option"
                 helpText="Choose one option from the list"
               />
@@ -86,7 +86,7 @@ import { Size } from 'angular-ui';
                 label="Multi Select"
                 [items]="basicItems"
                 mode="multi"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Select options"
                 helpText="Choose multiple options"
               />
@@ -103,7 +103,7 @@ import { Size } from 'angular-ui';
                 label="Countries"
                 [items]="countriesWithIcons"
                 mode="single"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Select a country"
               />
             </div>
@@ -112,7 +112,7 @@ import { Size } from 'angular-ui';
                 label="Actions"
                 [items]="actionsWithIcons"
                 mode="single"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Select an action"
               />
             </div>
@@ -128,7 +128,7 @@ import { Size } from 'angular-ui';
                 label="Small Dropdown"
                 [items]="basicItems"
                 size="small"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Small size"
               />
             </div>
@@ -137,7 +137,7 @@ import { Size } from 'angular-ui';
                 label="Medium Dropdown (Default)"
                 [items]="basicItems"
                 size="medium"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Medium size"
               />
             </div>
@@ -146,7 +146,7 @@ import { Size } from 'angular-ui';
                 label="Large Dropdown"
                 [items]="basicItems"
                 size="large"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Large size"
               />
             </div>
@@ -161,7 +161,7 @@ import { Size } from 'angular-ui';
               <ui-dropdown
                 label="Normal State"
                 [items]="basicItems"
-                variant="filled"
+                inputVariant="filled"
                 helpText="This is a normal dropdown"
               />
             </div>
@@ -169,7 +169,7 @@ import { Size } from 'angular-ui';
               <ui-dropdown
                 label="Error State"
                 [items]="basicItems"
-                variant="filled"
+                inputVariant="filled"
                 [(errorText)]="errorStateText"
               />
             </div>
@@ -185,7 +185,7 @@ import { Size } from 'angular-ui';
                 label="Disabled Dropdown"
                 [items]="basicItems"
                 [disabled]="true"
-                variant="filled"
+                inputVariant="filled"
                 helpText="This dropdown is disabled"
               />
             </div>
@@ -194,7 +194,7 @@ import { Size } from 'angular-ui';
                 label="Required Dropdown"
                 [items]="basicItems"
                 [required]="true"
-                variant="filled"
+                inputVariant="filled"
                 helpText="This field is required"
               />
             </div>
@@ -203,7 +203,7 @@ import { Size } from 'angular-ui';
                 label="Clearable Dropdown"
                 [items]="basicItems"
                 [clearable]="true"
-                variant="filled"
+                inputVariant="filled"
                 helpText="You can clear the selection"
               />
             </div>
@@ -220,7 +220,7 @@ import { Size } from 'angular-ui';
                 [items]="longCountryList"
                 [searchable]="true"
                 [clearable]="true"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Type to search..."
                 maxHeight="200px"
               />
@@ -231,7 +231,7 @@ import { Size } from 'angular-ui';
                 [items]="cityList"
                 [searchable]="true"
                 mode="multi"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Search cities..."
               />
             </div>
@@ -246,7 +246,7 @@ import { Size } from 'angular-ui';
               <ui-dropdown
                 label="Filled Variant"
                 [items]="basicItems"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Filled style"
               />
             </div>
@@ -254,7 +254,7 @@ import { Size } from 'angular-ui';
               <ui-dropdown
                 label="Underlined Variant"
                 [items]="basicItems"
-                variant="underlined"
+                inputVariant="underlined"
                 placeholder="Underlined style"
               />
             </div>
@@ -262,7 +262,7 @@ import { Size } from 'angular-ui';
               <ui-dropdown
                 label="Filled Gray Variant"
                 [items]="basicItems"
-                variant="filled-gray"
+                inputVariant="filled-gray"
                 placeholder="Filled gray style"
               />
             </div>
@@ -284,7 +284,7 @@ import { Size } from 'angular-ui';
                 label="Select Skills"
                 [items]="skillsWithIcons"
                 mode="multi"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Select your skills"
                 [clearable]="true"
                 helpText="Selected items appear as tags"
@@ -295,7 +295,7 @@ import { Size } from 'angular-ui';
                 label="Choose Technologies"
                 [items]="technologiesWithIcons"
                 mode="multi"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Select technologies"
                 [clearable]="true"
               />
@@ -310,7 +310,7 @@ import { Size } from 'angular-ui';
                 [items]="skillsWithIcons"
                 mode="multi"
                 size="small"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Select skills"
                 [clearable]="true"
               />
@@ -321,7 +321,7 @@ import { Size } from 'angular-ui';
                 [items]="skillsWithIcons"
                 mode="multi"
                 size="medium"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Select skills"
                 [clearable]="true"
               />
@@ -332,7 +332,7 @@ import { Size } from 'angular-ui';
                 [items]="skillsWithIcons"
                 mode="multi"
                 size="large"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Select skills"
                 [clearable]="true"
               />
@@ -348,7 +348,7 @@ import { Size } from 'angular-ui';
                 mode="multi"
                 [searchable]="true"
                 [clearable]="true"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Search and select..."
                 helpText="Type to search, selected items appear as tags"
               />
@@ -360,7 +360,7 @@ import { Size } from 'angular-ui';
                 mode="multi"
                 [searchable]="true"
                 [clearable]="true"
-                variant="filled"
+                inputVariant="filled"
                 placeholder="Search team members..."
               />
             </div>
@@ -376,7 +376,7 @@ import { Size } from 'angular-ui';
                   [(ngModel)]="tagFormData.selectedTags"
                   [ngModelOptions]="{ standalone: true }"
                   mode="multi"
-                  variant="filled"
+                  inputVariant="filled"
                   placeholder="Select tags"
                   [clearable]="true"
                   (selectionChange)="onTagSelectionChange($event)"
@@ -402,7 +402,7 @@ import { Size } from 'angular-ui';
                   [(ngModel)]="formData.country"
                   [ngModelOptions]="{ standalone: true }"
                   [required]="true"
-                  variant="filled"
+                  inputVariant="filled"
                   placeholder="Select your country"
                 />
                 <ui-dropdown
@@ -411,7 +411,7 @@ import { Size } from 'angular-ui';
                   [(ngModel)]="formData.languages"
                   [ngModelOptions]="{ standalone: true }"
                   mode="multi"
-                  variant="filled"
+                  inputVariant="filled"
                   placeholder="Select languages"
                 />
                 <ui-dropdown
@@ -419,7 +419,7 @@ import { Size } from 'angular-ui';
                   [items]="departmentItems"
                   [(ngModel)]="formData.department"
                   [ngModelOptions]="{ standalone: true }"
-                  variant="filled"
+                  inputVariant="filled"
                   placeholder="Select department"
                 />
                 <div class="showcase__form-output">

@@ -48,7 +48,7 @@ import { Size } from 'angular-ui';
               <ui-tel
                 [label]="currentLabel()"
                 [placeholder]="currentPlaceholder()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [disabled]="currentDisabled()"
                 [readonly]="currentReadonly()"
@@ -94,7 +94,7 @@ import { Size } from 'angular-ui';
                 placeholder="+1 (555) 123-4567"
                 size="small"
                 helpText="This is a small phone field"
-                variant="underlined"
+                inputVariant="underlined"
               ></ui-tel>
             </div>
             <div class="showcase__item">
@@ -103,7 +103,7 @@ import { Size } from 'angular-ui';
                 placeholder="+1 (555) 123-4567"
                 size="medium"
                 helpText="This is a medium phone field"
-                variant="filled-gray"
+                inputVariant="filled-gray"
               ></ui-tel>
             </div>
             <div class="showcase__item">
@@ -112,7 +112,7 @@ import { Size } from 'angular-ui';
                 placeholder="+1 (555) 123-4567"
                 size="large"
                 helpText="This is a large phone field"
-                variant="filled"
+                inputVariant="filled"
               ></ui-tel>
             </div>
           </div>

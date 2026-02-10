@@ -50,7 +50,7 @@ import { Size } from 'angular-ui';
                 [label]="currentLabel()"
                 [placeholder]="currentPlaceholder()"
                 [digitsCount]="currentDigitsCount()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [disabled]="currentDisabled()"
                 [readonly]="currentReadonly()"
@@ -147,21 +147,21 @@ import { Size } from 'angular-ui';
             <div class="showcase__item">
               <ui-totp
                 label="Filled Variant"
-                variant="filled"
+                inputVariant="filled"
                 helpText="Default filled variant"
               ></ui-totp>
             </div>
             <div class="showcase__item">
               <ui-totp
                 label="Filled Gray Variant"
-                variant="filled-gray"
+                inputVariant="filled-gray"
                 helpText="Filled with gray background"
               ></ui-totp>
             </div>
             <div class="showcase__item">
               <ui-totp
                 label="Underlined Variant"
-                variant="underlined"
+                inputVariant="underlined"
                 helpText="Minimal underlined variant"
               ></ui-totp>
             </div>
@@ -303,7 +303,7 @@ import { Size } from 'angular-ui';
               <ui-totp
                 label="Large + Required + Underlined"
                 size="large"
-                variant="underlined"
+                inputVariant="underlined"
                 [required]="true"
                 helpText="Large required underlined field"
               ></ui-totp>
@@ -326,7 +326,7 @@ import { Size } from 'angular-ui';
               <ui-totp
                 label="Microsoft Authenticator"
                 helpText="Enter code from Microsoft Authenticator app"
-                variant="filled-gray"
+                inputVariant="filled-gray"
               ></ui-totp>
             </div>
             <div class="showcase__item">
@@ -334,7 +334,7 @@ import { Size } from 'angular-ui';
                 label="SMS Verification Code"
                 [digitsCount]="4"
                 helpText="Enter the 4-digit code sent to your phone"
-                variant="underlined"
+                inputVariant="underlined"
               ></ui-totp>
             </div>
           </div>

@@ -17,7 +17,7 @@ import { DataGridFilterTemplateContext } from '../../models/data-grid-config.mod
     <ui-text
       [placeholder]="context().placeholder"
       [size]="size()"
-      [variant]="'filled-gray'"
+      [inputVariant]="'filled-gray'"
       [ngModel]="context().filterValue"
       (ngModelChange)="context().onValueChange($event)"
     />

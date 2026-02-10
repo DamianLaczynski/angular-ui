@@ -48,7 +48,7 @@ export class FieldComponent implements ControlValueAccessor, OnInit, OnDestroy {
   protected ngControl = inject(NgControl, { optional: true, skipSelf: true });
 
   fieldType = input<FieldType>('text');
-  variant = input<InputVariant>('filled');
+  inputVariant = input<InputVariant>('filled');
   label = input<string>('');
   placeholder = input<string>('');
   helpText = input<string>('');
@@ -94,7 +94,7 @@ export class FieldComponent implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   get wrapperClasses(): string {
-    const classes = [`input-wrapper--${this.size()}`, `input-wrapper--${this.variant()}`];
+    const classes = [`input-wrapper--${this.size()}`, `input-wrapper--${this.inputVariant()}`];
 
     if (this.disabled()) {
       classes.push('input-wrapper--disabled');
