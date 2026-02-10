@@ -9,7 +9,8 @@ import { SpinnerComponent } from '../spinner';
   imports: [IconComponent, SpinnerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    '[attr.tabindex]': '"-1"', // Prevent focus on host element - focus should be on inner button
+    '[attr.tabindex]': '"-1"',
+    '[style.width]': 'fullWidth() ? "100%" : null',
   },
 })
 export class ButtonComponent {

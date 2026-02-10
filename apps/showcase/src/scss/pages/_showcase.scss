@@ -239,6 +239,19 @@
 
     &--header {
       color: var(--color-neutral-foreground-rest);
+
+      &-multi {
+        flex-direction: column;
+        gap: $spacing-1;
+        font-size: $font-size-200;
+        font-weight: $font-weight-regular;
+        text-align: center;
+
+        span:first-child {
+          font-weight: $font-weight-semibold;
+          font-size: $font-size-300;
+        }
+      }
     }
 
     &--label {

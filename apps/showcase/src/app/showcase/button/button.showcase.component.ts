@@ -11,8 +11,8 @@ import {
 import { SectionWithDrawerComponent } from '@shared/components/section-with-drawer';
 import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
 import {
-  APPEARANCE_DRAWER_FORM_CONFIG,
-  VARIANT_DRAWER_FORM_CONFIG,
+  OVERVIEW_DRAWER_FORM_CONFIG,
+  APPEARANCE_VARIANT_DRAWER_FORM_CONFIG,
   SIZE_DRAWER_FORM_CONFIG,
   SHAPE_DRAWER_FORM_CONFIG,
   ICONS_DRAWER_FORM_CONFIG,
@@ -44,53 +44,91 @@ import { ButtonInteractiveComponent } from './button.interactive.component';
         <app-showcase-header title="Button" />
 
         <app-section-with-drawer
-          sectionTitle="Appearance"
-          [formConfig]="appearanceDrawerFormConfig"
-          [formValues]="appearanceFormValues()"
-          (formValuesChange)="appearanceFormValues.set($event)"
+          sectionTitle="Overview"
+          [formConfig]="overviewDrawerFormConfig"
+          [formValues]="overviewFormValues()"
+          (formValuesChange)="overviewFormValues.set($event)"
         >
-          <div class="showcase__grid">
+          <div class="showcase__icons-matrix">
+            <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
+              <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--corner"></div>
+              @for (col of overviewColumns; track col.variant + col.size + col.shape) {
+                <div
+                  class="showcase__icons-matrix__cell showcase__icons-matrix__cell--header showcase__icons-matrix__cell--header-multi"
+                >
+                  <span>{{ col.variant | titlecase }}</span>
+                  <span>{{ col.size | titlecase }}</span>
+                  <span>{{ col.shape | titlecase }}</span>
+                </div>
+              }
+            </div>
             @for (appearance of appearances; track appearance) {
-              <ui-button
-                [variant]="appearanceForm().variant"
-                [appearance]="appearance"
-                [size]="appearanceForm().size"
-                [shape]="appearanceForm().shape"
-                [icon]="appearanceForm().icon"
-                [disabled]="appearanceForm().disabled"
-                [loading]="appearanceForm().loading"
-                [selected]="appearanceForm().selected"
-                [selectable]="appearanceForm().selectable"
-                [fullWidth]="appearanceForm().fullWidth"
-              >
-                {{ appearance | titlecase }}
-              </ui-button>
+              <div class="showcase__icons-matrix__row">
+                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--label">
+                  {{ appearance | titlecase }}
+                </div>
+                @for (col of overviewColumns; track col.variant + col.size + col.shape) {
+                  <div class="showcase__icons-matrix__cell">
+                    <ui-button
+                      [variant]="col.variant"
+                      [appearance]="appearance"
+                      [size]="col.size"
+                      [shape]="col.shape"
+                      [icon]="overviewForm().icon"
+                      [disabled]="overviewForm().disabled"
+                      [loading]="overviewForm().loading"
+                      [selected]="overviewForm().selected"
+                      [selectable]="overviewForm().selectable"
+                      [fullWidth]="overviewForm().fullWidth"
+                    >
+                      {{ appearance | titlecase }} {{ col.variant | titlecase }}
+                    </ui-button>
+                  </div>
+                }
+              </div>
             }
           </div>
         </app-section-with-drawer>
 
         <app-section-with-drawer
-          sectionTitle="Variant"
-          [formConfig]="variantDrawerFormConfig"
-          [formValues]="variantFormValues()"
-          (formValuesChange)="variantFormValues.set($event)"
+          sectionTitle="Appearance & Variant"
+          [formConfig]="appearanceVariantDrawerFormConfig"
+          [formValues]="appearanceVariantFormValues()"
+          (formValuesChange)="appearanceVariantFormValues.set($event)"
         >
-          <div class="showcase__grid">
-            @for (v of variants; track v) {
-              <ui-button
-                [variant]="v"
-                [appearance]="variantForm().appearance"
-                [size]="variantForm().size"
-                [shape]="variantForm().shape"
-                [icon]="variantForm().icon"
-                [disabled]="variantForm().disabled"
-                [loading]="variantForm().loading"
-                [selected]="variantForm().selected"
-                [selectable]="variantForm().selectable"
-                [fullWidth]="variantForm().fullWidth"
-              >
-                {{ v | titlecase }}
-              </ui-button>
+          <div class="showcase__icons-matrix">
+            <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
+              <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--corner"></div>
+              @for (variant of variants; track variant) {
+                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--header">
+                  {{ variant | titlecase }}
+                </div>
+              }
+            </div>
+            @for (appearance of appearances; track appearance) {
+              <div class="showcase__icons-matrix__row">
+                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--label">
+                  {{ appearance | titlecase }}
+                </div>
+                @for (variant of variants; track variant) {
+                  <div class="showcase__icons-matrix__cell">
+                    <ui-button
+                      [variant]="variant"
+                      [appearance]="appearance"
+                      [size]="appearanceVariantForm().size"
+                      [shape]="appearanceVariantForm().shape"
+                      [icon]="appearanceVariantForm().icon"
+                      [disabled]="appearanceVariantForm().disabled"
+                      [loading]="appearanceVariantForm().loading"
+                      [selected]="appearanceVariantForm().selected"
+                      [selectable]="appearanceVariantForm().selectable"
+                      [fullWidth]="appearanceVariantForm().fullWidth"
+                    >
+                      {{ appearance | titlecase }} {{ variant | titlecase }}
+                    </ui-button>
+                  </div>
+                }
+              </div>
             }
           </div>
         </app-section-with-drawer>
@@ -228,8 +266,13 @@ export class ButtonShowcaseComponent {
   sizes = SIZES;
   shapes = SHAPES;
 
-  appearanceDrawerFormConfig = APPEARANCE_DRAWER_FORM_CONFIG;
-  variantDrawerFormConfig = VARIANT_DRAWER_FORM_CONFIG;
+  overviewDrawerFormConfig = OVERVIEW_DRAWER_FORM_CONFIG;
+  appearanceVariantDrawerFormConfig = APPEARANCE_VARIANT_DRAWER_FORM_CONFIG;
+  overviewColumns = VARIANTS.map((variant, i) => ({
+    variant,
+    size: SIZES[i % SIZES.length],
+    shape: SHAPES.reverse()[i % SHAPES.length],
+  }));
   iconsDrawerFormConfig = ICONS_DRAWER_FORM_CONFIG;
   iconsPerVariant: import('angular-ui').IconName[] = [
     'star',
@@ -250,10 +293,7 @@ export class ButtonShowcaseComponent {
     { id: 'loading', label: 'Loading', disabled: false, selected: false, loading: true },
   ];
 
-  appearanceFormValues = signal<Record<string, unknown>>({
-    variant: 'primary',
-    size: 'medium',
-    shape: 'rounded',
+  overviewFormValues = signal<Record<string, unknown>>({
     icon: '',
     disabled: false,
     selectable: false,
@@ -262,12 +302,9 @@ export class ButtonShowcaseComponent {
     fullWidth: false,
   });
 
-  appearanceForm = computed(() => {
-    const v = this.appearanceFormValues();
+  overviewForm = computed(() => {
+    const v = this.overviewFormValues();
     return {
-      variant: v['variant'] as Variant,
-      size: v['size'] as import('angular-ui').Size,
-      shape: v['shape'] as import('angular-ui').Shape,
       icon: (v['icon'] as import('angular-ui').IconName) || undefined,
       disabled: !!v['disabled'],
       loading: !!v['loading'],
@@ -277,8 +314,7 @@ export class ButtonShowcaseComponent {
     };
   });
 
-  variantFormValues = signal<Record<string, unknown>>({
-    appearance: 'filled',
+  appearanceVariantFormValues = signal<Record<string, unknown>>({
     size: 'medium',
     shape: 'rounded',
     icon: '',
@@ -289,10 +325,9 @@ export class ButtonShowcaseComponent {
     fullWidth: false,
   });
 
-  variantForm = computed(() => {
-    const v = this.variantFormValues();
+  appearanceVariantForm = computed(() => {
+    const v = this.appearanceVariantFormValues();
     return {
-      appearance: v['appearance'] as Appearance,
       size: v['size'] as import('angular-ui').Size,
       shape: v['shape'] as import('angular-ui').Shape,
       icon: (v['icon'] as import('angular-ui').IconName) || undefined,

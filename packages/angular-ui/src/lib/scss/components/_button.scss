@@ -339,6 +339,10 @@ $button-sizes: (
 
 .button--full-width {
   width: 100%;
+
+  @include icon-only-selector {
+    width: 100%;
+  }
 }
 
 .button__content {

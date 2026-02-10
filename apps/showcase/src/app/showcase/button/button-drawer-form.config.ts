@@ -59,8 +59,16 @@ export function getButtonSectionFormConfigExcluding(
   return ALL_CONTROLS.filter(c => !excludeKeys.includes(c.key));
 }
 
-export const APPEARANCE_DRAWER_FORM_CONFIG = getButtonSectionFormConfig('appearance');
-export const VARIANT_DRAWER_FORM_CONFIG = getButtonSectionFormConfig('variant');
+export const OVERVIEW_DRAWER_FORM_CONFIG = getButtonSectionFormConfigExcluding([
+  'appearance',
+  'variant',
+  'size',
+  'shape',
+]);
+export const APPEARANCE_VARIANT_DRAWER_FORM_CONFIG = getButtonSectionFormConfigExcluding([
+  'appearance',
+  'variant',
+]);
 export const SIZE_DRAWER_FORM_CONFIG = getButtonSectionFormConfig('size');
 export const SHAPE_DRAWER_FORM_CONFIG = getButtonSectionFormConfig('shape');
 export const ICONS_DRAWER_FORM_CONFIG = getButtonSectionFormConfigExcluding([
