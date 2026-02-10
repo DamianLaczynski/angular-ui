@@ -46,7 +46,7 @@ import { Size } from 'angular-ui';
               <ui-file
                 [label]="currentLabel()"
                 [mode]="currentMode()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [multiple]="currentMultiple()"
                 [disabled]="currentDisabled()"
@@ -177,13 +177,13 @@ import { Size } from 'angular-ui';
           <h2 class="showcase__section__title">Variants</h2>
           <div class="showcase__grid">
             <div class="showcase__item">
-              <ui-file label="Filled" variant="filled" />
+              <ui-file label="Filled" inputVariant="filled" />
             </div>
             <div class="showcase__item">
-              <ui-file label="Filled Gray" variant="filled-gray" />
+              <ui-file label="Filled Gray" inputVariant="filled-gray" />
             </div>
             <div class="showcase__item">
-              <ui-file label="Underlined" variant="underlined" />
+              <ui-file label="Underlined" inputVariant="underlined" />
             </div>
           </div>
         </section>
@@ -286,7 +286,7 @@ import { Size } from 'angular-ui';
                 [maxSize]="10 * 1024 * 1024"
                 accept="image/*,.pdf"
                 size="large"
-                variant="filled"
+                inputVariant="filled"
                 [required]="true"
                 helpText="Upload up to 5 images or PDFs, max 10MB each"
               />

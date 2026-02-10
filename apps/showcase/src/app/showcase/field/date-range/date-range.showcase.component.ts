@@ -48,7 +48,7 @@ import { Size } from 'angular-ui';
             <div preview>
               <ui-date-range
                 [label]="currentLabel()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [disabled]="currentDisabled()"
                 [readonly]="currentReadonly()"
@@ -99,21 +99,21 @@ import { Size } from 'angular-ui';
             <div class="showcase__item">
               <ui-date-range
                 label="Filled Variant"
-                variant="filled"
+                inputVariant="filled"
                 helpText="Default filled variant"
               ></ui-date-range>
             </div>
             <div class="showcase__item">
               <ui-date-range
                 label="Filled Gray Variant"
-                variant="filled-gray"
+                inputVariant="filled-gray"
                 helpText="Filled with gray background"
               ></ui-date-range>
             </div>
             <div class="showcase__item">
               <ui-date-range
                 label="Underlined Variant"
-                variant="underlined"
+                inputVariant="underlined"
                 helpText="Minimal underlined variant"
               ></ui-date-range>
             </div>
@@ -344,7 +344,7 @@ import { Size } from 'angular-ui';
               <ui-date-range
                 label="Large + Required + Underlined"
                 size="large"
-                variant="underlined"
+                inputVariant="underlined"
                 [required]="true"
                 helpText="Large required underlined field"
               ></ui-date-range>

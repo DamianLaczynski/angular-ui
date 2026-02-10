@@ -50,7 +50,7 @@ import { Size } from 'angular-ui';
               <ui-password
                 [label]="currentLabel()"
                 [placeholder]="currentPlaceholder()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [disabled]="currentDisabled()"
                 [readonly]="currentReadonly()"
@@ -94,7 +94,7 @@ import { Size } from 'angular-ui';
               <ui-password
                 label="Filled Variant"
                 placeholder="Enter password"
-                variant="filled"
+                inputVariant="filled"
                 helpText="Default filled variant"
               ></ui-password>
             </div>
@@ -102,7 +102,7 @@ import { Size } from 'angular-ui';
               <ui-password
                 label="Filled Gray Variant"
                 placeholder="Enter password"
-                variant="filled-gray"
+                inputVariant="filled-gray"
                 helpText="Filled with gray background"
               ></ui-password>
             </div>
@@ -110,7 +110,7 @@ import { Size } from 'angular-ui';
               <ui-password
                 label="Underlined Variant"
                 placeholder="Enter password"
-                variant="underlined"
+                inputVariant="underlined"
                 helpText="Minimal underlined variant"
               ></ui-password>
             </div>
@@ -304,7 +304,7 @@ import { Size } from 'angular-ui';
                 label="Large + Required + Underlined"
                 placeholder="Large required"
                 size="large"
-                variant="underlined"
+                inputVariant="underlined"
                 [required]="true"
                 helpText="Large required underlined field"
               ></ui-password>

@@ -47,7 +47,7 @@ import { Size } from 'angular-ui';
                 [label]="currentLabel()"
                 [placeholder]="currentPlaceholder()"
                 [format]="currentFormat()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [showAlpha]="currentShowAlpha()"
                 [showEyeDropper]="currentShowEyeDropper()"
@@ -148,17 +148,21 @@ import { Size } from 'angular-ui';
           <h2 class="showcase__section__title">Variants</h2>
           <div class="showcase__grid">
             <div class="showcase__item">
-              <ui-color label="Filled" variant="filled" [formControl]="filledControl" />
+              <ui-color label="Filled" inputVariant="filled" [formControl]="filledControl" />
             </div>
             <div class="showcase__item">
               <ui-color
                 label="Filled Gray"
-                variant="filled-gray"
+                inputVariant="filled-gray"
                 [formControl]="filledGrayControl"
               />
             </div>
             <div class="showcase__item">
-              <ui-color label="Underlined" variant="underlined" [formControl]="underlinedControl" />
+              <ui-color
+                label="Underlined"
+                inputVariant="underlined"
+                [formControl]="underlinedControl"
+              />
             </div>
           </div>
         </section>

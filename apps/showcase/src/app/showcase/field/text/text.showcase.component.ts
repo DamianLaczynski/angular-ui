@@ -50,7 +50,7 @@ import { InputVariant } from 'angular-ui';
               <ui-text
                 [label]="currentLabel()"
                 [placeholder]="currentPlaceholder()"
-                [variant]="currentVariant()"
+                [inputVariant]="currentVariant()"
                 [size]="currentSize()"
                 [disabled]="currentDisabled()"
                 [readonly]="currentReadonly()"
@@ -96,7 +96,7 @@ import { InputVariant } from 'angular-ui';
                 placeholder="Small text input"
                 size="small"
                 helpText="This is a small text field"
-                variant="underlined"
+                inputVariant="underlined"
               ></ui-text>
             </div>
             <div class="showcase__item">
@@ -105,7 +105,7 @@ import { InputVariant } from 'angular-ui';
                 placeholder="Medium text input"
                 size="medium"
                 helpText="This is a medium text field"
-                variant="filled-gray"
+                inputVariant="filled-gray"
               ></ui-text>
             </div>
             <div class="showcase__item">
@@ -114,7 +114,7 @@ import { InputVariant } from 'angular-ui';
                 placeholder="Large text input"
                 size="large"
                 helpText="This is a large text field"
-                variant="filled-lighter"
+                inputVariant="filled-lighter"
               ></ui-text>
             </div>
           </div>
@@ -276,7 +276,7 @@ import { InputVariant } from 'angular-ui';
               <ui-text
                 label="Filled Text Field"
                 placeholder="Enter text"
-                variant="filled"
+                inputVariant="filled"
                 helpText="Filled variant with background color"
               ></ui-text>
             </div>
@@ -285,7 +285,7 @@ import { InputVariant } from 'angular-ui';
               <ui-text
                 label="Filled Gray Text Field"
                 placeholder="Enter text"
-                variant="filled-gray"
+                inputVariant="filled-gray"
                 helpText="Filled gray variant"
               ></ui-text>
             </div>
@@ -294,7 +294,7 @@ import { InputVariant } from 'angular-ui';
               <ui-text
                 label="Filled Lighter Text Field"
                 placeholder="Enter text"
-                variant="filled-lighter"
+                inputVariant="filled-lighter"
                 helpText="Filled lighter variant"
               ></ui-text>
             </div>
@@ -303,7 +303,7 @@ import { InputVariant } from 'angular-ui';
               <ui-text
                 label="Underlined Text Field"
                 placeholder="Enter text"
-                variant="underlined"
+                inputVariant="underlined"
                 helpText="Underlined variant with bottom border"
               ></ui-text>
             </div>
