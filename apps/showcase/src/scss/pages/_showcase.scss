@@ -113,8 +113,6 @@
     display: flex;
     flex-direction: column;
     gap: $spacing-2;
-    min-width: 0;
-    overflow-x: auto;
   }
 
   &__item-label {
