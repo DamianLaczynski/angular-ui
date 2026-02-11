@@ -24,7 +24,7 @@ import { EmptyStateShowcaseComponent } from '@showcase/empty-state/empty-state.s
 import { ErrorStateShowcaseComponent } from '@showcase/error-state/error-state.showcase.component';
 import { LoadingStateShowcaseComponent } from '@showcase/loading-state/loading-state.showcase.component';
 import { MenuShowcaseComponent } from '@showcase/menu/menu.showcase.component';
-import { TagShowcaseComponent } from '@showcase/tag/tag.showcase.component';
+import { TagShowcaseComponent } from '@showcase/tag/tag.showcase';
 import { ProgressBarShowcaseComponent } from '@showcase/progress-bar/progress-bar.showcase.component';
 import { StateContainerShowcaseComponent } from '@showcase/state-container/state-container.showcase.component';
 import { SliderShowcaseComponent } from '@showcase/field/slider/slider.showcase.component';
