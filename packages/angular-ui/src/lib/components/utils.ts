@@ -22,6 +22,9 @@ export type ExtendedSize = 'extra-small' | 'small' | 'medium' | 'large' | 'extra
 // Orientation - layout direction
 export type Orientation = 'horizontal' | 'vertical';
 
+// Segment layout - grouped (segmented) vs spaced (separate) buttons
+export type SegmentLayout = 'segmented' | 'separate';
+
 // Content Position - position of labels, icons relative to content
 export type ContentPosition = 'before' | 'after' | 'above' | 'below' | 'none';
 
