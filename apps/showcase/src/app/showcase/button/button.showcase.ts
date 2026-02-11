@@ -10,15 +10,8 @@ import {
 } from '@shared/utils/showcase/component-options.utils';
 import { SectionWithDrawerComponent } from '@shared/components/section-with-drawer';
 import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
-import {
-  OVERVIEW_DRAWER_FORM_CONFIG,
-  APPEARANCE_VARIANT_DRAWER_FORM_CONFIG,
-  SIZE_DRAWER_FORM_CONFIG,
-  SHAPE_DRAWER_FORM_CONFIG,
-  ICONS_DRAWER_FORM_CONFIG,
-  STATES_DRAWER_FORM_CONFIG,
-} from './button-drawer-form.config';
-import { ButtonInteractiveComponent } from './button.interactive.component';
+import { BUTTON_DRAWER_CONFIGS } from './button.showcase.config';
+import { ButtonInteractiveComponent } from './button.interactive';
 
 @Component({
   selector: 'app-button-showcase',
@@ -266,14 +259,14 @@ export class ButtonShowcaseComponent {
   sizes = SIZES;
   shapes = SHAPES;
 
-  overviewDrawerFormConfig = OVERVIEW_DRAWER_FORM_CONFIG;
-  appearanceVariantDrawerFormConfig = APPEARANCE_VARIANT_DRAWER_FORM_CONFIG;
+  overviewDrawerFormConfig = BUTTON_DRAWER_CONFIGS.overview;
+  appearanceVariantDrawerFormConfig = BUTTON_DRAWER_CONFIGS.appearanceVariant;
   overviewColumns = VARIANTS.map((variant, i) => ({
     variant,
     size: SIZES[i % SIZES.length],
-    shape: SHAPES.reverse()[i % SHAPES.length],
+    shape: [...SHAPES].reverse()[i % SHAPES.length],
   }));
-  iconsDrawerFormConfig = ICONS_DRAWER_FORM_CONFIG;
+  iconsDrawerFormConfig = BUTTON_DRAWER_CONFIGS.icons;
   iconsPerVariant: import('angular-ui').IconName[] = [
     'star',
     'checkmark',
@@ -282,9 +275,9 @@ export class ButtonShowcaseComponent {
     'settings',
     'home',
   ];
-  sizeDrawerFormConfig = SIZE_DRAWER_FORM_CONFIG;
-  shapeDrawerFormConfig = SHAPE_DRAWER_FORM_CONFIG;
-  statesDrawerFormConfig = STATES_DRAWER_FORM_CONFIG;
+  sizeDrawerFormConfig = BUTTON_DRAWER_CONFIGS.size;
+  shapeDrawerFormConfig = BUTTON_DRAWER_CONFIGS.shape;
+  statesDrawerFormConfig = BUTTON_DRAWER_CONFIGS.states;
 
   statePresets = [
     { id: 'normal', label: 'Normal', disabled: false, selected: false, loading: false },

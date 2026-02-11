@@ -1,7 +1,13 @@
 import { Component, input, output, model } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ButtonComponent, DrawerComponent, DropdownComponent, SwitchComponent } from 'angular-ui';
+import {
+  ButtonComponent,
+  DrawerComponent,
+  RadioButtonGroupComponent,
+  SwitchComponent,
+} from 'angular-ui';
+import type { RadioButtonItem } from 'angular-ui';
 import type { SectionDrawerFormControl } from './section-with-drawer.types';
 
 @Component({
@@ -12,7 +18,7 @@ import type { SectionDrawerFormControl } from './section-with-drawer.types';
     FormsModule,
     ButtonComponent,
     DrawerComponent,
-    DropdownComponent,
+    RadioButtonGroupComponent,
     SwitchComponent,
   ],
   template: `
@@ -45,16 +51,15 @@ import type { SectionDrawerFormControl } from './section-with-drawer.types';
             @for (control of formConfig(); track control.key) {
               @if (control.type === 'dropdown' && control.options) {
                 <div class="showcase__form-field">
-                  <label class="showcase__form-label" [for]="fieldId(control.key)">{{
-                    control.label
-                  }}</label>
-                  <ui-dropdown
+                  <ui-radio-button-group
                     [id]="fieldId(control.key)"
                     [name]="control.key"
-                    [items]="$any(control.options)"
+                    [label]="control.label"
+                    [items]="toRadioItems(control.options)"
                     [ngModel]="formValues()[control.key]"
-                    (selectionChange)="onControlChange(control.key, $event)"
-                    size="small"
+                    (ngModelChange)="onControlChange(control.key, $event)"
+                    variant="primary"
+                    appearance="outline"
                   />
                 </div>
               }
@@ -65,7 +70,6 @@ import type { SectionDrawerFormControl } from './section-with-drawer.types';
                     [name]="control.key"
                     [ngModel]="formValues()[control.key]"
                     (ngModelChange)="onControlChange(control.key, $event)"
-                    size="small"
                   />
                   <label class="showcase__form-label" [for]="fieldId(control.key)">{{
                     control.label
@@ -94,8 +98,15 @@ export class SectionWithDrawerComponent {
     return `${slug}-form-${key}`;
   }
 
+  toRadioItems(options: { value: string | number | boolean; label: string }[]): RadioButtonItem[] {
+    return options.map((opt, i) => ({
+      id: typeof opt.value === 'boolean' ? i : opt.value,
+      label: opt.label,
+      value: opt.value,
+    }));
+  }
+
   onControlChange(key: string, value: unknown): void {
-    const v = Array.isArray(value) ? value[0] : value;
-    this.formValuesChange.emit({ ...this.formValues(), [key]: v });
+    this.formValuesChange.emit({ ...this.formValues(), [key]: value });
   }
 }

@@ -2,7 +2,7 @@ import { Component, signal, computed, viewChild } from '@angular/core';
 import { Appearance, ButtonComponent, IconName, Shape, Size, Variant } from 'angular-ui';
 import { InteractiveShowcaseComponent } from '@shared/components/interactive-showcase';
 import type { ShowcaseConfig } from '@shared/components/interactive-showcase';
-import { BUTTON_SHOWCASE_CONFIG } from './button-showcase.config';
+import { BUTTON_SHOWCASE_CONFIG } from './button.showcase.config';
 
 @Component({
   selector: 'app-button-interactive',

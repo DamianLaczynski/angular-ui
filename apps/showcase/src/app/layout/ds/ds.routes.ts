@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
 import { AccordionShowcaseComponent } from '@showcase/accordion/accordion.showcase.component';
 import { AvatarShowcaseComponent } from '@showcase/avatar/avatar.showcase.component';
-import { ButtonShowcaseComponent } from '@showcase/button/button.showcase.component';
+import { ButtonShowcaseComponent } from '@showcase/button/button.showcase';
 import { CalendarShowcaseComponent } from '@showcase/calendar/calendar.showcase.component';
 import { CommandPaletteShowcaseComponent } from '@showcase/command-palette/command-palette.showcase.component';
 import { TimeShowcaseComponent } from '@showcase/time/time.showcase.component';
 import { DateShowcaseComponent } from '@showcase/field/date/date.showcase.component';
 import { TimeSpanShowcaseComponent } from '@showcase/field/time-span/time-span.showcase.component';
 import { DateRangeShowcaseComponent } from '@showcase/field/date-range/date-range.showcase.component';
-import { DropdownShowcaseComponent } from '@showcase/field/dropdown/dropdown.showcase.component';
+import { DropdownShowcaseComponent } from '@showcase/field/dropdown/dropdown.showcase';
 import { NumberShowcaseComponent } from '@showcase/field/number/number.showcase.component';
 import { PasswordShowcaseComponent } from '@showcase/field/password/password.showcase.component';
 import { TextShowcaseComponent } from '@showcase/field/text/text.showcase.component';
@@ -17,7 +17,7 @@ import { SearchShowcaseComponent } from '@showcase/field/search/search.showcase.
 import { TelShowcaseComponent } from '@showcase/field/tel/tel.showcase.component';
 import { TextareaShowcaseComponent } from '@showcase/field/textarea/textarea.showcase.component';
 import { UrlShowcaseComponent } from '@showcase/field/url/url.showcase.component';
-import { TabsShowcaseComponent } from '@showcase/tabs/tabs.showcase.component';
+import { TabsShowcaseComponent } from '@showcase/tabs/tabs.showcase';
 import { SkeletonShowcaseComponent } from '@showcase/skeleton/skeleton.showcase.component';
 import { DialogShowcaseComponent } from '@showcase/dialog/dialog.showcase.component';
 import { EmptyStateShowcaseComponent } from '@showcase/empty-state/empty-state.showcase.component';

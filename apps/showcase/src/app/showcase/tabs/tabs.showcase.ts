@@ -7,24 +7,19 @@ import { TableOfContentComponent } from 'angular-ui';
 import { SectionWithDrawerComponent } from '@shared/components/section-with-drawer';
 import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
 import {
-  TABS_APPEARANCE_DRAWER_FORM_CONFIG,
-  TABS_VARIANT_DRAWER_FORM_CONFIG,
-  TABS_SIZE_DRAWER_FORM_CONFIG,
-  TABS_SHAPE_DRAWER_FORM_CONFIG,
-  TABS_ORIENTATION_DRAWER_FORM_CONFIG,
+  TABS_DRAWER_CONFIGS,
   TABS_ORIENTATIONS,
-} from './tabs-drawer-form.config';
+  DEFAULT_TABS,
+  EXTENDED_TABS,
+  LABELS_ONLY_TABS,
+} from './tabs.showcase.config';
 import {
   APPEARANCES,
   SHAPES,
   SIZES,
   VARIANTS,
 } from '@shared/utils/showcase/component-options.utils';
-import {
-  InteractiveShowcaseComponent,
-  ShowcaseConfig,
-} from '@shared/components/interactive-showcase';
-import { DEFAULT_TABS, EXTENDED_TABS, LABELS_ONLY_TABS } from './tabs-showcase-presets';
+import { TabsInteractiveComponent } from './tabs.interactive';
 
 @Component({
   selector: 'app-tabs-showcase',
@@ -36,7 +31,7 @@ import { DEFAULT_TABS, EXTENDED_TABS, LABELS_ONLY_TABS } from './tabs-showcase-p
     TableOfContentComponent,
     SectionWithDrawerComponent,
     ShowcaseHeaderComponent,
-    InteractiveShowcaseComponent,
+    TabsInteractiveComponent,
   ],
   template: `
     <div class="showcase showcase--responsive showcase__with-toc">
@@ -197,27 +192,7 @@ import { DEFAULT_TABS, EXTENDED_TABS, LABELS_ONLY_TABS } from './tabs-showcase-p
 
         <section id="interactive-demo" class="showcase__section">
           <h2 class="showcase__section__title">Interactive Demo</h2>
-          <app-interactive-showcase
-            [config]="showcaseConfig"
-            [showEventLog]="true"
-            (valuesChange)="onValuesChange($event)"
-            (reset)="onReset()"
-          >
-            <div preview>
-              <ui-tabs
-                [tabs]="interactiveTabs()"
-                [selectedTabId]="selectedInteractiveTab()"
-                [variant]="currentVariant()"
-                [appearance]="currentAppearance()"
-                [shape]="currentShape()"
-                [size]="currentSize()"
-                [orientation]="currentOrientation()"
-                [showSelectionIndicator]="currentShowIndicator()"
-                (tabChange)="onInteractiveTabChange($event)"
-                (tabClose)="onTabClose($event)"
-              />
-            </div>
-          </app-interactive-showcase>
+          <app-tabs-interactive />
         </section>
       </div>
     </div>
@@ -233,11 +208,11 @@ export class TabsShowcaseComponent {
   shapes = SHAPES;
   orientations = TABS_ORIENTATIONS;
 
-  appearanceDrawerFormConfig = TABS_APPEARANCE_DRAWER_FORM_CONFIG;
-  variantDrawerFormConfig = TABS_VARIANT_DRAWER_FORM_CONFIG;
-  sizeDrawerFormConfig = TABS_SIZE_DRAWER_FORM_CONFIG;
-  shapeDrawerFormConfig = TABS_SHAPE_DRAWER_FORM_CONFIG;
-  orientationDrawerFormConfig = TABS_ORIENTATION_DRAWER_FORM_CONFIG;
+  appearanceDrawerFormConfig = TABS_DRAWER_CONFIGS.appearance;
+  variantDrawerFormConfig = TABS_DRAWER_CONFIGS.variant;
+  sizeDrawerFormConfig = TABS_DRAWER_CONFIGS.size;
+  shapeDrawerFormConfig = TABS_DRAWER_CONFIGS.shape;
+  orientationDrawerFormConfig = TABS_DRAWER_CONFIGS.orientation;
 
   appearanceFormValues = signal<Record<string, unknown>>({
     variant: 'primary',
@@ -306,115 +281,9 @@ export class TabsShowcaseComponent {
     };
   }
 
-  private values = signal<Record<string, unknown>>({});
-  currentVariant = computed(() => this.values()['variant'] as Variant);
-  currentAppearance = computed(() => this.values()['appearance'] as Appearance);
-  currentShape = computed(() => this.values()['shape'] as Shape);
-  currentSize = computed(() => this.values()['size'] as Size);
-  currentOrientation = computed(() => this.values()['orientation'] as Orientation);
-  currentShowIndicator = computed(() => this.values()['showIndicator'] as boolean);
-
-  showcaseConfig: ShowcaseConfig = {
-    componentSelector: 'ui-tabs',
-    controlGroups: [
-      {
-        id: 'appearance',
-        label: 'Appearance',
-        icon: 'color' as import('angular-ui').IconName,
-        expanded: true,
-      },
-      { id: 'layout', label: 'Layout', icon: 'resize' as import('angular-ui').IconName },
-    ],
-    controls: [
-      {
-        key: 'tabSet',
-        label: 'Tab set',
-        type: 'dropdown',
-        options: [
-          { value: 'default', label: 'Default' },
-          { value: 'extended', label: 'Extended (disabled, closable)' },
-          { value: 'labelsOnly', label: 'Labels only' },
-        ],
-        defaultValue: 'default',
-        group: 'layout',
-      },
-      {
-        key: 'variant',
-        label: 'Variant',
-        type: 'dropdown',
-        options: VARIANTS.map(v => ({ value: v, label: v })),
-        defaultValue: 'primary',
-        group: 'appearance',
-      },
-      {
-        key: 'appearance',
-        label: 'Appearance',
-        type: 'dropdown',
-        options: APPEARANCES.map(a => ({ value: a, label: a })),
-        defaultValue: 'subtle',
-        group: 'appearance',
-      },
-      {
-        key: 'shape',
-        label: 'Shape',
-        type: 'dropdown',
-        options: SHAPES.map(s => ({ value: s, label: s })),
-        defaultValue: 'rounded',
-        group: 'appearance',
-      },
-      {
-        key: 'size',
-        label: 'Size',
-        type: 'dropdown',
-        options: SIZES.map(s => ({ value: s, label: s })),
-        defaultValue: 'medium',
-        group: 'layout',
-      },
-      {
-        key: 'orientation',
-        label: 'Orientation',
-        type: 'dropdown',
-        options: [
-          { value: 'horizontal', label: 'horizontal' },
-          { value: 'vertical', label: 'vertical' },
-        ],
-        defaultValue: 'horizontal',
-        group: 'layout',
-      },
-      {
-        key: 'showIndicator',
-        label: 'Show Indicator',
-        type: 'switch',
-        defaultValue: true,
-        group: 'appearance',
-      },
-    ],
-  };
-
-  selectedInteractiveTab = signal<string | number>('itab1');
-  interactiveTabs = computed<Tab[]>(() => {
-    const set = this.values()['tabSet'] as string;
-    if (set === 'extended') return this.extendedTabs();
-    if (set === 'labelsOnly') return LABELS_ONLY_TABS;
-    return DEFAULT_TABS;
-  });
-
-  onValuesChange(newValues: Record<string, unknown>): void {
-    this.values.set(newValues);
-  }
-
-  onReset(): void {}
-
-  onInteractiveTabChange(tab: Tab): void {
-    this.selectedInteractiveTab.set(tab.id);
-  }
-
   onTabClose(tab: Tab): void {
     this.extendedTabs.update(list => {
       const next = list.filter(t => t.id !== tab.id);
-      if (this.selectedInteractiveTab() === tab.id && next.length > 0) {
-        this.selectedInteractiveTab.set(next[0].id);
-      }
       return next;
     });
   }
