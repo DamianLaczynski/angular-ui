@@ -30,7 +30,8 @@ export type FieldType =
   | 'select'
   | 'checkbox'
   | 'radio'
-  | 'radio-group';
+  | 'radio-group'
+  | 'radio-button-group';
 
 @Component({
   selector: 'ui-field',

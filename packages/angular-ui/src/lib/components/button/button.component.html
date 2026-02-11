@@ -2,8 +2,13 @@
   [type]="type()"
   [class]="buttonClasses()"
   [disabled]="disabled()"
+  [attr.tabindex]="tabIndex()"
+  [attr.role]="role()"
   [attr.aria-label]="ariaLabel()"
-  [attr.aria-pressed]="selectable() ? (selected() ? 'true' : 'false') : null"
+  [attr.aria-pressed]="
+    role() === 'radio' ? null : selectable() ? (selected() ? 'true' : 'false') : null
+  "
+  [attr.aria-checked]="role() === 'radio' ? (ariaChecked() ?? selected()) : null"
   (click)="onClick($event)"
 >
   @if (loading()) {
