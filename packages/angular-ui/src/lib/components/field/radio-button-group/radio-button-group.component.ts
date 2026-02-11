@@ -1,6 +1,6 @@
-import { Component, forwardRef, input, ViewChildren, QueryList } from '@angular/core';
+import { Component, forwardRef, input, ViewChildren, QueryList, inject } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import { ButtonComponent } from '../../button';
 import { FieldComponent } from '../field/field.component';
 import { Orientation, SegmentLayout, Variant, Appearance, Shape } from '../../utils';
@@ -29,6 +29,8 @@ export interface RadioButtonItem {
 })
 export class RadioButtonGroupComponent extends FieldComponent implements ControlValueAccessor {
   @ViewChildren(ButtonComponent) private buttonComponents!: QueryList<ButtonComponent>;
+
+  private doc = inject(DOCUMENT, { optional: true });
 
   items = input<RadioButtonItem[]>([]);
   orientation = input<Orientation>('horizontal');
@@ -121,7 +123,8 @@ export class RadioButtonGroupComponent extends FieldComponent implements Control
   private getFocusedButtonIndex(): number {
     const list = this.buttonComponents;
     if (!list?.length) return 0;
-    const active = document.activeElement;
+    const active = this.doc?.activeElement;
+    if (!active) return this.getSelectedIndex();
     for (let i = 0; i < list.length; i++) {
       if (list.get(i)?.contains(active)) return i;
     }
