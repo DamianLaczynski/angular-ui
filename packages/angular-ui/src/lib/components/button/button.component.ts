@@ -1,4 +1,13 @@
-import { Component, input, output, model, computed, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  model,
+  computed,
+  ChangeDetectionStrategy,
+  ElementRef,
+  inject,
+} from '@angular/core';
 import { Variant, Appearance, Size, Shape, ExtendedSize, ButtonType } from '../utils';
 import { IconComponent, IconName } from '../icon';
 import { SpinnerComponent } from '../spinner';
@@ -13,6 +22,8 @@ import { SpinnerComponent } from '../spinner';
   },
 })
 export class ButtonComponent {
+  private readonly elementRef = inject(ElementRef);
+
   variant = input<Variant>('secondary');
   appearance = input<Appearance>('filled');
   size = input<Size>('medium');
@@ -25,6 +36,9 @@ export class ButtonComponent {
   selectable = input<boolean>(false);
   type = input<ButtonType>('button');
   fullWidth = input<boolean>(false);
+  role = input<'button' | 'radio'>('button');
+  ariaChecked = input<boolean | undefined>(undefined);
+  tabIndex = input<number | undefined>(undefined);
 
   selected = model<boolean>(false);
   disabled = model<boolean>(false);
@@ -84,5 +98,15 @@ export class ButtonComponent {
     }
 
     this.click.emit(event);
+  }
+
+  focus(): void {
+    (this.elementRef.nativeElement as HTMLElement)
+      .querySelector<HTMLButtonElement>('button')
+      ?.focus();
+  }
+
+  contains(node: Node | null): boolean {
+    return node ? (this.elementRef.nativeElement as HTMLElement).contains(node) : false;
   }
 }

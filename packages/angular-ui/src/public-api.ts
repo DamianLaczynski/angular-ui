@@ -23,6 +23,7 @@ export * from './lib/components/field/file';
 export * from './lib/components/field/number';
 export * from './lib/components/field/password';
 export * from './lib/components/field/radio';
+export * from './lib/components/field/radio-button-group';
 export * from './lib/components/field/search';
 export * from './lib/components/field/slider';
 export * from './lib/components/field/stepper';
