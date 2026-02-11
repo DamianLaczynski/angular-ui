@@ -70,12 +70,4 @@ export class RadioGroupComponent extends FieldComponent implements ControlValueA
     // Emit change event for parent components
     this.change.emit(selectedValue);
   }
-
-  /**
-   * Get the group name for radio buttons
-   * Uses provided name or generates one based on id
-   */
-  getGroupName(): string {
-    return this.name() || this.id()?.toString() || `radio-group-${this.items().length}`;
-  }
 }

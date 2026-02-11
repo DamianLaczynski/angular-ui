@@ -64,13 +64,21 @@ export class RadioButtonGroupComponent extends FieldComponent implements Control
     this.change.emit(selectedValue);
   }
 
-  getGroupName(): string {
-    return this.name() || this.id()?.toString() || `radio-button-group-${this.items().length}`;
-  }
-
   getButtonTabIndex(index: number): number {
+    if (this.disabled()) {
+      return -1;
+    }
+
+    const items = this.items();
     const selectedIndex = this.getSelectedIndex();
-    return index === selectedIndex ? 0 : -1;
+    const focusable = this.getFocusableIndices();
+    if (focusable.length === 0) return -1;
+
+    const isSelectedEnabled =
+      selectedIndex >= 0 && selectedIndex < items.length && !items[selectedIndex].disabled;
+
+    const tabIndexZero = isSelectedEnabled ? selectedIndex : focusable[0];
+    return index === tabIndexZero ? 0 : -1;
   }
 
   private getSelectedIndex(): number {
