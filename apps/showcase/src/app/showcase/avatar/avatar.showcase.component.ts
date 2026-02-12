@@ -1,17 +1,32 @@
-import { Component, signal, computed, viewChild } from '@angular/core';
-import { AvatarComponent } from 'angular-ui';
+import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableOfContentComponent } from 'angular-ui';
+import { FormsModule } from '@angular/forms';
+import { AvatarComponent, TableOfContentComponent } from 'angular-ui';
+import type { Appearance, IconName, Variant } from 'angular-ui';
 import {
-  InteractiveShowcaseComponent,
-  ShowcaseConfig,
-} from '@shared/components/interactive-showcase';
-import { Variant, Appearance, Size, Shape } from 'angular-ui';
-import { IconName } from 'angular-ui';
+  APPEARANCES,
+  SIZES,
+  SHAPES,
+  VARIANTS,
+} from '@shared/utils/showcase/component-options.utils';
+import { SectionWithDrawerComponent } from '@shared/components/section-with-drawer';
+import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
+import { AVATAR_DRAWER_CONFIGS } from './avatar.showcase.config';
+import { AvatarInteractiveComponent } from './avatar.interactive';
+
+const DEFAULT_IMAGE_URL = 'https://i.pravatar.cc/150?img=1';
 
 @Component({
   selector: 'app-avatar-showcase',
-  imports: [AvatarComponent, CommonModule, TableOfContentComponent, InteractiveShowcaseComponent],
+  imports: [
+    AvatarComponent,
+    CommonModule,
+    FormsModule,
+    SectionWithDrawerComponent,
+    ShowcaseHeaderComponent,
+    TableOfContentComponent,
+    AvatarInteractiveComponent,
+  ],
   template: `
     <div class="showcase showcase--responsive showcase__with-toc">
       <ui-table-of-content
@@ -22,557 +37,340 @@ import { IconName } from 'angular-ui';
         [maxLevel]="2"
       />
       <div class="showcase-content">
-        <h1 class="showcase__title">Avatar Component Showcase</h1>
-        <p class="showcase__description">
-          Comprehensive showcase of the Avatar component built with Fluent 2 Design System. Avatars
-          display user profile pictures, initials, or icons with support for multiple variants,
-          appearances, sizes, and shapes.
-        </p>
+        <app-showcase-header title="Avatar" />
 
-        <!-- Interactive Demo -->
-        <section class="showcase__section">
+        <app-section-with-drawer
+          sectionTitle="Overview"
+          [formConfig]="overviewDrawerFormConfig"
+          [formValues]="overviewFormValues()"
+          (formValuesChange)="overviewFormValues.set($event)"
+        >
+          <div class="showcase__icons-matrix">
+            <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
+              <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--corner"></div>
+              @for (variant of variants; track variant) {
+                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--header">
+                  {{ variant | titlecase }}
+                </div>
+              }
+            </div>
+            @for (appearance of appearances; track appearance) {
+              <div class="showcase__icons-matrix__row">
+                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--label">
+                  {{ appearance | titlecase }}
+                </div>
+                @for (variant of variants; track variant) {
+                  <div class="showcase__icons-matrix__cell">
+                    <ui-avatar
+                      [variant]="variant"
+                      [appearance]="appearance"
+                      [size]="overviewForm().size"
+                      [shape]="overviewForm().shape"
+                      [image]="overviewContent().image"
+                      [initials]="overviewContent().initials"
+                      [name]="overviewContent().name"
+                      [icon]="overviewContent().icon"
+                      [disabled]="overviewForm().disabled"
+                      [loading]="overviewForm().loading"
+                    />
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <app-section-with-drawer
+          sectionTitle="Appearance & Variant"
+          [formConfig]="appearanceVariantDrawerFormConfig"
+          [formValues]="appearanceVariantFormValues()"
+          (formValuesChange)="appearanceVariantFormValues.set($event)"
+        >
+          <div class="showcase__icons-matrix">
+            <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
+              <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--corner"></div>
+              @for (variant of variants; track variant) {
+                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--header">
+                  {{ variant | titlecase }}
+                </div>
+              }
+            </div>
+            @for (appearance of appearances; track appearance) {
+              <div class="showcase__icons-matrix__row">
+                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--label">
+                  {{ appearance | titlecase }}
+                </div>
+                @for (variant of variants; track variant) {
+                  <div class="showcase__icons-matrix__cell">
+                    <ui-avatar
+                      [variant]="variant"
+                      [appearance]="appearance"
+                      [size]="appearanceVariantForm().size"
+                      [shape]="appearanceVariantForm().shape"
+                      [image]="appearanceVariantContent().image"
+                      [initials]="appearanceVariantContent().initials"
+                      [name]="appearanceVariantContent().name"
+                      [icon]="appearanceVariantContent().icon"
+                      [disabled]="appearanceVariantForm().disabled"
+                      [loading]="appearanceVariantForm().loading"
+                    />
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <app-section-with-drawer
+          sectionTitle="Size"
+          [formConfig]="sizeDrawerFormConfig"
+          [formValues]="sizeFormValues()"
+          (formValuesChange)="sizeFormValues.set($event)"
+        >
+          <div class="showcase__grid">
+            @for (size of sizes; track size) {
+              <ui-avatar
+                [variant]="sizeForm().variant"
+                [appearance]="sizeForm().appearance"
+                [size]="size"
+                [shape]="sizeForm().shape"
+                [image]="sizeContent().image"
+                [initials]="sizeContent().initials"
+                [name]="sizeContent().name"
+                [icon]="sizeContent().icon"
+                [disabled]="sizeForm().disabled"
+                [loading]="sizeForm().loading"
+              />
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <app-section-with-drawer
+          sectionTitle="Shapes"
+          [formConfig]="shapeDrawerFormConfig"
+          [formValues]="shapeFormValues()"
+          (formValuesChange)="shapeFormValues.set($event)"
+        >
+          <div class="showcase__grid">
+            @for (shape of shapes; track shape) {
+              <ui-avatar
+                [variant]="shapeForm().variant"
+                [appearance]="shapeForm().appearance"
+                [size]="shapeForm().size"
+                [shape]="shape"
+                [image]="shapeContent().image"
+                [initials]="shapeContent().initials"
+                [name]="shapeContent().name"
+                [icon]="shapeContent().icon"
+                [disabled]="shapeForm().disabled"
+                [loading]="shapeForm().loading"
+              />
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <app-section-with-drawer
+          sectionTitle="States"
+          [formConfig]="statesDrawerFormConfig"
+          [formValues]="statesFormValues()"
+          (formValuesChange)="statesFormValues.set($event)"
+        >
+          <div class="showcase__grid">
+            @for (state of statePresets; track state.id) {
+              <ui-avatar
+                [variant]="statesForm().variant"
+                [appearance]="statesForm().appearance"
+                [size]="statesForm().size"
+                [shape]="statesForm().shape"
+                [image]="statesContent().image"
+                [initials]="statesContent().initials"
+                [name]="statesContent().name"
+                [icon]="statesContent().icon"
+                [disabled]="state.disabled"
+                [loading]="state.loading"
+              />
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <section id="interactive-demo" class="showcase__section">
           <h2 class="showcase__section__title">Interactive Demo</h2>
-          <app-interactive-showcase
-            #showcase
-            [config]="showcaseConfig"
-            [showEventLog]="true"
-            (valuesChange)="onValuesChange($event)"
-            (reset)="onReset()"
-          >
-            <div preview>
-              <ui-avatar
-                [variant]="currentVariant()"
-                [appearance]="currentAppearance()"
-                [size]="currentSize()"
-                [shape]="currentShape()"
-                [image]="currentImage()"
-                [initials]="currentInitials()"
-                [name]="currentName()"
-                [icon]="currentIcon()"
-                [disabled]="currentDisabled()"
-                [loading]="currentLoading()"
-                [ariaLabel]="currentAriaLabel()"
-              />
-            </div>
-          </app-interactive-showcase>
+          <app-avatar-interactive />
         </section>
-
-        <!-- Basic Examples -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Basic Examples</h2>
-
-          <h3 class="showcase__subsection__title">With Image</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar
-                image="https://i.pravatar.cc/150?img=1"
-                name="John Doe"
-                variant="secondary"
-              />
-              <ui-avatar
-                image="https://i.pravatar.cc/150?img=2"
-                name="Jane Smith"
-                variant="secondary"
-              />
-              <ui-avatar
-                image="https://i.pravatar.cc/150?img=3"
-                name="Bob Johnson"
-                variant="secondary"
-              />
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">With Initials</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar initials="JD" name="John Doe" variant="primary" />
-              <ui-avatar initials="JS" name="Jane Smith" variant="success" />
-              <ui-avatar initials="BJ" name="Bob Johnson" variant="info" />
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">With Name (Auto Initials)</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar name="John Doe" variant="primary" />
-              <ui-avatar name="Jane Smith" variant="success" />
-              <ui-avatar name="Bob Johnson" variant="info" />
-              <ui-avatar name="Alice" variant="warning" />
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">With Icon</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar icon="person" variant="secondary" />
-              <ui-avatar icon="person_account" variant="primary" />
-              <ui-avatar icon="settings" variant="info" />
-              <ui-avatar icon="home" variant="success" />
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">Default (No Content)</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar variant="secondary" />
-              <ui-avatar variant="primary" />
-              <ui-avatar variant="info" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Sizes -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Sizes</h2>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <div class="showcase__item">
-                <h3>Small</h3>
-                <ui-avatar
-                  image="https://i.pravatar.cc/150?img=1"
-                  name="John Doe"
-                  size="small"
-                  variant="secondary"
-                />
-              </div>
-              <div class="showcase__item">
-                <h3>Medium</h3>
-                <ui-avatar
-                  image="https://i.pravatar.cc/150?img=1"
-                  name="John Doe"
-                  size="medium"
-                  variant="secondary"
-                />
-              </div>
-              <div class="showcase__item">
-                <h3>Large</h3>
-                <ui-avatar
-                  image="https://i.pravatar.cc/150?img=1"
-                  name="John Doe"
-                  size="large"
-                  variant="secondary"
-                />
-              </div>
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">Sizes with Initials</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar initials="JD" name="John Doe" size="small" variant="primary" />
-              <ui-avatar initials="JD" name="John Doe" size="medium" variant="primary" />
-              <ui-avatar initials="JD" name="John Doe" size="large" variant="primary" />
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">Sizes with Icons</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar icon="person" size="small" variant="secondary" />
-              <ui-avatar icon="person" size="medium" variant="secondary" />
-              <ui-avatar icon="person" size="large" variant="secondary" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Shapes -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Shapes</h2>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <div class="showcase__item">
-                <h3>Rounded</h3>
-                <ui-avatar
-                  image="https://i.pravatar.cc/150?img=1"
-                  name="John Doe"
-                  shape="rounded"
-                  variant="secondary"
-                />
-              </div>
-              <div class="showcase__item">
-                <h3>Circular</h3>
-                <ui-avatar
-                  image="https://i.pravatar.cc/150?img=1"
-                  name="John Doe"
-                  shape="circular"
-                  variant="secondary"
-                />
-              </div>
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">Shapes with Initials</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar initials="JD" name="John Doe" shape="rounded" variant="primary" />
-              <ui-avatar initials="JD" name="John Doe" shape="circular" variant="primary" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Variants -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Variants (Semantic Colors)</h2>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar initials="JD" name="John Doe" variant="primary" />
-              <ui-avatar initials="JS" name="Jane Smith" variant="secondary" />
-              <ui-avatar initials="BJ" name="Bob Johnson" variant="success" />
-              <ui-avatar initials="AW" name="Alice Wilson" variant="warning" />
-              <ui-avatar initials="CD" name="Chris Davis" variant="danger" />
-              <ui-avatar initials="EM" name="Emma Miller" variant="info" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Appearances -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Appearances</h2>
-
-          <h3 class="showcase__subsection__title">Filled</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar initials="JD" name="John Doe" appearance="filled" variant="primary" />
-              <ui-avatar initials="JS" name="Jane Smith" appearance="filled" variant="secondary" />
-              <ui-avatar initials="BJ" name="Bob Johnson" appearance="filled" variant="success" />
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">Tint</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar initials="JD" name="John Doe" appearance="tint" variant="primary" />
-              <ui-avatar initials="JS" name="Jane Smith" appearance="tint" variant="secondary" />
-              <ui-avatar initials="BJ" name="Bob Johnson" appearance="tint" variant="success" />
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">Outline</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar initials="JD" name="John Doe" appearance="outline" variant="primary" />
-              <ui-avatar initials="JS" name="Jane Smith" appearance="outline" variant="secondary" />
-              <ui-avatar initials="BJ" name="Bob Johnson" appearance="outline" variant="success" />
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">Subtle</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar initials="JD" name="John Doe" appearance="subtle" variant="primary" />
-              <ui-avatar initials="JS" name="Jane Smith" appearance="subtle" variant="secondary" />
-              <ui-avatar initials="BJ" name="Bob Johnson" appearance="subtle" variant="success" />
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">Transparent</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar initials="JD" name="John Doe" appearance="transparent" variant="primary" />
-              <ui-avatar
-                initials="JS"
-                name="Jane Smith"
-                appearance="transparent"
-                variant="secondary"
-              />
-              <ui-avatar
-                initials="BJ"
-                name="Bob Johnson"
-                appearance="transparent"
-                variant="success"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- States -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">States</h2>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <div class="showcase__item">
-                <h3>Normal</h3>
-                <ui-avatar
-                  image="https://i.pravatar.cc/150?img=1"
-                  name="John Doe"
-                  variant="secondary"
-                />
-              </div>
-              <div class="showcase__item">
-                <h3>Disabled</h3>
-                <ui-avatar
-                  image="https://i.pravatar.cc/150?img=1"
-                  name="John Doe"
-                  [disabled]="true"
-                  variant="secondary"
-                />
-              </div>
-              <div class="showcase__item">
-                <h3>Loading</h3>
-                <ui-avatar
-                  image="https://i.pravatar.cc/150?img=1"
-                  name="John Doe"
-                  [loading]="true"
-                  variant="secondary"
-                />
-              </div>
-            </div>
-          </div>
-
-          <h3 class="showcase__subsection__title">States with Initials</h3>
-          <div class="showcase__preview">
-            <div class="showcase__grid">
-              <ui-avatar initials="JD" name="John Doe" variant="primary" />
-              <ui-avatar initials="JD" name="John Doe" [disabled]="true" variant="primary" />
-              <ui-avatar initials="JD" name="John Doe" [loading]="true" variant="primary" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Appearance + Variant Combinations -->
-        <div class="showcase__section">
-          <h2 class="showcase__section__title">Appearance + Variant Combinations</h2>
-
-          @for (variant of variants; track variant) {
-            <h3 class="showcase__subsection__title">{{ variant | titlecase }}</h3>
-            <div class="showcase__preview">
-              <div class="showcase__grid">
-                <ui-avatar
-                  [initials]="getInitials(variant)"
-                  [name]="getVariantName(variant)"
-                  [variant]="variant"
-                  appearance="filled"
-                />
-                <ui-avatar
-                  [initials]="getInitials(variant)"
-                  [name]="getVariantName(variant)"
-                  [variant]="variant"
-                  appearance="tint"
-                />
-                <ui-avatar
-                  [initials]="getInitials(variant)"
-                  [name]="getVariantName(variant)"
-                  [variant]="variant"
-                  appearance="outline"
-                />
-                <ui-avatar
-                  [initials]="getInitials(variant)"
-                  [name]="getVariantName(variant)"
-                  [variant]="variant"
-                  appearance="subtle"
-                />
-                <ui-avatar
-                  [initials]="getInitials(variant)"
-                  [name]="getVariantName(variant)"
-                  [variant]="variant"
-                  appearance="transparent"
-                />
-              </div>
-            </div>
-          }
-        </div>
       </div>
     </div>
   `,
 })
 export class AvatarShowcaseComponent {
-  variants: Variant[] = ['primary', 'secondary', 'success', 'warning', 'danger', 'info'];
-  appearances: Appearance[] = ['filled', 'tint', 'outline', 'subtle', 'transparent'];
-  sizes: Size[] = ['small', 'medium', 'large'];
-  shapes: Shape[] = ['rounded', 'circular', 'square'];
+  variants = VARIANTS;
+  appearances = APPEARANCES;
+  sizes = SIZES;
+  shapes = SHAPES;
 
-  private showcase = viewChild<InteractiveShowcaseComponent>('showcase');
+  overviewDrawerFormConfig = AVATAR_DRAWER_CONFIGS.overview;
+  appearanceVariantDrawerFormConfig = AVATAR_DRAWER_CONFIGS.appearanceVariant;
+  sizeDrawerFormConfig = AVATAR_DRAWER_CONFIGS.size;
+  shapeDrawerFormConfig = AVATAR_DRAWER_CONFIGS.shape;
+  statesDrawerFormConfig = AVATAR_DRAWER_CONFIGS.states;
 
-  showcaseConfig: ShowcaseConfig = {
-    componentSelector: 'ui-avatar',
-    controlGroups: [
-      { id: 'content', label: 'Content', icon: 'text_font' as any },
-      { id: 'appearance', label: 'Appearance', icon: 'color' as any, expanded: true },
-      { id: 'layout', label: 'Layout', icon: 'resize' as any },
-      { id: 'state', label: 'State', icon: 'toggle_left' as any },
-    ],
-    controls: [
-      {
-        key: 'contentType',
-        label: 'Content Type',
-        type: 'dropdown',
-        description: 'Type of content to display',
-        options: [
-          { value: 'image', label: 'Image' },
-          { value: 'initials', label: 'Initials' },
-          { value: 'name', label: 'Name (Auto Initials)' },
-          { value: 'icon', label: 'Icon' },
-          { value: 'none', label: 'None (Default)' },
-        ],
-        defaultValue: 'initials',
-        group: 'content',
-      },
-      {
-        key: 'image',
-        label: 'Image URL',
-        type: 'text',
-        description: 'Image URL for avatar',
-        defaultValue: 'https://i.pravatar.cc/150?img=1',
-        placeholder: 'Enter image URL',
-        group: 'content',
-      },
-      {
-        key: 'initials',
-        label: 'Initials',
-        type: 'text',
-        description: 'Initials to display',
-        defaultValue: 'JD',
-        placeholder: 'Enter initials',
-        group: 'content',
-      },
-      {
-        key: 'name',
-        label: 'Name',
-        type: 'text',
-        description: 'Full name (will generate initials)',
-        defaultValue: 'John Doe',
-        placeholder: 'Enter name',
-        group: 'content',
-      },
-      {
-        key: 'icon',
-        label: 'Icon',
-        type: 'dropdown',
-        description: 'Icon name',
-        options: [
-          { value: '', label: 'None' },
-          { value: 'person', label: 'person' },
-          { value: 'person_account', label: 'person_account' },
-          { value: 'settings', label: 'settings' },
-          { value: 'home', label: 'home' },
-          { value: 'info', label: 'info' },
-        ],
-        defaultValue: '',
-        group: 'content',
-      },
-      {
-        key: 'variant',
-        label: 'Variant',
-        type: 'dropdown',
-        description: 'Color variant',
-        options: this.variants.map(v => ({ value: v, label: v })),
-        defaultValue: 'secondary',
-        group: 'appearance',
-      },
-      {
-        key: 'appearance',
-        label: 'Appearance',
-        type: 'dropdown',
-        description: 'Visual style',
-        options: this.appearances.map(a => ({ value: a, label: a })),
-        defaultValue: 'filled',
-        group: 'appearance',
-      },
-      {
-        key: 'size',
-        label: 'Size',
-        type: 'dropdown',
-        options: this.sizes.map(s => ({ value: s, label: s })),
-        defaultValue: 'medium',
-        group: 'layout',
-      },
-      {
-        key: 'shape',
-        label: 'Shape',
-        type: 'dropdown',
-        options: this.shapes.map(s => ({ value: s, label: s })),
-        defaultValue: 'rounded',
-        group: 'layout',
-      },
-      {
-        key: 'disabled',
-        label: 'Disabled',
-        type: 'switch',
-        description: 'Disable avatar',
-        defaultValue: false,
-        group: 'state',
-      },
-      {
-        key: 'loading',
-        label: 'Loading',
-        type: 'switch',
-        description: 'Loading state with spinner',
-        defaultValue: false,
-        group: 'state',
-      },
-    ],
-  };
+  statePresets = [
+    { id: 'normal', label: 'Normal', disabled: false, loading: false },
+    { id: 'disabled', label: 'Disabled', disabled: true, loading: false },
+    { id: 'loading', label: 'Loading', disabled: false, loading: true },
+  ];
 
-  private values = signal<Record<string, any>>({
+  overviewFormValues = signal<Record<string, unknown>>({
     contentType: 'initials',
-    image: 'https://i.pravatar.cc/150?img=1',
-    initials: 'JD',
-    name: 'John Doe',
     icon: '',
-    variant: 'secondary',
-    appearance: 'filled',
-    size: 'medium',
-    shape: 'rounded',
     disabled: false,
     loading: false,
   });
 
-  currentVariant = computed(() => this.values()['variant'] as Variant);
-  currentAppearance = computed(() => this.values()['appearance'] as Appearance);
-  currentSize = computed(() => this.values()['size'] as Size);
-  currentShape = computed(() => this.values()['shape'] as Shape);
-  currentImage = computed(() => {
-    const contentType = this.values()['contentType'];
-    return contentType === 'image' ? (this.values()['image'] as string) : undefined;
-  });
-  currentInitials = computed(() => {
-    const contentType = this.values()['contentType'];
-    return contentType === 'initials' ? (this.values()['initials'] as string) : undefined;
-  });
-  currentName = computed(() => {
-    const contentType = this.values()['contentType'];
-    return contentType === 'name' ? (this.values()['name'] as string) : undefined;
-  });
-  currentIcon = computed(() => {
-    const contentType = this.values()['contentType'];
-    const icon = this.values()['icon'];
-    return contentType === 'icon' && icon ? (icon as IconName) : undefined;
-  });
-  currentDisabled = computed(() => this.values()['disabled'] as boolean);
-  currentLoading = computed(() => this.values()['loading'] as boolean);
-  currentAriaLabel = computed(() => {
-    const name = this.currentName();
-    const initials = this.currentInitials();
-    return name || initials || 'Avatar';
-  });
-
-  onValuesChange(newValues: Record<string, any>): void {
-    this.values.set(newValues);
-  }
-
-  onReset(): void {}
-
-  getInitials(variant: Variant): string {
-    const map: Record<Variant, string> = {
-      primary: 'JD',
-      secondary: 'JS',
-      success: 'BJ',
-      warning: 'AW',
-      danger: 'CD',
-      info: 'EM',
+  overviewForm = computed(() => {
+    const v = this.overviewFormValues();
+    return {
+      size: 'medium' as const,
+      shape: 'rounded' as const,
+      disabled: !!v['disabled'],
+      loading: !!v['loading'],
     };
-    return map[variant] || 'JD';
-  }
+  });
 
-  getVariantName(variant: Variant): string {
-    const map: Record<Variant, string> = {
-      primary: 'John Doe',
-      secondary: 'Jane Smith',
-      success: 'Bob Johnson',
-      warning: 'Alice Wilson',
-      danger: 'Chris Davis',
-      info: 'Emma Miller',
+  overviewContent = computed(() =>
+    this.getContentProps(
+      (this.overviewFormValues()['contentType'] as string) || 'initials',
+      (this.overviewFormValues()['icon'] as string) || '',
+    ),
+  );
+
+  appearanceVariantFormValues = signal<Record<string, unknown>>({
+    size: 'medium',
+    shape: 'rounded',
+    contentType: 'initials',
+    icon: '',
+    disabled: false,
+    loading: false,
+  });
+
+  appearanceVariantForm = computed(() => {
+    const v = this.appearanceVariantFormValues();
+    return {
+      size: (v['size'] as 'small' | 'medium' | 'large') || 'medium',
+      shape: (v['shape'] as 'rounded' | 'circular' | 'square') || 'rounded',
+      disabled: !!v['disabled'],
+      loading: !!v['loading'],
     };
-    return map[variant] || 'John Doe';
+  });
+
+  appearanceVariantContent = computed(() =>
+    this.getContentProps(
+      (this.appearanceVariantFormValues()['contentType'] as string) || 'initials',
+      (this.appearanceVariantFormValues()['icon'] as string) || '',
+    ),
+  );
+
+  sizeFormValues = signal<Record<string, unknown>>({
+    variant: 'secondary',
+    appearance: 'filled',
+    shape: 'rounded',
+    contentType: 'initials',
+    icon: '',
+    disabled: false,
+    loading: false,
+  });
+
+  sizeForm = computed(() => {
+    const v = this.sizeFormValues();
+    return {
+      variant: (v['variant'] as Variant) || 'secondary',
+      appearance: (v['appearance'] as Appearance) || 'filled',
+      shape: (v['shape'] as 'rounded' | 'circular' | 'square') || 'rounded',
+      disabled: !!v['disabled'],
+      loading: !!v['loading'],
+    };
+  });
+
+  sizeContent = computed(() =>
+    this.getContentProps(
+      (this.sizeFormValues()['contentType'] as string) || 'initials',
+      (this.sizeFormValues()['icon'] as string) || '',
+    ),
+  );
+
+  shapeFormValues = signal<Record<string, unknown>>({
+    variant: 'secondary',
+    appearance: 'filled',
+    size: 'medium',
+    contentType: 'initials',
+    icon: '',
+    disabled: false,
+    loading: false,
+  });
+
+  shapeForm = computed(() => {
+    const v = this.shapeFormValues();
+    return {
+      variant: (v['variant'] as Variant) || 'secondary',
+      appearance: (v['appearance'] as Appearance) || 'filled',
+      size: (v['size'] as 'small' | 'medium' | 'large') || 'medium',
+      disabled: !!v['disabled'],
+      loading: !!v['loading'],
+    };
+  });
+
+  shapeContent = computed(() =>
+    this.getContentProps(
+      (this.shapeFormValues()['contentType'] as string) || 'initials',
+      (this.shapeFormValues()['icon'] as string) || '',
+    ),
+  );
+
+  statesFormValues = signal<Record<string, unknown>>({
+    variant: 'secondary',
+    appearance: 'filled',
+    size: 'medium',
+    shape: 'rounded',
+    contentType: 'initials',
+    icon: '',
+  });
+
+  statesForm = computed(() => {
+    const v = this.statesFormValues();
+    return {
+      variant: (v['variant'] as Variant) || 'secondary',
+      appearance: (v['appearance'] as Appearance) || 'filled',
+      size: (v['size'] as 'small' | 'medium' | 'large') || 'medium',
+      shape: (v['shape'] as 'rounded' | 'circular' | 'square') || 'rounded',
+    };
+  });
+
+  statesContent = computed(() =>
+    this.getContentProps(
+      (this.statesFormValues()['contentType'] as string) || 'initials',
+      (this.statesFormValues()['icon'] as string) || '',
+    ),
+  );
+
+  private getContentProps(
+    contentType: string,
+    icon: string,
+  ): {
+    image?: string;
+    initials?: string;
+    name?: string;
+    icon?: IconName;
+  } {
+    switch (contentType) {
+      case 'image':
+        return { image: DEFAULT_IMAGE_URL };
+      case 'initials':
+        return { initials: 'JD', name: 'John Doe' };
+      case 'name':
+        return { name: 'John Doe' };
+      case 'icon':
+        return { icon: (icon || 'person') as IconName };
+      default:
+        return {};
+    }
   }
 }
