@@ -21,7 +21,6 @@
     background-color: var(--color-neutral-background-rest);
     border-bottom: 1px solid var(--color-neutral-stroke-rest);
     flex-shrink: 0;
-    z-index: calc($z-index-fixed + 1);
 
     &__title {
       font-size: $font-size-600;
