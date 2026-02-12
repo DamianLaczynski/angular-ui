@@ -61,10 +61,13 @@ export class TagComponent {
   tabIndex = input<number | null | undefined>(undefined);
 
   private defaultTabIndex = computed(() => {
-    if (!this.selectable() && !this.dismissible()) {
-      return null;
+    if (this.disabled()) {
+      return -1;
     }
-    return this.disabled() ? -1 : 0;
+    if (!this.selectable() && !this.dismissible()) {
+      return -1;
+    }
+    return 0;
   });
 
   effectiveTabIndex = computed(() => this.tabIndex() ?? this.defaultTabIndex());

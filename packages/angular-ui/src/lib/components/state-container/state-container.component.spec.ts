@@ -1,11 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, TemplateRef, viewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { StateContainerComponent } from './state-container.component';
 import { LoadingStateComponent } from '../loading-state/loading-state.component';
 import { ErrorStateComponent } from '../error-state/error-state.component';
 import { EmptyStateComponent } from '../empty-state/empty-state.component';
-import { State, initialState, loadingState, loadedState, errorState } from '@shared/state';
+import {
+  State,
+  initialState,
+  loadingState,
+  loadedState,
+  errorState,
+} from '../../state/models/state.model';
 import { QuickAction, Size } from '../utils';
 import { IconName } from '../icon';
 
