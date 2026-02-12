@@ -286,18 +286,6 @@
   padding: 8px 12px;
 }
 
-:root[data-design='material'] .accordion {
-  border-radius: 12px;
-}
-
-:root[data-design='material'] .accordion__panel {
-  padding: 0 16px 0;
-}
-
-:root[data-design='material'] .accordion__panel-content {
-  padding: 8px 0;
-}
-
 :root[data-design='material'] .menu {
   border-radius: 12px;
   padding: 8px;
@@ -318,6 +306,177 @@
 
 :root[data-design='material'] .progress-bar--large {
   height: 6px;
+}
+
+:root[data-design='material'] .card {
+  border: none;
+  box-shadow: var(--elevation-card);
+}
+
+:root[data-design='material'] .card__header-container {
+  padding: 16px 16px 0;
+}
+
+:root[data-design='material'] .card__title {
+  font-weight: 500;
+}
+
+:root[data-design='material'] .card .card__body-container,
+:root[data-design='material'] .card .card__footer-container {
+  padding: 0 16px 16px;
+}
+
+:root[data-design='material'] .breadcrumb__list {
+  font-size: 14px;
+  padding: 12px 0;
+}
+
+:root[data-design='material'] .breadcrumb__divider {
+  color: var(--color-neutral-foreground3-rest);
+  margin: 0 8px;
+}
+
+:root[data-design='material'] .pagination__controls {
+  gap: 8px;
+}
+
+:root[data-design='material'] .pagination__pages {
+  gap: 4px;
+}
+
+:root[data-design='material'] .pagination__button .button,
+:root[data-design='material'] .pagination__button button {
+  border-radius: 20px;
+  min-width: 40px;
+}
+
+:root[data-design='material'] .pagination__ellipsis {
+  padding: 0 8px;
+  border: none;
+  background: transparent;
+  color: var(--color-neutral-foreground3-rest);
+}
+
+:root[data-design='material'] .nav {
+  padding: 8px;
+  border-radius: 12px;
+  gap: 4px;
+}
+
+:root[data-design='material'] .nav .node__content {
+  border-radius: 28px;
+  padding: 12px 16px;
+  min-height: 48px;
+}
+
+:root[data-design='material'] .nav-section-header__text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-neutral-foreground3-rest);
+  letter-spacing: 0.1em;
+}
+
+:root[data-design='material'] .toast {
+  border: none;
+  border-radius: 28px;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 0 1px rgba(0, 0, 0, 0.3);
+  padding: 14px 16px;
+}
+
+:root[data-design='material'] .toast__title {
+  font-weight: 500;
+}
+
+:root[data-design='material'] .toast__message {
+  font-size: 14px;
+  line-height: 1.43;
+}
+
+:root[data-design='material'] .tag {
+  border-radius: 8px;
+  font-weight: 500;
+  padding: 4px 12px;
+  font-size: 14px;
+  min-height: 32px;
+}
+
+:root[data-design='material'] .accordion {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.12),
+    0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+:root[data-design='material'] .accordion .tree-node {
+  width: 100%;
+}
+
+:root[data-design='material'] .accordion .tree-node__wrapper {
+  width: 100%;
+}
+
+:root[data-design='material'] .accordion .node__content {
+  width: 100%;
+  justify-content: flex-start;
+  border-radius: 0;
+  padding: 16px 24px;
+  min-height: 48px;
+  border-bottom: 1px solid var(--color-neutral-stroke-rest);
+  background: var(--color-neutral-background-rest);
+}
+
+:root[data-design='material'] .accordion .node__content:hover:not(:disabled) {
+  background: var(--color-neutral-background-hover);
+}
+
+:root[data-design='material'] .accordion--expanded .node__content {
+  border-bottom-color: transparent;
+}
+
+:root[data-design='material'] .accordion__panel {
+  padding: 0;
+}
+
+:root[data-design='material'] .accordion__panel-content {
+  padding: 16px 24px;
+  background: var(--color-neutral-background2-rest);
+  border-bottom: 1px solid var(--color-neutral-stroke-rest);
+  font-size: 14px;
+  line-height: 1.43;
+}
+
+:root[data-design='material'] .spinner__circle-bg {
+  fill: var(--color-neutral-background-brand-selected);
+}
+
+:root[data-design='material'] .spinner__circle-arc {
+  fill: var(--color-brand-primary);
+}
+
+:root[data-design='material'] .checkbox--rounded .checkbox-visual,
+:root[data-design='material'] .checkbox--square .checkbox-visual {
+  border-radius: 4px;
+}
+
+:root[data-design='material'] .checkbox--circular .checkbox-visual {
+  border-radius: 50%;
+}
+
+:root[data-design='material'] .checkbox-label {
+  font-size: 14px;
+}
+
+:root[data-design='material'] .switch-label {
+  font-size: 14px;
+}
+
+:root[data-design='material'] .divider {
+  border-color: var(--color-neutral-stroke-rest);
+  opacity: 0.38;
 }
 
 :root[data-design='material'] .input-wrapper--filled,

@@ -287,18 +287,6 @@
   font-size: 0.875rem;
 }
 
-:root[data-design='bootstrap'] .accordion {
-  border-radius: 0.375rem;
-}
-
-:root[data-design='bootstrap'] .accordion__panel {
-  padding: 0 1rem 0;
-}
-
-:root[data-design='bootstrap'] .accordion__panel-content {
-  padding: 0.5rem 0;
-}
-
 :root[data-design='bootstrap'] .menu {
   border-radius: 0.375rem;
   padding: 0.5rem;
@@ -321,6 +309,203 @@
 
 :root[data-design='bootstrap'] .progress-bar--large {
   height: 1rem;
+}
+
+:root[data-design='bootstrap'] .card {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+:root[data-design='bootstrap'] .card__header-container {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid var(--color-neutral-stroke-rest);
+  padding: 0.75rem 1rem;
+}
+
+:root[data-design='bootstrap'].dark .card__header-container,
+:root[data-design='bootstrap'][data-theme='dark'] .card__header-container {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+:root[data-design='bootstrap'] .card__body-container,
+:root[data-design='bootstrap'] .card .card__footer-container {
+  padding: 0 1rem 1rem;
+}
+
+:root[data-design='bootstrap'] .card__title {
+  font-weight: 700;
+}
+
+:root[data-design='bootstrap'] .breadcrumb__list {
+  font-size: 0.875rem;
+  padding: 0.75rem 0;
+}
+
+:root[data-design='bootstrap'] .breadcrumb__divider {
+  color: var(--color-neutral-foreground3-rest);
+  margin: 0 0.5rem;
+}
+
+:root[data-design='bootstrap'] .pagination {
+  padding: 0;
+  gap: 0;
+}
+
+:root[data-design='bootstrap'] .pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+
+:root[data-design='bootstrap'] .pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+:root[data-design='bootstrap'] .pagination__button {
+  margin-left: -1px;
+}
+
+:root[data-design='bootstrap'] .pagination__button .button,
+:root[data-design='bootstrap'] .pagination__button button {
+  margin-left: -1px;
+  border-radius: 0;
+  border: 1px solid var(--color-neutral-stroke-rest);
+  min-width: 2.5rem;
+}
+
+:root[data-design='bootstrap'] .pagination__button--first .button,
+:root[data-design='bootstrap'] .pagination__button--first button {
+  border-radius: 0.375rem 0 0 0.375rem;
+  margin-left: 0;
+}
+
+:root[data-design='bootstrap'] .pagination__button--last .button,
+:root[data-design='bootstrap'] .pagination__button--last button {
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+
+:root[data-design='bootstrap'] .pagination__button--page .button--selected,
+:root[data-design='bootstrap'] .pagination__button--page .button--primary {
+  z-index: 1;
+}
+
+:root[data-design='bootstrap'] .pagination__ellipsis {
+  padding: 0.375rem 0.75rem;
+  margin-left: -1px;
+  border: 1px solid var(--color-neutral-stroke-rest);
+  background: var(--color-neutral-background-rest);
+  border-radius: 0;
+}
+
+:root[data-design='bootstrap'] .nav {
+  padding: 0.5rem 0;
+  border-radius: 0;
+  gap: 0;
+}
+
+:root[data-design='bootstrap'] .nav .node__content {
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+}
+
+:root[data-design='bootstrap'] .nav-section-header__text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-neutral-foreground3-rest);
+}
+
+:root[data-design='bootstrap'] .toast {
+  border: 1px solid var(--color-neutral-stroke-rest);
+  border-radius: 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  padding: 0.75rem 1rem;
+}
+
+:root[data-design='bootstrap'] .toast__title {
+  font-weight: 700;
+}
+
+:root[data-design='bootstrap'] .toast__message {
+  font-size: 0.875rem;
+}
+
+:root[data-design='bootstrap'] .tag {
+  border-radius: 0.375rem;
+  font-weight: 600;
+  padding: 0.35em 0.65em;
+  font-size: 0.875em;
+}
+
+:root[data-design='bootstrap'] .accordion {
+  border: 1px solid var(--color-neutral-stroke-rest);
+  border-radius: 0.375rem;
+  overflow: hidden;
+}
+
+:root[data-design='bootstrap'] .accordion .tree-node {
+  width: 100%;
+}
+
+:root[data-design='bootstrap'] .accordion .tree-node__wrapper {
+  width: 100%;
+}
+
+:root[data-design='bootstrap'] .accordion .node__content {
+  width: 100%;
+  justify-content: flex-start;
+  border-radius: 0;
+  padding: 0.5rem 1rem;
+  min-height: 38px;
+  border-bottom: 1px solid var(--color-neutral-stroke-rest);
+  background: var(--color-neutral-background-rest);
+}
+
+:root[data-design='bootstrap'] .accordion .node__content:hover:not(:disabled) {
+  background: var(--color-neutral-background-hover);
+}
+
+:root[data-design='bootstrap'] .accordion--expanded .node__content {
+  border-bottom-color: transparent;
+}
+
+:root[data-design='bootstrap'] .accordion__panel {
+  padding: 0;
+}
+
+:root[data-design='bootstrap'] .accordion__panel-content {
+  padding: 1rem;
+  background: var(--color-neutral-background-rest);
+  border-bottom: 1px solid var(--color-neutral-stroke-rest);
+  font-size: 0.875rem;
+}
+
+:root[data-design='bootstrap'] .spinner__circle-bg {
+  fill: var(--color-neutral-stroke-rest);
+}
+
+:root[data-design='bootstrap'] .spinner__circle-arc {
+  fill: var(--color-brand-primary);
+}
+
+:root[data-design='bootstrap'] .checkbox--rounded .checkbox-visual,
+:root[data-design='bootstrap'] .checkbox--square .checkbox-visual {
+  border-radius: 0.25em;
+}
+
+:root[data-design='bootstrap'] .checkbox-label {
+  font-size: 0.875rem;
+  padding-left: 0.25rem;
+}
+
+:root[data-design='bootstrap'] .switch-label {
+  font-size: 0.875rem;
+}
+
+:root[data-design='bootstrap'] .divider {
+  border-color: var(--color-neutral-stroke-rest);
+  opacity: 1;
 }
 
 :root[data-design='bootstrap'] .input-wrapper--filled,
