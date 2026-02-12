@@ -2,6 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavComponent, NavNode } from 'angular-ui';
 import { filter } from 'rxjs/operators';
+import { DesignSystem, DesignSystemService } from '@shared/theme/design-system.service';
 import { ThemeMode, ThemeService } from '@shared/theme/theme.service';
 import { SearchComponent } from 'angular-ui';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,7 @@ import { ButtonComponent } from 'angular-ui';
 export class DsSidebarComponent {
   private readonly router = inject(Router);
   private readonly themeService = inject(ThemeService);
+  private readonly designSystemService = inject(DesignSystemService);
   selectedItemId = signal<string | null>(null);
   private _searchQuery = signal<string>('');
 
@@ -30,6 +32,12 @@ export class DsSidebarComponent {
   isDarkMode = computed(() => this.themeService.$themeMode() === ThemeMode.Dark);
   themeLabel = computed(() => (this.isDarkMode() ? 'Light mode' : 'Dark mode'));
   themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));
+
+  DesignSystem = DesignSystem;
+  designSystem = this.designSystemService.$designSystem;
+  isFluent = computed(() => this.designSystem() === DesignSystem.Fluent);
+  isMaterial = computed(() => this.designSystem() === DesignSystem.Material);
+  isBootstrap = computed(() => this.designSystem() === DesignSystem.Bootstrap);
 
   private readonly allNavItems: NavNode[] = [
     // Form Components Section
@@ -176,5 +184,9 @@ export class DsSidebarComponent {
 
   onDarkModeToggle(): void {
     this.themeService.toggleTheme();
+  }
+
+  onDesignSystemChange(value: DesignSystem): void {
+    this.designSystemService.setDesignSystem(value);
   }
 }

@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
 import { Size, Appearance, Shape, Orientation, Variant } from '../utils';
 import { IconName } from '../icon';
+import { RippleDirective } from '../../directives/ripple';
 
 export interface Node<T = any> {
   id: string | number;
@@ -36,6 +37,7 @@ export interface Node<T = any> {
     `,
   ],
   imports: [CommonModule, IconComponent],
+  hostDirectives: [RippleDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NodeComponent<T extends Node> {

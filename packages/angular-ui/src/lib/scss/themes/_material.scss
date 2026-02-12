@@ -1,0 +1,446 @@
+// ==========================================================================
+// Material Design 3 Theme
+// ==========================================================================
+// Overrides CSS variables when data-design="material". Works with light/dark.
+
+:root[data-design='material'] {
+  --color-brand-primary: #6750a4;
+  --color-brand-primary-hover: #7c6bb4;
+  --color-brand-primary-pressed: #5a4a8f;
+  --color-brand-primary-selected: #5a4a8f;
+
+  --color-brand-foreground: #6750a4;
+  --color-brand-foreground-hover: #7c6bb4;
+  --color-brand-foreground-pressed: #5a4a8f;
+
+  --color-compound-brand-background: #6750a4;
+  --color-compound-brand-background-hover: #7c6bb4;
+  --color-compound-brand-background-pressed: #5a4a8f;
+  --color-compound-brand-foreground: #6750a4;
+  --color-compound-brand-foreground-hover: #7c6bb4;
+  --color-compound-brand-foreground-pressed: #5a4a8f;
+  --color-compound-brand-stroke: #6750a4;
+  --color-compound-brand-stroke-hover: #7c6bb4;
+  --color-compound-brand-stroke-pressed: #5a4a8f;
+
+  --color-accent-primary: #6750a4;
+  --color-accent-primary-hover: #7c6bb4;
+  --color-accent-primary-pressed: #5a4a8f;
+  --color-accent-primary-selected: #5a4a8f;
+
+  --color-neutral-foreground-rest: #1c1b1f;
+  --color-neutral-foreground-hover: #1c1b1f;
+  --color-neutral-foreground-pressed: #1c1b1f;
+  --color-neutral-foreground-selected: #1c1b1f;
+  --color-neutral-foreground-disabled: #9e9c9e;
+  --color-neutral-foreground-on-brand: #ffffff;
+
+  --color-neutral-foreground2-rest: #49454f;
+  --color-neutral-foreground2-hover: #1c1b1f;
+  --color-neutral-foreground2-pressed: #1c1b1f;
+  --color-neutral-foreground2-selected: #1c1b1f;
+  --color-neutral-foreground2-brand-hover: #6750a4;
+  --color-neutral-foreground2-brand-pressed: #5a4a8f;
+  --color-neutral-foreground2-brand-selected: #6750a4;
+
+  --color-neutral-foreground3-rest: #49454f;
+  --color-neutral-foreground3-hover: #49454f;
+  --color-neutral-foreground3-pressed: #49454f;
+  --color-neutral-foreground3-selected: #49454f;
+  --color-neutral-foreground3-brand-hover: #6750a4;
+  --color-neutral-foreground3-brand-pressed: #5a4a8f;
+  --color-neutral-foreground3-brand-selected: #6750a4;
+
+  --color-neutral-foreground4-rest: #79747e;
+
+  --color-neutral-background-rest: #fffbfe;
+  --color-neutral-background-selected: #e7e0ec;
+  --color-neutral-background-hover: #f5f0f7;
+  --color-neutral-background-pressed: #e7e0ec;
+  --color-neutral-background-disabled: #e7e0ec;
+  --color-neutral-background-brand-selected: #eaddff;
+  --color-neutral-background-brand-hover: #e0d5f0;
+  --color-neutral-background-brand-pressed: #d4c8e8;
+
+  --color-neutral-background2-rest: #f5f0f7;
+  --color-neutral-background2-hover: #e7e0ec;
+  --color-neutral-background2-pressed: #ddd5e2;
+  --color-neutral-background2-selected: #e7e0ec;
+
+  --color-neutral-background3-rest: #e7e0ec;
+  --color-neutral-background3-hover: #ddd5e2;
+  --color-neutral-background3-pressed: #d4c8e0;
+  --color-neutral-background3-selected: #e0d5e8;
+
+  --color-subtle-background-hover: #f5f0f7;
+  --color-subtle-background-pressed: #e7e0ec;
+  --color-subtle-background-selected: #e7e0ec;
+
+  --color-neutral-stroke-rest: #79747e;
+  --color-neutral-stroke-hover: #49454f;
+  --color-neutral-stroke-pressed: #1c1b1f;
+  --color-neutral-stroke-selected: #49454f;
+  --color-neutral-stroke-disabled: #cac4d0;
+  --color-neutral-stroke-accessible: #49454f;
+  --color-neutral-stroke-accessible-hover: #1c1b1f;
+  --color-neutral-stroke-accessible-pressed: #1c1b1f;
+  --color-neutral-stroke-accessible-selected: #6750a4;
+  --color-brand-stroke-rest: #6750a4;
+  --color-brand-stroke-hover: #7c6bb4;
+  --color-brand-stroke-pressed: #5a4a8f;
+  --color-brand-stroke-selected: #6750a4;
+
+  --border-radius-400: 12px;
+
+  --color-focus-border: #6750a4;
+  --ui-ripple-color: rgba(0, 0, 0, 0.12);
+
+  --duration-fast: 200ms;
+  --easing-default: cubic-bezier(0.2, 0, 0, 1);
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --elevation-card: 0 1px 2px 0 rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.75rem;
+  --font-size-h3: 1.5rem;
+  --font-size-h4: 1.375rem;
+  --font-size-h5: 1rem;
+  --font-size-h6: 0.875rem;
+  --font-weight-heading: 500;
+  --line-height-heading: 1.25;
+  --font-size-body: 1rem;
+  --line-height-body: 1.5;
+}
+
+:root[data-design='material'] .button--medium {
+  min-height: 40px;
+  padding: 10px 24px;
+}
+
+:root[data-design='material'] .button--small {
+  min-height: 32px;
+  padding: 8px 16px;
+}
+
+:root[data-design='material'] .button--large {
+  min-height: 48px;
+  padding: 14px 32px;
+}
+
+:root[data-design='material'] .button--rounded {
+  border-radius: 20px;
+}
+
+:root[data-design='material'] .button--large.button--rounded {
+  border-radius: 24px;
+}
+
+:root[data-design='material'] .node__content {
+  position: relative;
+}
+
+:root[data-design='material'] .badge {
+  border-radius: 16px;
+  font-weight: 500;
+}
+
+:root[data-design='material'] .badge--rounded {
+  border-radius: 16px;
+}
+
+:root[data-design='material'] .badge--medium {
+  height: 24px;
+  min-width: 24px;
+  padding: 0 10px;
+}
+
+:root[data-design='material'] .badge--small {
+  height: 20px;
+  min-width: 20px;
+  padding: 0 8px;
+}
+
+:root[data-design='material'] .badge--large {
+  height: 28px;
+  min-width: 28px;
+  padding: 0 12px;
+}
+
+:root[data-design='material'] .tabs .node__content {
+  border-radius: 12px 12px 0 0;
+  padding: 12px 24px;
+}
+
+:root[data-design='material'] .tabs.node--indicator-horizontal .node__indicator,
+:root[data-design='material'] .tabs .node__selector {
+  height: 4px;
+  border-radius: 4px 4px 0 0;
+}
+
+:root[data-design='material'] .data-grid {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+:root[data-design='material'] .data-grid__header-text {
+  font-weight: 500;
+}
+
+:root[data-design='material'] .data-grid__header-label-content {
+  min-height: 56px;
+  padding: 0 16px;
+}
+
+:root[data-design='material'] .data-grid__header-cell--selection {
+  padding: 0 16px;
+}
+
+:root[data-design='material'] .data-grid__header-cell--expand {
+  padding: 0 8px;
+}
+
+:root[data-design='material'] .data-grid__cell {
+  padding: 0 16px;
+  min-height: 52px;
+}
+
+:root[data-design='material'] .data-grid__cell--selection {
+  padding: 0 16px;
+}
+
+:root[data-design='material'] .data-grid__filter-cell {
+  padding: 0 16px;
+  min-height: 52px;
+}
+
+:root[data-design='material'] .data-grid__row-details-content {
+  padding: 16px;
+  padding-left: calc(40px + 16px);
+}
+
+:root[data-design='material'] .dialog__content {
+  border-radius: 28px;
+}
+
+:root[data-design='material'] .dialog__content--fullscreen {
+  border-radius: 0;
+}
+
+:root[data-design='material'] .dialog__header {
+  padding: 24px 24px 0;
+}
+
+:root[data-design='material'] .dialog__title {
+  font-weight: 500;
+}
+
+:root[data-design='material'] .dialog__body {
+  padding: 24px;
+  padding-top: 8px;
+}
+
+:root[data-design='material'] .dialog__footer {
+  padding: 24px;
+  padding-top: 4px;
+}
+
+:root[data-design='material'] .drawer__content--left {
+  border-radius: 0 28px 0 0;
+}
+
+:root[data-design='material'] .drawer__content--right {
+  border-radius: 28px 0 0 0;
+}
+
+:root[data-design='material'] .drawer__content--top {
+  border-radius: 0 0 28px 28px;
+}
+
+:root[data-design='material'] .drawer__content--bottom {
+  border-radius: 28px 28px 0 0;
+}
+
+:root[data-design='material'] .drawer__header {
+  padding: 16px 24px;
+  padding-bottom: 16px;
+}
+
+:root[data-design='material'] .drawer__title {
+  font-weight: 500;
+}
+
+:root[data-design='material'] .drawer__body {
+  padding: 24px;
+}
+
+:root[data-design='material'] .drawer__footer {
+  padding: 24px;
+  padding-top: 16px;
+}
+
+:root[data-design='material'] .tooltip__popup__content {
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+:root[data-design='material'] .accordion {
+  border-radius: 12px;
+}
+
+:root[data-design='material'] .accordion__panel {
+  padding: 0 16px 0;
+}
+
+:root[data-design='material'] .accordion__panel-content {
+  padding: 8px 0;
+}
+
+:root[data-design='material'] .menu {
+  border-radius: 12px;
+  padding: 8px;
+}
+
+:root[data-design='material'] .dropdown-panel {
+  border-radius: 12px;
+}
+
+:root[data-design='material'] .progress-bar {
+  height: 4px;
+  border-radius: 4px;
+}
+
+:root[data-design='material'] .progress-bar--small {
+  height: 2px;
+}
+
+:root[data-design='material'] .progress-bar--large {
+  height: 6px;
+}
+
+:root[data-design='material'] .input-wrapper--filled,
+:root[data-design='material'] .input-wrapper--filled-gray {
+  padding-inline: 12px;
+  padding-block: 10px 12px;
+}
+
+:root[data-design='material'][data-theme='dark'],
+:root[data-design='material'].dark {
+  --ui-ripple-color: rgba(255, 255, 255, 0.12);
+  --color-brand-primary: #d0bcff;
+  --color-brand-primary-hover: #ddd0ff;
+  --color-brand-primary-pressed: #b9a4e0;
+  --color-brand-primary-selected: #b9a4e0;
+
+  --color-brand-foreground: #d0bcff;
+  --color-brand-foreground-hover: #ddd0ff;
+  --color-brand-foreground-pressed: #b9a4e0;
+
+  --color-compound-brand-background: #d0bcff;
+  --color-compound-brand-background-hover: #ddd0ff;
+  --color-compound-brand-background-pressed: #b9a4e0;
+  --color-compound-brand-foreground: #d0bcff;
+  --color-compound-brand-foreground-hover: #ddd0ff;
+  --color-compound-brand-foreground-pressed: #b9a4e0;
+  --color-compound-brand-stroke: #d0bcff;
+  --color-compound-brand-stroke-hover: #ddd0ff;
+  --color-compound-brand-stroke-pressed: #b9a4e0;
+
+  --color-accent-primary: #d0bcff;
+  --color-accent-primary-hover: #ddd0ff;
+  --color-accent-primary-pressed: #b9a4e0;
+  --color-accent-primary-selected: #b9a4e0;
+
+  --color-neutral-foreground-rest: #e6e1e5;
+  --color-neutral-foreground-hover: #e6e1e5;
+  --color-neutral-foreground-pressed: #e6e1e5;
+  --color-neutral-foreground-selected: #e6e1e5;
+  --color-neutral-foreground-disabled: #938f99;
+  --color-neutral-foreground-on-brand: #381e72;
+
+  --color-neutral-foreground2-rest: #cac4d0;
+  --color-neutral-foreground2-hover: #e6e1e5;
+  --color-neutral-foreground2-pressed: #e6e1e5;
+  --color-neutral-foreground2-selected: #e6e1e5;
+  --color-neutral-foreground2-brand-hover: #d0bcff;
+  --color-neutral-foreground2-brand-pressed: #b9a4e0;
+  --color-neutral-foreground2-brand-selected: #d0bcff;
+
+  --color-neutral-foreground3-rest: #938f99;
+  --color-neutral-foreground3-hover: #cac4d0;
+  --color-neutral-foreground3-pressed: #cac4d0;
+  --color-neutral-foreground3-selected: #cac4d0;
+  --color-neutral-foreground3-brand-hover: #d0bcff;
+  --color-neutral-foreground3-brand-pressed: #b9a4e0;
+  --color-neutral-foreground3-brand-selected: #d0bcff;
+
+  --color-neutral-foreground4-rest: #938f99;
+
+  --color-neutral-background-rest: #1c1b1f;
+  --color-neutral-background-selected: #2d2b30;
+  --color-neutral-background-hover: #2d2b30;
+  --color-neutral-background-pressed: #242329;
+  --color-neutral-background-disabled: #242329;
+  --color-neutral-background-brand-selected: #4f378b;
+  --color-neutral-background-brand-hover: #5a4392;
+  --color-neutral-background-brand-pressed: #3d2a66;
+
+  --color-neutral-background2-rest: #242329;
+  --color-neutral-background2-hover: #2d2b30;
+  --color-neutral-background2-pressed: #1c1b1f;
+  --color-neutral-background2-selected: #2d2b30;
+
+  --color-neutral-background3-rest: #1c1b1f;
+  --color-neutral-background3-hover: #242329;
+  --color-neutral-background3-pressed: #141218;
+  --color-neutral-background3-selected: #242329;
+
+  --color-subtle-background-hover: #2d2b30;
+  --color-subtle-background-pressed: #242329;
+  --color-subtle-background-selected: #2d2b30;
+
+  --color-neutral-stroke-rest: #938f99;
+  --color-neutral-stroke-hover: #cac4d0;
+  --color-neutral-stroke-pressed: #e6e1e5;
+  --color-neutral-stroke-selected: #938f99;
+  --color-neutral-stroke-disabled: #49454f;
+  --color-neutral-stroke-accessible: #cac4d0;
+  --color-neutral-stroke-accessible-hover: #e6e1e5;
+  --color-neutral-stroke-accessible-pressed: #e6e1e5;
+  --color-neutral-stroke-accessible-selected: #d0bcff;
+  --color-brand-stroke-rest: #d0bcff;
+  --color-brand-stroke-hover: #ddd0ff;
+  --color-brand-stroke-pressed: #b9a4e0;
+  --color-brand-stroke-selected: #d0bcff;
+
+  --border-radius-400: 12px;
+
+  --color-focus-border: #d0bcff;
+
+  --elevation-card: 0 1px 3px 1px rgba(0, 0, 0, 0.5), 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+:root[data-design='material'] .input-wrapper--filled,
+:root[data-design='material'] .input-wrapper--filled-gray {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-neutral-stroke-rest);
+  border-radius: 0;
+
+  &:hover {
+    border-bottom-color: var(--color-neutral-foreground-rest);
+  }
+
+  &:focus-within {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--color-brand-primary);
+  }
+}
+
+:root[data-design='material'] .input-wrapper--filled.input-wrapper--error,
+:root[data-design='material'] .input-wrapper--filled-gray.input-wrapper--error {
+  border: none;
+  border-bottom: 2px solid var(--color-shared-red-foreground);
+}

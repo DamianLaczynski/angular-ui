@@ -15,8 +15,8 @@
 @mixin transition($properties: all, $duration: $duration-fast, $easing: $easing-decelerate-min) {
   & {
     transition-property: $properties;
-    transition-duration: $duration;
-    transition-timing-function: $easing;
+    transition-duration: var(--duration-fast, #{$duration});
+    transition-timing-function: var(--easing-default, #{$easing});
   }
 }
 

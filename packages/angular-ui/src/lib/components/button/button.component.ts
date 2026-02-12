@@ -11,11 +11,13 @@ import {
 import { Variant, Appearance, Size, Shape, ExtendedSize, ButtonType } from '../utils';
 import { IconComponent, IconName } from '../icon';
 import { SpinnerComponent } from '../spinner';
+import { RippleDirective } from '../../directives/ripple';
 
 @Component({
   selector: 'ui-button',
   templateUrl: './button.component.html',
   imports: [IconComponent, SpinnerComponent],
+  hostDirectives: [RippleDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.tabindex]': '"-1"',

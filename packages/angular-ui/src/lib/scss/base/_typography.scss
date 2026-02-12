@@ -12,41 +12,42 @@ h4,
 h5,
 h6 {
   font-family: $font-family-base;
-  font-weight: $font-weight-bold;
-  line-height: $line-height-300;
-  margin-bottom: $spacing-3;
+  font-weight: var(--font-weight-heading, #{$font-weight-bold});
+  line-height: var(--line-height-heading, #{$line-height-300});
+  margin-bottom: var(--spacing-3, #{$spacing-3});
   color: var(--color-neutral-foreground-rest);
 }
 
 h1 {
-  font-size: $font-size-800;
-  margin-bottom: $spacing-4;
+  font-size: var(--font-size-h1, #{$font-size-800});
+  margin-bottom: var(--spacing-4, #{$spacing-4});
 }
 
 h2 {
-  font-size: $font-size-700;
+  font-size: var(--font-size-h2, #{$font-size-700});
 }
 
 h3 {
-  font-size: $font-size-600;
+  font-size: var(--font-size-h3, #{$font-size-600});
 }
 
 h4 {
-  font-size: $font-size-500;
+  font-size: var(--font-size-h4, #{$font-size-500});
 }
 
 h5 {
-  font-size: $font-size-400;
+  font-size: var(--font-size-h5, #{$font-size-400});
 }
 
 h6 {
-  font-size: $font-size-300;
+  font-size: var(--font-size-h6, #{$font-size-300});
 }
 
 // Paragraphs
 p {
-  margin-bottom: $spacing-3;
-  line-height: $line-height-400;
+  margin-bottom: var(--spacing-3, #{$spacing-3});
+  font-size: var(--font-size-body, #{$font-size-400});
+  line-height: var(--line-height-body, #{$line-height-400});
 
   &:last-child {
     margin-bottom: 0;
@@ -57,7 +58,8 @@ p {
 a {
   color: var(--color-brand-primary);
   text-decoration: none;
-  transition: color $duration-fast $easing-ease-in-out;
+  transition: color var(--duration-fast, #{$duration-fast})
+    var(--easing-default, #{$easing-ease-in-out});
 
   &:hover {
     color: var(--color-brand-primary-hover);
@@ -68,8 +70,8 @@ a {
 // Lists
 ul,
 ol {
-  margin-bottom: $spacing-3;
-  padding-left: $spacing-4;
+  margin-bottom: var(--spacing-3, #{$spacing-3});
+  padding-left: var(--spacing-4, #{$spacing-4});
 
   &:last-child {
     margin-bottom: 0;
@@ -85,7 +87,7 @@ ol {
 }
 
 li {
-  margin-bottom: $spacing-1;
+  margin-bottom: var(--spacing-1, #{$spacing-1});
 
   &:last-child {
     margin-bottom: 0;
@@ -94,7 +96,7 @@ li {
 
 // Definition lists
 dl {
-  margin-bottom: $spacing-3;
+  margin-bottom: var(--spacing-3, #{$spacing-3});
 
   &:last-child {
     margin-bottom: 0;
@@ -103,12 +105,12 @@ dl {
 
 dt {
   font-weight: $font-weight-semibold;
-  margin-bottom: $spacing-1;
+  margin-bottom: var(--spacing-1, #{$spacing-1});
 }
 
 dd {
-  margin-bottom: $spacing-2;
-  margin-left: $spacing-3;
+  margin-bottom: var(--spacing-2, #{$spacing-2});
+  margin-left: var(--spacing-3, #{$spacing-3});
 
   &:last-child {
     margin-bottom: 0;
@@ -117,14 +119,14 @@ dd {
 
 // Blockquotes
 blockquote {
-  margin: $spacing-4 0;
-  padding: $spacing-3 $spacing-4;
+  margin: var(--spacing-4, #{$spacing-4}) 0;
+  padding: var(--spacing-3, #{$spacing-3}) var(--spacing-4, #{$spacing-4});
   border-left: 4px solid var(--color-brand-primary);
   background-color: var(--color-neutral-background-selected);
   font-style: italic;
 
   p {
-    margin-bottom: $spacing-2;
+    margin-bottom: var(--spacing-2, #{$spacing-2});
 
     &:last-child {
       margin-bottom: 0;
@@ -133,7 +135,7 @@ blockquote {
 
   cite {
     display: block;
-    margin-top: $spacing-2;
+    margin-top: var(--spacing-2, #{$spacing-2});
     font-size: $font-size-200;
     color: var(--color-neutral-foreground2-rest);
     font-style: normal;
@@ -150,19 +152,19 @@ code {
   font-size: 0.875em;
   background-color: var(--color-neutral-background-selected);
   padding: 0.125em 0.25em;
-  border-radius: $border-radius-200;
+  border-radius: var(--border-radius-400, #{$border-radius-200});
   color: var(--color-shared-red-foreground);
 }
 
 pre {
   font-family: $font-family-mono;
   font-size: $font-size-200;
-  line-height: $line-height-400;
+  line-height: var(--line-height-body, #{$line-height-400});
   background-color: var(--color-neutral-background-selected);
-  padding: $spacing-3;
-  border-radius: $border-radius-400;
+  padding: var(--spacing-3, #{$spacing-3});
+  border-radius: var(--border-radius-400);
   overflow-x: auto;
-  margin-bottom: $spacing-3;
+  margin-bottom: var(--spacing-3, #{$spacing-3});
 
   code {
     background: none;
@@ -194,8 +196,8 @@ abbr[title] {
 // Address
 address {
   font-style: normal;
-  line-height: $line-height-400;
-  margin-bottom: $spacing-3;
+  line-height: var(--line-height-body, #{$line-height-400});
+  margin-bottom: var(--spacing-3, #{$spacing-3});
 
   &:last-child {
     margin-bottom: 0;
@@ -207,7 +209,7 @@ hr {
   border: none;
   height: 1px;
   background-color: var(--color-neutral-stroke-rest);
-  margin: $spacing-4 0;
+  margin: var(--spacing-4, #{$spacing-4}) 0;
 }
 
 // Selection

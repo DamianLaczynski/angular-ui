@@ -1,0 +1,473 @@
+// ==========================================================================
+// Bootstrap 5 Theme
+// ==========================================================================
+// Overrides CSS variables when data-design="bootstrap". Works with light/dark.
+
+:root[data-design='bootstrap'] {
+  --color-brand-primary: #0d6efd;
+  --color-brand-primary-hover: #0b5ed7;
+  --color-brand-primary-pressed: #0a58ca;
+  --color-brand-primary-selected: #0a58ca;
+
+  --color-brand-foreground: #0d6efd;
+  --color-brand-foreground-hover: #0b5ed7;
+  --color-brand-foreground-pressed: #0a58ca;
+
+  --color-compound-brand-background: #0d6efd;
+  --color-compound-brand-background-hover: #0b5ed7;
+  --color-compound-brand-background-pressed: #0a58ca;
+  --color-compound-brand-foreground: #0d6efd;
+  --color-compound-brand-foreground-hover: #0b5ed7;
+  --color-compound-brand-foreground-pressed: #0a58ca;
+  --color-compound-brand-stroke: #0d6efd;
+  --color-compound-brand-stroke-hover: #0b5ed7;
+  --color-compound-brand-stroke-pressed: #0a58ca;
+
+  --color-accent-primary: #0d6efd;
+  --color-accent-primary-hover: #0b5ed7;
+  --color-accent-primary-pressed: #0a58ca;
+  --color-accent-primary-selected: #0a58ca;
+
+  --color-neutral-foreground-rest: #212529;
+  --color-neutral-foreground-hover: #212529;
+  --color-neutral-foreground-pressed: #212529;
+  --color-neutral-foreground-selected: #212529;
+  --color-neutral-foreground-disabled: #6c757d;
+  --color-neutral-foreground-on-brand: #ffffff;
+
+  --color-neutral-foreground2-rest: #495057;
+  --color-neutral-foreground2-hover: #212529;
+  --color-neutral-foreground2-pressed: #212529;
+  --color-neutral-foreground2-selected: #212529;
+  --color-neutral-foreground2-brand-hover: #0d6efd;
+  --color-neutral-foreground2-brand-pressed: #0b5ed7;
+  --color-neutral-foreground2-brand-selected: #0d6efd;
+
+  --color-neutral-foreground3-rest: #6c757d;
+  --color-neutral-foreground3-hover: #495057;
+  --color-neutral-foreground3-pressed: #495057;
+  --color-neutral-foreground3-selected: #495057;
+  --color-neutral-foreground3-brand-hover: #0d6efd;
+  --color-neutral-foreground3-brand-pressed: #0b5ed7;
+  --color-neutral-foreground3-brand-selected: #0d6efd;
+
+  --color-neutral-foreground4-rest: #6c757d;
+
+  --color-neutral-background-rest: #ffffff;
+  --color-neutral-background-selected: #e9ecef;
+  --color-neutral-background-hover: #f8f9fa;
+  --color-neutral-background-pressed: #e9ecef;
+  --color-neutral-background-disabled: #e9ecef;
+  --color-neutral-background-brand-selected: #cfe2ff;
+  --color-neutral-background-brand-hover: #b6d4fe;
+  --color-neutral-background-brand-pressed: #9ec5fe;
+
+  --color-neutral-background2-rest: #f8f9fa;
+  --color-neutral-background2-hover: #e9ecef;
+  --color-neutral-background2-pressed: #dee2e6;
+  --color-neutral-background2-selected: #e9ecef;
+
+  --color-neutral-background3-rest: #e9ecef;
+  --color-neutral-background3-hover: #dee2e6;
+  --color-neutral-background3-pressed: #ced4da;
+  --color-neutral-background3-selected: #dee2e6;
+
+  --color-subtle-background-hover: #f8f9fa;
+  --color-subtle-background-pressed: #e9ecef;
+  --color-subtle-background-selected: #e9ecef;
+
+  --color-neutral-stroke-rest: #dee2e6;
+  --color-neutral-stroke-hover: #ced4da;
+  --color-neutral-stroke-pressed: #adb5bd;
+  --color-neutral-stroke-selected: #adb5bd;
+  --color-neutral-stroke-disabled: #ced4da;
+  --color-neutral-stroke-accessible: #212529;
+  --color-neutral-stroke-accessible-hover: #212529;
+  --color-neutral-stroke-accessible-pressed: #212529;
+  --color-neutral-stroke-accessible-selected: #0d6efd;
+  --color-brand-stroke-rest: #0d6efd;
+  --color-brand-stroke-hover: #0b5ed7;
+  --color-brand-stroke-pressed: #0a58ca;
+  --color-brand-stroke-selected: #0d6efd;
+
+  --border-radius-400: 6px;
+
+  --color-focus-border: #86b7fe;
+
+  --duration-fast: 150ms;
+  --easing-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --spacing-1: 0.25rem;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --elevation-card: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.75rem;
+  --font-size-h3: 1.5rem;
+  --font-size-h4: 1.25rem;
+  --font-size-h5: 1rem;
+  --font-size-h6: 0.875rem;
+  --font-weight-heading: 700;
+  --line-height-heading: 1.2;
+  --font-size-body: 1rem;
+  --line-height-body: 1.5;
+}
+
+:root[data-design='bootstrap'] .button--medium {
+  min-height: 38px;
+  padding: 0.375rem 0.75rem;
+}
+
+:root[data-design='bootstrap'] .button--small {
+  min-height: 31px;
+  padding: 0.25rem 0.5rem;
+}
+
+:root[data-design='bootstrap'] .button--large {
+  min-height: 48px;
+  padding: 0.5rem 1rem;
+}
+
+:root[data-design='bootstrap'] .badge {
+  border-radius: 0.375rem;
+  font-weight: 700;
+}
+
+:root[data-design='bootstrap'] .badge--rounded {
+  border-radius: 0.375rem;
+}
+
+:root[data-design='bootstrap'] .tabs {
+  border-bottom: 1px solid var(--color-neutral-stroke-rest);
+  gap: 0;
+}
+
+:root[data-design='bootstrap'] .tabs .node__content {
+  border-radius: 0.375rem 0.375rem 0 0;
+  border: 1px solid transparent;
+  border-bottom: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 1rem;
+  background: transparent;
+}
+
+:root[data-design='bootstrap'] .tabs .node__content:hover:not(:disabled) {
+  background-color: var(--color-neutral-background-hover);
+}
+
+:root[data-design='bootstrap'] .tabs .node--selected .node__content {
+  background-color: var(--color-neutral-background-rest);
+  border-color: var(--color-neutral-stroke-rest);
+  border-bottom-color: var(--color-neutral-background-rest);
+}
+
+:root[data-design='bootstrap'] .tabs .node__selector {
+  height: 2px;
+  background-color: var(--color-brand-primary);
+}
+
+:root[data-design='bootstrap'] .tabs.node--indicator-horizontal .node__indicator {
+  height: 2px;
+}
+
+:root[data-design='bootstrap'] .data-grid {
+  border-radius: 0.375rem;
+  overflow: hidden;
+  border: 1px solid var(--color-neutral-stroke-rest);
+}
+
+:root[data-design='bootstrap'] .data-grid__header-text {
+  font-weight: 700;
+}
+
+:root[data-design='bootstrap'] .data-grid__header-row {
+  border-bottom-width: 2px;
+}
+
+:root[data-design='bootstrap'] .data-grid__header-label-content {
+  padding: 0.75rem;
+}
+
+:root[data-design='bootstrap'] .data-grid__header-cell--selection {
+  padding: 0.75rem;
+}
+
+:root[data-design='bootstrap'] .data-grid__header-cell--expand {
+  padding: 0.5rem 0.75rem;
+}
+
+:root[data-design='bootstrap'] .data-grid__cell {
+  padding: 0.75rem;
+}
+
+:root[data-design='bootstrap'] .data-grid__cell--selection {
+  padding: 0.75rem;
+}
+
+:root[data-design='bootstrap'] .data-grid__filter-cell {
+  padding: 0.5rem 0.75rem;
+  min-height: 38px;
+}
+
+:root[data-design='bootstrap'] .data-grid__row-details-content {
+  padding: 0.75rem 1rem;
+  padding-left: calc(40px + 1rem);
+}
+
+:root[data-design='bootstrap'] .dialog__content {
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-neutral-stroke-rest);
+}
+
+:root[data-design='bootstrap'] .dialog__content--fullscreen {
+  border-radius: 0;
+  border: none;
+}
+
+:root[data-design='bootstrap'] .dialog__header {
+  padding: 1rem 1rem 0;
+}
+
+:root[data-design='bootstrap'] .dialog__title {
+  font-weight: 700;
+}
+
+:root[data-design='bootstrap'] .dialog__body {
+  padding: 1rem;
+  padding-top: 0.5rem;
+}
+
+:root[data-design='bootstrap'] .dialog__footer {
+  padding: 1rem;
+  padding-top: 0.5rem;
+}
+
+:root[data-design='bootstrap'] .drawer__content--left {
+  border-radius: 0 0.375rem 0 0;
+  border-right: 1px solid var(--color-neutral-stroke-rest);
+}
+
+:root[data-design='bootstrap'] .drawer__content--right {
+  border-radius: 0.375rem 0 0 0;
+  border-left: 1px solid var(--color-neutral-stroke-rest);
+}
+
+:root[data-design='bootstrap'] .drawer__content--top {
+  border-radius: 0 0 0.375rem 0.375rem;
+  border-top: 1px solid var(--color-neutral-stroke-rest);
+}
+
+:root[data-design='bootstrap'] .drawer__content--bottom {
+  border-radius: 0.375rem 0.375rem 0 0;
+  border-bottom: 1px solid var(--color-neutral-stroke-rest);
+}
+
+:root[data-design='bootstrap'] .drawer__header {
+  padding: 0.75rem 1rem;
+  padding-bottom: 0.75rem;
+}
+
+:root[data-design='bootstrap'] .drawer__title {
+  font-weight: 700;
+}
+
+:root[data-design='bootstrap'] .drawer__body {
+  padding: 1rem;
+}
+
+:root[data-design='bootstrap'] .drawer__footer {
+  padding: 1rem;
+  padding-top: 0.75rem;
+}
+
+:root[data-design='bootstrap'] .tooltip__popup__content {
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+:root[data-design='bootstrap'] .accordion {
+  border-radius: 0.375rem;
+}
+
+:root[data-design='bootstrap'] .accordion__panel {
+  padding: 0 1rem 0;
+}
+
+:root[data-design='bootstrap'] .accordion__panel-content {
+  padding: 0.5rem 0;
+}
+
+:root[data-design='bootstrap'] .menu {
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  border: 1px solid var(--color-neutral-stroke-rest);
+}
+
+:root[data-design='bootstrap'] .dropdown-panel {
+  border-radius: 0.375rem;
+  border: 1px solid var(--color-neutral-stroke-rest);
+}
+
+:root[data-design='bootstrap'] .progress-bar {
+  height: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+:root[data-design='bootstrap'] .progress-bar--small {
+  height: 0.25rem;
+}
+
+:root[data-design='bootstrap'] .progress-bar--large {
+  height: 1rem;
+}
+
+:root[data-design='bootstrap'] .input-wrapper--filled,
+:root[data-design='bootstrap'] .input-wrapper--filled-gray {
+  min-height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+}
+
+:root[data-design='bootstrap'] *:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+:root[data-design='bootstrap'][data-theme='dark'] *:focus-visible,
+:root[data-design='bootstrap'].dark *:focus-visible {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.5);
+}
+
+:root[data-design='bootstrap'] .input-wrapper input:focus-visible,
+:root[data-design='bootstrap'] .input-wrapper .input:focus-visible {
+  box-shadow: none;
+}
+
+:root[data-design='bootstrap'] .input-wrapper::after {
+  display: none;
+}
+
+:root[data-design='bootstrap'] .input-wrapper--filled,
+:root[data-design='bootstrap'] .input-wrapper--filled-gray {
+  border: 1px solid var(--color-neutral-stroke-rest);
+  border-bottom-color: var(--color-neutral-stroke-rest);
+
+  &:hover {
+    border-color: var(--color-neutral-stroke-hover);
+    border-bottom-color: var(--color-neutral-stroke-hover);
+  }
+
+  &:focus-within {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  }
+}
+
+:root[data-design='bootstrap'] .input-wrapper--filled-gray {
+  background-color: var(--color-neutral-background-rest);
+}
+
+:root[data-design='bootstrap'] .input-wrapper--filled.input-wrapper--error,
+:root[data-design='bootstrap'] .input-wrapper--filled-gray.input-wrapper--error {
+  &:focus-within {
+    border-color: var(--color-shared-red-foreground);
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+  }
+}
+
+:root[data-design='bootstrap'][data-theme='dark'],
+:root[data-design='bootstrap'].dark {
+  --color-brand-primary: #0d6efd;
+  --color-brand-primary-hover: #3d8bfd;
+  --color-brand-primary-pressed: #0a58ca;
+  --color-brand-primary-selected: #0a58ca;
+
+  --color-brand-foreground: #0d6efd;
+  --color-brand-foreground-hover: #3d8bfd;
+  --color-brand-foreground-pressed: #0a58ca;
+
+  --color-compound-brand-background: #0d6efd;
+  --color-compound-brand-background-hover: #3d8bfd;
+  --color-compound-brand-background-pressed: #0a58ca;
+  --color-compound-brand-foreground: #0d6efd;
+  --color-compound-brand-foreground-hover: #3d8bfd;
+  --color-compound-brand-foreground-pressed: #0a58ca;
+  --color-compound-brand-stroke: #0d6efd;
+  --color-compound-brand-stroke-hover: #3d8bfd;
+  --color-compound-brand-stroke-pressed: #0a58ca;
+
+  --color-accent-primary: #0d6efd;
+  --color-accent-primary-hover: #3d8bfd;
+  --color-accent-primary-pressed: #0a58ca;
+  --color-accent-primary-selected: #0a58ca;
+
+  --color-neutral-foreground-rest: #f8f9fa;
+  --color-neutral-foreground-hover: #f8f9fa;
+  --color-neutral-foreground-pressed: #f8f9fa;
+  --color-neutral-foreground-selected: #f8f9fa;
+  --color-neutral-foreground-disabled: #6c757d;
+  --color-neutral-foreground-on-brand: #ffffff;
+
+  --color-neutral-foreground2-rest: #dee2e6;
+  --color-neutral-foreground2-hover: #f8f9fa;
+  --color-neutral-foreground2-pressed: #f8f9fa;
+  --color-neutral-foreground2-selected: #f8f9fa;
+  --color-neutral-foreground2-brand-hover: #3d8bfd;
+  --color-neutral-foreground2-brand-pressed: #0a58ca;
+  --color-neutral-foreground2-brand-selected: #0d6efd;
+
+  --color-neutral-foreground3-rest: #adb5bd;
+  --color-neutral-foreground3-hover: #dee2e6;
+  --color-neutral-foreground3-pressed: #dee2e6;
+  --color-neutral-foreground3-selected: #dee2e6;
+  --color-neutral-foreground3-brand-hover: #3d8bfd;
+  --color-neutral-foreground3-brand-pressed: #0a58ca;
+  --color-neutral-foreground3-brand-selected: #0d6efd;
+
+  --color-neutral-foreground4-rest: #6c757d;
+
+  --color-neutral-background-rest: #212529;
+  --color-neutral-background-selected: #343a40;
+  --color-neutral-background-hover: #343a40;
+  --color-neutral-background-pressed: #495057;
+  --color-neutral-background-disabled: #343a40;
+  --color-neutral-background-brand-selected: #0a58ca;
+  --color-neutral-background-brand-hover: #0b5ed7;
+  --color-neutral-background-brand-pressed: #084298;
+
+  --color-neutral-background2-rest: #343a40;
+  --color-neutral-background2-hover: #495057;
+  --color-neutral-background2-pressed: #212529;
+  --color-neutral-background2-selected: #495057;
+
+  --color-neutral-background3-rest: #495057;
+  --color-neutral-background3-hover: #495057;
+  --color-neutral-background3-pressed: #343a40;
+  --color-neutral-background3-selected: #495057;
+
+  --color-subtle-background-hover: #343a40;
+  --color-subtle-background-pressed: #495057;
+  --color-subtle-background-selected: #343a40;
+
+  --color-neutral-stroke-rest: #495057;
+  --color-neutral-stroke-hover: #6c757d;
+  --color-neutral-stroke-pressed: #adb5bd;
+  --color-neutral-stroke-selected: #6c757d;
+  --color-neutral-stroke-disabled: #343a40;
+  --color-neutral-stroke-accessible: #adb5bd;
+  --color-neutral-stroke-accessible-hover: #dee2e6;
+  --color-neutral-stroke-accessible-pressed: #dee2e6;
+  --color-neutral-stroke-accessible-selected: #0d6efd;
+  --color-brand-stroke-rest: #0d6efd;
+  --color-brand-stroke-hover: #3d8bfd;
+  --color-brand-stroke-pressed: #0a58ca;
+  --color-brand-stroke-selected: #0d6efd;
+
+  --border-radius-400: 6px;
+
+  --color-focus-border: #86b7fe;
+
+  --elevation-card: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.4);
+}

@@ -11,11 +11,13 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from '../button';
 import { Appearance, Size, Orientation, QuickAction, Variant } from '../utils';
 import { IconComponent, IconName } from '../icon';
+import { RippleDirective } from '../../directives/ripple';
 
 @Component({
   selector: 'ui-card',
   templateUrl: './card.component.html',
   imports: [CommonModule, ButtonComponent, IconComponent],
+  hostDirectives: [{ directive: RippleDirective, inputs: ['enabled: clickable'] }],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {

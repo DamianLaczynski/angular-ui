@@ -19,7 +19,7 @@
   font-weight: $font-weight-semibold;
   overflow: hidden;
   box-sizing: border-box;
-  border-radius: $border-radius-400;
+  border-radius: var(--border-radius-400, #{$border-radius-400});
 
   &__icon {
     display: flex;
@@ -115,7 +115,7 @@
 // ==========================================================================
 
 .badge--rounded {
-  border-radius: $border-radius-400;
+  border-radius: var(--border-radius-400, #{$border-radius-400});
 }
 
 .badge--circular {

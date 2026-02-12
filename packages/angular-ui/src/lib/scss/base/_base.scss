@@ -116,6 +116,30 @@
   // Focus border color (light mode - black)
   --color-focus-border: #000000;
 
+  --duration-fast: #{$duration-fast};
+  --duration-faster: #{$duration-faster};
+  --duration-ultra-fast: #{$duration-ultra-fast};
+  --duration-normal: #{$duration-normal};
+  --easing-default: #{$easing-decelerate-min};
+  --easing-accelerate: #{$easing-accelerate-min};
+
+  --spacing-1: #{$spacing-1};
+  --spacing-2: #{$spacing-2};
+  --spacing-3: #{$spacing-3};
+  --spacing-4: #{$spacing-4};
+  --elevation-card: #{$elevation-2};
+
+  --font-size-h1: #{$font-size-800};
+  --font-size-h2: #{$font-size-700};
+  --font-size-h3: #{$font-size-600};
+  --font-size-h4: #{$font-size-500};
+  --font-size-h5: #{$font-size-400};
+  --font-size-h6: #{$font-size-300};
+  --font-weight-heading: #{$font-weight-bold};
+  --line-height-heading: #{$line-height-300};
+  --font-size-body: #{$font-size-400};
+  --line-height-body: #{$line-height-400};
+
   // Shared Colors
   --color-shared-red-foreground: #{$color-shared-red-foreground};
   --color-shared-red-foreground-hover: #{$color-shared-red-foreground-hover};

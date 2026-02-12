@@ -9,6 +9,35 @@
     ></ui-search>
   </div>
   <ui-nav [items]="navItems()"></ui-nav>
+  <div class="ds-sidebar__design-toggle">
+    <ui-button
+      [fullWidth]="true"
+      [variant]="isFluent() ? 'primary' : 'secondary'"
+      [appearance]="isFluent() ? 'filled' : 'outline'"
+      size="medium"
+      (click)="onDesignSystemChange(DesignSystem.Fluent)"
+    >
+      Fluent
+    </ui-button>
+    <ui-button
+      [fullWidth]="true"
+      [variant]="isMaterial() ? 'primary' : 'secondary'"
+      [appearance]="isMaterial() ? 'filled' : 'outline'"
+      size="medium"
+      (click)="onDesignSystemChange(DesignSystem.Material)"
+    >
+      Material
+    </ui-button>
+    <ui-button
+      [fullWidth]="true"
+      [variant]="isBootstrap() ? 'primary' : 'secondary'"
+      [appearance]="isBootstrap() ? 'filled' : 'outline'"
+      size="medium"
+      (click)="onDesignSystemChange(DesignSystem.Bootstrap)"
+    >
+      Bootstrap
+    </ui-button>
+  </div>
   <div class="ds-sidebar__theme-toggle">
     <ui-button
       [fullWidth]="true"
