@@ -59,12 +59,22 @@ import { KbdShowcaseComponent } from '@showcase/kbd/kbd.showcase.component';
 import { TooltipShowcaseComponent } from '@showcase/tooltip/tooltip.showcase.component';
 import { RatingShowcaseComponent } from '@showcase/rating/rating.showcase.component';
 import { VideoShowcaseComponent } from '@showcase/video/video.showcase.component';
+import { GettingStartedComponent } from '../../pages/docs/getting-started/getting-started.component';
+import { InstallationComponent } from '../../pages/docs/installation/installation.component';
 
 export const dsRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'accordion',
+    redirectTo: 'getting-started',
+  },
+  {
+    path: 'getting-started',
+    component: GettingStartedComponent,
+  },
+  {
+    path: 'installation',
+    component: InstallationComponent,
   },
   {
     path: 'accordion',

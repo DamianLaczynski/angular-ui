@@ -14,23 +14,100 @@
   position: relative;
 
   &__header {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: $spacing-4 $spacing-6;
-    background-color: var(--color-neutral-background-rest);
-    border-bottom: 1px solid var(--color-neutral-stroke-rest);
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-brand-primary) 18%, var(--color-neutral-background-rest)) 0%,
+      var(--color-neutral-background-rest) 50%,
+      color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-background-rest)) 100%
+    );
+    border-bottom: 2px solid
+      color-mix(in srgb, var(--color-brand-primary) 18%, var(--color-neutral-stroke-rest));
     flex-shrink: 0;
 
+    &::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--color-brand-primary) 25%, transparent),
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: 10%;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--color-brand-primary-pressed) 20%, transparent),
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    &__right {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: $spacing-4;
+    }
+
+    &__meta {
+      display: flex;
+      align-items: center;
+      gap: $spacing-3;
+    }
+
+    &__version {
+      font-size: $font-size-200;
+      color: var(--color-neutral-foreground2-rest);
+    }
+
+    &__link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-neutral-foreground2-rest);
+      transition: color $duration-fast $easing-ease-in-out;
+
+      &:hover {
+        color: var(--color-brand-primary);
+      }
+    }
+
     &__title {
-      font-size: $font-size-600;
+      position: relative;
+      z-index: 1;
+      font-size: $font-size-500;
       font-weight: $font-weight-semibold;
       color: var(--color-neutral-foreground-rest);
       margin: 0;
       line-height: 1.2;
+      cursor: pointer;
+      transition: color $duration-fast $easing-ease-in-out;
+
+      &:hover {
+        color: var(--color-brand-primary);
+      }
 
       @include respond-to(small) {
-        font-size: $font-size-500;
+        font-size: $font-size-400;
       }
     }
 
@@ -46,7 +123,8 @@
     overflow: auto;
     transition: transform $duration-fast $easing-ease-in-out;
     background-color: var(--color-neutral-background-rest);
-    border-right: 1px solid var(--color-neutral-stroke-rest);
+    border-right: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 12%, var(--color-neutral-stroke-rest));
     width: 280px;
     flex-shrink: 0;
 
@@ -83,6 +161,13 @@
     height: 100%;
     overflow: auto;
     min-width: 0;
+    background: linear-gradient(
+      135deg,
+      var(--color-neutral-background2-rest) 0%,
+      var(--color-neutral-background-rest) 50%,
+      color-mix(in srgb, var(--color-neutral-stroke-rest) 8%, var(--color-neutral-background-rest))
+        100%
+    );
   }
 
   &__overlay {
@@ -92,11 +177,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: color-mix(in srgb, var(--color-neutral-foreground-rest) 25%, transparent);
     z-index: calc($z-index-fixed - 1);
     opacity: 0;
-    transition: opacity $duration-fast $easing-ease-in-out;
+    transition: opacity $duration-normal $easing-ease-in-out;
     pointer-events: none;
+    backdrop-filter: blur(2px);
 
     @include respond-to(medium) {
       display: block;

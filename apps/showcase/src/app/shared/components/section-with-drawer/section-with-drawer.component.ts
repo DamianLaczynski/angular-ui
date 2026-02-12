@@ -35,6 +35,9 @@ import type { SectionDrawerFormControl } from './section-with-drawer.types';
           Customize
         </ui-button>
       </div>
+      @if (sectionDescription()) {
+        <p class="showcase__section__description">{{ sectionDescription() }}</p>
+      }
       <div class="showcase__option-section__box">
         <ng-content />
       </div>
@@ -85,6 +88,7 @@ import type { SectionDrawerFormControl } from './section-with-drawer.types';
 })
 export class SectionWithDrawerComponent {
   sectionTitle = input.required<string>();
+  sectionDescription = input<string>('');
   drawerTitle = input<string>('');
   formConfig = input.required<SectionDrawerFormControl[]>();
   formValues = input.required<Record<string, unknown>>();

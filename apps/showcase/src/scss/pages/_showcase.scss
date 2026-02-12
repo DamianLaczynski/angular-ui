@@ -7,16 +7,14 @@
 @use 'utils/functions' as *;
 
 .showcase {
-  // Base showcase container
-  padding: $spacing-8;
-  max-width: 1600px;
+  padding: clamp(32px, 6vw, 64px) clamp(24px, 4vw, 48px);
+  max-width: 1400px;
   margin: 0 auto;
   font-family: $font-family-base;
 
-  // Direct child headings (for backward compatibility)
   h2 {
     font-size: $font-size-700;
-    font-weight: $font-weight-bold;
+    font-weight: $font-weight-semibold;
     color: var(--color-neutral-foreground-rest);
     margin-bottom: $spacing-4;
   }
@@ -28,13 +26,13 @@
     margin-bottom: $spacing-4;
   }
 
-  // Elements
   &__title {
-    font-size: $font-size-800;
-    font-weight: $font-weight-bold;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: $font-weight-semibold;
     color: var(--color-neutral-foreground-rest);
-    margin-bottom: $spacing-4;
-    line-height: 1.3; // Better line height for text wrapping
+    margin-bottom: $spacing-3;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
@@ -42,8 +40,9 @@
   &__description {
     font-size: $font-size-400;
     color: var(--color-neutral-foreground2-rest);
-    margin-bottom: $spacing-12;
-    line-height: $line-height-400;
+    margin-bottom: $spacing-10;
+    line-height: 1.6;
+    max-width: 720px;
   }
 
   &__header {
@@ -67,11 +66,11 @@
 
     &__tag {
       font-family: $font-family-mono;
-      font-size: $font-size-300;
-      padding: $spacing-1 $spacing-2;
-      background: var(--color-neutral-background-hover);
-      border: 1px solid var(--color-neutral-stroke-rest);
-      border-radius: $border-radius-200;
+      font-size: $font-size-200;
+      padding: 4px 8px;
+      background: color-mix(in srgb, var(--color-brand-primary) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--color-brand-primary) 28%, transparent);
+      border-radius: $border-radius-400;
       color: var(--color-neutral-foreground2-rest);
     }
 
@@ -104,8 +103,10 @@
     &__box {
       padding: $spacing-4;
       background: var(--color-neutral-background-rest);
-      border: 1px solid var(--color-neutral-stroke-rest);
-      border-radius: $border-radius-400;
+      border: 1px solid
+        color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-stroke-rest));
+      border-radius: $border-radius-600;
+      transition: border-color $duration-fast $easing-ease-in-out;
     }
   }
 
@@ -130,7 +131,8 @@
       justify-content: space-between;
       gap: $spacing-4;
       margin-bottom: $spacing-4;
-      border-bottom: 2px solid var(--color-neutral-stroke-rest);
+      border-bottom: 2px solid
+        color-mix(in srgb, var(--color-brand-primary) 20%, var(--color-neutral-stroke-rest));
       padding-bottom: $spacing-2;
 
       .showcase__section__title {
@@ -146,16 +148,16 @@
       font-weight: $font-weight-semibold;
       color: var(--color-neutral-foreground-rest);
       margin-bottom: $spacing-6;
-      border-bottom: 2px solid var(--color-neutral-stroke-rest);
+      border-bottom: 2px solid
+        color-mix(in srgb, var(--color-brand-primary) 20%, var(--color-neutral-stroke-rest));
       padding-bottom: $spacing-2;
     }
 
-    // Section description
     &__description {
-      font-size: $font-size-300;
+      font-size: $font-size-400;
       color: var(--color-neutral-foreground2-rest);
       margin-bottom: $spacing-4;
-      line-height: $line-height-400;
+      line-height: 1.6;
     }
   }
 
@@ -199,8 +201,9 @@
     display: flex;
     flex-direction: column;
     gap: 0;
-    border: 1px solid var(--color-neutral-stroke-rest);
-    border-radius: $border-radius-400;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 16%, var(--color-neutral-stroke-rest));
+    border-radius: $border-radius-600;
     overflow: hidden;
   }
 
@@ -208,14 +211,19 @@
     display: grid;
     grid-template-columns: 120px repeat(6, 1fr);
     gap: 0;
-    border-bottom: 1px solid var(--color-neutral-stroke-rest);
+    border-bottom: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 12%, var(--color-neutral-stroke-rest));
 
     &:last-child {
       border-bottom: none;
     }
 
     &--header {
-      background: var(--color-neutral-background-hover);
+      background: color-mix(
+        in srgb,
+        var(--color-brand-primary) 8%,
+        var(--color-neutral-background-rest)
+      );
       font-weight: $font-weight-semibold;
       font-size: $font-size-300;
     }
@@ -226,7 +234,8 @@
     align-items: center;
     justify-content: center;
     padding: $spacing-2;
-    border-right: 1px solid var(--color-neutral-stroke-rest);
+    border-right: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 12%, var(--color-neutral-stroke-rest));
     min-height: 48px;
 
     &:last-child {
@@ -234,7 +243,8 @@
     }
 
     &--corner {
-      border-right: 1px solid var(--color-neutral-stroke-rest);
+      border-right: 1px solid
+        color-mix(in srgb, var(--color-brand-primary) 12%, var(--color-neutral-stroke-rest));
     }
 
     &--header {
@@ -319,8 +329,14 @@
   &__form-output {
     margin-top: $spacing-4;
     padding: $spacing-4;
-    background-color: var(--color-neutral-background-hover, #f5f5f5);
-    border-radius: $border-radius-400;
+    background: color-mix(
+      in srgb,
+      var(--color-brand-primary) 6%,
+      var(--color-neutral-background-rest)
+    );
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 20%, var(--color-neutral-stroke-rest));
+    border-radius: $border-radius-600;
 
     h4 {
       margin-bottom: $spacing-2;
@@ -346,8 +362,14 @@
   &__event-log {
     margin-top: $spacing-4;
     padding: $spacing-4;
-    background-color: var(--color-neutral-background-hover, #f5f5f5);
-    border-radius: $border-radius-400;
+    background: color-mix(
+      in srgb,
+      var(--color-brand-primary) 6%,
+      var(--color-neutral-background-rest)
+    );
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 20%, var(--color-neutral-stroke-rest));
+    border-radius: $border-radius-600;
 
     h4 {
       margin-bottom: $spacing-2;
@@ -373,9 +395,10 @@
     margin-top: $spacing-4;
     margin-bottom: $spacing-4;
     background: var(--color-neutral-background-rest);
-    border: 1px solid var(--color-neutral-stroke-rest);
-    border-radius: $border-radius-400;
-    padding: $spacing-4;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-stroke-rest));
+    border-radius: $border-radius-800;
+    padding: $spacing-6;
 
     // Scrollable modifier
     &--scrollable {
@@ -407,8 +430,9 @@
   &__info {
     margin-top: $spacing-2;
     padding: $spacing-2 $spacing-4;
-    background: var(--color-neutral-background-brand-selected, #d0e7ff);
-    border-radius: $border-radius-200;
+    background: color-mix(in srgb, var(--color-brand-primary) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--color-brand-primary) 25%, transparent);
+    border-radius: $border-radius-400;
     color: var(--color-neutral-foreground-rest);
     font-size: $font-size-300;
   }
@@ -417,8 +441,9 @@
     margin-top: $spacing-4;
     padding: $spacing-4;
     background: var(--color-neutral-background-rest);
-    border: 1px solid var(--color-neutral-stroke-rest);
-    border-radius: $border-radius-400;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-stroke-rest));
+    border-radius: $border-radius-600;
   }
 
   &__subsection-title {
@@ -541,8 +566,14 @@
     flex-wrap: wrap;
     gap: $spacing-4;
     padding: $spacing-4;
-    background-color: var(--color-neutral-background-hover, #f5f5f5);
-    border-radius: $border-radius-400;
+    background: color-mix(
+      in srgb,
+      var(--color-brand-primary) 6%,
+      var(--color-neutral-background2-rest)
+    );
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-stroke-rest));
+    border-radius: $border-radius-800;
 
     label {
       display: flex;
@@ -569,17 +600,18 @@
     flex-direction: column;
     gap: $spacing-4;
     padding: $spacing-6;
-    background: var(--color-neutral-background-2);
-    border-radius: $border-radius-400;
-    border: 1px solid var(--color-neutral-stroke-rest);
+    background: var(--color-neutral-background2-rest);
+    border-radius: $border-radius-600;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-stroke-rest));
 
-    // Controls - na górze
     &__controls {
       display: flex;
       flex-wrap: wrap;
       gap: $spacing-4;
       padding-bottom: $spacing-4;
-      border-bottom: 1px solid var(--color-neutral-stroke-rest);
+      border-bottom: 1px solid
+        color-mix(in srgb, var(--color-brand-primary) 12%, var(--color-neutral-stroke-rest));
     }
 
     &__control {
@@ -595,12 +627,12 @@
       color: var(--color-neutral-foreground2-rest);
     }
 
-    // Preview - w środku
     &__preview {
       padding: $spacing-4;
       background: var(--color-neutral-background-rest);
       border-radius: $border-radius-400;
-      border: 1px dashed var(--color-neutral-stroke-rest);
+      border: 1px dashed
+        color-mix(in srgb, var(--color-brand-primary) 20%, var(--color-neutral-stroke-rest));
     }
 
     // Info - na dole
@@ -623,12 +655,12 @@
       }
     }
 
-    // Actions - przyciski
     &__actions {
       display: flex;
       gap: $spacing-2;
       padding-top: $spacing-2;
-      border-top: 1px solid var(--color-neutral-stroke-rest);
+      border-top: 1px solid
+        color-mix(in srgb, var(--color-brand-primary) 12%, var(--color-neutral-stroke-rest));
     }
 
     @include respond-to(small) {
@@ -652,12 +684,15 @@
     margin-top: $spacing-5;
   }
 
-  // Event log items (nested inside event-log)
   .event-log {
     max-height: 300px;
     overflow-y: auto;
     padding: $spacing-4;
-    background-color: var(--color-neutral-background-hover, #f5f5f5);
+    background: color-mix(
+      in srgb,
+      var(--color-brand-primary) 4%,
+      var(--color-neutral-background-rest)
+    );
     border-radius: $border-radius-400;
     font-family: 'Courier New', monospace;
     font-size: $font-size-300;
@@ -700,7 +735,8 @@
       padding: $spacing-5;
       background: var(--color-neutral-background-rest);
       border-radius: $border-radius-800;
-      border: 1px solid var(--color-neutral-stroke-rest);
+      border: 1px solid
+        color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-stroke-rest));
       flex-shrink: 0;
     }
 
@@ -775,19 +811,20 @@
       gap: $spacing-2;
       padding: $spacing-4;
       background: var(--color-neutral-background-rest);
-      border: 1px solid var(--color-neutral-stroke-rest);
+      border: 1px solid
+        color-mix(in srgb, var(--color-brand-primary) 12%, var(--color-neutral-stroke-rest));
       border-radius: $border-radius-800;
       cursor: pointer;
       transition: all $duration-fast $easing-ease-in-out;
 
       &:hover {
         background: var(--color-neutral-background-hover);
-        border-color: var(--color-neutral-stroke-hover);
+        border-color: var(--color-brand-primary);
         box-shadow: $elevation-4;
         transform: translateY(-2px);
 
         .showcase__icon-showcase__icon-wrapper {
-          color: var(--color-neutral-foreground-rest);
+          color: var(--color-brand-primary);
         }
 
         .showcase__icon-showcase__name {
@@ -866,7 +903,8 @@
         color: var(--color-neutral-foreground-rest);
         margin-bottom: $spacing-6;
         padding-bottom: $spacing-2;
-        border-bottom: 2px solid var(--color-neutral-stroke-rest);
+        border-bottom: 2px solid
+          color-mix(in srgb, var(--color-brand-primary) 20%, var(--color-neutral-stroke-rest));
       }
 
       &__description {
@@ -900,11 +938,13 @@
       flex-direction: column;
       border-radius: $border-radius-400;
       overflow: hidden;
-      border: 1px solid var(--color-neutral-stroke-rest);
+      border: 1px solid
+        color-mix(in srgb, var(--color-brand-primary) 12%, var(--color-neutral-stroke-rest));
       background: var(--color-neutral-background-rest);
       transition: all $duration-fast $easing-ease-in-out;
 
       &:hover {
+        border-color: var(--color-brand-primary);
         box-shadow: $elevation-4;
         transform: translateY(-2px);
       }

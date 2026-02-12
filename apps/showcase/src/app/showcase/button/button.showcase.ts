@@ -35,9 +35,15 @@ import { ButtonInteractiveComponent } from './button.interactive';
       />
       <div class="showcase-content">
         <app-showcase-header title="Button" />
+        <p class="showcase__description">
+          The Button component triggers actions. It supports variants (primary, secondary, success,
+          etc.), appearances (filled, tint, outline, subtle), sizes, shapes, icons, and states like
+          disabled or loading. Use for form submissions, navigation, or any user-initiated action.
+        </p>
 
         <app-section-with-drawer
           sectionTitle="Overview"
+          sectionDescription="Complete matrix of all button combinations: variants (primary, secondary, success, etc.), appearances (filled, tint, outline, subtle), sizes, and shapes. Use the Customize drawer to toggle icon, disabled, loading, selected, and fullWidth states across all buttons."
           [formConfig]="overviewDrawerFormConfig"
           [formValues]="overviewFormValues()"
           (formValuesChange)="overviewFormValues.set($event)"
@@ -85,6 +91,7 @@ import { ButtonInteractiveComponent } from './button.interactive';
 
         <app-section-with-drawer
           sectionTitle="Appearance & Variant"
+          sectionDescription="Appearance controls the visual style (filled, tint, outline, subtle) while variant sets the semantic color (primary, secondary, success, warning, danger, info). These combine to create distinct button styles for different contexts and hierarchy levels."
           [formConfig]="appearanceVariantDrawerFormConfig"
           [formValues]="appearanceVariantFormValues()"
           (formValuesChange)="appearanceVariantFormValues.set($event)"
@@ -128,6 +135,7 @@ import { ButtonInteractiveComponent } from './button.interactive';
 
         <app-section-with-drawer
           sectionTitle="Icons"
+          sectionDescription="Buttons support optional icons from the Fluent icon set. Icons can be used alone (icon-only buttons) or alongside text. Each variant is shown with a different icon to demonstrate flexibility."
           [formConfig]="iconsDrawerFormConfig"
           [formValues]="iconFormValues()"
           (formValuesChange)="iconFormValues.set($event)"
@@ -169,6 +177,7 @@ import { ButtonInteractiveComponent } from './button.interactive';
 
         <app-section-with-drawer
           sectionTitle="Size"
+          sectionDescription="Three size options: small, medium (default), and large. Size affects padding, font size, and icon dimensions. Choose based on context—small for dense UIs, large for primary CTAs."
           [formConfig]="sizeDrawerFormConfig"
           [formValues]="sizeFormValues()"
           (formValuesChange)="sizeFormValues.set($event)"
@@ -195,6 +204,7 @@ import { ButtonInteractiveComponent } from './button.interactive';
 
         <app-section-with-drawer
           sectionTitle="Shapes"
+          sectionDescription="Border radius options: rounded (default), circular (pill-shaped, ideal for icon-only), and square. Shape affects the visual weight and works well with different use cases."
           [formConfig]="shapeDrawerFormConfig"
           [formValues]="shapeFormValues()"
           (formValuesChange)="shapeFormValues.set($event)"
@@ -247,6 +257,11 @@ import { ButtonInteractiveComponent } from './button.interactive';
 
         <section id="interactive-demo" class="showcase__section">
           <h2 class="showcase__section__title">Interactive Demo</h2>
+          <p class="showcase__section__description">
+            Experiment with all button options in real time. Change variant, appearance, size,
+            shape, add icons, and toggle states. The button emits click events—check the event log
+            to see interactions.
+          </p>
           <app-button-interactive />
         </section>
       </div>

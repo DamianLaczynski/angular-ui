@@ -226,6 +226,7 @@
               [ngModel]="getControlValue(control.key)"
               (selectionChange)="onControlChange(control.key, $event)"
               size="small"
+              inputVariant="filled-gray"
             />
           }
           @case ('text') {
@@ -234,6 +235,7 @@
               (ngModelChange)="onTextChange(control.key, $event)"
               [placeholder]="control.placeholder || ''"
               size="small"
+              inputVariant="filled-gray"
             />
           }
           @case ('textarea') {
@@ -243,6 +245,7 @@
               [placeholder]="control.placeholder || ''"
               [rows]="control.rows || 3"
               size="small"
+              inputVariant="filled-gray"
             />
           }
           @case ('number') {
@@ -253,6 +256,7 @@
               [max]="control.max"
               [step]="control.step || 1"
               size="small"
+              inputVariant="filled-gray"
             />
           }
           @case ('switch') {
@@ -260,6 +264,7 @@
               [ngModel]="getControlValue(control.key)"
               (ngModelChange)="onTextChange(control.key, $event)"
               size="small"
+              inputVariant="filled-gray"
             />
           }
           @case ('color') {

@@ -1,0 +1,44 @@
+<div class="docs-page">
+  <div class="docs-page__header">
+    <h1>Getting Started</h1>
+    <p class="docs-page__intro">
+      Learn how to install and use Angular UI components in your project.
+    </p>
+  </div>
+
+  <section class="docs-page__section">
+    <h2>Installation</h2>
+    <p>Install Angular UI using npm:</p>
+    <pre class="docs-page__code"><code>npm install angular-ui</code></pre>
+  </section>
+
+  <section class="docs-page__section">
+    <h2>Basic Usage</h2>
+    <p>Import the components you need in your Angular module or standalone component:</p>
+    <pre class="docs-page__code"><code>import &#123; ButtonComponent &#125; from 'angular-ui';
+
+@Component(&#123;
+  selector: 'app-example',
+  imports: [ButtonComponent],
+  template: `
+    &lt;ui-button variant="primary"&gt;Click me&lt;/ui-button&gt;
+  `
+&#125;)
+export class ExampleComponent &#123;&#125;</code></pre>
+  </section>
+
+  <section class="docs-page__section">
+    <h2>Theming</h2>
+    <p>Angular UI supports both light and dark themes out of the box.</p>
+    <p>You can customize the theme by overriding CSS variables in your global styles.</p>
+  </section>
+
+  <section class="docs-page__section">
+    <h2>Next Steps</h2>
+    <ul>
+      <li>Explore the component showcase to see all available components</li>
+      <li>Check out the API documentation for each component</li>
+      <li>Join our community for support and updates</li>
+    </ul>
+  </section>
+</div>

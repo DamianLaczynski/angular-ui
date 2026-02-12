@@ -38,9 +38,15 @@ const DEFAULT_IMAGE_URL = 'https://i.pravatar.cc/150?img=1';
       />
       <div class="showcase-content">
         <app-showcase-header title="Avatar" />
+        <p class="showcase__description">
+          Avatar displays a user's identity through image, initials, or icon. Supports variants,
+          appearances, sizes (small, medium, large), shapes (rounded, circular, square), and states
+          like disabled or loading. Use in headers, user lists, or profile cards.
+        </p>
 
         <app-section-with-drawer
           sectionTitle="Overview"
+          sectionDescription="Matrix of all avatar combinations: variants (primary, secondary, etc.) and appearances (filled, tint, outline, subtle). Use Customize to switch content type (initials, image, name, icon) and toggle disabled or loading states."
           [formConfig]="overviewDrawerFormConfig"
           [formValues]="overviewFormValues()"
           (formValuesChange)="overviewFormValues.set($event)"
@@ -82,6 +88,7 @@ const DEFAULT_IMAGE_URL = 'https://i.pravatar.cc/150?img=1';
 
         <app-section-with-drawer
           sectionTitle="Appearance & Variant"
+          sectionDescription="Appearance controls the fill style (filled, tint, outline, subtle) while variant sets the semantic color. Combine them for different contexts—e.g. filled primary for active user, outline secondary for inactive."
           [formConfig]="appearanceVariantDrawerFormConfig"
           [formValues]="appearanceVariantFormValues()"
           (formValuesChange)="appearanceVariantFormValues.set($event)"
@@ -123,6 +130,7 @@ const DEFAULT_IMAGE_URL = 'https://i.pravatar.cc/150?img=1';
 
         <app-section-with-drawer
           sectionTitle="Size"
+          sectionDescription="Three sizes: small (24px), medium (32px), large (48px). Choose based on context—small for compact lists, medium for headers, large for profile views."
           [formConfig]="sizeDrawerFormConfig"
           [formValues]="sizeFormValues()"
           (formValuesChange)="sizeFormValues.set($event)"
@@ -147,6 +155,7 @@ const DEFAULT_IMAGE_URL = 'https://i.pravatar.cc/150?img=1';
 
         <app-section-with-drawer
           sectionTitle="Shapes"
+          sectionDescription="Rounded (default), circular (pill), or square. Circular is common for user avatars; square fits grid layouts."
           [formConfig]="shapeDrawerFormConfig"
           [formValues]="shapeFormValues()"
           (formValuesChange)="shapeFormValues.set($event)"
@@ -171,6 +180,7 @@ const DEFAULT_IMAGE_URL = 'https://i.pravatar.cc/150?img=1';
 
         <app-section-with-drawer
           sectionTitle="States"
+          sectionDescription="Normal (default), Disabled (grayed out, non-interactive), and Loading (shows spinner while image or data loads). Use loading when fetching user data asynchronously."
           [formConfig]="statesDrawerFormConfig"
           [formValues]="statesFormValues()"
           (formValuesChange)="statesFormValues.set($event)"
@@ -195,6 +205,11 @@ const DEFAULT_IMAGE_URL = 'https://i.pravatar.cc/150?img=1';
 
         <section id="interactive-demo" class="showcase__section">
           <h2 class="showcase__section__title">Interactive Demo</h2>
+          <p class="showcase__section__description">
+            Try all avatar options: content type (image, initials, name, icon), variant, appearance,
+            size, shape. The avatar automatically derives initials from name when no image is
+            provided.
+          </p>
           <app-avatar-interactive />
         </section>
       </div>

@@ -1,19 +1,45 @@
-import { Component, signal, inject, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  signal,
+  inject,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  computed,
+} from '@angular/core';
 
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { DsSidebarComponent } from './components/ds-sidebar/ds-sidebar.component';
 import { SplitterPanel } from 'angular-ui';
 import { ButtonComponent } from 'angular-ui';
+import { IconComponent } from 'angular-ui';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
+import { ScrollService } from '@shared/scroll/scroll.service';
+import { ThemeMode, ThemeService } from '@shared/theme/theme.service';
 
 @Component({
   selector: 'app-ds',
-  imports: [RouterOutlet, DsSidebarComponent, ButtonComponent],
+  imports: [RouterOutlet, DsSidebarComponent, ButtonComponent, IconComponent],
   templateUrl: './ds.component.html',
 })
-export class DsComponent implements OnInit, OnDestroy {
+export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('mainContent') mainContent?: ElementRef<HTMLElement>;
+
   private readonly breakpointObserver = inject(BreakpointObserver);
+  private readonly router = inject(Router);
+  private readonly scrollService = inject(ScrollService);
+  private readonly themeService = inject(ThemeService);
+
+  readonly version = '1.0.0';
+  readonly githubUrl = 'https://github.com/your-org/angular-ui';
+  readonly npmUrl = 'https://www.npmjs.com/package/angular-ui';
+
+  isDarkMode = computed(() => this.themeService.$themeMode() === ThemeMode.Dark);
+  themeLabel = computed(() => (this.isDarkMode() ? 'Light mode' : 'Dark mode'));
+  themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));
   private breakpointSubscription?: Subscription;
 
   panels = signal<SplitterPanel[]>([
@@ -29,6 +55,12 @@ export class DsComponent implements OnInit, OnDestroy {
 
   isSidebarOpen = signal<boolean>(false);
   isMobile = signal<boolean>(false);
+
+  ngAfterViewInit(): void {
+    if (this.mainContent?.nativeElement) {
+      this.scrollService.register(this.mainContent.nativeElement);
+    }
+  }
 
   ngOnInit(): void {
     // Monitor breakpoint changes
@@ -48,6 +80,7 @@ export class DsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.breakpointSubscription?.unsubscribe();
+    this.scrollService.unregister();
   }
 
   toggleSidebar(): void {
@@ -56,5 +89,13 @@ export class DsComponent implements OnInit, OnDestroy {
 
   closeSidebar(): void {
     this.isSidebarOpen.set(false);
+  }
+
+  navigateToHome(): void {
+    this.router.navigate(['/']);
+  }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
   }
 }
