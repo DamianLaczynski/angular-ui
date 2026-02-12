@@ -1,11 +1,12 @@
-import { ComponentFixture, TestBed, fakeAsync, tick, flush } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DropdownComponent, DropdownItem } from './dropdown.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { of } from 'rxjs';
-import { QueryParams, QueryResult } from '@shared/api/models/query-params.model';
+import { QueryParams } from '../../../api';
+
+const flush = () => new Promise(r => setTimeout(r, 0));
+const tick = (ms = 0) => new Promise(r => setTimeout(r, ms));
 
 describe('DropdownComponent', () => {
   let component: DropdownComponent;
@@ -177,47 +178,47 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should open dropdown when toggle is called', fakeAsync(() => {
+    it('should open dropdown when toggle is called', async () => {
       expect(component.isOpen()).toBe(false);
 
       component.toggleDropdown();
-      tick();
+      await await flush();
 
       expect(component.isOpen()).toBe(true);
-    }));
+    });
 
-    it('should close dropdown when toggle is called on open dropdown', fakeAsync(() => {
+    it('should close dropdown when toggle is called on open dropdown', async () => {
       component.openDropdown();
-      tick();
+      await await flush();
       expect(component.isOpen()).toBe(true);
 
       component.toggleDropdown();
-      tick();
+      await await flush();
 
       expect(component.isOpen()).toBe(false);
-    }));
+    });
 
-    it('should emit opened event when dropdown opens', fakeAsync(() => {
+    it('should emit opened event when dropdown opens', async () => {
       let openedEmitted = false;
       component.opened.subscribe(() => (openedEmitted = true));
 
       component.openDropdown();
-      tick();
+      await await flush();
 
       expect(openedEmitted).toBe(true);
-    }));
+    });
 
-    it('should emit closed event when dropdown closes', fakeAsync(() => {
+    it('should emit closed event when dropdown closes', async () => {
       let closedEmitted = false;
       component.closed.subscribe(() => (closedEmitted = true));
 
       component.openDropdown();
-      tick();
+      await await flush();
       component.closeDropdown();
-      tick();
+      await await flush();
 
       expect(closedEmitted).toBe(true);
-    }));
+    });
 
     it('should not open dropdown when disabled', () => {
       fixture.componentRef.setInput('disabled', true);
@@ -228,31 +229,31 @@ describe('DropdownComponent', () => {
       expect(component.isOpen()).toBe(false);
     });
 
-    it('should close dropdown after selecting item in single mode', fakeAsync(() => {
+    it('should close dropdown after selecting item in single mode', async () => {
       component.openDropdown();
-      tick();
+      await await flush();
       expect(component.isOpen()).toBe(true);
 
       const item = createMockItems()[0];
       component.selectItem(item);
-      tick();
+      await await flush();
 
       expect(component.isOpen()).toBe(false);
-    }));
+    });
 
-    it('should keep dropdown open after selecting item in multi mode', fakeAsync(() => {
+    it('should keep dropdown open after selecting item in multi mode', async () => {
       fixture.componentRef.setInput('mode', 'multi');
       fixture.detectChanges();
 
       component.openDropdown();
-      tick();
+      await await flush();
 
       const item = createMockItems()[0];
       component.selectItem(item);
-      tick();
+      await await flush();
 
       expect(component.isOpen()).toBe(true);
-    }));
+    });
   });
 
   describe('Search Functionality', () => {
@@ -439,9 +440,9 @@ describe('DropdownComponent', () => {
       expect(component.isOpen()).toBe(true);
     });
 
-    it('should navigate down through items with ArrowDown', fakeAsync(() => {
+    it('should navigate down through items with ArrowDown', async () => {
       component.openDropdown(false);
-      tick();
+      await await flush();
 
       const items = component.selectableItems();
 
@@ -458,11 +459,11 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
 
       expect(component.activeDescendant()).toBe(component.getItemId(items[1]));
-    }));
+    });
 
-    it('should navigate up through items with ArrowUp', fakeAsync(() => {
+    it('should navigate up through items with ArrowUp', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       const items = component.selectableItems();
 
@@ -471,11 +472,11 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
 
       expect(component.activeDescendant()).toBe(component.getItemId(items[items.length - 1]));
-    }));
+    });
 
-    it('should wrap to first item when navigating down from last item', fakeAsync(() => {
+    it('should wrap to first item when navigating down from last item', async () => {
       component.openDropdown(false);
-      tick();
+      await await flush();
 
       const items = component.selectableItems();
 
@@ -495,11 +496,11 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
 
       expect(component.activeDescendant()).toBe(component.getItemId(items[0]));
-    }));
+    });
 
-    it('should navigate to first item on Home key', fakeAsync(() => {
+    it('should navigate to first item on Home key', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       const items = component.selectableItems();
       const event = new KeyboardEvent('keydown', { key: 'Home' });
@@ -507,11 +508,11 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
 
       expect(component.activeDescendant()).toBe(component.getItemId(items[0]));
-    }));
+    });
 
-    it('should navigate to last item on End key', fakeAsync(() => {
+    it('should navigate to last item on End key', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       const items = component.selectableItems();
       const event = new KeyboardEvent('keydown', { key: 'End' });
@@ -519,14 +520,14 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
 
       expect(component.activeDescendant()).toBe(component.getItemId(items[items.length - 1]));
-    }));
+    });
 
-    it('should select active item on Enter key', fakeAsync(() => {
+    it('should select active item on Enter key', async () => {
       fixture.componentRef.setInput('mode', 'multi');
       fixture.detectChanges();
 
       component.openDropdown(false);
-      tick();
+      await await flush();
 
       const items = component.selectableItems();
 
@@ -541,14 +542,14 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
 
       expect(component.selectedValues().has(items[0].value)).toBe(true);
-    }));
+    });
 
-    it('should select active item on Space key', fakeAsync(() => {
+    it('should select active item on Space key', async () => {
       fixture.componentRef.setInput('mode', 'multi');
       fixture.detectChanges();
 
       component.openDropdown(false);
-      tick();
+      await await flush();
 
       const items = component.selectableItems();
 
@@ -563,11 +564,11 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
 
       expect(component.selectedValues().has(items[0].value)).toBe(true);
-    }));
+    });
 
-    it('should close dropdown on Escape key', fakeAsync(() => {
+    it('should close dropdown on Escape key', async () => {
       component.openDropdown();
-      tick();
+      await await flush();
       expect(component.isOpen()).toBe(true);
 
       const event = new KeyboardEvent('keydown', { key: 'Escape' });
@@ -575,11 +576,11 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
 
       expect(component.isOpen()).toBe(false);
-    }));
+    });
 
-    it('should close dropdown on Tab key', fakeAsync(() => {
+    it('should close dropdown on Tab key', async () => {
       component.openDropdown();
-      tick();
+      await await flush();
       expect(component.isOpen()).toBe(true);
 
       const event = new KeyboardEvent('keydown', { key: 'Tab' });
@@ -587,7 +588,7 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
 
       expect(component.isOpen()).toBe(false);
-    }));
+    });
 
     it('should clear selection on Delete key in single mode', () => {
       const item = createMockItems()[0];
@@ -601,9 +602,9 @@ describe('DropdownComponent', () => {
       expect(component.selectedValues().size).toBe(0);
     });
 
-    it('should skip disabled items during navigation', fakeAsync(() => {
+    it('should skip disabled items during navigation', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       const selectableItems = component.selectableItems();
 
@@ -619,7 +620,7 @@ describe('DropdownComponent', () => {
         item => component.getItemId(item) === component.activeDescendant(),
       );
       expect(activeItem?.disabled).toBeFalsy();
-    }));
+    });
   });
 
   describe('Typeahead Search', () => {
@@ -628,32 +629,32 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should find item starting with typed character', fakeAsync(() => {
+    it('should find item starting with typed character', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       const event = new KeyboardEvent('keydown', { key: 'a' });
       component.onKeyDown(event);
-      tick(1100); // Wait for typeahead timeout
+      await tick(1100); // Wait for typeahead timeout
       fixture.detectChanges();
 
       const activeItem = component
         .selectableItems()
         .find(item => component.getItemId(item) === component.activeDescendant());
       expect(activeItem?.label).toBe('Apple');
-    }));
+    });
 
-    it('should accumulate characters for typeahead', fakeAsync(() => {
+    it('should accumulate characters for typeahead', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       const event1 = new KeyboardEvent('keydown', { key: 'b' });
       component.onKeyDown(event1);
-      tick(100);
+      await tick(100);
 
       const event2 = new KeyboardEvent('keydown', { key: 'a' });
       component.onKeyDown(event2);
-      tick(100);
+      await tick(100);
       fixture.detectChanges();
 
       const activeItem = component
@@ -661,22 +662,22 @@ describe('DropdownComponent', () => {
         .find(item => component.getItemId(item) === component.activeDescendant());
       expect(activeItem?.label).toBe('Banana');
 
-      tick(1000); // Clear typeahead
-    }));
+      await tick(1000); // Clear typeahead
+    });
 
-    it('should reset typeahead string after timeout', fakeAsync(() => {
+    it('should reset typeahead string after timeout', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       const event1 = new KeyboardEvent('keydown', { key: 'b' });
       component.onKeyDown(event1);
-      tick(1100); // Wait for timeout
+      await tick(1100); // Wait for timeout
       fixture.detectChanges();
 
       // After timeout, 'a' should search from beginning, not continue 'ba'
       const event2 = new KeyboardEvent('keydown', { key: 'a' });
       component.onKeyDown(event2);
-      tick(100);
+      await tick(100);
       fixture.detectChanges();
 
       const activeItem = component
@@ -684,17 +685,17 @@ describe('DropdownComponent', () => {
         .find(item => component.getItemId(item) === component.activeDescendant());
       expect(activeItem?.label).toBe('Apple');
 
-      tick(1000);
-    }));
+      await tick(1000);
+    });
 
-    it('should wrap around when searching', fakeAsync(() => {
+    it('should wrap around when searching', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       // First 'o' finds Option 1
       const event1 = new KeyboardEvent('keydown', { key: 'o' });
       component.onKeyDown(event1);
-      tick(100);
+      await tick(100);
       fixture.detectChanges();
 
       let activeItem = component
@@ -702,12 +703,12 @@ describe('DropdownComponent', () => {
         .find(item => component.getItemId(item) === component.activeDescendant());
       expect(activeItem?.label).toBe('Option 1');
 
-      tick(1100); // Reset typeahead
+      await tick(1100); // Reset typeahead
 
       // Second 'o' should find next option starting with 'o'
       const event2 = new KeyboardEvent('keydown', { key: 'o' });
       component.onKeyDown(event2);
-      tick(100);
+      await tick(100);
       fixture.detectChanges();
 
       activeItem = component
@@ -715,8 +716,8 @@ describe('DropdownComponent', () => {
         .find(item => component.getItemId(item) === component.activeDescendant());
       expect(activeItem?.label).toBe('Option 2');
 
-      tick(1000);
-    }));
+      await tick(1000);
+    });
   });
 
   describe('ControlValueAccessor', () => {
@@ -775,7 +776,7 @@ describe('DropdownComponent', () => {
     });
 
     it('should call onChange when selection changes', () => {
-      const onChangeSpy = jasmine.createSpy('onChange');
+      const onChangeSpy = vi.fn();
       component.registerOnChange(onChangeSpy);
 
       const item = createMockItems()[0];
@@ -819,7 +820,7 @@ describe('DropdownComponent', () => {
   });
 
   describe('Data Source (Dynamic Loading)', () => {
-    it('should use dataSource for dynamic items', fakeAsync(() => {
+    it('should use dataSource for dynamic items', async () => {
       const mockDataSource = (params: QueryParams<any>) => {
         return of({
           items: [
@@ -843,10 +844,10 @@ describe('DropdownComponent', () => {
         expect(result.items[0].label).toBe('Dynamic 1');
       });
 
-      tick();
-    }));
+      await await flush();
+    });
 
-    it('should pass search term to dataSource', fakeAsync(() => {
+    it('should pass search term to dataSource', async () => {
       let capturedParams: QueryParams<any> | undefined;
 
       const mockDataSource = (params: QueryParams<any>) => {
@@ -869,12 +870,12 @@ describe('DropdownComponent', () => {
       const dataSourceFn = component.scrollContainerDataSource();
       dataSourceFn(1, 20).subscribe();
 
-      tick();
+      await await flush();
 
       expect(capturedParams?.searchTerm).toBe('test');
-    }));
+    });
 
-    it('should not filter items client-side when using dataSource', () => {
+    it('should not filter items client-side when using dataSource', async () => {
       const mockDataSource = (params: QueryParams<any>) => {
         return of({
           items: createMockItems(),
@@ -888,17 +889,21 @@ describe('DropdownComponent', () => {
       fixture.componentRef.setInput('dataSource', mockDataSource);
       fixture.detectChanges();
 
+      component.openDropdown();
+      await flush();
+      await tick(100);
+
       component.searchQuery.set('apple');
       fixture.detectChanges();
+      await flush();
 
-      // Should return all items, not filtered
       const available = component.availableItems();
       expect(available.length).toBe(5);
     });
   });
 
   describe('Static Items Pagination', () => {
-    it('should paginate static items correctly', fakeAsync(() => {
+    it('should paginate static items correctly', async () => {
       const items = createMockItems();
       fixture.componentRef.setInput('items', items);
       fixture.componentRef.setInput('pageSize', 2);
@@ -914,10 +919,10 @@ describe('DropdownComponent', () => {
         expect(result.hasPreviousPage).toBe(false);
       });
 
-      tick();
-    }));
+      await await flush();
+    });
 
-    it('should return correct page 2', fakeAsync(() => {
+    it('should return correct page 2', async () => {
       const items = createMockItems();
       fixture.componentRef.setInput('items', items);
       fixture.componentRef.setInput('pageSize', 2);
@@ -933,10 +938,10 @@ describe('DropdownComponent', () => {
         expect(result.hasPreviousPage).toBe(true);
       });
 
-      tick();
-    }));
+      await await flush();
+    });
 
-    it('should handle last page correctly', fakeAsync(() => {
+    it('should handle last page correctly', async () => {
       const items = createMockItems();
       fixture.componentRef.setInput('items', items);
       fixture.componentRef.setInput('pageSize', 2);
@@ -951,8 +956,8 @@ describe('DropdownComponent', () => {
         expect(result.hasPreviousPage).toBe(true);
       });
 
-      tick();
-    }));
+      await await flush();
+    });
   });
 
   describe('Item Selection State', () => {
@@ -1056,9 +1061,9 @@ describe('DropdownComponent', () => {
       expect(component.getItemId(item)).toBe('dropdown-option-test-dropdown-1');
     });
 
-    it('should set active descendant when navigating', fakeAsync(() => {
+    it('should set active descendant when navigating', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
       component.onKeyDown(event);
@@ -1066,11 +1071,11 @@ describe('DropdownComponent', () => {
 
       expect(component.activeDescendant()).toBeTruthy();
       expect(component.isNavigating()).toBe(true);
-    }));
+    });
 
-    it('should clear active descendant when dropdown closes', fakeAsync(() => {
+    it('should clear active descendant when dropdown closes', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
       component.onKeyDown(event);
@@ -1081,11 +1086,11 @@ describe('DropdownComponent', () => {
 
       expect(component.activeDescendant()).toBeNull();
       expect(component.isNavigating()).toBe(false);
-    }));
+    });
 
-    it('should identify active item correctly', fakeAsync(() => {
+    it('should identify active item correctly', async () => {
       component.openDropdown(false);
-      tick();
+      await await flush();
 
       const items = component.selectableItems();
 
@@ -1096,7 +1101,7 @@ describe('DropdownComponent', () => {
 
       expect(component.isItemActive(items[0])).toBe(true);
       expect(component.isItemActive(items[1])).toBe(false);
-    }));
+    });
   });
 
   describe('Mouse Interaction', () => {
@@ -1105,9 +1110,9 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should disable keyboard navigation on mouse enter', fakeAsync(() => {
+    it('should disable keyboard navigation on mouse enter', async () => {
       component.openDropdown(true);
-      tick();
+      await await flush();
 
       const event = new KeyboardEvent('keydown', { key: 'ArrowDown' });
       component.onKeyDown(event);
@@ -1118,7 +1123,7 @@ describe('DropdownComponent', () => {
       fixture.detectChanges();
 
       expect(component.isNavigating()).toBe(false);
-    }));
+    });
   });
 
   describe('Edge Cases', () => {
@@ -1214,7 +1219,7 @@ describe('DropdownComponent', () => {
   });
 
   describe('Complex Scenarios', () => {
-    it('should handle rapid selection changes', fakeAsync(() => {
+    it('should handle rapid selection changes', async () => {
       fixture.componentRef.setInput('items', createMockItems());
       fixture.detectChanges();
 
@@ -1222,17 +1227,17 @@ describe('DropdownComponent', () => {
 
       // Rapidly select different items
       component.selectItem(items[0]);
-      tick(10);
+      await tick(10);
       component.selectItem(items[1]);
-      tick(10);
+      await tick(10);
       component.selectItem(items[4]);
-      tick(10);
+      await tick(10);
       fixture.detectChanges();
 
       // Only last selection should remain in single mode
       expect(component.selectedValues().has(5)).toBe(true);
       expect(component.selectedValues().size).toBe(1);
-    }));
+    });
 
     it('should handle search with selection in multi mode', () => {
       fixture.componentRef.setInput('items', createMockItems());

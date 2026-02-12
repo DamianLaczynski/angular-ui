@@ -157,30 +157,6 @@ body.dark-theme {
   // Focus border color (dark mode - white)
   --color-focus-border: #ffffff;
 
-  // Milkdown Crepe Theme Variables - Mapped to Fluent 2 Design System (Dark)
-  --crepe-color-background: var(--color-neutral-background-rest);
-  --crepe-color-on-background: var(--color-neutral-foreground-rest);
-  --crepe-color-surface: var(--color-neutral-background2-rest);
-  --crepe-color-surface-low: var(--color-neutral-background3-rest);
-  --crepe-color-on-surface: var(--color-neutral-foreground-rest);
-  --crepe-color-on-surface-variant: var(--color-neutral-foreground2-rest);
-  --crepe-color-outline: var(--color-neutral-stroke-rest);
-  --crepe-color-primary: var(--color-brand-foreground);
-  --crepe-color-secondary: var(--color-neutral-background-brand-selected);
-  --crepe-color-on-secondary: var(--color-brand-foreground);
-  --crepe-color-inverse: var(--color-neutral-foreground-rest);
-  --crepe-color-on-inverse: var(--color-neutral-background-rest);
-  --crepe-color-inline-code: var(--color-shared-red-foreground);
-  --crepe-color-error: var(--color-shared-red-foreground);
-  --crepe-color-hover: var(--color-neutral-background-hover);
-  --crepe-color-selected: var(--color-neutral-background-selected);
-  --crepe-color-inline-area: var(--color-neutral-background3-rest);
-  --crepe-font-title: #{$crepe-font-title};
-  --crepe-font-default: #{$crepe-font-default};
-  --crepe-font-code: #{$crepe-font-code};
-  --crepe-shadow-1: #{$crepe-shadow-1};
-  --crepe-shadow-2: #{$crepe-shadow-2};
-
   // Fluent 2 CSS Variables (for compatibility)
   --Neutral-Foreground-1-Rest: #f5f5f5;
   --Neutral-Foreground-Disabled-Rest: #6b6b6b;

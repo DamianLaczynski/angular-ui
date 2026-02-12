@@ -318,30 +318,3 @@ $easing-decelerate-min: cubic-bezier(0.33, 0, 0.1, 1);
 $easing-ease-in-out-max: cubic-bezier(0.8, 0, 0.2, 1);
 $easing-ease-in-out: cubic-bezier(0.33, 0, 0.67, 1);
 $easing-linear: cubic-bezier(0, 0, 1, 1);
-
-// Milkdown Crepe Theme Variables - Mapped to Fluent 2 Design System
-// Light theme
-$crepe-color-background: #{$color-neutral-background-rest};
-$crepe-color-on-background: #{$color-neutral-foreground-rest};
-$crepe-color-surface: #{$color-neutral-background2-rest};
-$crepe-color-surface-low: #{$color-neutral-background3-rest};
-$crepe-color-on-surface: #{$color-neutral-foreground-rest};
-$crepe-color-on-surface-variant: #{$color-neutral-foreground2-rest};
-$crepe-color-outline: #{$color-neutral-stroke-rest};
-$crepe-color-primary: #{$color-brand-primary};
-$crepe-color-secondary: #{$color-neutral-background-brand-selected};
-$crepe-color-on-secondary: #{$color-brand-foreground};
-$crepe-color-inverse: #{$color-neutral-foreground-rest};
-$crepe-color-on-inverse: #{$color-neutral-background-rest};
-$crepe-color-inline-code: #{$color-shared-red-foreground};
-$crepe-color-error: #{$color-shared-red-foreground};
-$crepe-color-hover: #{$color-neutral-background-hover};
-$crepe-color-selected: #{$color-neutral-background-selected};
-$crepe-color-inline-area: #{$color-neutral-background3-rest};
-
-$crepe-font-title: #{$font-family-secondary};
-$crepe-font-default: #{$font-family-base};
-$crepe-font-code: #{$font-family-mono};
-
-$crepe-shadow-1: #{$elevation-2};
-$crepe-shadow-2: #{$elevation-4};

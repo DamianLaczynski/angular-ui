@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement, TemplateRef } from '@angular/core';
+import { TemplateRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { AccordionComponent } from './accordion.component';
 import { TreeNodeComponent } from '../tree-node/tree-node.component';

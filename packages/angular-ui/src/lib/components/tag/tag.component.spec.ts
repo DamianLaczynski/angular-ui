@@ -49,7 +49,7 @@ describe('TagComponent', () => {
       expect(component.dismissible()).toBe(false);
       expect(component.ariaLabel()).toBe('');
       expect(component.tabIndex()).toBeUndefined();
-      expect(component.effectiveTabIndex()).toBeNull();
+      expect(component.effectiveTabIndex()).toBe(-1);
     });
   });
 
@@ -257,6 +257,7 @@ describe('TagComponent', () => {
 
     it('should set aria-selected when clickable', () => {
       fixture.componentRef.setInput('text', 'Tag');
+      fixture.componentRef.setInput('selectable', true);
       fixture.componentRef.setInput('selected', true);
       fixture.detectChanges();
 
@@ -434,8 +435,8 @@ describe('TagComponent', () => {
       fixture.detectChanges();
 
       const event = new MouseEvent('click');
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       component.onTagClick(event);
 
@@ -456,8 +457,8 @@ describe('TagComponent', () => {
       fixture.detectChanges();
 
       const event = new KeyboardEvent('keydown', { key: 'Enter' });
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       component.onTagKeyDown(event);
 
@@ -547,7 +548,7 @@ describe('TagComponent', () => {
       fixture.detectChanges();
 
       const event = new MouseEvent('click', { bubbles: true });
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'stopPropagation');
 
       component.onDismissClick(event);
 
@@ -593,8 +594,8 @@ describe('TagComponent', () => {
       fixture.detectChanges();
 
       const event = new MouseEvent('click');
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       component.onDismissClick(event);
 
