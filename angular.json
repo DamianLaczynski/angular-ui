@@ -20,15 +20,11 @@
             "outputPath": "dist/showcase",
             "index": "apps/showcase/src/index.html",
             "browser": "apps/showcase/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "apps/showcase/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "packages/angular-ui/src/lib/scss"
-              ]
+              "includePaths": ["packages/angular-ui/src/lib/scss"]
             },
             "assets": [
               {
@@ -87,53 +83,16 @@
           "builder": "@angular/build:extract-i18n"
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
             "tsConfig": "apps/showcase/tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "packages/angular-ui/src/lib/scss"
-              ]
-            },
-            "karmaConfig": "karma.conf.js",
-            "codeCoverage": true,
-            "codeCoverageExclude": [
-              "apps/showcase/src/**/*.spec.ts",
-              "apps/showcase/src/test.ts",
-              "apps/showcase/src/**/*.module.ts",
-              "apps/showcase/src/environments/**/*",
-              "apps/showcase/src/main.ts"
-            ],
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              },
-              {
-                "glob": "**/*",
-                "input": "node_modules/@fluentui/svg-icons/icons",
-                "output": "assets/icons"
-              }
-            ],
-            "styles": [
-              "packages/angular-ui/src/lib/scss/main.scss",
-              "apps/showcase/src/scss/main.scss"
-            ],
-            "scripts": []
+            "setupFiles": ["packages/angular-ui/src/test-setup.ts"]
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "apps/showcase/src/**/*.ts",
-              "apps/showcase/src/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/showcase/src/**/*.ts", "apps/showcase/src/**/*.html"]
           }
         }
       }
@@ -159,25 +118,21 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "tsConfig": "packages/angular-ui/tsconfig.spec.json"
+            "tsConfig": "packages/angular-ui/tsconfig.spec.json",
+            "setupFiles": ["packages/angular-ui/src/test-setup.ts"]
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "packages/angular-ui/**/*.ts",
-              "packages/angular-ui/**/*.html"
-            ]
+            "lintFilePatterns": ["packages/angular-ui/**/*.ts", "packages/angular-ui/**/*.html"]
           }
         }
       }
     }
   },
   "cli": {
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ],
+    "schematicCollections": ["@angular-eslint/schematics"],
     "analytics": false
   },
   "schematics": {

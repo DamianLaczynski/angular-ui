@@ -1,15 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement, TemplateRef } from '@angular/core';
+import { TemplateRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { TreeNodeComponent, TreeNode } from './tree-node.component';
 import { NodeComponent } from '../node/node.component';
 import { IconComponent } from '../icon/icon.component';
-import { Size, Shape, ChevronPosition, Appearance, Orientation, Variant } from '../utils';
+import { Size } from '../utils';
 import { IconName } from '../icon';
 
 describe('TreeNodeComponent', () => {
-  let component: TreeNodeComponent;
-  let fixture: ComponentFixture<TreeNodeComponent>;
+  let component: TreeNodeComponent<any>;
+  let fixture: ComponentFixture<TreeNodeComponent<any>>;
 
   const createMockNode = (overrides?: Partial<TreeNode>): TreeNode => ({
     id: 'node-1',
@@ -27,7 +27,7 @@ describe('TreeNodeComponent', () => {
       imports: [TreeNodeComponent, NodeComponent, IconComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TreeNodeComponent);
+    fixture = TestBed.createComponent(TreeNodeComponent<any>);
     component = fixture.componentInstance;
   });
 
@@ -424,7 +424,7 @@ describe('TreeNodeComponent', () => {
       fixture.detectChanges();
 
       const event = new MouseEvent('click', { bubbles: true });
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'stopPropagation');
 
       component.onChevronClick(event);
 
@@ -590,8 +590,8 @@ describe('TreeNodeComponent', () => {
       fixture.detectChanges();
 
       const event = new KeyboardEvent('keydown', { key: 'Enter' });
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       component.onKeyDown(event);
 
@@ -611,7 +611,7 @@ describe('TreeNodeComponent', () => {
       fixture.detectChanges();
 
       const event = new KeyboardEvent('keydown', { key: ' ' });
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault');
 
       component.onKeyDown(event);
 
@@ -625,7 +625,7 @@ describe('TreeNodeComponent', () => {
       fixture.detectChanges();
 
       const event = new KeyboardEvent('keydown', { key: 'ArrowRight' });
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault');
 
       component.onKeyDown(event);
 
@@ -653,7 +653,7 @@ describe('TreeNodeComponent', () => {
       fixture.detectChanges();
 
       const event = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault');
 
       component.onKeyDown(event);
 
@@ -701,7 +701,7 @@ describe('TreeNodeComponent', () => {
       fixture.detectChanges();
 
       const event = new KeyboardEvent('keydown', { key: '*' });
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault');
 
       component.onKeyDown(event);
 
@@ -855,8 +855,8 @@ describe('TreeNodeComponent', () => {
         value: { dropEffect: '' },
         writable: true,
       });
-      spyOn(dragEvent, 'preventDefault');
-      spyOn(dragEvent, 'stopPropagation');
+      vi.spyOn(dragEvent, 'preventDefault');
+      vi.spyOn(dragEvent, 'stopPropagation');
 
       component.onBetweenElementsDragOver(dragEvent, mockNode, 'before');
 
@@ -873,7 +873,7 @@ describe('TreeNodeComponent', () => {
       fixture.detectChanges();
 
       const dragEvent = new DragEvent('dragover');
-      spyOn(dragEvent, 'preventDefault');
+      vi.spyOn(dragEvent, 'preventDefault');
 
       component.onBetweenElementsDragOver(dragEvent, mockNode, 'before');
 
@@ -888,7 +888,7 @@ describe('TreeNodeComponent', () => {
       fixture.detectChanges();
 
       const dragEvent = new DragEvent('dragover');
-      spyOn(dragEvent, 'preventDefault');
+      vi.spyOn(dragEvent, 'preventDefault');
 
       component.onBetweenElementsDragOver(dragEvent, mockNode, 'before');
 
@@ -925,8 +925,8 @@ describe('TreeNodeComponent', () => {
       fixture.detectChanges();
 
       const dragEvent = new DragEvent('drop', { bubbles: true, cancelable: true });
-      spyOn(dragEvent, 'preventDefault');
-      spyOn(dragEvent, 'stopPropagation');
+      vi.spyOn(dragEvent, 'preventDefault');
+      vi.spyOn(dragEvent, 'stopPropagation');
 
       component.onBetweenElementsDrop(dragEvent, mockNode, 'after');
 
@@ -944,7 +944,7 @@ describe('TreeNodeComponent', () => {
       fixture.detectChanges();
 
       const dragEvent = new DragEvent('drop');
-      spyOn(dragEvent, 'preventDefault');
+      vi.spyOn(dragEvent, 'preventDefault');
 
       component.onBetweenElementsDrop(dragEvent, mockNode, 'before');
 

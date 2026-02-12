@@ -585,12 +585,12 @@ export class DropdownComponent extends FieldComponent implements OnDestroy {
 
   private scrollToActiveItem(): void {
     const overlayRef = this.overlayHandle?.overlayRef;
-    if (!this.activeDescendant() || !overlayRef) {
+    if (!this.activeDescendant() || !overlayRef?.overlayElement) {
       return;
     }
 
     const activeElement = overlayRef.overlayElement.querySelector(`#${this.activeDescendant()}`);
-    if (activeElement) {
+    if (activeElement && typeof activeElement.scrollIntoView === 'function') {
       activeElement.scrollIntoView({
         block: 'nearest',
         behavior: 'smooth',

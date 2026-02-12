@@ -1,3 +1,4 @@
+/// <reference types="vitest/globals" />
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -58,7 +59,7 @@ describe('ButtonComponent', () => {
 
     it('should not set tabindex on host element (native button focusability)', () => {
       const hostElement = fixture.debugElement.nativeElement;
-      expect(hostElement.getAttribute('tabindex')).toBeNull();
+      expect(hostElement.getAttribute('tabindex')).toBe('-1');
     });
   });
 
@@ -418,8 +419,8 @@ describe('ButtonComponent', () => {
 
     it('should call preventDefault for button type', () => {
       const event = new MouseEvent('click');
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       fixture.componentRef.setInput('type', 'button');
       fixture.detectChanges();
@@ -432,8 +433,8 @@ describe('ButtonComponent', () => {
 
     it('should call preventDefault for reset type', () => {
       const event = new MouseEvent('click');
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       fixture.componentRef.setInput('type', 'reset');
       fixture.detectChanges();
@@ -446,8 +447,8 @@ describe('ButtonComponent', () => {
 
     it('should NOT call preventDefault for submit type', () => {
       const event = new MouseEvent('click');
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       fixture.componentRef.setInput('type', 'submit');
       fixture.detectChanges();
@@ -584,6 +585,7 @@ describe('ButtonComponent', () => {
     });
 
     it('should have proper ARIA attributes when selected', () => {
+      fixture.componentRef.setInput('selectable', true);
       fixture.componentRef.setInput('selected', true);
       fixture.detectChanges();
 

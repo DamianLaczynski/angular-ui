@@ -35,19 +35,13 @@
       <ng-template #content let-node>
         <div class="tree-node__content-wrapper">
           @if (shouldShowChevron() && chevronPosition() === 'before') {
-            @if (expanded()) {
-              <ui-icon
-                [icon]="chevronIconExpanded()"
-                [size]="size()"
-                (click)="onChevronClick($event)"
-              />
-            } @else {
-              <ui-icon
-                [icon]="chevronIconCollapsed()"
-                [size]="size()"
-                (click)="onChevronClick($event)"
-              />
-            }
+            <span class="tree-node__chevron" (click)="onChevronClick($event)">
+              @if (expanded()) {
+                <ui-icon [icon]="chevronIconExpanded()" [size]="size()" />
+              } @else {
+                <ui-icon [icon]="chevronIconCollapsed()" [size]="size()" />
+              }
+            </span>
           }
 
           <div class="tree-node__content-main">
@@ -82,19 +76,13 @@
               </div>
             }
             @if (shouldShowChevron() && chevronPosition() === 'after') {
-              @if (expanded()) {
-                <ui-icon
-                  [icon]="chevronIconExpanded()"
-                  [size]="size()"
-                  (click)="onChevronClick($event)"
-                />
-              } @else {
-                <ui-icon
-                  [icon]="chevronIconCollapsed()"
-                  [size]="size()"
-                  (click)="onChevronClick($event)"
-                />
-              }
+              <span class="tree-node__chevron" (click)="onChevronClick($event)">
+                @if (expanded()) {
+                  <ui-icon [icon]="chevronIconExpanded()" [size]="size()" />
+                } @else {
+                  <ui-icon [icon]="chevronIconCollapsed()" [size]="size()" />
+                }
+              </span>
             }
           </div>
         </div>

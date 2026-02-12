@@ -1,14 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { NodeComponent, Node } from './node.component';
 import { IconComponent } from '../icon/icon.component';
-import { Size, Appearance, Shape, Orientation, Variant } from '../utils';
+import { Size, Appearance, Shape, Variant } from '../utils';
 import { IconName } from '../icon';
 
 describe('NodeComponent', () => {
-  let component: NodeComponent;
-  let fixture: ComponentFixture<NodeComponent>;
+  let component: NodeComponent<any>;
+  let fixture: ComponentFixture<NodeComponent<any>>;
   let testNode: Node;
 
   beforeEach(async () => {
@@ -16,7 +15,7 @@ describe('NodeComponent', () => {
       imports: [NodeComponent, IconComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NodeComponent);
+    fixture = TestBed.createComponent(NodeComponent<any>);
     component = fixture.componentInstance;
 
     testNode = {
@@ -280,8 +279,8 @@ describe('NodeComponent', () => {
       fixture.detectChanges();
 
       const event = new MouseEvent('click');
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       component.onContentClick(event);
 
@@ -369,8 +368,8 @@ describe('NodeComponent', () => {
       fixture.detectChanges();
 
       const event = new Event('click', { bubbles: true });
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       component.onCloseClick(event);
 
@@ -477,7 +476,7 @@ describe('NodeComponent', () => {
       const event = new DragEvent('dragstart', {
         dataTransfer: new DataTransfer(),
       });
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault');
 
       component.onDragStart(event);
 
@@ -531,8 +530,8 @@ describe('NodeComponent', () => {
       const event = new DragEvent('dragover', {
         dataTransfer: new DataTransfer(),
       });
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       component.onDragOver(event);
 
@@ -548,7 +547,7 @@ describe('NodeComponent', () => {
       fixture.detectChanges();
 
       const event = new DragEvent('dragover');
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault');
 
       component.onDragOver(event);
 
@@ -562,7 +561,7 @@ describe('NodeComponent', () => {
       fixture.detectChanges();
 
       const event = new DragEvent('dragover');
-      spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'preventDefault');
 
       component.onDragOver(event);
 
@@ -582,8 +581,8 @@ describe('NodeComponent', () => {
       const event = new DragEvent('drop', {
         dataTransfer: new DataTransfer(),
       });
-      spyOn(event, 'preventDefault');
-      spyOn(event, 'stopPropagation');
+      vi.spyOn(event, 'preventDefault');
+      vi.spyOn(event, 'stopPropagation');
 
       component.onDrop(event);
 

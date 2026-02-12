@@ -10,17 +10,18 @@ import {
   afterNextRender,
   TemplateRef,
   Directive,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Orientation } from '../utils';
 
 @Directive({
-  selector: '[appSplitterPanel]',
+  selector: '[uiSplitterPanel]',
 })
 export class SplitterPanelDirective {
-  id = input.required<string>({ alias: 'appSplitterPanel' });
+  id = input.required<string>({ alias: 'uiSplitterPanel' });
 
-  constructor(public templateRef: TemplateRef<any>) {}
+  public templateRef = inject(TemplateRef);
 }
 
 export interface SplitterPanel {
