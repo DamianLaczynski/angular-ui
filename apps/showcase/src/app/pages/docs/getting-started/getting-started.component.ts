@@ -61,19 +61,4 @@ export class ExampleComponent {}`,
     'Test keyboard navigation and focus states before release.',
     'Document your internal usage pattern in one page for the team.',
   ];
-
-  readonly nextSteps: { label: string; route: string }[] = [
-    {
-      label: 'Installation details',
-      route: '/docs/installation',
-    },
-    {
-      label: 'Roadmap',
-      route: '/docs/roadmap',
-    },
-    {
-      label: 'Component showcase',
-      route: '/docs',
-    },
-  ];
 }
