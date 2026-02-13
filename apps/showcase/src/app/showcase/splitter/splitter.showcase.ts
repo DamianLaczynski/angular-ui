@@ -253,9 +253,9 @@ export class SplitterShowcaseComponent {
   ]);
 
   nestedInnerPanels = signal<SplitterPanel[]>([
-    { id: 'header', size: 20, resizable: false },
-    { id: 'content', size: 60, resizable: false },
-    { id: 'footer', size: 20, resizable: false },
+    { id: 'header', size: 20, resizable: true },
+    { id: 'content', size: 60, resizable: true },
+    { id: 'footer', size: 20, resizable: true },
   ]);
 
   onPanelResize(event: SplitterResizeEvent): void {
