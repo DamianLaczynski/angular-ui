@@ -16,7 +16,7 @@ export type SharedControlDef =
       type: 'dropdown';
       options: ControlOption[];
       group?: string;
-      defaultValue?: string;
+      defaultValue?: string | number | boolean;
       description?: string;
     } & DrawerShowcaseFlags)
   | ({
@@ -43,6 +43,9 @@ export type SharedControlDef =
       group?: string;
       defaultValue?: number;
       description?: string;
+      min?: number;
+      max?: number;
+      step?: number;
     } & DrawerShowcaseFlags)
   | ({
       key: string;
@@ -118,6 +121,9 @@ export function toShowcaseControl(def: SharedControlDef): ShowcaseControl {
     return {
       ...base,
       defaultValue: def.defaultValue ?? 0,
+      min: def.min,
+      max: def.max,
+      step: def.step,
     };
   }
   return {
