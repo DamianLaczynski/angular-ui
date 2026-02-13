@@ -145,8 +145,8 @@ export class LandingComponent {
 
   readonly version = '1.0.0';
   readonly currentYear = new Date().getFullYear();
-  readonly githubUrl = 'https://github.com/your-org/angular-ui';
-  readonly npmUrl = 'https://www.npmjs.com/package/angular-ui';
+  readonly githubUrl = 'https://github.com/DamianLaczynski/angular-ui';
+  readonly npmUrl = 'https://www.npmjs.com/';
 
   searchQuery = signal('');
   readonly showcaseComponents = signal<ShowcaseComponent[]>(ALL_SHOWCASE_COMPONENTS);

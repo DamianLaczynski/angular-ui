@@ -34,8 +34,8 @@ export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
   private readonly themeService = inject(ThemeService);
 
   readonly version = '1.0.0';
-  readonly githubUrl = 'https://github.com/your-org/angular-ui';
-  readonly npmUrl = 'https://www.npmjs.com/package/angular-ui';
+  readonly githubUrl = 'https://github.com/DamianLaczynski/angular-ui';
+  readonly npmUrl = 'https://www.npmjs.com/';
 
   isDarkMode = computed(() => this.themeService.$themeMode() === ThemeMode.Dark);
   themeLabel = computed(() => (this.isDarkMode() ? 'Light mode' : 'Dark mode'));
