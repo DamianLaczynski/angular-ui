@@ -79,13 +79,13 @@ const ALL_CONTROLS = toDrawerFormControls(NAV_CONTROL_DEFS);
 
 export const NAV_DRAWER_CONFIGS = createDrawerFormConfigs(ALL_CONTROLS, {
   overview: {
-    excludeKeys: ['appearance', 'variant', 'size', 'shape', 'chevronPosition', 'indicatorPosition'],
+    excludeKeys: ['appearance', 'variant', 'size', 'shape'],
   },
   appearanceVariant: { excludeKeys: ['appearance', 'variant'] },
   size: { excludeKey: 'size' },
   shape: { excludeKey: 'shape' },
   chevronPosition: { excludeKey: 'chevronPosition' },
-  selectionIndicator: { excludeKeys: ['showSelectionIndicator', 'indicatorPosition'] },
+  selectionIndicator: { excludeKeys: [] },
 });
 
 export const NAV_SHOWCASE_CONFIG: ShowcaseConfig = {

@@ -61,123 +61,125 @@ const DEFAULT_ITEMS: RadioButtonItem[] = [
         </p>
 
         <app-section-with-drawer
-          sectionTitle="Overview"
-          sectionDescription="Complete matrix of variant and appearance combinations. Use the Customize drawer to toggle disabled, readonly, and required states across all groups."
-          [formConfig]="overviewDrawerFormConfig"
-          [formValues]="overviewFormValues()"
-          (formValuesChange)="overviewFormValues.set($event)"
+          sectionTitle="Appearance"
+          sectionDescription="Appearance controls the visual style: filled, tint, outline, and subtle."
+          [formConfig]="appearanceDrawerFormConfig"
+          [formValues]="appearanceFormValues()"
+          (formValuesChange)="appearanceFormValues.set($event)"
         >
-          <div class="showcase__icons-matrix">
-            <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
-              <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--corner"></div>
-              @for (variant of variants; track variant) {
-                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--header">
-                  {{ variant | titlecase }}
-                </div>
-              }
-            </div>
+          <div class="showcase__grid">
             @for (appearance of appearances; track appearance) {
-              <div class="showcase__icons-matrix__row">
-                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--label">
-                  {{ appearance | titlecase }}
-                </div>
-                @for (variant of variants; track variant) {
-                  <div class="showcase__icons-matrix__cell">
-                    <ui-radio-button-group
-                      [label]="'Options'"
-                      [variant]="variant"
-                      [appearance]="appearance"
-                      [size]="overviewForm().size"
-                      [shape]="overviewForm().shape"
-                      [orientation]="overviewForm().orientation"
-                      [layout]="overviewForm().layout"
-                      [disabled]="overviewForm().disabled"
-                      [readonly]="overviewForm().readonly"
-                      [required]="overviewForm().required"
-                      [items]="defaultItems"
-                      [(ngModel)]="overviewValues[appearance + variant]"
-                      [name]="'overview-' + appearance + '-' + variant"
-                    />
-                  </div>
-                }
+              <div class="showcase__item">
+                <h3 class="showcase__item__title">{{ appearance | titlecase }}</h3>
+                <ui-radio-button-group
+                  [label]="appearance + ' appearance'"
+                  [appearance]="appearance"
+                  [variant]="appearanceForm().variant"
+                  [size]="appearanceForm().size"
+                  [shape]="appearanceForm().shape"
+                  [orientation]="appearanceForm().orientation"
+                  [layout]="appearanceForm().layout"
+                  [disabled]="appearanceForm().disabled"
+                  [readonly]="appearanceForm().readonly"
+                  [required]="appearanceForm().required"
+                  [items]="defaultItems"
+                  [(ngModel)]="appearanceValues[appearance]"
+                  [name]="'appearance-' + appearance"
+                />
               </div>
             }
           </div>
         </app-section-with-drawer>
 
         <app-section-with-drawer
-          sectionTitle="Appearance & Variant"
-          sectionDescription="Appearance controls the visual style (filled, tint, outline, subtle) while variant sets the semantic color. These combine to create distinct group styles for different contexts."
-          [formConfig]="appearanceVariantDrawerFormConfig"
-          [formValues]="appearanceVariantFormValues()"
-          (formValuesChange)="appearanceVariantFormValues.set($event)"
+          sectionTitle="Variant"
+          sectionDescription="Variant sets the semantic color for the group."
+          [formConfig]="variantDrawerFormConfig"
+          [formValues]="variantFormValues()"
+          (formValuesChange)="variantFormValues.set($event)"
         >
-          <div class="showcase__icons-matrix">
-            <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
-              <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--corner"></div>
-              @for (variant of variants; track variant) {
-                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--header">
-                  {{ variant | titlecase }}
-                </div>
-              }
-            </div>
-            @for (appearance of appearances; track appearance) {
-              <div class="showcase__icons-matrix__row">
-                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--label">
-                  {{ appearance | titlecase }}
-                </div>
-                @for (variant of variants; track variant) {
-                  <div class="showcase__icons-matrix__cell">
-                    <ui-radio-button-group
-                      [label]="'Options'"
-                      [variant]="variant"
-                      [appearance]="appearance"
-                      [size]="appearanceVariantForm().size"
-                      [shape]="appearanceVariantForm().shape"
-                      [orientation]="appearanceVariantForm().orientation"
-                      [layout]="appearanceVariantForm().layout"
-                      [disabled]="appearanceVariantForm().disabled"
-                      [readonly]="appearanceVariantForm().readonly"
-                      [required]="appearanceVariantForm().required"
-                      [items]="defaultItems"
-                      [(ngModel)]="appearanceVariantValues[appearance + variant]"
-                      [name]="'av-' + appearance + '-' + variant"
-                    />
-                  </div>
-                }
+          <div class="showcase__grid">
+            @for (variant of variants; track variant) {
+              <div class="showcase__item">
+                <h3 class="showcase__item__title">{{ variant | titlecase }}</h3>
+                <ui-radio-button-group
+                  [label]="variant + ' variant'"
+                  [variant]="variant"
+                  [appearance]="variantForm().appearance"
+                  [size]="variantForm().size"
+                  [shape]="variantForm().shape"
+                  [orientation]="variantForm().orientation"
+                  [layout]="variantForm().layout"
+                  [disabled]="variantForm().disabled"
+                  [readonly]="variantForm().readonly"
+                  [required]="variantForm().required"
+                  [items]="defaultItems"
+                  [(ngModel)]="variantValues[variant]"
+                  [name]="'variant-' + variant"
+                />
               </div>
             }
           </div>
         </app-section-with-drawer>
 
         <app-section-with-drawer
-          sectionTitle="Orientation & Layout"
-          sectionDescription="Orientation sets horizontal or vertical arrangement. Layout controls whether buttons are segmented (connected) or separate (spaced)."
-          [formConfig]="orientationLayoutDrawerFormConfig"
-          [formValues]="orientationLayoutFormValues()"
-          (formValuesChange)="orientationLayoutFormValues.set($event)"
+          sectionTitle="Orientation"
+          sectionDescription="Orientation sets horizontal or vertical arrangement of options."
+          [formConfig]="orientationDrawerFormConfig"
+          [formValues]="orientationFormValues()"
+          (formValuesChange)="orientationFormValues.set($event)"
         >
           <div class="showcase__grid showcase__grid--large">
             @for (orientation of orientations; track orientation) {
-              @for (layout of segmentLayouts; track layout) {
-                <div class="showcase__item">
-                  <ui-radio-button-group
-                    [label]="orientation + ' / ' + layout"
-                    [orientation]="orientation"
-                    [layout]="layout"
-                    [variant]="orientationLayoutForm().variant"
-                    [appearance]="orientationLayoutForm().appearance"
-                    [size]="orientationLayoutForm().size"
-                    [shape]="orientationLayoutForm().shape"
-                    [disabled]="orientationLayoutForm().disabled"
-                    [readonly]="orientationLayoutForm().readonly"
-                    [required]="orientationLayoutForm().required"
-                    [items]="defaultItems"
-                    [(ngModel)]="orientationLayoutValues[orientation + layout]"
-                    [name]="'ol-' + orientation + '-' + layout"
-                  />
-                </div>
-              }
+              <div class="showcase__item">
+                <h3 class="showcase__item__title">{{ orientation | titlecase }}</h3>
+                <ui-radio-button-group
+                  [label]="orientation + ' orientation'"
+                  [orientation]="orientation"
+                  [layout]="orientationForm().layout"
+                  [variant]="orientationForm().variant"
+                  [appearance]="orientationForm().appearance"
+                  [size]="orientationForm().size"
+                  [shape]="orientationForm().shape"
+                  [disabled]="orientationForm().disabled"
+                  [readonly]="orientationForm().readonly"
+                  [required]="orientationForm().required"
+                  [items]="defaultItems"
+                  [(ngModel)]="orientationValues[orientation]"
+                  [name]="'orientation-' + orientation"
+                />
+              </div>
+            }
+          </div>
+        </app-section-with-drawer>
+
+        <app-section-with-drawer
+          sectionTitle="Layout"
+          sectionDescription="Layout controls whether buttons are segmented (connected) or separate (spaced)."
+          [formConfig]="layoutDrawerFormConfig"
+          [formValues]="layoutFormValues()"
+          (formValuesChange)="layoutFormValues.set($event)"
+        >
+          <div class="showcase__grid showcase__grid--large">
+            @for (layout of segmentLayouts; track layout) {
+              <div class="showcase__item">
+                <h3 class="showcase__item__title">{{ layout | titlecase }}</h3>
+                <ui-radio-button-group
+                  [label]="layout + ' layout'"
+                  [layout]="layout"
+                  [orientation]="layoutForm().orientation"
+                  [variant]="layoutForm().variant"
+                  [appearance]="layoutForm().appearance"
+                  [size]="layoutForm().size"
+                  [shape]="layoutForm().shape"
+                  [disabled]="layoutForm().disabled"
+                  [readonly]="layoutForm().readonly"
+                  [required]="layoutForm().required"
+                  [items]="defaultItems"
+                  [(ngModel)]="layoutValues[layout]"
+                  [name]="'layout-' + layout"
+                />
+              </div>
             }
           </div>
         </app-section-with-drawer>
@@ -298,9 +300,10 @@ export class RadioButtonGroupShowcaseComponent {
 
   defaultItems = DEFAULT_ITEMS;
 
-  overviewDrawerFormConfig = RADIO_BUTTON_GROUP_DRAWER_CONFIGS.overview;
-  appearanceVariantDrawerFormConfig = RADIO_BUTTON_GROUP_DRAWER_CONFIGS.appearanceVariant;
-  orientationLayoutDrawerFormConfig = RADIO_BUTTON_GROUP_DRAWER_CONFIGS.orientationLayout;
+  appearanceDrawerFormConfig = RADIO_BUTTON_GROUP_DRAWER_CONFIGS.appearance;
+  variantDrawerFormConfig = RADIO_BUTTON_GROUP_DRAWER_CONFIGS.variant;
+  orientationDrawerFormConfig = RADIO_BUTTON_GROUP_DRAWER_CONFIGS.orientation;
+  layoutDrawerFormConfig = RADIO_BUTTON_GROUP_DRAWER_CONFIGS.layout;
   sizeDrawerFormConfig = RADIO_BUTTON_GROUP_DRAWER_CONFIGS.size;
   shapeDrawerFormConfig = RADIO_BUTTON_GROUP_DRAWER_CONFIGS.shape;
   statesDrawerFormConfig = RADIO_BUTTON_GROUP_DRAWER_CONFIGS.states;
@@ -312,14 +315,16 @@ export class RadioButtonGroupShowcaseComponent {
     { id: 'readonly', label: 'Read Only', disabled: false, readonly: true, required: false },
   ];
 
-  overviewValues: Record<string, unknown> = {};
-  appearanceVariantValues: Record<string, unknown> = {};
-  orientationLayoutValues: Record<string, unknown> = {};
+  appearanceValues: Record<string, unknown> = {};
+  variantValues: Record<string, unknown> = {};
+  orientationValues: Record<string, unknown> = {};
+  layoutValues: Record<string, unknown> = {};
   sizeValues: Record<string, unknown> = {};
   shapeValues: Record<string, unknown> = {};
   stateValues: Record<string, unknown> = {};
 
-  overviewFormValues = signal<Record<string, unknown>>({
+  appearanceFormValues = signal<Record<string, unknown>>({
+    variant: 'secondary',
     size: 'medium',
     shape: 'rounded',
     orientation: 'horizontal',
@@ -329,9 +334,10 @@ export class RadioButtonGroupShowcaseComponent {
     required: false,
   });
 
-  overviewForm = computed(() => this.toForm(this.overviewFormValues()));
+  appearanceForm = computed(() => this.toForm(this.appearanceFormValues()));
 
-  appearanceVariantFormValues = signal<Record<string, unknown>>({
+  variantFormValues = signal<Record<string, unknown>>({
+    appearance: 'outline',
     size: 'medium',
     shape: 'rounded',
     orientation: 'horizontal',
@@ -341,19 +347,33 @@ export class RadioButtonGroupShowcaseComponent {
     required: false,
   });
 
-  appearanceVariantForm = computed(() => this.toForm(this.appearanceVariantFormValues()));
+  variantForm = computed(() => this.toForm(this.variantFormValues()));
 
-  orientationLayoutFormValues = signal<Record<string, unknown>>({
+  orientationFormValues = signal<Record<string, unknown>>({
     variant: 'secondary',
     appearance: 'outline',
     size: 'medium',
     shape: 'rounded',
+    layout: 'separate',
     disabled: false,
     readonly: false,
     required: false,
   });
 
-  orientationLayoutForm = computed(() => this.toForm(this.orientationLayoutFormValues()));
+  orientationForm = computed(() => this.toForm(this.orientationFormValues()));
+
+  layoutFormValues = signal<Record<string, unknown>>({
+    variant: 'secondary',
+    appearance: 'outline',
+    size: 'medium',
+    shape: 'rounded',
+    orientation: 'horizontal',
+    disabled: false,
+    readonly: false,
+    required: false,
+  });
+
+  layoutForm = computed(() => this.toForm(this.layoutFormValues()));
 
   sizeFormValues = signal<Record<string, unknown>>({
     variant: 'secondary',

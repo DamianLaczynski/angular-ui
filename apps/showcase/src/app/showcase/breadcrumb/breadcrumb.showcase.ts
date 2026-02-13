@@ -80,40 +80,26 @@ const SETTINGS_BREADCRUMB: Breadcrumb[] = [
 
         <app-section-with-drawer
           sectionTitle="Overview"
-          sectionDescription="Complete matrix of all breadcrumb combinations: variants and appearances. Use the Customize drawer to toggle icons, selection indicator, and indicator position across all breadcrumbs."
+          sectionDescription="Quick variant overview shown as single examples in separate rows. Use the Customize drawer to toggle icons, selection indicator, and indicator position."
           [formConfig]="overviewDrawerFormConfig"
           [formValues]="overviewFormValues()"
           (formValuesChange)="overviewFormValues.set($event)"
         >
-          <div class="showcase__icons-matrix">
-            <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
-              <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--corner"></div>
-              @for (variant of variants; track variant) {
-                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--header">
-                  {{ variant | titlecase }}
-                </div>
-              }
-            </div>
-            @for (appearance of appearances; track appearance) {
-              <div class="showcase__icons-matrix__row">
-                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--label">
-                  {{ appearance | titlecase }}
-                </div>
-                @for (variant of variants; track variant) {
-                  <div class="showcase__icons-matrix__cell">
-                    <ui-breadcrumb
-                      [items]="basicBreadcrumb"
-                      [variant]="variant"
-                      [appearance]="appearance"
-                      [size]="overviewForm().size"
-                      [shape]="overviewForm().shape"
-                      [showIcons]="overviewForm().showIcons"
-                      [showSelectionIndicator]="overviewForm().showIndicator"
-                      [indicatorPosition]="overviewForm().indicatorPosition"
-                      (itemClick)="onItemClick($event)"
-                    />
-                  </div>
-                }
+          <div class="showcase__grid showcase__grid--row">
+            @for (variant of variants; track variant) {
+              <div class="showcase__item">
+                <h3 class="showcase__item__title">{{ variant | titlecase }}</h3>
+                <ui-breadcrumb
+                  [items]="basicBreadcrumb"
+                  [variant]="variant"
+                  appearance="subtle"
+                  [size]="overviewForm().size"
+                  [shape]="overviewForm().shape"
+                  [showIcons]="overviewForm().showIcons"
+                  [showSelectionIndicator]="overviewForm().showIndicator"
+                  [indicatorPosition]="overviewForm().indicatorPosition"
+                  (itemClick)="onItemClick($event)"
+                />
               </div>
             }
           </div>
@@ -121,41 +107,31 @@ const SETTINGS_BREADCRUMB: Breadcrumb[] = [
 
         <app-section-with-drawer
           sectionTitle="Appearance & Variant"
-          sectionDescription="Appearance controls the visual style (filled, tint, outline, subtle, transparent) while variant sets the semantic color. These combine to create distinct breadcrumb styles for different contexts."
+          sectionDescription="Appearance controls the visual style (filled, tint, outline, subtle, transparent) while variant sets the semantic color. Each combination is shown as a separate example row."
           [formConfig]="appearanceVariantDrawerFormConfig"
           [formValues]="appearanceVariantFormValues()"
           (formValuesChange)="appearanceVariantFormValues.set($event)"
         >
-          <div class="showcase__icons-matrix">
-            <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
-              <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--corner"></div>
+          <div class="showcase__grid showcase__grid--row">
+            @for (appearance of appearances; track appearance) {
               @for (variant of variants; track variant) {
-                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--header">
-                  {{ variant | titlecase }}
+                <div class="showcase__item">
+                  <h3 class="showcase__item__title">
+                    {{ appearance | titlecase }} / {{ variant | titlecase }}
+                  </h3>
+                  <ui-breadcrumb
+                    [items]="basicBreadcrumb"
+                    [variant]="variant"
+                    [appearance]="appearance"
+                    [size]="appearanceVariantForm().size"
+                    [shape]="appearanceVariantForm().shape"
+                    [showIcons]="appearanceVariantForm().showIcons"
+                    [showSelectionIndicator]="appearanceVariantForm().showIndicator"
+                    [indicatorPosition]="appearanceVariantForm().indicatorPosition"
+                    (itemClick)="onItemClick($event)"
+                  />
                 </div>
               }
-            </div>
-            @for (appearance of appearances; track appearance) {
-              <div class="showcase__icons-matrix__row">
-                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--label">
-                  {{ appearance | titlecase }}
-                </div>
-                @for (variant of variants; track variant) {
-                  <div class="showcase__icons-matrix__cell">
-                    <ui-breadcrumb
-                      [items]="basicBreadcrumb"
-                      [variant]="variant"
-                      [appearance]="appearance"
-                      [size]="appearanceVariantForm().size"
-                      [shape]="appearanceVariantForm().shape"
-                      [showIcons]="appearanceVariantForm().showIcons"
-                      [showSelectionIndicator]="appearanceVariantForm().showIndicator"
-                      [indicatorPosition]="appearanceVariantForm().indicatorPosition"
-                      (itemClick)="onItemClick($event)"
-                    />
-                  </div>
-                }
-              </div>
             }
           </div>
         </app-section-with-drawer>
@@ -167,7 +143,7 @@ const SETTINGS_BREADCRUMB: Breadcrumb[] = [
           [formValues]="iconFormValues()"
           (formValuesChange)="iconFormValues.set($event)"
         >
-          <div class="showcase__grid showcase__grid--vertical">
+          <div class="showcase__grid showcase__grid--row">
             <div class="showcase__item">
               <h3 class="showcase__item__title">With Icons</h3>
               <ui-breadcrumb
@@ -202,7 +178,7 @@ const SETTINGS_BREADCRUMB: Breadcrumb[] = [
           [formValues]="sizeFormValues()"
           (formValuesChange)="sizeFormValues.set($event)"
         >
-          <div class="showcase__grid showcase__grid--vertical">
+          <div class="showcase__grid showcase__grid--row">
             @for (size of sizes; track size) {
               <div class="showcase__item">
                 <h3 class="showcase__item__title">{{ size | titlecase }}</h3>
@@ -227,7 +203,7 @@ const SETTINGS_BREADCRUMB: Breadcrumb[] = [
           [formValues]="shapeFormValues()"
           (formValuesChange)="shapeFormValues.set($event)"
         >
-          <div class="showcase__grid">
+          <div class="showcase__grid showcase__grid--row">
             @for (shape of shapes; track shape) {
               <div class="showcase__item">
                 <h3 class="showcase__item__title">{{ shape | titlecase }}</h3>
@@ -252,7 +228,7 @@ const SETTINGS_BREADCRUMB: Breadcrumb[] = [
           [formValues]="statesFormValues()"
           (formValuesChange)="statesFormValues.set($event)"
         >
-          <div class="showcase__grid">
+          <div class="showcase__grid showcase__grid--row">
             <div class="showcase__item">
               <h3 class="showcase__item__title">Normal</h3>
               <ui-breadcrumb
@@ -299,7 +275,7 @@ const SETTINGS_BREADCRUMB: Breadcrumb[] = [
           [formValues]="selectionIndicatorsFormValues()"
           (formValuesChange)="selectionIndicatorsFormValues.set($event)"
         >
-          <div class="showcase__grid">
+          <div class="showcase__grid showcase__grid--row">
             <div class="showcase__item">
               <h3 class="showcase__item__title">Horizontal Indicator</h3>
               <ui-breadcrumb
@@ -338,7 +314,7 @@ const SETTINGS_BREADCRUMB: Breadcrumb[] = [
           [formValues]="examplesFormValues()"
           (formValuesChange)="examplesFormValues.set($event)"
         >
-          <div class="showcase__grid showcase__grid--vertical">
+          <div class="showcase__grid showcase__grid--row">
             <div class="showcase__item">
               <h3 class="showcase__item__title">File System Navigation</h3>
               <ui-breadcrumb

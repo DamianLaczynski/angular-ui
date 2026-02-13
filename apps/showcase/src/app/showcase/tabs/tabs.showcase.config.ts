@@ -31,6 +31,7 @@ const TABS_CONTROL_DEFS: SharedControlDef[] = [
     options: TAB_SET_OPTIONS,
     defaultValue: 'default',
     group: 'layout',
+    description: 'Selects which tab data set is rendered in the preview.',
     drawer: false,
   },
   {
@@ -40,6 +41,7 @@ const TABS_CONTROL_DEFS: SharedControlDef[] = [
     options: toOptions(VARIANTS),
     defaultValue: 'primary',
     group: 'appearance',
+    description: 'Applies the semantic style variant for tabs.',
   },
   {
     key: 'appearance',
@@ -48,6 +50,7 @@ const TABS_CONTROL_DEFS: SharedControlDef[] = [
     options: toOptions(APPEARANCES),
     defaultValue: 'subtle',
     group: 'appearance',
+    description: 'Controls visual emphasis level (for example subtle or filled).',
   },
   {
     key: 'shape',
@@ -56,6 +59,7 @@ const TABS_CONTROL_DEFS: SharedControlDef[] = [
     options: toOptions(SHAPES),
     defaultValue: 'rounded',
     group: 'appearance',
+    description: 'Defines corner style of tab items.',
   },
   {
     key: 'size',
@@ -64,6 +68,7 @@ const TABS_CONTROL_DEFS: SharedControlDef[] = [
     options: toOptions(SIZES),
     defaultValue: 'medium',
     group: 'layout',
+    description: 'Changes tab height and internal spacing.',
   },
   {
     key: 'orientation',
@@ -72,6 +77,7 @@ const TABS_CONTROL_DEFS: SharedControlDef[] = [
     options: toOptions([...TABS_ORIENTATIONS]),
     defaultValue: 'horizontal',
     group: 'layout',
+    description: 'Switches tab layout between horizontal and vertical.',
   },
   {
     key: 'showSelectionIndicator',
@@ -79,12 +85,14 @@ const TABS_CONTROL_DEFS: SharedControlDef[] = [
     type: 'switch',
     defaultValue: true,
     group: 'appearance',
+    description: 'Shows or hides the active-tab indicator.',
   },
   {
     key: 'fullWidth',
     label: 'Full width',
     type: 'switch',
     group: 'layout',
+    description: 'Stretches tabs to fill the available horizontal space.',
     showcase: false,
   },
 ];

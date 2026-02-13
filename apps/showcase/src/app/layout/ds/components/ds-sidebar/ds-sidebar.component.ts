@@ -25,10 +25,10 @@ export class DsSidebarComponent {
 
   private readonly allNavItems: NavNode[] = [
     // Documentation Section
-    { id: 'documentation', isSectionHeader: true, label: 'Documentation' },
     { id: 'getting-started', label: 'Getting Started', icon: 'rocket' },
     { id: 'installation', label: 'Installation', icon: 'arrow_download' },
     { id: 'roadmap', label: 'Roadmap', icon: 'timeline' },
+    { id: 'divider', isDivider: true, label: 'divider' },
     // Form Components Section
     { id: 'form-components', isSectionHeader: true, label: 'Form Components' },
     { id: 'checkbox', label: 'Checkbox', icon: 'checkbox_checked' },

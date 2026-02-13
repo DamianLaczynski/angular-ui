@@ -46,48 +46,6 @@ import type { DropdownMode } from 'angular-ui';
         </p>
 
         <app-section-with-drawer
-          sectionTitle="Overview"
-          sectionDescription="Complete matrix of all dropdown combinations: input variants (filled, filled-gray, filled-lighter, underlined) and sizes (small, medium, large). Use the Customize drawer to toggle mode, searchable, clearable, disabled, and required across all dropdowns."
-          [formConfig]="overviewDrawerFormConfig"
-          [formValues]="overviewFormValues()"
-          (formValuesChange)="overviewFormValues.set($event)"
-        >
-          <div class="showcase__icons-matrix showcase__icons-matrix--4-cols">
-            <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
-              <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--corner"></div>
-              @for (size of sizes; track size) {
-                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--header">
-                  {{ size | titlecase }}
-                </div>
-              }
-            </div>
-            @for (variant of inputVariants; track variant) {
-              <div class="showcase__icons-matrix__row">
-                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--label">
-                  {{ variant }}
-                </div>
-                @for (size of sizes; track size) {
-                  <div class="showcase__icons-matrix__cell">
-                    <ui-dropdown
-                      [label]="variant + ' ' + size"
-                      [items]="basicItems"
-                      [inputVariant]="variant"
-                      [size]="size"
-                      [mode]="overviewForm().mode"
-                      [searchable]="overviewForm().searchable"
-                      [clearable]="overviewForm().clearable"
-                      [disabled]="overviewForm().disabled"
-                      [required]="overviewForm().required"
-                      placeholder="Select..."
-                    />
-                  </div>
-                }
-              </div>
-            }
-          </div>
-        </app-section-with-drawer>
-
-        <app-section-with-drawer
           sectionTitle="Variant"
           sectionDescription="Input variants control the visual style: filled (default), filled-gray, filled-lighter, and underlined. Choose based on context and hierarchy within your form layout."
           [formConfig]="variantDrawerFormConfig"
@@ -214,7 +172,6 @@ export class DropdownShowcaseComponent {
   modes = DROPDOWN_MODES;
   basicItems = DROPDOWN_BASIC_ITEMS;
 
-  overviewDrawerFormConfig = DROPDOWN_DRAWER_CONFIGS.overview;
   variantDrawerFormConfig = DROPDOWN_DRAWER_CONFIGS.variant;
   sizeDrawerFormConfig = DROPDOWN_DRAWER_CONFIGS.size;
   modeDrawerFormConfig = DROPDOWN_DRAWER_CONFIGS.mode;
@@ -225,15 +182,6 @@ export class DropdownShowcaseComponent {
     { id: 'disabled', label: 'Disabled', disabled: true, required: false },
     { id: 'required', label: 'Required', disabled: false, required: true },
   ];
-
-  overviewFormValues = signal<Record<string, unknown>>({
-    mode: 'single',
-    searchable: false,
-    clearable: false,
-    disabled: false,
-    required: false,
-  });
-  overviewForm = computed(() => this.toDropdownForm(this.overviewFormValues()));
 
   variantFormValues = signal<Record<string, unknown>>({
     size: 'medium',
