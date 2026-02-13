@@ -43,6 +43,7 @@ import { TagInteractiveComponent } from './tag.interactive';
 
         <app-section-with-drawer
           sectionTitle="Overview"
+          sectionDescription="Complete matrix of all tag combinations: variants (primary, secondary, success, etc.) and appearances (filled, tint, outline, subtle). Use the Customize drawer to toggle icon, dismissible, disabled, selected, and selectable states across all tags."
           [formConfig]="overviewDrawerFormConfig"
           [formValues]="overviewFormValues()"
           (formValuesChange)="overviewFormValues.set($event)"
@@ -84,6 +85,7 @@ import { TagInteractiveComponent } from './tag.interactive';
 
         <app-section-with-drawer
           sectionTitle="Appearance & Variant"
+          sectionDescription="Appearance controls the visual style (filled, tint, outline, subtle) while variant sets the semantic color (primary, secondary, success, warning, danger, info). These combine to create distinct tag styles for different contexts and hierarchy levels."
           [formConfig]="appearanceVariantDrawerFormConfig"
           [formValues]="appearanceVariantFormValues()"
           (formValuesChange)="appearanceVariantFormValues.set($event)"
@@ -125,9 +127,10 @@ import { TagInteractiveComponent } from './tag.interactive';
 
         <app-section-with-drawer
           sectionTitle="Icons"
+          sectionDescription="Tags support optional icons from the Fluent icon set. Icons can be used alone or alongside text. Each variant is shown with a different icon to demonstrate flexibility."
           [formConfig]="iconsDrawerFormConfig"
-          [formValues]="iconsFormValues()"
-          (formValuesChange)="iconsFormValues.set($event)"
+          [formValues]="iconFormValues()"
+          (formValuesChange)="iconFormValues.set($event)"
         >
           <div class="showcase__icons-matrix">
             <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
@@ -149,13 +152,13 @@ import { TagInteractiveComponent } from './tag.interactive';
                       [text]="variant | titlecase"
                       [variant]="variant"
                       [appearance]="appearance"
-                      [size]="iconsForm().size"
-                      [shape]="iconsForm().shape"
+                      [size]="iconForm().size"
+                      [shape]="iconForm().shape"
                       [icon]="iconsPerVariant[colIndex]"
-                      [dismissible]="iconsForm().dismissible"
-                      [disabled]="iconsForm().disabled"
-                      [selected]="iconsForm().selected"
-                      [selectable]="iconsForm().selectable"
+                      [dismissible]="iconForm().dismissible"
+                      [disabled]="iconForm().disabled"
+                      [selected]="iconForm().selected"
+                      [selectable]="iconForm().selectable"
                     />
                   </div>
                 }
@@ -166,6 +169,7 @@ import { TagInteractiveComponent } from './tag.interactive';
 
         <app-section-with-drawer
           sectionTitle="Size"
+          sectionDescription="Three size options: small, medium (default), and large. Size affects padding, font size, and icon dimensions. Choose based on context—small for dense UIs, large for prominent tags."
           [formConfig]="sizeDrawerFormConfig"
           [formValues]="sizeFormValues()"
           (formValuesChange)="sizeFormValues.set($event)"
@@ -189,7 +193,8 @@ import { TagInteractiveComponent } from './tag.interactive';
         </app-section-with-drawer>
 
         <app-section-with-drawer
-          sectionTitle="Shape"
+          sectionTitle="Shapes"
+          sectionDescription="Border radius options: rounded (default), circular (pill-shaped), and square. Shape affects the visual weight and works well with different use cases."
           [formConfig]="shapeDrawerFormConfig"
           [formValues]="shapeFormValues()"
           (formValuesChange)="shapeFormValues.set($event)"
@@ -214,6 +219,7 @@ import { TagInteractiveComponent } from './tag.interactive';
 
         <app-section-with-drawer
           sectionTitle="States"
+          sectionDescription="Tag states: normal, selected (highlighted when selectable), and disabled. Use selectable for filter chips or multi-select scenarios."
           [formConfig]="statesDrawerFormConfig"
           [formValues]="statesFormValues()"
           (formValuesChange)="statesFormValues.set($event)"
@@ -238,6 +244,11 @@ import { TagInteractiveComponent } from './tag.interactive';
 
         <section id="interactive-demo" class="showcase__section">
           <h2 class="showcase__section__title">Interactive Demo</h2>
+          <p class="showcase__section__description">
+            Experiment with all tag options in real time. Change variant, appearance, size, shape,
+            add icons, and toggle states. The tag emits tagClick and dismiss events—check the event
+            log to see interactions.
+          </p>
           <app-tag-interactive />
         </section>
       </div>
@@ -257,14 +268,7 @@ export class TagShowcaseComponent {
   shapeDrawerFormConfig = TAG_DRAWER_CONFIGS.shape;
   statesDrawerFormConfig = TAG_DRAWER_CONFIGS.states;
 
-  iconsPerVariant: IconName[] = [
-    'star',
-    'checkmark_circle',
-    'clock',
-    'dismiss_circle',
-    'info',
-    'info',
-  ];
+  iconsPerVariant: IconName[] = ['star', 'checkmark', 'delete', 'info', 'settings', 'home'];
 
   statePresets = [
     { id: 'normal', label: 'Normal', disabled: false, selected: false },
@@ -274,7 +278,7 @@ export class TagShowcaseComponent {
 
   overviewFormValues = signal<Record<string, unknown>>({
     icon: '',
-    dismissible: true,
+    dismissible: false,
     selected: false,
     disabled: false,
     selectable: false,
@@ -295,7 +299,7 @@ export class TagShowcaseComponent {
     size: 'medium',
     shape: 'rounded',
     icon: '',
-    dismissible: true,
+    dismissible: false,
     selected: false,
     disabled: false,
     selectable: false,
@@ -314,17 +318,17 @@ export class TagShowcaseComponent {
     };
   });
 
-  iconsFormValues = signal<Record<string, unknown>>({
+  iconFormValues = signal<Record<string, unknown>>({
     size: 'medium',
     shape: 'rounded',
-    dismissible: true,
+    dismissible: false,
     selected: false,
     disabled: false,
     selectable: false,
   });
 
-  iconsForm = computed(() => {
-    const v = this.iconsFormValues();
+  iconForm = computed(() => {
+    const v = this.iconFormValues();
     return {
       size: v['size'] as import('angular-ui').Size,
       shape: v['shape'] as import('angular-ui').Shape,
@@ -340,7 +344,7 @@ export class TagShowcaseComponent {
     appearance: 'tint',
     shape: 'rounded',
     icon: '',
-    dismissible: true,
+    dismissible: false,
     selected: false,
     disabled: false,
     selectable: false,
@@ -365,7 +369,7 @@ export class TagShowcaseComponent {
     appearance: 'tint',
     size: 'medium',
     icon: '',
-    dismissible: true,
+    dismissible: false,
     selected: false,
     disabled: false,
     selectable: false,
@@ -391,7 +395,7 @@ export class TagShowcaseComponent {
     size: 'medium',
     shape: 'rounded',
     icon: '',
-    dismissible: true,
+    dismissible: false,
     selectable: false,
   });
 

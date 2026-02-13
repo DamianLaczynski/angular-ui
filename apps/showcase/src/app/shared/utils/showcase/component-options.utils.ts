@@ -14,6 +14,23 @@ export const DROPDOWN_MODES = ['single', 'multi'] as const;
 
 export const TABS_ORIENTATIONS = ['horizontal', 'vertical'] as const;
 
+export const ORIENTATIONS = ['horizontal', 'vertical'] as const;
+
+export const SEGMENT_LAYOUTS = ['segmented', 'separate'] as const;
+
+export const CONTENT_POSITIONS = ['before', 'after', 'above', 'below', 'none'] as const;
+
+export const SCROLL_PANEL_ORIENTATIONS = ['vertical', 'horizontal', 'both'] as const;
+
+export const SCROLL_PANEL_BEHAVIORS = ['auto', 'always', 'never'] as const;
+
+export const SCROLL_PANEL_MAX_HEIGHTS: { value: string; label: string }[] = [
+  { value: '200px', label: '200px' },
+  { value: '400px', label: '400px' },
+  { value: '600px', label: '600px' },
+  { value: '100%', label: '100%' },
+];
+
 export const ICON_OPTIONS: { value: string; label: string }[] = [
   { value: '', label: 'None' },
   { value: 'star', label: 'star' },

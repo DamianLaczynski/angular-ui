@@ -8,7 +8,6 @@ import { DROPDOWN_SHOWCASE_CONFIG, DROPDOWN_BASIC_ITEMS } from './dropdown.showc
 
 @Component({
   selector: 'app-dropdown-interactive',
-  standalone: true,
   imports: [FormsModule, DropdownComponent, InteractiveShowcaseComponent],
   template: `
     <app-interactive-showcase

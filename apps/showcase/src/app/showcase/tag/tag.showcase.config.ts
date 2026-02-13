@@ -11,28 +11,19 @@ import {
   APPEARANCES,
   SIZES,
   SHAPES,
+  ICON_OPTIONS,
   SHOWCASE_GROUP_ICONS,
 } from '@shared/utils/showcase/component-options.utils';
-
-const TAG_ICON_OPTIONS = [
-  { value: '', label: 'None' },
-  { value: 'checkmark_circle', label: 'checkmark_circle' },
-  { value: 'clock', label: 'clock' },
-  { value: 'dismiss_circle', label: 'dismiss_circle' },
-  { value: 'info', label: 'info' },
-  { value: 'star', label: 'star' },
-];
 
 const TAG_CONTROL_DEFS: SharedControlDef[] = [
   {
     key: 'text',
     label: 'Text',
     type: 'text',
-    description: 'Tag text',
+    description: 'Tag label text',
     defaultValue: 'Tag',
     placeholder: 'Enter tag text',
     group: 'content',
-    drawer: false,
   },
   {
     key: 'secondaryText',
@@ -42,14 +33,13 @@ const TAG_CONTROL_DEFS: SharedControlDef[] = [
     defaultValue: '',
     placeholder: 'Enter secondary text',
     group: 'content',
-    drawer: false,
   },
   {
     key: 'icon',
     label: 'Icon',
     type: 'dropdown',
-    options: TAG_ICON_OPTIONS,
-    description: 'Tag icon',
+    options: ICON_OPTIONS,
+    description: 'Icon name',
     defaultValue: '',
     group: 'content',
   },
@@ -92,7 +82,23 @@ const TAG_CONTROL_DEFS: SharedControlDef[] = [
     label: 'Dismissible',
     type: 'switch',
     description: 'Show dismiss button',
-    defaultValue: true,
+    defaultValue: false,
+    group: 'state',
+  },
+  {
+    key: 'disabled',
+    label: 'Disabled',
+    type: 'switch',
+    description: 'Disable tag',
+    defaultValue: false,
+    group: 'state',
+  },
+  {
+    key: 'selectable',
+    label: 'Selectable',
+    type: 'switch',
+    description: 'Click toggles selected state',
+    defaultValue: false,
     group: 'state',
   },
   {
@@ -103,32 +109,16 @@ const TAG_CONTROL_DEFS: SharedControlDef[] = [
     defaultValue: false,
     group: 'state',
   },
-  {
-    key: 'disabled',
-    label: 'Disabled',
-    type: 'switch',
-    description: 'Disabled state',
-    defaultValue: false,
-    group: 'state',
-  },
-  {
-    key: 'selectable',
-    label: 'Selectable',
-    type: 'switch',
-    description: 'Tag is clickable when selectable',
-    defaultValue: false,
-    group: 'state',
-  },
 ];
 
-const TAG_FORM_CONTROLS = toDrawerFormControls(TAG_CONTROL_DEFS);
+const ALL_CONTROLS = toDrawerFormControls(TAG_CONTROL_DEFS);
 
-export const TAG_DRAWER_CONFIGS = createDrawerFormConfigs(TAG_FORM_CONTROLS, {
-  overview: { excludeKeys: ['variant', 'appearance', 'size', 'shape'] },
-  appearanceVariant: { excludeKeys: ['variant', 'appearance'] },
+export const TAG_DRAWER_CONFIGS = createDrawerFormConfigs(ALL_CONTROLS, {
+  overview: { excludeKeys: ['appearance', 'variant', 'size', 'shape'] },
+  appearanceVariant: { excludeKeys: ['appearance', 'variant'] },
+  icons: { excludeKeys: ['appearance', 'variant', 'icon'] },
   size: { excludeKey: 'size' },
   shape: { excludeKey: 'shape' },
-  icons: { excludeKeys: ['variant', 'appearance', 'icon'] },
   states: { excludeKeys: ['disabled', 'selected'] },
 });
 

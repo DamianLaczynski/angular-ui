@@ -39,7 +39,7 @@ export class DsSidebarComponent {
     { id: 'file', label: 'File', icon: 'document' },
     { id: 'number', label: 'Number', icon: 'number_row' },
     { id: 'password', label: 'Password', icon: 'password' },
-    { id: 'radio', label: 'Radio', icon: 'checkmark_circle' },
+    { id: 'radio-button-group', label: 'Radio Button Group', icon: 'checkmark_circle' },
     { id: 'slider', label: 'Slider', icon: 'arrow_maximize' },
     { id: 'switch', label: 'Switch', icon: 'tap_single' },
     { id: 'text', label: 'Text', icon: 'text_align_left' },

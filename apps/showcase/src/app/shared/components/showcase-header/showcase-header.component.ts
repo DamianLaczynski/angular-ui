@@ -16,6 +16,8 @@ import { environment } from '../../../../environments/environment';
       @if (showActions()) {
         <div class="showcase__header__actions">
           <ui-menu
+            variant="primary"
+            appearance="tint"
             triggerVariant="split"
             text="Copy markdown"
             icon="copy"

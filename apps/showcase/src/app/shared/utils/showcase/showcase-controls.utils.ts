@@ -35,6 +35,24 @@ export type SharedControlDef =
       defaultValue?: string;
       placeholder?: string;
       description?: string;
+    } & DrawerShowcaseFlags)
+  | ({
+      key: string;
+      label: string;
+      type: 'number';
+      group?: string;
+      defaultValue?: number;
+      description?: string;
+    } & DrawerShowcaseFlags)
+  | ({
+      key: string;
+      label: string;
+      type: 'textarea';
+      group?: string;
+      defaultValue?: string;
+      placeholder?: string;
+      rows?: number;
+      description?: string;
     } & DrawerShowcaseFlags);
 
 function isDrawerControl(
@@ -81,11 +99,25 @@ export function toShowcaseControl(def: SharedControlDef): ShowcaseControl {
       placeholder: def.placeholder,
     };
   }
+  if (def.type === 'textarea') {
+    return {
+      ...base,
+      defaultValue: def.defaultValue ?? '',
+      placeholder: def.placeholder,
+      rows: def.rows,
+    };
+  }
   if (def.type === 'dropdown') {
     return {
       ...base,
       options: def.options,
       defaultValue: def.defaultValue ?? def.options[0]?.value ?? '',
+    };
+  }
+  if (def.type === 'number') {
+    return {
+      ...base,
+      defaultValue: def.defaultValue ?? 0,
     };
   }
   return {

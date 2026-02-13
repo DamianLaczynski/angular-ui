@@ -50,7 +50,7 @@ export class TagInteractiveComponent {
     appearance: 'tint',
     size: 'medium',
     shape: 'rounded',
-    dismissible: true,
+    dismissible: false,
     selected: false,
     disabled: false,
     selectable: false,

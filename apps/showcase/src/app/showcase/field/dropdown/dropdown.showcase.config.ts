@@ -106,6 +106,7 @@ const DROPDOWN_CONTROL_DEFS: SharedControlDef[] = [
 const DROPDOWN_FORM_CONTROLS = toDrawerFormControls(DROPDOWN_CONTROL_DEFS);
 
 export const DROPDOWN_DRAWER_CONFIGS = createDrawerFormConfigs(DROPDOWN_FORM_CONTROLS, {
+  overview: { excludeKeys: ['variant', 'size'] },
   variant: { excludeKey: 'variant' },
   size: { excludeKey: 'size' },
   mode: { excludeKey: 'mode' },

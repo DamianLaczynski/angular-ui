@@ -18,7 +18,6 @@ import type { DropdownMode } from 'angular-ui';
 
 @Component({
   selector: 'app-dropdown-showcase',
-  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -39,9 +38,58 @@ import type { DropdownMode } from 'angular-ui';
       />
       <div class="showcase-content">
         <app-showcase-header title="Dropdown" />
+        <p class="showcase__description">
+          The Dropdown component lets users select one or multiple options from a list. It supports
+          input variants (filled, filled-gray, filled-lighter, underlined), sizes, single and multi
+          selection modes, searchable lists, and states like disabled or required. Use for form
+          selects, filters, or any choice from a predefined set.
+        </p>
+
+        <app-section-with-drawer
+          sectionTitle="Overview"
+          sectionDescription="Complete matrix of all dropdown combinations: input variants (filled, filled-gray, filled-lighter, underlined) and sizes (small, medium, large). Use the Customize drawer to toggle mode, searchable, clearable, disabled, and required across all dropdowns."
+          [formConfig]="overviewDrawerFormConfig"
+          [formValues]="overviewFormValues()"
+          (formValuesChange)="overviewFormValues.set($event)"
+        >
+          <div class="showcase__icons-matrix showcase__icons-matrix--4-cols">
+            <div class="showcase__icons-matrix__row showcase__icons-matrix__row--header">
+              <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--corner"></div>
+              @for (size of sizes; track size) {
+                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--header">
+                  {{ size | titlecase }}
+                </div>
+              }
+            </div>
+            @for (variant of inputVariants; track variant) {
+              <div class="showcase__icons-matrix__row">
+                <div class="showcase__icons-matrix__cell showcase__icons-matrix__cell--label">
+                  {{ variant }}
+                </div>
+                @for (size of sizes; track size) {
+                  <div class="showcase__icons-matrix__cell">
+                    <ui-dropdown
+                      [label]="variant + ' ' + size"
+                      [items]="basicItems"
+                      [inputVariant]="variant"
+                      [size]="size"
+                      [mode]="overviewForm().mode"
+                      [searchable]="overviewForm().searchable"
+                      [clearable]="overviewForm().clearable"
+                      [disabled]="overviewForm().disabled"
+                      [required]="overviewForm().required"
+                      placeholder="Select..."
+                    />
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        </app-section-with-drawer>
 
         <app-section-with-drawer
           sectionTitle="Variant"
+          sectionDescription="Input variants control the visual style: filled (default), filled-gray, filled-lighter, and underlined. Choose based on context and hierarchy within your form layout."
           [formConfig]="variantDrawerFormConfig"
           [formValues]="variantFormValues()"
           (formValuesChange)="variantFormValues.set($event)"
@@ -68,6 +116,7 @@ import type { DropdownMode } from 'angular-ui';
 
         <app-section-with-drawer
           sectionTitle="Size"
+          sectionDescription="Three size options: small, medium (default), and large. Size affects the trigger height and touch target. Choose based on form density and context."
           [formConfig]="sizeDrawerFormConfig"
           [formValues]="sizeFormValues()"
           (formValuesChange)="sizeFormValues.set($event)"
@@ -94,6 +143,7 @@ import type { DropdownMode } from 'angular-ui';
 
         <app-section-with-drawer
           sectionTitle="Mode"
+          sectionDescription="Single mode allows one selection; multi mode allows multiple selections with checkboxes and tags. Use single for exclusive choices, multi for filters or multi-select scenarios."
           [formConfig]="modeDrawerFormConfig"
           [formValues]="modeFormValues()"
           (formValuesChange)="modeFormValues.set($event)"
@@ -120,6 +170,7 @@ import type { DropdownMode } from 'angular-ui';
 
         <app-section-with-drawer
           sectionTitle="States"
+          sectionDescription="Normal, disabled, and required states. Use the Customize drawer to adjust variant, size, and mode across all state examples."
           [formConfig]="statesDrawerFormConfig"
           [formValues]="statesFormValues()"
           (formValuesChange)="statesFormValues.set($event)"
@@ -146,6 +197,11 @@ import type { DropdownMode } from 'angular-ui';
 
         <section id="interactive-demo" class="showcase__section">
           <h2 class="showcase__section__title">Interactive Demo</h2>
+          <p class="showcase__section__description">
+            Experiment with all dropdown options in real time. Change label, placeholder, variant,
+            size, mode, and toggle searchable, clearable, disabled, and required. The component
+            emits selectionChange events—check the event log to see interactions.
+          </p>
           <app-dropdown-interactive />
         </section>
       </div>
@@ -158,6 +214,7 @@ export class DropdownShowcaseComponent {
   modes = DROPDOWN_MODES;
   basicItems = DROPDOWN_BASIC_ITEMS;
 
+  overviewDrawerFormConfig = DROPDOWN_DRAWER_CONFIGS.overview;
   variantDrawerFormConfig = DROPDOWN_DRAWER_CONFIGS.variant;
   sizeDrawerFormConfig = DROPDOWN_DRAWER_CONFIGS.size;
   modeDrawerFormConfig = DROPDOWN_DRAWER_CONFIGS.mode;
@@ -168,6 +225,15 @@ export class DropdownShowcaseComponent {
     { id: 'disabled', label: 'Disabled', disabled: true, required: false },
     { id: 'required', label: 'Required', disabled: false, required: true },
   ];
+
+  overviewFormValues = signal<Record<string, unknown>>({
+    mode: 'single',
+    searchable: false,
+    clearable: false,
+    disabled: false,
+    required: false,
+  });
+  overviewForm = computed(() => this.toDropdownForm(this.overviewFormValues()));
 
   variantFormValues = signal<Record<string, unknown>>({
     size: 'medium',
