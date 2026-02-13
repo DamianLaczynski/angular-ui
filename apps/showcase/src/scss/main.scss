@@ -32,4 +32,12 @@
 @use 'pages/landing';
 
 // 7. Themes - Theme-related styles
-// (Using library themes, override here if needed)
+@use 'themes/ocean';
+@use 'themes/forest';
+@use 'themes/sunset';
+@use 'themes/aurora';
+@use 'themes/royal';
+@use 'themes/graphite';
+@use 'themes/bootstrap';
+@use 'themes/material';
+@use 'themes/ant';

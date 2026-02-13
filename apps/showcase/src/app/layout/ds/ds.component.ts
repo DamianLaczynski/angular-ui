@@ -18,7 +18,7 @@ import { IconComponent } from 'angular-ui';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 import { ScrollService } from '@shared/scroll/scroll.service';
-import { ThemeMode, ThemeService } from '@shared/theme/theme.service';
+import { ThemeMode, ThemeService, ThemeVariant } from '@shared/theme/theme.service';
 
 @Component({
   selector: 'app-ds',
@@ -40,6 +40,13 @@ export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
   isDarkMode = computed(() => this.themeService.$themeMode() === ThemeMode.Dark);
   themeLabel = computed(() => (this.isDarkMode() ? 'Light mode' : 'Dark mode'));
   themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));
+  readonly themeVariants = this.themeService.themeVariants;
+  currentThemeVariant = computed(() => this.themeService.$themeVariant());
+  currentThemeVariantLabel = computed(
+    () =>
+      this.themeVariants.find(variant => variant.id === this.currentThemeVariant())?.label ??
+      'Theme',
+  );
   private breakpointSubscription?: Subscription;
 
   panels = signal<SplitterPanel[]>([
@@ -97,5 +104,9 @@ export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   toggleTheme(): void {
     this.themeService.toggleTheme();
+  }
+
+  setThemeVariant(variant: ThemeVariant): void {
+    this.themeService.setThemeVariant(variant);
   }
 }
