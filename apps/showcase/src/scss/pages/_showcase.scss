@@ -8,9 +8,24 @@
 
 .showcase {
   padding: clamp(32px, 6vw, 64px) clamp(24px, 4vw, 48px);
-  max-width: 1400px;
+  max-width: 1300px;
   margin: 0 auto;
   font-family: $font-family-base;
+
+  ui-table-of-content {
+    .table-of-content {
+      border-radius: $border-radius-600;
+      border: 1px solid
+        color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-stroke-rest));
+      background:
+        radial-gradient(
+          circle at 110% -30%,
+          color-mix(in srgb, var(--color-brand-primary) 12%, transparent),
+          transparent 45%
+        ),
+        var(--color-neutral-background2-rest);
+    }
+  }
 
   h2 {
     font-size: $font-size-700;
@@ -27,18 +42,18 @@
   }
 
   &__title {
-    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-size: clamp(2rem, 5vw, 2.75rem);
     font-weight: $font-weight-semibold;
     color: var(--color-neutral-foreground-rest);
     margin-bottom: $spacing-3;
-    line-height: 1.25;
+    line-height: 1.2;
     letter-spacing: -0.01em;
     word-wrap: break-word;
     overflow-wrap: break-word;
   }
 
   &__description {
-    font-size: $font-size-400;
+    font-size: clamp(1rem, 2vw, 1.125rem);
     color: var(--color-neutral-foreground2-rest);
     margin-bottom: $spacing-10;
     line-height: 1.6;
@@ -48,10 +63,10 @@
   &__header {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: $spacing-4;
-    margin-bottom: $spacing-6;
+    margin-bottom: $spacing-3;
 
     &__main {
       display: flex;
@@ -378,11 +393,13 @@
   &__form-output {
     margin-top: $spacing-4;
     padding: $spacing-4;
-    background: color-mix(
-      in srgb,
-      var(--color-brand-primary) 6%,
-      var(--color-neutral-background-rest)
-    );
+    background:
+      radial-gradient(
+        circle at 110% -30%,
+        color-mix(in srgb, var(--color-brand-primary) 12%, transparent),
+        transparent 45%
+      ),
+      var(--color-neutral-background2-rest);
     border: 1px solid
       color-mix(in srgb, var(--color-brand-primary) 20%, var(--color-neutral-stroke-rest));
     border-radius: $border-radius-600;
@@ -1221,6 +1238,189 @@
       ui-table-of-content {
         display: none; // Hide TOC on small devices
       }
+    }
+  }
+
+  &__toc {
+    border-radius: $border-radius-600;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-stroke-rest));
+    background:
+      radial-gradient(
+        circle at 110% -30%,
+        color-mix(in srgb, var(--color-brand-primary) 12%, transparent),
+        transparent 45%
+      ),
+      var(--color-neutral-background2-rest);
+    padding: $spacing-1;
+
+    .table-of-content {
+      background: transparent !important;
+      border: 0 !important;
+    }
+  }
+
+  &__stack {
+    display: grid;
+    gap: $spacing-4;
+  }
+
+  &__list {
+    font-size: $font-size-400;
+    line-height: 1.7;
+    margin: 0 0 $spacing-4;
+    padding-left: $spacing-6;
+    color: var(--color-neutral-foreground2-rest);
+
+    li {
+      margin-bottom: $spacing-2;
+    }
+  }
+
+  &__card {
+    padding: $spacing-5;
+    border-radius: $border-radius-600;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 18%, var(--color-neutral-stroke-rest));
+    background:
+      radial-gradient(
+        circle at 120% -20%,
+        color-mix(in srgb, var(--color-brand-primary) 14%, transparent),
+        transparent 46%
+      ),
+      var(--color-neutral-background-rest);
+  }
+
+  &__meta {
+    margin: 0 0 $spacing-2;
+    font-size: $font-size-200;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-neutral-foreground3-rest);
+  }
+
+  &__code {
+    margin: $spacing-4 0;
+    padding: $spacing-4;
+    border-radius: $border-radius-600;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-stroke-rest));
+    background: var(--color-neutral-background2-rest);
+    overflow: auto;
+
+    code {
+      font-family: $font-family-mono;
+      font-size: $font-size-300;
+      color: var(--color-neutral-foreground-rest);
+      line-height: 1.6;
+      white-space: pre;
+    }
+  }
+
+  &__note {
+    padding: $spacing-4;
+    border-radius: $border-radius-600;
+    border-left: 3px solid var(--color-brand-primary);
+    background: color-mix(in srgb, var(--color-brand-primary) 10%, transparent);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-3;
+
+    &--end {
+      margin-top: $spacing-8;
+    }
+  }
+
+  &__button-link {
+    text-decoration: none;
+    color: var(--color-brand-primary);
+    border: 1px solid color-mix(in srgb, var(--color-brand-primary) 26%, transparent);
+    background: color-mix(in srgb, var(--color-brand-primary) 4%, transparent);
+    border-radius: $border-radius-400;
+    padding: $spacing-2 $spacing-4;
+    font-size: $font-size-300;
+    font-weight: $font-weight-medium;
+    transition:
+      border-color $duration-fast $easing-ease-in-out,
+      background $duration-fast $easing-ease-in-out;
+
+    &:hover {
+      border-color: color-mix(in srgb, var(--color-brand-primary) 42%, transparent);
+      background: color-mix(in srgb, var(--color-brand-primary) 10%, transparent);
+    }
+  }
+
+  &__card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: $spacing-5;
+    border-radius: $border-radius-600;
+    border: 1px solid
+      color-mix(in srgb, var(--color-brand-primary) 18%, var(--color-neutral-stroke-rest));
+    background:
+      radial-gradient(
+        circle at 120% -20%,
+        color-mix(in srgb, var(--color-brand-primary) 14%, transparent),
+        transparent 46%
+      ),
+      var(--color-neutral-background-rest);
+    transition:
+      transform $duration-fast $easing-ease-in-out,
+      border-color $duration-fast $easing-ease-in-out,
+      background $duration-fast $easing-ease-in-out;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--color-brand-primary);
+      background:
+        radial-gradient(
+          circle at 120% -20%,
+          color-mix(in srgb, var(--color-brand-primary) 18%, transparent),
+          transparent 46%
+        ),
+        color-mix(in srgb, var(--color-brand-primary) 6%, var(--color-neutral-background-rest));
+    }
+
+    h3 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  &__item-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-2;
+  }
+
+  &__status-pill {
+    margin-inline-start: auto;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: $font-size-200;
+    font-weight: $font-weight-semibold;
+
+    &--shipped {
+      color: #0b6a36;
+      background: color-mix(in srgb, #2aa872 16%, transparent);
+    }
+
+    &--in-progress {
+      color: #8f5b00;
+      background: color-mix(in srgb, #e5ac39 16%, transparent);
+    }
+
+    &--planned {
+      color: var(--color-brand-primary);
+      background: color-mix(in srgb, var(--color-brand-primary) 14%, transparent);
     }
   }
 

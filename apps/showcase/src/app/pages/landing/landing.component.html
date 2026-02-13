@@ -381,6 +381,37 @@
       }
     </div>
   </div>
+  <!-- Roadmap Preview -->
+  <div class="landing__roadmap">
+    <div class="landing__showcase__header">
+      <h2 class="landing__showcase__title">Roadmap</h2>
+      <p class="landing__showcase__description">
+        See what is already shipped, what is being built, and what comes next.
+      </p>
+    </div>
+    <div class="landing__showcase__grid landing__roadmap__grid">
+      @for (item of roadmapPreview; track item.id) {
+        <article class="landing__showcase__card landing__roadmap__card">
+          <p class="landing__roadmap__card__time">Target: {{ item.timeframe }}</p>
+          <span
+            class="landing__roadmap__card__status"
+            [class]="
+              'landing__roadmap__card__status landing__roadmap__card__status--' + item.status
+            "
+          >
+            {{ getRoadmapStatusLabel(item.status) }}
+          </span>
+          <h3 class="landing__roadmap__card__title">{{ item.title }}</h3>
+          <p class="landing__roadmap__card__summary">{{ item.summary }}</p>
+        </article>
+      }
+    </div>
+    <div class="landing__roadmap__actions">
+      <ui-button variant="secondary" size="large" icon="timeline" (click)="navigateToRoadmap()">
+        View Full Roadmap
+      </ui-button>
+    </div>
+  </div>
 
   <!-- CTA Section -->
   <div class="landing__cta">
@@ -408,6 +439,7 @@
     <div class="landing__footer__content">
       <div class="landing__footer__links">
         <a routerLink="/docs/getting-started" class="landing__footer__link">Getting Started</a>
+        <a routerLink="/docs/roadmap" class="landing__footer__link">Roadmap</a>
         <a routerLink="/docs" class="landing__footer__link">Components</a>
         <a
           [href]="githubUrl"
@@ -421,7 +453,7 @@
         >
       </div>
       <div class="landing__footer__meta">
-        <span class="landing__footer__copyright">© {{ currentYear }} Angular UI</span>
+        <span class="landing__footer__copyright">&copy; {{ currentYear }} Angular UI</span>
         <span class="landing__footer__version">v{{ version }}</span>
       </div>
     </div>

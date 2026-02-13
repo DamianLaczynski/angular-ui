@@ -42,6 +42,14 @@ interface ShowcaseComponent {
   icon: IconName;
 }
 
+interface RoadmapPreviewItem {
+  id: string;
+  title: string;
+  timeframe: string;
+  summary: string;
+  status: 'done' | 'active' | 'next';
+}
+
 const ALL_SHOWCASE_COMPONENTS: ShowcaseComponent[] = [
   { id: 'accordion', name: 'Accordion', icon: 'slide_text' },
   { id: 'avatar', name: 'Avatar', icon: 'person' },
@@ -147,6 +155,29 @@ export class LandingComponent {
   readonly currentYear = new Date().getFullYear();
   readonly githubUrl = 'https://github.com/DamianLaczynski/angular-ui';
   readonly npmUrl = 'https://www.npmjs.com/';
+  readonly roadmapPreview: RoadmapPreviewItem[] = [
+    {
+      id: 'stability',
+      title: 'Core stability',
+      timeframe: 'Q1 2026',
+      summary: 'Foundation for Fluent tokens, docs structure and baseline accessibility.',
+      status: 'done',
+    },
+    {
+      id: 'dx',
+      title: 'Developer experience',
+      timeframe: 'Q2 2026',
+      summary: 'Better guides, richer API examples and stronger test coverage.',
+      status: 'active',
+    },
+    {
+      id: 'advanced',
+      title: 'Advanced components',
+      timeframe: 'Q3 2026',
+      summary: 'Data-heavy patterns and layout primitives for enterprise applications.',
+      status: 'next',
+    },
+  ];
 
   searchQuery = signal('');
   readonly showcaseComponents = signal<ShowcaseComponent[]>(ALL_SHOWCASE_COMPONENTS);
@@ -256,8 +287,21 @@ export class LandingComponent {
     this.router.navigate(['/docs/getting-started']);
   }
 
+  navigateToRoadmap(): void {
+    this.router.navigate(['/docs/roadmap']);
+  }
+
   navigateToComponent(componentId: string): void {
     this.router.navigate(['/docs', componentId]);
+  }
+
+  getRoadmapStatusLabel(status: RoadmapPreviewItem['status']): string {
+    const labels: Record<RoadmapPreviewItem['status'], string> = {
+      done: 'Delivered',
+      active: 'In progress',
+      next: 'Next up',
+    };
+    return labels[status];
   }
 
   getShowcaseId(item: CarouselItem): string {

@@ -430,6 +430,83 @@
   }
 }
 
+// Roadmap Section
+.landing__roadmap {
+  padding: clamp(64px, 12vw, 96px) $spacing-6;
+}
+
+.landing__roadmap__grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: $spacing-5;
+}
+
+.landing__roadmap__card {
+  align-items: flex-start;
+  padding: $spacing-5;
+  cursor: default;
+  border-radius: $border-radius-600;
+  border: 1px solid
+    color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-stroke-rest));
+  background:
+    radial-gradient(
+      circle at 110% -30%,
+      color-mix(in srgb, var(--color-brand-primary) 12%, transparent),
+      transparent 45%
+    ),
+    var(--color-neutral-background2-rest);
+
+  &:hover {
+    transform: none;
+    border-color: color-mix(
+      in srgb,
+      var(--color-brand-primary) 14%,
+      var(--color-neutral-stroke-rest)
+    );
+    background:
+      radial-gradient(
+        circle at 110% -30%,
+        color-mix(in srgb, var(--color-brand-primary) 12%, transparent),
+        transparent 45%
+      ),
+      var(--color-neutral-background2-rest);
+  }
+
+  &__time {
+    margin: 0;
+    color: var(--color-neutral-foreground3-rest);
+  }
+
+  &__status {
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: $font-size-200;
+    font-weight: $font-weight-semibold;
+    color: var(--color-brand-primary);
+    background: color-mix(in srgb, var(--color-brand-primary) 14%, transparent);
+
+    &--done {
+      color: #0b6a36;
+      background: color-mix(in srgb, #2aa872 18%, transparent);
+    }
+
+    &--active {
+      color: #8f5b00;
+      background: color-mix(in srgb, #e5ac39 18%, transparent);
+    }
+
+    &--next {
+      color: #0a5fb4;
+      background: color-mix(in srgb, #5c9cff 18%, transparent);
+    }
+  }
+}
+
+.landing__roadmap__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: $spacing-8;
+}
+
 // CTA Section
 .landing__cta {
   padding: clamp(64px, 12vw, 96px) $spacing-6;
