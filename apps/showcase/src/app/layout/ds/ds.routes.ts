@@ -23,6 +23,7 @@ import { DialogShowcaseComponent } from '@showcase/dialog/dialog.showcase';
 import { EmptyStateShowcaseComponent } from '@showcase/empty-state/empty-state.showcase';
 import { ErrorStateShowcaseComponent } from '@showcase/error-state/error-state.showcase';
 import { LoadingStateShowcaseComponent } from '@showcase/loading-state/loading-state.showcase';
+import { MessageBarShowcaseComponent } from '@showcase/message-bar/message-bar.showcase';
 import { MenuShowcaseComponent } from '@showcase/menu/menu.showcase';
 import { TagShowcaseComponent } from '@showcase/tag/tag.showcase';
 import { ProgressBarShowcaseComponent } from '@showcase/progress-bar/progress-bar.showcase';
@@ -140,6 +141,10 @@ export const dsRoutes: Routes = [
   {
     path: 'loading-state',
     component: LoadingStateShowcaseComponent,
+  },
+  {
+    path: 'message-bar',
+    component: MessageBarShowcaseComponent,
   },
   {
     path: 'state-container',

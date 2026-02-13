@@ -80,6 +80,7 @@ export class DsSidebarComponent {
     { id: 'skeleton', label: 'Skeleton', icon: 'checkbox_indeterminate' },
     { id: 'spinner', label: 'Spinner', icon: 'replay' },
     { id: 'toast', label: 'Toast', icon: 'alert' },
+    { id: 'message-bar', label: 'Message Bar', icon: 'alert_badge' },
     // Data Display Section
     { id: 'data-display', isSectionHeader: true, label: 'Data Display' },
     { id: 'data-grid', label: 'Data Grid', icon: 'table' },
