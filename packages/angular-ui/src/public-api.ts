@@ -37,6 +37,7 @@ export * from './lib/components/field/url';
 export * from './lib/components/icon';
 export * from './lib/components/kbd';
 export * from './lib/components/loading-state';
+export * from './lib/components/message-bar';
 export * from './lib/components/menu';
 export * from './lib/components/nav';
 export * from './lib/components/node';
