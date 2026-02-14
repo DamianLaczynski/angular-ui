@@ -14,7 +14,7 @@ import { TEXTAREA_SHOWCASE_CONFIG } from './textarea.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-textarea

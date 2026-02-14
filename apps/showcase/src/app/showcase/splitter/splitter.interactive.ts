@@ -26,7 +26,7 @@ import type { Orientation } from 'angular-ui';
       [config]="showcaseConfig"
       [showEventLog]="false"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview [style.height]="'400px'">
         <ui-splitter

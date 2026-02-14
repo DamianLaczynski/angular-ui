@@ -29,7 +29,7 @@ const DEFAULT_ITEMS: RadioButtonItem[] = [
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-radio-button-group

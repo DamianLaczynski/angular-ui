@@ -17,7 +17,7 @@ import {
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview class="showcase__preview">
         <div class="showcase__button-row">

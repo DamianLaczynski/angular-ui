@@ -21,7 +21,7 @@ import { TitleCasePipe } from '@angular/common';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-scroll-panel

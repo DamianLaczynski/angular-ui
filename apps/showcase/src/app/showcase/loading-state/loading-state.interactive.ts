@@ -12,7 +12,7 @@ import { LOADING_STATE_SHOWCASE_CONFIG } from './loading-state.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="values.set($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         @if (currentOverlay()) {
