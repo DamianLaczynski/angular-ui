@@ -1,19 +1,20 @@
 import { Component, input, output, computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuComponent } from 'angular-ui';
+//TODO: Add menu component back when it is implemented
+//import { MenuComponent } from 'angular-ui';
 import type { MenuItem } from 'angular-ui';
 import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-showcase-header',
   standalone: true,
-  imports: [MenuComponent],
+  //imports: [MenuComponent],
   template: `
     <header class="showcase__header">
       <div class="showcase__header__main">
         <h1 class="showcase__title showcase__header__title">{{ title() }}</h1>
       </div>
-      @if (showActions()) {
+      <!-- @if (showActions()) {
         <div class="showcase__header__actions">
           <ui-menu
             variant="primary"
@@ -27,7 +28,7 @@ import { environment } from '../../../../environments/environment';
             (menuItemClick)="onMenuItemClick($event)"
           />
         </div>
-      }
+      } -->
     </header>
   `,
 })
