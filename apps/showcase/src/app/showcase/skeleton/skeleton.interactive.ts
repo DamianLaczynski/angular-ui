@@ -12,7 +12,7 @@ import { SKELETON_SHOWCASE_CONFIG } from './skeleton.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="false"
       (valuesChange)="values.set($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-skeleton

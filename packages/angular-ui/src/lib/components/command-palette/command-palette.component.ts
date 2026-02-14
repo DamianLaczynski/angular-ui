@@ -119,7 +119,7 @@ export class CommandPaletteComponent {
   constructor() {
     effect(() => {
       this.filteredItems();
-      this._selectedIndex.set(0);
+      this.setFirstSelectableIndex();
     });
   }
 
@@ -128,15 +128,14 @@ export class CommandPaletteComponent {
   onArrowDown(event: KeyboardEvent): void {
     if (!this.visible()) return;
     event.preventDefault();
-    const maxIndex = this.filteredItems().length - 1;
-    this._selectedIndex.update(index => Math.min(index + 1, maxIndex));
+    this.moveSelection(1);
   }
 
   @HostListener('document:keydown.arrowup', ['$event'])
   onArrowUp(event: KeyboardEvent): void {
     if (!this.visible()) return;
     event.preventDefault();
-    this._selectedIndex.update(index => Math.max(index - 1, 0));
+    this.moveSelection(-1);
   }
 
   @HostListener('document:keydown.enter', ['$event'])
@@ -158,7 +157,7 @@ export class CommandPaletteComponent {
     if (!this.visible()) {
       this.visible.set(true);
       this._searchQuery.set('');
-      this._selectedIndex.set(0);
+      this.setFirstSelectableIndex();
     }
   }
 
@@ -169,7 +168,7 @@ export class CommandPaletteComponent {
 
   onSearchChange(query: string): void {
     this._searchQuery.set(query);
-    this._selectedIndex.set(0); // Reset selection on search
+    this.setFirstSelectableIndex();
   }
 
   onItemClick(item: CommandPaletteItem): void {
@@ -213,11 +212,55 @@ export class CommandPaletteComponent {
     return items[this._selectedIndex()] === item;
   }
 
-  trackByItemId(index: number, item: CommandPaletteItem): string {
+  selectedItemId(): string | null {
+    const selectedItem = this.filteredItems()[this._selectedIndex()];
+    return selectedItem ? this.itemId(selectedItem) : null;
+  }
+
+  itemId(item: CommandPaletteItem): string {
+    return `command-palette-item-${this.toDomToken(item.id)}`;
+  }
+
+  groupHeaderId(group: CommandPaletteGroup): string {
+    return `command-palette-group-${this.toDomToken(group.id)}`;
+  }
+
+  trackByItemId(_index: number, item: CommandPaletteItem): string {
     return item.id;
   }
 
-  trackByGroupId(index: number, group: CommandPaletteGroup): string {
+  trackByGroupId(_index: number, group: CommandPaletteGroup): string {
     return group.id;
+  }
+
+  private setFirstSelectableIndex(): void {
+    const firstSelectableIndex = this.filteredItems().findIndex(item => !item.disabled);
+    this._selectedIndex.set(firstSelectableIndex >= 0 ? firstSelectableIndex : 0);
+  }
+
+  private moveSelection(direction: 1 | -1): void {
+    const enabledIndices = this.filteredItems()
+      .map((item, index) => (!item.disabled ? index : -1))
+      .filter(index => index >= 0);
+
+    if (enabledIndices.length === 0) {
+      this._selectedIndex.set(0);
+      return;
+    }
+
+    const currentIndex = this._selectedIndex();
+
+    if (direction > 0) {
+      const nextIndex = enabledIndices.find(index => index > currentIndex);
+      this._selectedIndex.set(nextIndex ?? enabledIndices[enabledIndices.length - 1]);
+      return;
+    }
+
+    const previousIndex = [...enabledIndices].reverse().find(index => index < currentIndex);
+    this._selectedIndex.set(previousIndex ?? enabledIndices[0]);
+  }
+
+  private toDomToken(value: string): string {
+    return value.replace(/[^a-zA-Z0-9-_]/g, '-');
   }
 }

@@ -12,7 +12,7 @@ import { KBD_SHOWCASE_CONFIG } from './kbd.showcase.config';
     <app-interactive-showcase
       [config]="showcaseConfig"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-kbd [text]="currentText()" [size]="currentSize()" [appearance]="currentAppearance()" />

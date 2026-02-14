@@ -115,9 +115,10 @@ const RADIO_BUTTON_GROUP_CONTROL_DEFS: SharedControlDef[] = [
 const ALL_CONTROLS = toDrawerFormControls(RADIO_BUTTON_GROUP_CONTROL_DEFS);
 
 export const RADIO_BUTTON_GROUP_DRAWER_CONFIGS = createDrawerFormConfigs(ALL_CONTROLS, {
-  overview: { excludeKeys: ['variant', 'appearance', 'orientation', 'layout', 'size', 'shape'] },
-  appearanceVariant: { excludeKeys: ['variant', 'appearance'] },
-  orientationLayout: { excludeKeys: ['orientation', 'layout'] },
+  appearance: { excludeKey: 'appearance' },
+  variant: { excludeKey: 'variant' },
+  orientation: { excludeKey: 'orientation' },
+  layout: { excludeKey: 'layout' },
   size: { excludeKey: 'size' },
   shape: { excludeKey: 'shape' },
   states: { excludeKeys: ['disabled', 'readonly', 'required'] },

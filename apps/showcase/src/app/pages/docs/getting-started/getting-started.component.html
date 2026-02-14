@@ -47,11 +47,19 @@
       </ul>
     </section>
 
-    <div class="showcase__actions showcase__actions--end">
-      @for (item of nextSteps; track item.route) {
-        <a class="showcase__button-link" [routerLink]="item.route">{{ item.label }}</a>
-      }
-    </div>
+    <section class="showcase__section">
+      <h2 class="showcase__section__title">Related pages</h2>
+      <div class="showcase__grid showcase__grid--large">
+        <a class="showcase__card-link" routerLink="/docs/installation">
+          <h3>Installation</h3>
+          <p>Environment requirements and setup checklist for your project.</p>
+        </a>
+        <a class="showcase__card-link" routerLink="/docs/roadmap">
+          <h3>Roadmap</h3>
+          <p>Current priorities and upcoming milestones for Angular UI.</p>
+        </a>
+      </div>
+    </section>
   </div>
 
   <ui-table-of-content

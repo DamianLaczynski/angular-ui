@@ -13,7 +13,7 @@ import { ERROR_STATE_SHOWCASE_CONFIG } from './error-state.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-error-state

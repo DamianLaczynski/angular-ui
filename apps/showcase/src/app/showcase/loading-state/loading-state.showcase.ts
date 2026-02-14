@@ -1,12 +1,6 @@
 import { Component, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  LoadingStateComponent,
-  CardComponent,
-  ButtonComponent,
-  QuickAction,
-  Size,
-} from 'angular-ui';
+import { LoadingStateComponent, CardComponent, ButtonComponent, Size } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
 import { SectionWithDrawerComponent } from '@shared/components/section-with-drawer';
 import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
@@ -159,12 +153,13 @@ import { LoadingStateInteractiveComponent } from './loading-state.interactive';
                 [size]="overlayForm().size"
                 [spinnerSize]="overlayForm().spinnerSize"
               >
-                <ui-card
-                  title="Sample Content"
-                  bodyText="This content will be covered by the loading overlay. The blur effect helps draw attention to the loading state."
-                  [showFooter]="false"
-                  style="filled"
-                />
+                <ui-card appearance="filled" ariaLabel="Sample content card">
+                  <div uiCardHeader><strong>Sample Content</strong></div>
+                  <p uiCardBody>
+                    This content will be covered by the loading overlay. The blur effect helps draw
+                    attention to the loading state.
+                  </p>
+                </ui-card>
               </ui-loading-state>
             </div>
             <div class="showcase__item">
@@ -178,12 +173,13 @@ import { LoadingStateInteractiveComponent } from './loading-state.interactive';
                 [size]="overlayForm().size"
                 [spinnerSize]="overlayForm().spinnerSize"
               >
-                <ui-card
-                  title="Sample Content"
-                  bodyText="This content is visible through the overlay without blur, allowing users to see what's being loaded."
-                  [showFooter]="false"
-                  style="outline"
-                />
+                <ui-card appearance="outline" ariaLabel="Sample content card">
+                  <div uiCardHeader><strong>Sample Content</strong></div>
+                  <p uiCardBody>
+                    This content is visible through the overlay without blur, allowing users to see
+                    what's being loaded.
+                  </p>
+                </ui-card>
               </ui-loading-state>
             </div>
           </div>
@@ -281,12 +277,15 @@ import { LoadingStateInteractiveComponent } from './loading-state.interactive';
                 spinnerSize="small"
                 size="small"
               >
-                <ui-card
-                  title="Card Title"
-                  bodyText="This is a sample card with content that will be covered by the loading overlay."
-                  [primaryAction]="cardAction()"
-                  style="filled"
-                />
+                <ui-card appearance="filled" ariaLabel="Card with actions">
+                  <div uiCardHeader><strong>Card Title</strong></div>
+                  <p uiCardBody>
+                    This is a sample card with content that will be covered by the loading overlay.
+                  </p>
+                  <div uiCardFooter>
+                    <ui-button size="small">Action Button</ui-button>
+                  </div>
+                </ui-card>
               </ui-loading-state>
             </div>
           </div>
@@ -428,12 +427,6 @@ export class LoadingStateShowcaseComponent {
   });
 
   showFullScreen = signal<boolean>(false);
-
-  cardAction = signal<QuickAction>({
-    label: 'Action Button',
-    variant: 'primary',
-    action: () => {},
-  });
 
   showFullScreenDemo(): void {
     this.showFullScreen.set(true);

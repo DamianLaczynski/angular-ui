@@ -15,7 +15,7 @@ import { TEL_SHOWCASE_CONFIG } from './tel.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-tel

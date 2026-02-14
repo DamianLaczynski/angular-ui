@@ -15,7 +15,7 @@ import { DROPDOWN_SHOWCASE_CONFIG, DROPDOWN_BASIC_ITEMS } from './dropdown.showc
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-dropdown

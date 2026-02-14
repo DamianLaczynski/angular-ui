@@ -14,7 +14,7 @@ import { DATE_SHOWCASE_CONFIG } from './date.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-date

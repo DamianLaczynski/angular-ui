@@ -12,7 +12,6 @@ import {
 
 import { Router, RouterOutlet } from '@angular/router';
 import { DsSidebarComponent } from './components/ds-sidebar/ds-sidebar.component';
-import { SplitterPanel } from 'angular-ui';
 import { ButtonComponent } from 'angular-ui';
 import { IconComponent } from 'angular-ui';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -27,6 +26,7 @@ import { ThemeMode, ThemeService } from '@shared/theme/theme.service';
 })
 export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('mainContent') mainContent?: ElementRef<HTMLElement>;
+  @ViewChild('headerRef') headerRef?: ElementRef<HTMLElement>;
 
   private readonly breakpointObserver = inject(BreakpointObserver);
   private readonly router = inject(Router);
@@ -42,16 +42,7 @@ export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
   themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));
   private breakpointSubscription?: Subscription;
 
-  panels = signal<SplitterPanel[]>([
-    {
-      id: 'sidebar',
-      size: 15,
-    },
-    {
-      id: 'content',
-      size: 85,
-    },
-  ]);
+  private headerResizeObserver?: ResizeObserver;
 
   isSidebarOpen = signal<boolean>(false);
   isMobile = signal<boolean>(false);
@@ -59,6 +50,13 @@ export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.mainContent?.nativeElement) {
       this.scrollService.register(this.mainContent.nativeElement);
+    }
+
+    this.syncHeaderHeight();
+
+    if (typeof ResizeObserver !== 'undefined' && this.headerRef?.nativeElement) {
+      this.headerResizeObserver = new ResizeObserver(() => this.syncHeaderHeight());
+      this.headerResizeObserver.observe(this.headerRef.nativeElement);
     }
   }
 
@@ -75,11 +73,14 @@ export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
           // On desktop, sidebar should always be visible
           this.isSidebarOpen.set(true);
         }
+
+        this.syncHeaderHeight();
       });
   }
 
   ngOnDestroy(): void {
     this.breakpointSubscription?.unsubscribe();
+    this.headerResizeObserver?.disconnect();
     this.scrollService.unregister();
   }
 
@@ -97,5 +98,13 @@ export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   toggleTheme(): void {
     this.themeService.toggleTheme();
+  }
+
+  private syncHeaderHeight(): void {
+    const headerEl = this.headerRef?.nativeElement;
+    if (!headerEl) return;
+
+    const height = Math.ceil(headerEl.getBoundingClientRect().height);
+    document.documentElement.style.setProperty('--ds-header-height', `${height}px`);
   }
 }

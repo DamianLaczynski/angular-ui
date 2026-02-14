@@ -44,9 +44,14 @@ import { TabsInteractiveComponent } from './tabs.interactive';
       />
       <div class="showcase-content">
         <app-showcase-header title="Tabs" />
+        <p class="showcase__description">
+          Tabs organize related content into switchable views. Use them to reduce visual noise and
+          keep navigation local to a section while preserving quick access to key areas.
+        </p>
 
         <app-section-with-drawer
           sectionTitle="Appearance"
+          sectionDescription="Appearance changes the visual emphasis of tabs (for example subtle or filled styles) without changing their structure. Use this to match hierarchy and contrast in your layout."
           [formConfig]="appearanceDrawerFormConfig"
           [formValues]="appearanceFormValues()"
           (formValuesChange)="appearanceFormValues.set($event)"
@@ -71,6 +76,7 @@ import { TabsInteractiveComponent } from './tabs.interactive';
 
         <app-section-with-drawer
           sectionTitle="Variant"
+          sectionDescription="Variant controls the semantic color intent of tabs, such as primary or status-oriented styles. Combine it with appearance to tune clarity and emphasis."
           [formConfig]="variantDrawerFormConfig"
           [formValues]="variantFormValues()"
           (formValuesChange)="variantFormValues.set($event)"
@@ -95,6 +101,7 @@ import { TabsInteractiveComponent } from './tabs.interactive';
 
         <app-section-with-drawer
           sectionTitle="Size"
+          sectionDescription="Size adjusts tab height and spacing. Pick smaller sizes for dense interfaces and larger sizes when tabs are a primary navigation element."
           [formConfig]="sizeDrawerFormConfig"
           [formValues]="sizeFormValues()"
           (formValuesChange)="sizeFormValues.set($event)"
@@ -119,6 +126,7 @@ import { TabsInteractiveComponent } from './tabs.interactive';
 
         <app-section-with-drawer
           sectionTitle="Shape"
+          sectionDescription="Shape changes tab corner geometry to better align with your design language, from rounded defaults to more angular alternatives."
           [formConfig]="shapeDrawerFormConfig"
           [formValues]="shapeFormValues()"
           (formValuesChange)="shapeFormValues.set($event)"
@@ -143,6 +151,7 @@ import { TabsInteractiveComponent } from './tabs.interactive';
 
         <app-section-with-drawer
           sectionTitle="Orientation"
+          sectionDescription="Orientation switches tabs between horizontal and vertical layouts. Vertical tabs work well for side navigation and longer labels."
           [formConfig]="orientationDrawerFormConfig"
           [formValues]="orientationFormValues()"
           (formValuesChange)="orientationFormValues.set($event)"
@@ -167,6 +176,10 @@ import { TabsInteractiveComponent } from './tabs.interactive';
 
         <section id="tab-options" class="showcase__section">
           <h2 class="showcase__section__title">Tab options</h2>
+          <p class="showcase__section__description">
+            Compare different tab data sets: standard tabs, disabled and closable items, and a
+            minimal labels-only configuration.
+          </p>
           <div class="showcase__option-section__box">
             <div class="showcase__grid">
               <div class="showcase__item">
@@ -192,6 +205,10 @@ import { TabsInteractiveComponent } from './tabs.interactive';
 
         <section id="interactive-demo" class="showcase__section">
           <h2 class="showcase__section__title">Interactive Demo</h2>
+          <p class="showcase__section__description">
+            Experiment with all tab properties in real time, then review generated markup and
+            emitted events.
+          </p>
           <app-tabs-interactive />
         </section>
       </div>

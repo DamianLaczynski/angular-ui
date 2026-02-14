@@ -11,6 +11,7 @@ import { SectionWithDrawerComponent } from '@shared/components/section-with-draw
 import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
 import {
   Appearance,
+  ButtonComponent,
   ChevronPosition,
   NavComponent,
   NavNode,
@@ -29,6 +30,7 @@ import { NavInteractiveComponent } from './nav.interactive';
     CommonModule,
     FormsModule,
     NavComponent,
+    ButtonComponent,
     SectionWithDrawerComponent,
     ShowcaseHeaderComponent,
     TableOfContentComponent,
@@ -219,14 +221,27 @@ import { NavInteractiveComponent } from './nav.interactive';
 
         <app-section-with-drawer
           sectionTitle="Selection Indicator"
-          sectionDescription="Show selection marker in vertical or horizontal orientation, or disable it."
+          sectionDescription="Configure selection marker visibility and orientation. Compare vertical and horizontal positions in the same data set."
           [formConfig]="selectionIndicatorDrawerFormConfig"
           [formValues]="selectionIndicatorFormValues()"
           (formValuesChange)="selectionIndicatorFormValues.set($event)"
         >
           <div class="showcase__grid">
             <div class="showcase__item">
-              <h3>Vertical</h3>
+              <h3>Configured</h3>
+              <ui-nav
+                [items]="selectionItems"
+                [variant]="selectionIndicatorForm().variant"
+                [appearance]="selectionIndicatorForm().appearance"
+                [size]="selectionIndicatorForm().size"
+                [shape]="selectionIndicatorForm().shape"
+                [chevronPosition]="selectionIndicatorForm().chevronPosition"
+                [showSelectionIndicator]="selectionIndicatorForm().showSelectionIndicator"
+                [indicatorPosition]="selectionIndicatorForm().indicatorPosition"
+              />
+            </div>
+            <div class="showcase__item">
+              <h3>Vertical Reference</h3>
               <ui-nav
                 [items]="selectionItems"
                 [variant]="selectionIndicatorForm().variant"
@@ -239,7 +254,7 @@ import { NavInteractiveComponent } from './nav.interactive';
               />
             </div>
             <div class="showcase__item">
-              <h3>Horizontal</h3>
+              <h3>Horizontal Reference</h3>
               <ui-nav
                 [items]="selectionItems"
                 [variant]="selectionIndicatorForm().variant"
@@ -249,18 +264,6 @@ import { NavInteractiveComponent } from './nav.interactive';
                 [chevronPosition]="selectionIndicatorForm().chevronPosition"
                 [showSelectionIndicator]="true"
                 [indicatorPosition]="'horizontal'"
-              />
-            </div>
-            <div class="showcase__item">
-              <h3>Hidden</h3>
-              <ui-nav
-                [items]="selectionItems"
-                [variant]="selectionIndicatorForm().variant"
-                [appearance]="selectionIndicatorForm().appearance"
-                [size]="selectionIndicatorForm().size"
-                [shape]="selectionIndicatorForm().shape"
-                [chevronPosition]="selectionIndicatorForm().chevronPosition"
-                [showSelectionIndicator]="false"
               />
             </div>
           </div>
@@ -317,18 +320,22 @@ import { NavInteractiveComponent } from './nav.interactive';
 
           <ng-template #navQuickActionsTemplate let-node>
             <div class="showcase__nav-quick-actions">
-              <button
-                type="button"
+              <ui-button
+                appearance="outline"
+                variant="secondary"
+                size="small"
                 (click)="onQuickActionClick('edit', node); $event.stopPropagation()"
               >
                 Edit
-              </button>
-              <button
-                type="button"
+              </ui-button>
+              <ui-button
+                appearance="outline"
+                variant="danger"
+                size="small"
                 (click)="onQuickActionClick('delete', node); $event.stopPropagation()"
               >
                 Delete
-              </button>
+              </ui-button>
             </div>
           </ng-template>
         </section>
@@ -371,15 +378,6 @@ import { NavInteractiveComponent } from './nav.interactive';
         display: flex;
         gap: 0.375rem;
       }
-
-      .showcase__nav-quick-actions button {
-        border: 1px solid var(--color-neutral-stroke1-rest, #d1d1d1);
-        border-radius: 4px;
-        background: var(--color-neutral-background1-rest, #fff);
-        padding: 0.125rem 0.375rem;
-        font-size: 11px;
-        cursor: pointer;
-      }
     `,
   ],
 })
@@ -404,24 +402,76 @@ export class NavShowcaseComponent {
   }));
 
   overviewItems: NavNode[] = [
-    { id: 'overview-home', label: 'Home', icon: 'home', selected: true },
-    { id: 'overview-settings', label: 'Settings', icon: 'settings' },
+    {
+      id: 'overview-home',
+      label: 'Home',
+      icon: 'home',
+      selected: true,
+      hasChildren: true,
+      children: [{ id: 'overview-home-main', label: 'Main page' }],
+    },
+    {
+      id: 'overview-settings',
+      label: 'Settings',
+      icon: 'settings',
+      hasChildren: true,
+      children: [{ id: 'overview-settings-profile', label: 'Profile' }],
+    },
   ];
 
   appearanceVariantItems: NavNode[] = [
-    { id: 'appearance-home', label: 'Overview', icon: 'home', selected: true },
-    { id: 'appearance-reports', label: 'Reports', icon: 'info' },
+    {
+      id: 'appearance-home',
+      label: 'Overview',
+      icon: 'home',
+      selected: true,
+      hasChildren: true,
+      children: [{ id: 'appearance-home-insights', label: 'Insights' }],
+    },
+    {
+      id: 'appearance-reports',
+      label: 'Reports',
+      icon: 'info',
+      hasChildren: true,
+      children: [{ id: 'appearance-reports-monthly', label: 'Monthly' }],
+    },
   ];
 
   sizeItems: NavNode[] = [
-    { id: 'size-home', label: 'Home', icon: 'home', selected: true },
-    { id: 'size-dashboard', label: 'Dashboard', icon: 'grid' },
+    {
+      id: 'size-home',
+      label: 'Home',
+      icon: 'home',
+      selected: true,
+      hasChildren: true,
+      children: [{ id: 'size-home-summary', label: 'Summary' }],
+    },
+    {
+      id: 'size-dashboard',
+      label: 'Dashboard',
+      icon: 'grid',
+      hasChildren: true,
+      children: [{ id: 'size-dashboard-kpis', label: 'KPIs' }],
+    },
     { id: 'size-settings', label: 'Settings', icon: 'settings' },
   ];
 
   shapeItems: NavNode[] = [
-    { id: 'shape-projects', label: 'Projects', icon: 'folder', selected: true },
-    { id: 'shape-files', label: 'Files', icon: 'document' },
+    {
+      id: 'shape-projects',
+      label: 'Projects',
+      icon: 'folder',
+      selected: true,
+      hasChildren: true,
+      children: [{ id: 'shape-projects-alpha', label: 'Project Alpha' }],
+    },
+    {
+      id: 'shape-files',
+      label: 'Files',
+      icon: 'document',
+      hasChildren: true,
+      children: [{ id: 'shape-files-shared', label: 'Shared' }],
+    },
     { id: 'shape-settings', label: 'Settings', icon: 'settings' },
   ];
 
@@ -450,8 +500,21 @@ export class NavShowcaseComponent {
   ];
 
   selectionItems: NavNode[] = [
-    { id: 'selection-home', label: 'Home', icon: 'home', selected: true },
-    { id: 'selection-projects', label: 'Projects', icon: 'folder' },
+    {
+      id: 'selection-home',
+      label: 'Home',
+      icon: 'home',
+      selected: true,
+      hasChildren: true,
+      children: [{ id: 'selection-home-feed', label: 'Feed' }],
+    },
+    {
+      id: 'selection-projects',
+      label: 'Projects',
+      icon: 'folder',
+      hasChildren: true,
+      children: [{ id: 'selection-projects-active', label: 'Active projects' }],
+    },
     { id: 'selection-settings', label: 'Settings', icon: 'settings' },
   ];
 
@@ -583,6 +646,8 @@ export class NavShowcaseComponent {
     size: 'medium',
     shape: 'rounded',
     chevronPosition: 'after',
+    indicatorPosition: 'vertical',
+    showSelectionIndicator: true,
   });
 
   selectionIndicatorForm = computed(() => {
@@ -593,6 +658,8 @@ export class NavShowcaseComponent {
       size: (v['size'] as Size) ?? 'medium',
       shape: (v['shape'] as Shape) ?? 'rounded',
       chevronPosition: (v['chevronPosition'] as ChevronPosition) ?? 'after',
+      indicatorPosition: (v['indicatorPosition'] as Orientation) ?? 'vertical',
+      showSelectionIndicator: !!v['showSelectionIndicator'],
     };
   });
 

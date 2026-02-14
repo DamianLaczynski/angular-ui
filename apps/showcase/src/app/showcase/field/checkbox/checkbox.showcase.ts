@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -56,7 +56,6 @@ import { CheckboxInteractiveComponent } from './checkbox.interactive';
                   [label]="shape + ' checkbox'"
                   [shape]="shape"
                   [size]="shapeForm().size"
-                  [disabled]="shapeForm().disabled"
                   [readonly]="shapeForm().readonly"
                   [required]="shapeForm().required"
                   [formControl]="getShapeControl(shape)"
@@ -81,7 +80,6 @@ import { CheckboxInteractiveComponent } from './checkbox.interactive';
                   [label]="size + ' checkbox'"
                   [shape]="sizeForm().shape"
                   [size]="size"
-                  [disabled]="sizeForm().disabled"
                   [readonly]="sizeForm().readonly"
                   [required]="sizeForm().required"
                   [formControl]="getSizeControl(size)"
@@ -118,7 +116,6 @@ import { CheckboxInteractiveComponent } from './checkbox.interactive';
                     [label]="state.label + ' checkbox'"
                     [shape]="statesForm().shape"
                     [size]="statesForm().size"
-                    [disabled]="state.disabled"
                     [readonly]="state.readonly"
                     [required]="state.required"
                     [formControl]="getStateControl(state.id)"
@@ -143,7 +140,6 @@ import { CheckboxInteractiveComponent } from './checkbox.interactive';
                   [label]="combo.label"
                   [shape]="combo.shape"
                   [size]="combo.size"
-                  [disabled]="combinationsForm().disabled"
                   [readonly]="combinationsForm().readonly"
                   [required]="combinationsForm().required"
                   [formControl]="getComboControl(combo.id)"
@@ -280,7 +276,7 @@ export class CheckboxShowcaseComponent {
   largeSizeControl = new FormControl(true);
 
   normalStateControl = new FormControl(true);
-  disabledStateControl = new FormControl(true);
+  disabledStateControl = new FormControl({ value: true, disabled: true });
   requiredStateControl = new FormControl(false);
   readonlyStateControl = new FormControl(true);
   indeterminateStateControl = new FormControl(false);
@@ -327,6 +323,34 @@ export class CheckboxShowcaseComponent {
   });
   combinationsForm = computed(() => this.toCheckboxForm(this.combinationsFormValues()));
 
+  constructor() {
+    effect(() => {
+      this.setControlsDisabled(
+        [this.roundedShapeControl, this.circularShapeControl, this.squareShapeControl],
+        this.shapeForm().disabled,
+      );
+    });
+
+    effect(() => {
+      this.setControlsDisabled(
+        [this.smallSizeControl, this.mediumSizeControl, this.largeSizeControl],
+        this.sizeForm().disabled,
+      );
+    });
+
+    effect(() => {
+      this.setControlsDisabled(
+        [
+          this.roundedSmallControl,
+          this.roundedLargeControl,
+          this.circularSmallControl,
+          this.circularLargeControl,
+        ],
+        this.combinationsForm().disabled,
+      );
+    });
+  }
+
   private toCheckboxForm(v: Record<string, unknown>) {
     return {
       shape: (v['shape'] as Shape) ?? 'rounded',
@@ -362,5 +386,15 @@ export class CheckboxShowcaseComponent {
     if (id === 'rounded-large') return this.roundedLargeControl;
     if (id === 'circular-small') return this.circularSmallControl;
     return this.circularLargeControl;
+  }
+
+  private setControlsDisabled(controls: FormControl[], shouldDisable: boolean): void {
+    for (const control of controls) {
+      if (shouldDisable && control.enabled) {
+        control.disable({ emitEvent: false });
+      } else if (!shouldDisable && control.disabled) {
+        control.enable({ emitEvent: false });
+      }
+    }
   }
 }
