@@ -28,7 +28,7 @@ import { TagShowcaseComponent } from '@showcase/tag/tag.showcase';
 import { ProgressBarShowcaseComponent } from '@showcase/progress-bar/progress-bar.showcase';
 import { StateContainerShowcaseComponent } from '@showcase/state-container/state-container.showcase';
 import { SliderShowcaseComponent } from '@showcase/field/slider/slider.showcase';
-import { DividerShowcaseComponent } from '@showcase/divider/divider.showcase.component';
+import { DividerShowcaseComponent } from '@showcase/divider/divider.showcase';
 import { BadgeShowcaseComponent } from '@showcase/badge/badge.showcase';
 import { CardShowcaseComponent } from '@showcase/card/card.showcase.component';
 import { CheckboxShowcaseComponent } from '@showcase/field/checkbox/checkbox.showcase';
