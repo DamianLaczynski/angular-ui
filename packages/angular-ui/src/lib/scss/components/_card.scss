@@ -1,426 +1,268 @@
 // ==========================================================================
-// Card Component - Fluent 2 Design System
+// Card Component - Fluent 2 inspired
 // ==========================================================================
-// Appearances: filled (default), transparent, tint, outline, subtle
-// Sizes: small, medium, large
-// Orientations: vertical (default), horizontal
-// States: selected, disabled, clickable
 
-@use 'sass:map';
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 
-// ==========================================================================
-// Base Card
-// ==========================================================================
-
 .card {
+  --card-padding: #{$spacing-3};
+  --card-radius: #{$border-radius-400};
+
   position: relative;
   display: flex;
   flex-direction: column;
-  background: var(--color-neutral-background-rest);
-  border-radius: $border-radius-400;
-  border: 1px solid var(--color-neutral-stroke-rest);
-  box-shadow: $elevation-2;
-  overflow: hidden;
+  gap: var(--card-gap);
+  width: 100%;
+  min-width: 0;
   box-sizing: border-box;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--color-neutral-stroke-rest);
+  background: var(--color-neutral-background-rest);
+  box-shadow: $elevation-2;
+  color: var(--color-neutral-foreground-rest);
+  transition:
+    background-color $duration-faster $easing-decelerate-min,
+    border-color $duration-faster $easing-decelerate-min,
+    box-shadow $duration-faster $easing-decelerate-min;
 
-  &__header-container {
-    padding: $spacing-3;
+  &:focus-visible {
+    outline: 2px solid var(--color-focus-border);
+    outline-offset: 2px;
+  }
+
+  &__content {
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: $spacing-2;
+    gap: var(--card-gap);
+    flex: 1;
   }
 
-  &__header {
-    display: flex;
-    align-items: center;
-    gap: $spacing-3;
-  }
+  &__floating-action {
+    position: absolute;
+    top: calc(var(--card-padding) - #{$spacing-1});
+    right: calc(var(--card-padding) - #{$spacing-1});
+    z-index: 2;
+    pointer-events: auto;
 
-  &__header-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
+    .field,
+    .checkbox-wrapper {
+      margin: 0;
+    }
 
-    ui-icon {
-      color: var(--color-neutral-foreground-rest);
+    .checkbox-container {
+      gap: 0;
     }
   }
 
-  &__text-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  > [uiCardPreview] {
+    display: block;
+    min-width: 0;
+    border-radius: calc(var(--card-radius) - 1px);
+    overflow: hidden;
   }
 
-  &__title {
-    color: var(--color-neutral-foreground-rest);
+  > [uiCardPreview] > img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  > [uiCardFloatingAction],
+  > [uiCardCheckbox] {
+    position: absolute;
+    top: calc(var(--card-padding) - #{$spacing-1});
+    right: calc(var(--card-padding) - #{$spacing-1});
+    z-index: 2;
+  }
+
+  &__content > [uiCardHeader],
+  &__content > [uiCardBody],
+  &__content > [uiCardFooter] {
+    min-width: 0;
+  }
+
+  &__content > [uiCardHeader] {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-3;
+  }
+
+  &__content > [uiCardBody] {
+    color: var(--color-neutral-foreground2-rest);
     font-size: $font-size-300;
-    font-weight: $font-weight-semibold;
     line-height: $line-height-300;
   }
 
-  &__subtitle {
-    color: var(--color-neutral-foreground2-rest);
-    font-size: $font-size-200;
-    line-height: $line-height-200;
+  &__content > [uiCardFooter] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-2;
   }
 
-  &__quick-action {
-    padding: 6px;
+  &__content > [uiCardFooter]:empty,
+  &__content > [uiCardHeader]:empty,
+  &__content > [uiCardBody]:empty,
+  &__content:empty {
+    display: none;
+  }
+
+  // Sizes
+  &--small {
+    --card-padding: #{$spacing-2};
+    --card-radius: #{$border-radius-200};
+  }
+
+  &--medium {
+    --card-padding: #{$spacing-3};
+    --card-radius: #{$border-radius-400};
+  }
+
+  &--large {
+    --card-padding: #{$spacing-4};
+    --card-radius: #{$border-radius-600};
+  }
+
+  // Appearances
+  &--filled {
+    background: var(--color-neutral-background-rest);
+    border-color: var(--color-neutral-stroke-rest);
+    box-shadow: $elevation-2;
+  }
+
+  &--filled-alternative {
+    background: var(--color-neutral-background2-rest);
+    border-color: var(--color-neutral-stroke-rest);
+    box-shadow: $elevation-2;
+  }
+
+  &--outline {
     background: transparent;
-    border: none;
-    border-radius: $border-radius-400;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-color: var(--color-neutral-stroke-rest);
+    box-shadow: none;
+  }
+
+  &--subtle {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  // Orientation
+  &--horizontal {
+    flex-direction: row;
+    align-items: stretch;
+
+    > [uiCardPreview] {
+      width: min(42%, 220px);
+      max-width: 220px;
+      min-width: 96px;
+      align-self: stretch;
+      flex-shrink: 0;
+    }
+
+    > [uiCardPreview] > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .card__content {
+      flex: 1;
+    }
+  }
+
+  &--has-floating-action {
+    .card__content {
+      padding-right: $spacing-8;
+    }
+  }
+
+  // Selection
+  &--selected {
+    border-color: var(--color-brand-stroke-rest);
+    box-shadow:
+      0 0 0 1px var(--color-brand-stroke-rest),
+      $elevation-2;
+  }
+
+  &--selected.card--outline {
+    box-shadow: 0 0 0 1px var(--color-brand-stroke-rest);
+  }
+
+  &--selected.card--subtle {
+    background: var(--color-neutral-background-brand-selected);
+    border-color: var(--color-brand-stroke-rest);
+    box-shadow: 0 0 0 1px var(--color-brand-stroke-rest);
+  }
+
+  // Interactive states
+  &--interactive {
     cursor: pointer;
-    @include smooth-hover;
-
-    &:hover:not(:disabled) {
-      background: var(--color-neutral-background-hover);
-    }
-
-    &:active:not(:disabled) {
-      background: var(--color-neutral-background-pressed);
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-
-      ui-icon {
-        color: var(--color-neutral-foreground-disabled);
-      }
-    }
-
-    ui-icon {
-      color: var(--color-neutral-foreground2-rest);
-    }
   }
 
-  &__body-container {
-    padding: 0 $spacing-3 $spacing-3;
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__body {
-    display: flex;
-    align-items: center;
-    gap: $spacing-3;
-  }
-
-  &__body-text {
-    flex: 1;
-    color: var(--color-neutral-foreground2-rest);
-    font-size: $font-size-200;
-    line-height: $line-height-200;
-  }
-
-  &__footer-container {
-    padding: 0 $spacing-3 $spacing-3;
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__footer {
-    display: flex;
-    align-items: center;
-    gap: $spacing-3;
-  }
-}
-
-// ==========================================================================
-// Sizes
-// ==========================================================================
-
-$card-sizes: (
-  'small': (
-    border-radius: $border-radius-200,
-    header-padding: $spacing-2,
-    body-padding: $spacing-2,
-    title-font-size: $font-size-200,
-  ),
-  'medium': (
-    border-radius: $border-radius-400,
-    header-padding: $spacing-3,
-    body-padding: $spacing-3,
-    title-font-size: $font-size-300,
-  ),
-  'large': (
-    border-radius: $border-radius-600,
-    header-padding: $spacing-4,
-    body-padding: $spacing-4,
-    title-font-size: $font-size-400,
-  ),
-);
-
-@each $size, $props in $card-sizes {
-  .card--#{$size} {
-    border-radius: map.get($props, border-radius);
-
-    .card__header-container {
-      padding: map.get($props, header-padding);
-    }
-
-    .card__body-container,
-    .card__footer-container {
-      padding: 0 map.get($props, body-padding) map.get($props, body-padding);
-    }
-
-    .card__title {
-      font-size: map.get($props, title-font-size);
-    }
-  }
-}
-
-// ==========================================================================
-// Appearances
-// ==========================================================================
-
-// Filled (default)
-.card--filled {
-  background: var(--color-neutral-background-rest);
-  @include smooth-hover;
-  @include transition-transform($duration-faster);
-
-  &:hover:not(.card--disabled) {
-    background: var(--color-neutral-background-hover);
+  &--interactive:not(.card--disabled):hover {
+    border-color: var(--color-neutral-stroke-hover);
     box-shadow: $elevation-4;
   }
 
-  &:active:not(.card--disabled) {
+  &--interactive:not(.card--disabled):active {
+    border-color: var(--color-neutral-stroke-pressed);
+    box-shadow: $elevation-2;
+  }
+
+  &--interactive.card--outline:not(.card--disabled):hover {
+    background: var(--color-neutral-background-hover);
+    box-shadow: none;
+  }
+
+  &--interactive.card--outline:not(.card--disabled):active {
     background: var(--color-neutral-background-pressed);
   }
-}
 
-// Transparent
-.card--transparent {
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
-}
-
-// Tint
-.card--tint {
-  background: var(--color-subtle-background-rest);
-  @include smooth-hover;
-
-  &:hover:not(.card--disabled) {
+  &--interactive.card--subtle:not(.card--disabled):hover {
     background: var(--color-subtle-background-hover);
+    border-color: transparent;
+    box-shadow: none;
   }
-}
 
-// Outline
-.card--outline {
-  background: transparent;
-  border: 2px solid var(--color-neutral-stroke-rest);
-  box-shadow: none;
-  @include smooth-hover;
-  @include transition-transform($duration-faster);
-
-  &:hover:not(.card--disabled) {
-    border-color: var(--color-neutral-stroke-hover);
-    background: var(--color-neutral-background-hover);
+  &--interactive.card--subtle:not(.card--disabled):active {
+    background: var(--color-subtle-background-pressed);
   }
-}
 
-// Subtle
-.card--subtle {
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
-  @include smooth-hover;
-
-  &:hover:not(.card--disabled) {
-    background: var(--color-subtle-background-hover);
+  &--interactive.card--selected:not(.card--disabled):hover {
+    border-color: var(--color-brand-stroke-rest);
+    box-shadow:
+      0 0 0 1px var(--color-brand-stroke-rest),
+      $elevation-4;
   }
-}
 
-// Legacy alias
-.card--plain {
-  background: transparent;
-  border-color: transparent;
-  box-shadow: none;
-}
-
-// ==========================================================================
-// States
-// ==========================================================================
-
-.card--selected {
-  border-color: var(--color-brand-primary);
-  box-shadow: 0 0 0 1px var(--color-brand-primary);
-}
-
-.card--disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-
-  .card__title,
-  .card__subtitle,
-  .card__body-text {
+  // Disabled
+  &--disabled {
+    background: var(--color-neutral-background-disabled);
+    border-color: var(--color-neutral-stroke-disabled);
+    box-shadow: none;
     color: var(--color-neutral-foreground-disabled);
+    cursor: not-allowed;
   }
 }
 
-.card--clickable {
-  cursor: pointer;
-  @include smooth-hover;
-  @include transition-transform($duration-faster);
+@include respond-to(small) {
+  .card--horizontal {
+    flex-direction: column;
 
-  @include focus-ring;
-
-  &:not(.card--disabled):hover {
-    transform: translateY(-1px);
-  }
-
-  &:not(.card--disabled):active {
-    transform: translateY(0);
-  }
-}
-
-// ==========================================================================
-// Orientations
-// ==========================================================================
-
-.card--horizontal {
-  flex-direction: row;
-
-  .card__header-container,
-  .card__body-container,
-  .card__footer-container {
-    flex: 1;
-  }
-
-  .card__header-container {
-    border-right: 1px solid var(--color-neutral-stroke-rest);
-  }
-}
-
-.card--vertical {
-  flex-direction: column;
-}
-
-// ==========================================================================
-// Variants
-// ==========================================================================
-
-// PRIMARY VARIANT
-.card--primary {
-  border-color: var(--color-brand-primary);
-
-  .card__header-icon ui-icon,
-  .card__title {
-    color: var(--color-brand-primary);
-  }
-
-  &.card--filled {
-    background: var(--color-neutral-background-brand-selected);
-
-    &:hover:not(.card--disabled) {
-      background: var(--color-neutral-background-brand-hover);
+    > [uiCardPreview] {
+      width: 100%;
+      max-width: none;
+      min-width: 0;
+      align-self: auto;
     }
 
-    &:active:not(.card--disabled) {
-      background: var(--color-neutral-background-brand-pressed);
-    }
-  }
-
-  &.card--outline {
-    border-color: var(--color-brand-primary);
-
-    &:hover:not(.card--disabled) {
-      background: var(--color-neutral-background-brand-hover);
-    }
-  }
-
-  &.card--selected {
-    border-color: var(--color-brand-primary);
-    box-shadow: 0 0 0 1px var(--color-brand-primary);
-  }
-}
-
-// SECONDARY VARIANT
-.card--secondary {
-  border-color: var(--color-neutral-stroke-accessible);
-
-  .card__header-icon ui-icon,
-  .card__title {
-    color: var(--color-neutral-foreground2-rest);
-  }
-
-  &.card--filled {
-    background: var(--color-neutral-background2-rest);
-
-    &:hover:not(.card--disabled) {
-      background: var(--color-neutral-background2-hover);
-    }
-
-    &:active:not(.card--disabled) {
-      background: var(--color-neutral-background2-pressed);
-    }
-  }
-
-  &.card--outline {
-    border-color: var(--color-neutral-stroke-accessible);
-
-    &:hover:not(.card--disabled) {
-      background: var(--color-neutral-background2-hover);
-    }
-  }
-
-  &.card--selected {
-    border-color: var(--color-neutral-stroke-accessible);
-    box-shadow: 0 0 0 1px var(--color-neutral-stroke-accessible);
-  }
-}
-
-// SUCCESS, WARNING, DANGER, INFO - using shared color variants
-$card-color-variants: (
-  'success': 'green',
-  'warning': 'orange',
-  'danger': 'red',
-  'info': 'blue',
-);
-
-@each $variant, $color in $card-color-variants {
-  .card--#{$variant} {
-    border-color: var(--color-shared-#{$color}-foreground);
-
-    .card__header-icon ui-icon,
-    .card__title {
-      color: var(--color-shared-#{$color}-foreground);
-    }
-
-    &.card--filled {
-      background: var(--color-shared-#{$color}-background);
-
-      &:hover:not(.card--disabled) {
-        filter: brightness(0.95);
-      }
-
-      &:active:not(.card--disabled) {
-        filter: brightness(0.9);
-      }
-    }
-
-    &.card--outline {
-      border-color: var(--color-shared-#{$color}-foreground);
-
-      &:hover:not(.card--disabled) {
-        background: var(--color-shared-#{$color}-background);
-      }
-    }
-
-    &.card--selected {
-      border-color: var(--color-shared-#{$color}-foreground);
-      box-shadow: 0 0 0 1px var(--color-shared-#{$color}-foreground);
+    > [uiCardPreview] > img {
+      height: auto;
+      object-fit: cover;
     }
   }
 }

@@ -1,20 +1,17 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, UrlSegment } from '@angular/router';
 import { NavComponent, NavNode } from 'angular-ui';
 import { filter } from 'rxjs/operators';
-import { ThemeMode, ThemeService } from '@shared/theme/theme.service';
 import { SearchComponent } from 'angular-ui';
 import { FormsModule } from '@angular/forms';
-import { ButtonComponent } from 'angular-ui';
 
 @Component({
   selector: 'app-ds-sidebar',
-  imports: [NavComponent, SearchComponent, FormsModule, ButtonComponent],
+  imports: [NavComponent, SearchComponent, FormsModule],
   templateUrl: './ds-sidebar.component.html',
 })
 export class DsSidebarComponent {
   private readonly router = inject(Router);
-  private readonly themeService = inject(ThemeService);
   selectedItemId = signal<string | null>(null);
   private _searchQuery = signal<string>('');
 
@@ -26,12 +23,12 @@ export class DsSidebarComponent {
     this._searchQuery.set(value);
   }
 
-  // Dark mode state - computed from layout service
-  isDarkMode = computed(() => this.themeService.$themeMode() === ThemeMode.Dark);
-  themeLabel = computed(() => (this.isDarkMode() ? 'Light mode' : 'Dark mode'));
-  themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));
-
   private readonly allNavItems: NavNode[] = [
+    // Documentation Section
+    { id: 'getting-started', label: 'Getting Started', icon: 'rocket' },
+    { id: 'installation', label: 'Installation', icon: 'arrow_download' },
+    { id: 'roadmap', label: 'Roadmap', icon: 'timeline' },
+    { id: 'divider-1', isDivider: true, label: 'divider1' },
     // Form Components Section
     { id: 'form-components', isSectionHeader: true, label: 'Form Components' },
     { id: 'checkbox', label: 'Checkbox', icon: 'checkbox_checked' },
@@ -43,7 +40,7 @@ export class DsSidebarComponent {
     { id: 'file', label: 'File', icon: 'document' },
     { id: 'number', label: 'Number', icon: 'number_row' },
     { id: 'password', label: 'Password', icon: 'password' },
-    { id: 'radio', label: 'Radio', icon: 'checkmark_circle' },
+    { id: 'radio-button-group', label: 'Radio Button Group', icon: 'checkmark_circle' },
     { id: 'slider', label: 'Slider', icon: 'arrow_maximize' },
     { id: 'switch', label: 'Switch', icon: 'tap_single' },
     { id: 'text', label: 'Text', icon: 'text_align_left' },
@@ -144,37 +141,74 @@ export class DsSidebarComponent {
 
   // Nav items with handlers applied
   navItems = computed<NavNode[]>(() => {
-    return this.filteredNavItems().map(item => ({
-      ...item,
-      onClick: item.children
-        ? undefined
-        : () => {
-            this.selectedItemId.set(item.id as string);
-            this.router.navigate(['ds', item.id]);
-          },
-      selected: this.selectedItemId() === item.id,
-      children: item.children?.map(child => ({
-        ...child,
-        onClick: () => {
-          this.selectedItemId.set(child.id as string);
-          this.router.navigate(['ds', child.id]);
-        },
-        selected: this.selectedItemId() === child.id,
-      })),
-    }));
+    return this.filteredNavItems().map(item => this.buildNavNode(item));
   });
 
   constructor() {
+    this.syncSelectedItemFromUrl(this.router.url);
+
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      const url = event.url;
-      const item = this.navItems().find(item => item.id === url.split('/').pop());
-      if (item) {
-        this.selectedItemId.set(item.id as string);
-      }
+      this.syncSelectedItemFromUrl(event.urlAfterRedirects);
     });
   }
 
-  onDarkModeToggle(): void {
-    this.themeService.toggleTheme();
+  private syncSelectedItemFromUrl(url: string): void {
+    const activeId = this.getLastPrimarySegment(url);
+    if (!activeId) {
+      this.selectedItemId.set(null);
+      return;
+    }
+
+    const match = this.findNavItemById(activeId, this.allNavItems);
+    this.selectedItemId.set(match ? (match.id as string) : null);
+  }
+
+  private findNavItemById(id: string, items: NavNode[]): NavNode | null {
+    for (const item of items) {
+      if (item.id === id) {
+        return item;
+      }
+
+      if (item.children?.length) {
+        const childMatch = this.findNavItemById(id, item.children);
+        if (childMatch) {
+          return childMatch;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  private getLastPrimarySegment(url: string): string | null {
+    try {
+      const tree = this.router.parseUrl(url);
+      const primarySegments: UrlSegment[] = tree.root.children['primary']?.segments ?? [];
+      if (primarySegments.length === 0) {
+        return null;
+      }
+      return primarySegments[primarySegments.length - 1].path;
+    } catch {
+      const normalized = url.split(/[?#]/)[0].replace(/\/+$/, '');
+      const parts = normalized.split('/').filter(Boolean);
+      return parts.length > 0 ? parts[parts.length - 1] : null;
+    }
+  }
+
+  private buildNavNode(item: NavNode): NavNode {
+    const itemId = String(item.id);
+    const hasChildren = !!(item.children && item.children.length > 0);
+
+    return {
+      ...item,
+      selected: this.selectedItemId() === itemId,
+      onClick: hasChildren ? undefined : () => this.navigateToItem(itemId),
+      children: item.children?.map(child => this.buildNavNode(child)),
+    };
+  }
+
+  private navigateToItem(itemId: string): void {
+    this.selectedItemId.set(itemId);
+    this.router.navigate(['docs', itemId]);
   }
 }

@@ -1,17 +1,48 @@
 <div class="ds">
   <!-- Header -->
-  <header class="ds__header">
-    <h1 class="ds__header__title">Angular UI</h1>
-    @if (isMobile()) {
-      <ui-button
-        class="ds__header__menu-button"
-        variant="primary"
-        [icon]="isSidebarOpen() ? 'dismiss' : 'navigation'"
-        size="medium"
-        (click)="toggleSidebar()"
-        [attr.aria-label]="isSidebarOpen() ? 'Close sidebar' : 'Open sidebar'"
-      ></ui-button>
-    }
+  <header #headerRef class="ds__header">
+    <h1 class="ds__header__title" (click)="navigateToHome()">Angular UI</h1>
+    <div class="ds__header__right">
+      <div class="ds__header__meta">
+        <span class="ds__header__version">v{{ version }}</span>
+        <a
+          [href]="githubUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ds__header__link"
+          aria-label="GitHub"
+        >
+          <ui-icon icon="open" size="small"></ui-icon>
+        </a>
+        <a
+          [href]="npmUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ds__header__link"
+          aria-label="npm"
+        >
+          <ui-icon icon="arrow_download" size="small"></ui-icon>
+        </a>
+        <ui-button
+          variant="secondary"
+          appearance="transparent"
+          size="medium"
+          [icon]="themeIcon()"
+          [text]="themeLabel()"
+          (click)="toggleTheme()"
+        />
+      </div>
+      @if (isMobile()) {
+        <ui-button
+          class="ds__header__menu-button"
+          variant="primary"
+          [icon]="isSidebarOpen() ? 'dismiss' : 'navigation'"
+          size="medium"
+          (click)="toggleSidebar()"
+          [attr.aria-label]="isSidebarOpen() ? 'Close sidebar' : 'Open sidebar'"
+        ></ui-button>
+      }
+    </div>
   </header>
 
   <!-- Overlay (visible on mobile when sidebar is open) -->
@@ -33,7 +64,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="ds__main-content">
+    <div #mainContent class="ds__main-content">
       <router-outlet></router-outlet>
     </div>
   </div>

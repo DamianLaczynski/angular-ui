@@ -1,70 +1,85 @@
 import { Routes } from '@angular/router';
-import { AccordionShowcaseComponent } from '@showcase/accordion/accordion.showcase.component';
-import { AvatarShowcaseComponent } from '@showcase/avatar/avatar.showcase.component';
-import { ButtonShowcaseComponent } from '@showcase/button/button.showcase.component';
-import { CalendarShowcaseComponent } from '@showcase/calendar/calendar.showcase.component';
-import { CommandPaletteShowcaseComponent } from '@showcase/command-palette/command-palette.showcase.component';
-import { TimeShowcaseComponent } from '@showcase/time/time.showcase.component';
-import { DateShowcaseComponent } from '@showcase/field/date/date.showcase.component';
-import { TimeSpanShowcaseComponent } from '@showcase/field/time-span/time-span.showcase.component';
-import { DateRangeShowcaseComponent } from '@showcase/field/date-range/date-range.showcase.component';
-import { DropdownShowcaseComponent } from '@showcase/field/dropdown/dropdown.showcase.component';
-import { NumberShowcaseComponent } from '@showcase/field/number/number.showcase.component';
-import { PasswordShowcaseComponent } from '@showcase/field/password/password.showcase.component';
-import { TextShowcaseComponent } from '@showcase/field/text/text.showcase.component';
-import { EmailShowcaseComponent } from '@showcase/field/email/email.showcase.component';
-import { SearchShowcaseComponent } from '@showcase/field/search/search.showcase.component';
-import { TelShowcaseComponent } from '@showcase/field/tel/tel.showcase.component';
-import { TextareaShowcaseComponent } from '@showcase/field/textarea/textarea.showcase.component';
-import { UrlShowcaseComponent } from '@showcase/field/url/url.showcase.component';
-import { TabsShowcaseComponent } from '@showcase/tabs/tabs.showcase.component';
-import { SkeletonShowcaseComponent } from '@showcase/skeleton/skeleton.showcase.component';
-import { DialogShowcaseComponent } from '@showcase/dialog/dialog.showcase.component';
-import { EmptyStateShowcaseComponent } from '@showcase/empty-state/empty-state.showcase.component';
-import { ErrorStateShowcaseComponent } from '@showcase/error-state/error-state.showcase.component';
-import { LoadingStateShowcaseComponent } from '@showcase/loading-state/loading-state.showcase.component';
-import { MenuShowcaseComponent } from '@showcase/menu/menu.showcase.component';
-import { TagShowcaseComponent } from '@showcase/tag/tag.showcase.component';
-import { ProgressBarShowcaseComponent } from '@showcase/progress-bar/progress-bar.showcase.component';
-import { StateContainerShowcaseComponent } from '@showcase/state-container/state-container.showcase.component';
-import { SliderShowcaseComponent } from '@showcase/field/slider/slider.showcase.component';
-import { DividerShowcaseComponent } from '@showcase/divider/divider.showcase.component';
-import { BadgeShowcaseComponent } from '@showcase/badge/badge.showcase.component';
-import { CardShowcaseComponent } from '@showcase/card/card.showcase.component';
-import { CheckboxShowcaseComponent } from '@showcase/field/checkbox/checkbox.showcase.component';
-import { ColorShowcaseComponent } from '@showcase/field/color/color.showcase.component';
-import { SwitchShowcaseComponent } from '@showcase/field/switch/switch.showcase.component';
-import { RadioShowcaseComponent } from '@showcase/field/radio/radio.showcase.component';
-import { SplitterShowcaseComponent } from '@showcase/splitter/splitter.showcase.component';
-import { ScrollPanelShowcaseComponent } from '@showcase/scroll-panel/scroll-panel.showcase.component';
-import { ScrollContainerShowcaseComponent } from '@showcase/scroll-container/scroll-container.showcase.component';
-import { SpinnerShowcaseComponent } from '@showcase/spinner/spinner.showcase.component';
-import { FileShowcaseComponent } from '@showcase/field/file/file.showcase.component';
-import { StepperShowcaseComponent } from '@showcase/field/stepper/stepper.showcase.component';
-import { ToastShowcaseComponent } from '@showcase/toast/toast.showcase.component';
-import { TotpShowcaseComponent } from '@showcase/field/totp/totp.showcase.component';
-import { NavShowcaseComponent } from '@showcase/nav/nav.showcase.component';
-import { NodeShowcaseComponent } from '@showcase/node/node.showcase.component';
-import { TreeShowcaseComponent } from '@showcase/tree/tree.showcase.component';
-import { TreeNodeShowcaseComponent } from '@showcase/tree-node/tree-node.showcase.component';
-import { DataGridShowcaseComponent } from '@showcase/data-grid/data-grid.showcase.component';
-import { PaginationShowcaseComponent } from '@showcase/pagination/pagination.showcase.component';
-import { ToolbarShowcaseComponent } from '@showcase/toolbar/toolbar.showcase.component';
-import { IconShowcaseComponent } from '@showcase/icon/icon.showcase.component';
-import { TableOfContentShowcaseComponent } from '@showcase/table-of-content/table-of-content.showcase.component';
-import { BreadcrumbShowcaseComponent } from '@showcase/breadcrumb/breadcrumb.showcase.component';
-import { CarouselShowcaseComponent } from '@showcase/carousel/carousel.showcase.component';
-import { DrawerShowcaseComponent } from '@showcase/drawer/drawer.showcase.component';
-import { KbdShowcaseComponent } from '@showcase/kbd/kbd.showcase.component';
-import { TooltipShowcaseComponent } from '@showcase/tooltip/tooltip.showcase.component';
-import { RatingShowcaseComponent } from '@showcase/rating/rating.showcase.component';
-import { VideoShowcaseComponent } from '@showcase/video/video.showcase.component';
+import { AccordionShowcaseComponent } from '@showcase/accordion/accordion.showcase';
+import { AvatarShowcaseComponent } from '@showcase/avatar/avatar.showcase';
+import { ButtonShowcaseComponent } from '@showcase/button/button.showcase';
+import { CalendarShowcaseComponent } from '@showcase/calendar/calendar.showcase';
+import { CommandPaletteShowcaseComponent } from '@showcase/command-palette/command-palette.showcase';
+import { TimeShowcaseComponent } from '@showcase/time/time.showcase';
+import { DateShowcaseComponent } from '@showcase/field/date/date.showcase';
+import { TimeSpanShowcaseComponent } from '@showcase/field/time-span/time-span.showcase';
+import { DateRangeShowcaseComponent } from '@showcase/field/date-range/date-range.showcase';
+import { DropdownShowcaseComponent } from '@showcase/field/dropdown/dropdown.showcase';
+import { NumberShowcaseComponent } from '@showcase/field/number/number.showcase';
+import { PasswordShowcaseComponent } from '@showcase/field/password/password.showcase';
+import { TextShowcaseComponent } from '@showcase/field/text/text.showcase';
+import { EmailShowcaseComponent } from '@showcase/field/email/email.showcase';
+import { SearchShowcaseComponent } from '@showcase/field/search/search.showcase';
+import { TelShowcaseComponent } from '@showcase/field/tel/tel.showcase';
+import { TextareaShowcaseComponent } from '@showcase/field/textarea/textarea.showcase';
+import { UrlShowcaseComponent } from '@showcase/field/url/url.showcase';
+import { TabsShowcaseComponent } from '@showcase/tabs/tabs.showcase';
+import { SkeletonShowcaseComponent } from '@showcase/skeleton/skeleton.showcase';
+import { DialogShowcaseComponent } from '@showcase/dialog/dialog.showcase';
+import { EmptyStateShowcaseComponent } from '@showcase/empty-state/empty-state.showcase';
+import { ErrorStateShowcaseComponent } from '@showcase/error-state/error-state.showcase';
+import { LoadingStateShowcaseComponent } from '@showcase/loading-state/loading-state.showcase';
+import { MenuShowcaseComponent } from '@showcase/menu/menu.showcase';
+import { TagShowcaseComponent } from '@showcase/tag/tag.showcase';
+import { ProgressBarShowcaseComponent } from '@showcase/progress-bar/progress-bar.showcase';
+import { StateContainerShowcaseComponent } from '@showcase/state-container/state-container.showcase';
+import { SliderShowcaseComponent } from '@showcase/field/slider/slider.showcase';
+import { DividerShowcaseComponent } from '@showcase/divider/divider.showcase';
+import { BadgeShowcaseComponent } from '@showcase/badge/badge.showcase';
+import { CardShowcaseComponent } from '@showcase/card/card.showcase';
+import { CheckboxShowcaseComponent } from '@showcase/field/checkbox/checkbox.showcase';
+import { ColorShowcaseComponent } from '@showcase/field/color/color.showcase';
+import { SwitchShowcaseComponent } from '@showcase/field/switch/switch.showcase';
+import { RadioButtonGroupShowcaseComponent } from '@showcase/field/radio-button-group/radio-button-group.showcase';
+import { SplitterShowcaseComponent } from '@showcase/splitter/splitter.showcase';
+import { ScrollPanelShowcaseComponent } from '@showcase/scroll-panel/scroll-panel.showcase';
+import { ScrollContainerShowcaseComponent } from '@showcase/scroll-container/scroll-container.showcase';
+import { SpinnerShowcaseComponent } from '@showcase/spinner/spinner.showcase';
+import { FileShowcaseComponent } from '@showcase/field/file/file.showcase';
+import { StepperShowcaseComponent } from '@showcase/field/stepper/stepper.showcase';
+import { ToastShowcaseComponent } from '@showcase/toast/toast.showcase';
+import { TotpShowcaseComponent } from '@showcase/field/totp/totp.showcase';
+import { NavShowcaseComponent } from '@showcase/nav/nav.showcase';
+import { NodeShowcaseComponent } from '@showcase/node/node.showcase';
+import { TreeShowcaseComponent } from '@showcase/tree/tree.showcase';
+import { TreeNodeShowcaseComponent } from '@showcase/tree-node/tree-node.showcase';
+import { DataGridShowcaseComponent } from '@showcase/data-grid/data-grid.showcase';
+import { PaginationShowcaseComponent } from '@showcase/pagination/pagination.showcase';
+import { ToolbarShowcaseComponent } from '@showcase/toolbar/toolbar.showcase';
+import { IconShowcaseComponent } from '@showcase/icon/icon.showcase';
+import { TableOfContentShowcaseComponent } from '@showcase/table-of-content/table-of-content.showcase';
+import { BreadcrumbShowcaseComponent } from '@showcase/breadcrumb/breadcrumb.showcase';
+import { CarouselShowcaseComponent } from '@showcase/carousel/carousel.showcase';
+import { DrawerShowcaseComponent } from '@showcase/drawer/drawer.showcase';
+import { KbdShowcaseComponent } from '@showcase/kbd/kbd.showcase';
+import { TooltipShowcaseComponent } from '@showcase/tooltip/tooltip.showcase';
+import { RatingShowcaseComponent } from '@showcase/rating/rating.showcase';
+import { VideoShowcaseComponent } from '@showcase/video/video.showcase';
+import { GettingStartedComponent } from '../../pages/docs/getting-started/getting-started.component';
+import { InstallationComponent } from '../../pages/docs/installation/installation.component';
+import { RoadmapComponent } from '../../pages/docs/roadmap/roadmap.component';
 
 export const dsRoutes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'accordion',
+    redirectTo: 'getting-started',
+  },
+  {
+    path: 'getting-started',
+    component: GettingStartedComponent,
+  },
+  {
+    path: 'installation',
+    component: InstallationComponent,
+  },
+  {
+    path: 'roadmap',
+    component: RoadmapComponent,
   },
   {
     path: 'accordion',
@@ -159,8 +174,8 @@ export const dsRoutes: Routes = [
     component: PasswordShowcaseComponent,
   },
   {
-    path: 'radio',
-    component: RadioShowcaseComponent,
+    path: 'radio-button-group',
+    component: RadioButtonGroupShowcaseComponent,
   },
   {
     path: 'slider',

@@ -84,9 +84,11 @@ interface ViewportOption {
 })
 export class InteractiveShowcaseComponent {
   config = input<ShowcaseConfig>();
+  initialValues = input<Record<string, any>>();
   showCopyCode = input<boolean>(true);
   showEventLog = input<boolean>(true);
   showViewportControls = input<boolean>(true);
+  showPreview = input<boolean>(true);
   maxEventLogItems = input<number>(10);
 
   // Outputs
@@ -195,6 +197,16 @@ export class InteractiveShowcaseComponent {
     effect(() => {
       const cfg = this.config();
       if (!cfg?.controls?.length) return;
+      const initial = this.initialValues();
+      if (initial && Object.keys(initial).length > 0) {
+        const defaults: Record<string, any> = {};
+        cfg.controls.forEach(c => {
+          defaults[c.key] = c.defaultValue;
+        });
+        this.controlValues.set({ ...defaults, ...initial });
+        this.valuesChange.emit(this.controlValues());
+        return;
+      }
       const current = this.controlValues();
       const configKeys = cfg.controls
         .map(c => c.key)

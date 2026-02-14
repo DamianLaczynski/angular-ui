@@ -339,6 +339,10 @@ $button-sizes: (
 
 .button--full-width {
   width: 100%;
+
+  @include icon-only-selector {
+    width: 100%;
+  }
 }
 
 .button__content {
@@ -446,14 +450,14 @@ $button-sizes: (
 
   &.button--outline {
     @include button-variant-outline(
-      var(--color-neutral-foreground2-rest),
-      var(--color-neutral-stroke-accessible),
+      var(--color-neutral-foreground-rest),
+      var(--color-neutral-stroke-rest),
       var(--color-subtle-background-hover),
       var(--color-neutral-foreground-hover),
-      var(--color-neutral-stroke-accessible-hover),
+      var(--color-neutral-stroke-hover),
       var(--color-neutral-foreground-pressed),
       var(--color-subtle-background-pressed),
-      var(--color-neutral-stroke-accessible-pressed),
+      var(--color-neutral-stroke-pressed),
       var(--color-neutral-foreground2-rest),
       var(--color-subtle-background-selected),
       var(--color-neutral-stroke-selected)
@@ -462,7 +466,7 @@ $button-sizes: (
 
   &.button--subtle {
     @include button-variant-subtle(
-      var(--color-neutral-foreground2-rest),
+      var(--color-neutral-foreground-rest),
       var(--color-subtle-background-hover),
       var(--color-neutral-foreground-hover),
       var(--color-neutral-foreground-pressed),
@@ -473,7 +477,7 @@ $button-sizes: (
 
   &.button--transparent {
     @include button-variant-transparent(
-      var(--color-neutral-foreground2-rest),
+      var(--color-neutral-foreground-rest),
       var(--color-neutral-foreground-rest),
       var(--color-neutral-foreground3-rest),
       var(--color-subtle-background-selected)
@@ -482,7 +486,7 @@ $button-sizes: (
 
   &.button--tint {
     @include button-variant-tint(
-      var(--color-neutral-foreground2-rest),
+      var(--color-neutral-foreground-rest),
       var(--color-neutral-background2-rest),
       var(--color-neutral-background2-hover),
       var(--color-neutral-background2-pressed),

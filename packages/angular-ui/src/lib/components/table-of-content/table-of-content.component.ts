@@ -105,11 +105,13 @@ export class TableOfContentComponent implements OnDestroy {
 
   private prepareHeadings(headings: HTMLElement[]): void {
     const scrollMargin = this.offsetTop() + 100;
+    const usedIds = new Set<string>();
 
     headings.forEach((heading, index) => {
-      if (!heading.id) {
-        heading.id = this.generateId(heading.textContent || `heading-${index}`);
-      }
+      const fallback = `heading-${index + 1}`;
+      const source = heading.id || heading.textContent || fallback;
+      const baseId = this.generateId(source) || fallback;
+      heading.id = this.makeUniqueId(baseId, usedIds);
       heading.style.scrollMarginTop = `${scrollMargin}px`;
     });
   }
@@ -122,6 +124,22 @@ export class TableOfContentComponent implements OnDestroy {
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
       .substring(0, 50);
+  }
+
+  private makeUniqueId(baseId: string, usedIds: Set<string>): string {
+    if (!usedIds.has(baseId)) {
+      usedIds.add(baseId);
+      return baseId;
+    }
+
+    let suffix = 2;
+    let nextId = `${baseId}-${suffix}`;
+    while (usedIds.has(nextId)) {
+      suffix += 1;
+      nextId = `${baseId}-${suffix}`;
+    }
+    usedIds.add(nextId);
+    return nextId;
   }
 
   private buildHierarchy(headings: HTMLElement[]): TocItem[] {

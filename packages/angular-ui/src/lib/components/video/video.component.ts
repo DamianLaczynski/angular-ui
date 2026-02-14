@@ -77,6 +77,8 @@ export class VideoComponent implements AfterViewInit, OnDestroy {
   // Auto-hide controls timer
   private controlsHideTimer: any = null;
   private readonly CONTROLS_HIDE_DELAY = 3000; // 3 seconds
+  private isDestroyed = false;
+  private listenerCleanups: Array<() => void> = [];
 
   // Speed options
   readonly speedOptions = [
@@ -147,7 +149,8 @@ export class VideoComponent implements AfterViewInit, OnDestroy {
     video.playbackRate = this.playbackRate();
 
     // Event listeners
-    video.addEventListener('play', () => {
+    this.addDomListener(video, 'play', () => {
+      if (this.isDestroyed) return;
       this.isPlaying.set(true);
       this.play.emit();
       // Start auto-hide timer when playing starts
@@ -156,7 +159,8 @@ export class VideoComponent implements AfterViewInit, OnDestroy {
       }
     });
 
-    video.addEventListener('pause', () => {
+    this.addDomListener(video, 'pause', () => {
+      if (this.isDestroyed) return;
       this.isPlaying.set(false);
       this.pause.emit();
       // Keep controls visible when paused
@@ -164,7 +168,8 @@ export class VideoComponent implements AfterViewInit, OnDestroy {
       this.showControlsAnimated(true);
     });
 
-    video.addEventListener('ended', () => {
+    this.addDomListener(video, 'ended', () => {
+      if (this.isDestroyed) return;
       this.isPlaying.set(false);
       this.ended.emit();
       // Keep controls visible when video ends
@@ -172,17 +177,20 @@ export class VideoComponent implements AfterViewInit, OnDestroy {
       this.showControlsAnimated(true);
     });
 
-    video.addEventListener('timeupdate', () => {
+    this.addDomListener(video, 'timeupdate', () => {
+      if (this.isDestroyed) return;
       this.currentTime.set(video.currentTime);
       this.timeUpdate.emit(video.currentTime);
     });
 
-    video.addEventListener('loadedmetadata', () => {
+    this.addDomListener(video, 'loadedmetadata', () => {
+      if (this.isDestroyed) return;
       this.duration.set(video.duration);
       this.loadedMetadata.emit();
     });
 
-    video.addEventListener('volumechange', () => {
+    this.addDomListener(video, 'volumechange', () => {
+      if (this.isDestroyed) return;
       this.volume.set(video.volume);
       this.isMuted.set(video.muted);
       this.volumeChange.emit(video.volume);
@@ -199,30 +207,34 @@ export class VideoComponent implements AfterViewInit, OnDestroy {
       this.isFullscreen.set(isFullscreen);
     };
 
-    document.addEventListener('fullscreenchange', updateFullscreenState);
-    document.addEventListener('webkitfullscreenchange', updateFullscreenState);
-    document.addEventListener('mozfullscreenchange', updateFullscreenState);
-    document.addEventListener('MSFullscreenChange', updateFullscreenState);
+    this.addDomListener(document, 'fullscreenchange', updateFullscreenState);
+    this.addDomListener(document, 'webkitfullscreenchange', updateFullscreenState);
+    this.addDomListener(document, 'mozfullscreenchange', updateFullscreenState);
+    this.addDomListener(document, 'MSFullscreenChange', updateFullscreenState);
 
     // Handle Picture-in-Picture changes
-    video.addEventListener('enterpictureinpicture', () => {
+    this.addDomListener(video, 'enterpictureinpicture', () => {
+      if (this.isDestroyed) return;
       this.isPictureInPicture.set(true);
     });
 
-    video.addEventListener('leavepictureinpicture', () => {
+    this.addDomListener(video, 'leavepictureinpicture', () => {
+      if (this.isDestroyed) return;
       this.isPictureInPicture.set(false);
     });
   }
 
   ngOnDestroy(): void {
+    this.isDestroyed = true;
+    this.cleanupListeners();
+    this.clearControlsHideTimer();
+
     const video = this.videoElement?.nativeElement;
     if (video) {
       video.pause();
       video.src = '';
       video.load();
     }
-    // Clear controls hide timer
-    this.clearControlsHideTimer();
   }
 
   togglePlay(): void {
@@ -523,5 +535,21 @@ export class VideoComponent implements AfterViewInit, OnDestroy {
       return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
     }
     return `${m}:${s.toString().padStart(2, '0')}`;
+  }
+
+  private addDomListener(
+    target: EventTarget,
+    eventName: string,
+    handler: EventListenerOrEventListenerObject,
+  ): void {
+    target.addEventListener(eventName, handler);
+    this.listenerCleanups.push(() => target.removeEventListener(eventName, handler));
+  }
+
+  private cleanupListeners(): void {
+    for (const cleanup of this.listenerCleanups) {
+      cleanup();
+    }
+    this.listenerCleanups = [];
   }
 }

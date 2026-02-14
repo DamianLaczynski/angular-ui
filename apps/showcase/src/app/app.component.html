@@ -1,1 +1,11 @@
-<router-outlet></router-outlet> <ui-toast-container position="top-right"></ui-toast-container>
+<router-outlet></router-outlet>
+<ui-toast-container position="top-right"></ui-toast-container>
+<button
+  type="button"
+  class="app-fab app-back-to-top"
+  [class.app-back-to-top--hidden]="!showBackToTop()"
+  (click)="scrollToTop()"
+  aria-label="Back to top"
+>
+  <ui-icon icon="arrow_up" size="small"></ui-icon>
+</button>

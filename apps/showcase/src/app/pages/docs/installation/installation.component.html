@@ -1,0 +1,80 @@
+<div class="showcase showcase--responsive showcase__with-toc">
+  <div class="showcase-content">
+    <header class="showcase__header">
+      <div class="showcase__header__main">
+        <h1 class="showcase__title showcase__header__title">Installation</h1>
+      </div>
+    </header>
+    <p class="showcase__description">
+      End-to-end setup for Angular UI, from package install to first successful render.
+    </p>
+
+    <section class="showcase__section">
+      <h2 class="showcase__section__title">Prerequisites</h2>
+      <ul class="showcase__list">
+        @for (item of prerequisites; track item) {
+          <li>{{ item }}</li>
+        }
+      </ul>
+    </section>
+
+    <section class="showcase__section">
+      <h2 class="showcase__section__title">Install package</h2>
+      <div class="showcase__grid showcase__grid--large">
+        @for (item of installCommands; track item.manager) {
+          <article class="showcase__card">
+            <p class="showcase__meta">{{ item.manager }}</p>
+            <pre class="showcase__code"><code>{{ item.command }}</code></pre>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="showcase__section">
+      <h2 class="showcase__section__title">Register styles</h2>
+      <p class="showcase__section__description">
+        Add Angular UI styles before your app styles in <code>angular.json</code>.
+      </p>
+      <pre class="showcase__code"><code>"styles": [
+  "node_modules/angular-ui/styles/main.scss",
+  "src/styles.scss"
+]</code></pre>
+    </section>
+
+    <section class="showcase__section">
+      <h2 class="showcase__section__title">Verify setup</h2>
+      <ul class="showcase__list">
+        @for (check of verificationChecks; track check) {
+          <li>{{ check }}</li>
+        }
+      </ul>
+      <p class="showcase__note">
+        If something is missing, start by checking style order and then ensure components are
+        imported in the consuming standalone component.
+      </p>
+    </section>
+
+    <section class="showcase__section">
+      <h2 class="showcase__section__title">Related pages</h2>
+      <div class="showcase__grid showcase__grid--large">
+        <a class="showcase__card-link" routerLink="/docs/getting-started">
+          <h3>Getting Started</h3>
+          <p>Fast path from install to first production-ready feature.</p>
+        </a>
+        <a class="showcase__card-link" routerLink="/docs/roadmap">
+          <h3>Roadmap</h3>
+          <p>Current priorities and upcoming milestones for Angular UI.</p>
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <ui-table-of-content
+    class="showcase__toc"
+    containerSelector=".showcase-content"
+    [minLevel]="2"
+    [maxLevel]="3"
+    [sticky]="true"
+    [offsetTop]="24"
+  />
+</div>

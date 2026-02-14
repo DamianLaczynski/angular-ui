@@ -76,7 +76,6 @@ export class MenuComponent implements OnDestroy {
 
   selected = input<boolean>(false);
   disabled = input<boolean>(false);
-  fullWidth = input<boolean>(false);
 
   menuItems = input<MenuItem[]>([]);
   menuMaxHeight = input<string>('');
@@ -101,19 +100,18 @@ export class MenuComponent implements OnDestroy {
       `button--${this.shape()}`,
     ];
     if (this.disabled()) c.push('button--disabled');
+    if (this.selected()) c.push('button--selected');
     return c;
   });
 
   triggerClasses = computed(() => {
     const c = ['menu-trigger', ...this.baseButtonClasses()];
-    if (this.fullWidth() && !this.isSplit()) c.push('button--full-width');
     if (this.isMenuOpen()) c.push('menu-trigger--open');
     return c.join(' ');
   });
 
   buttonClasses = computed(() => {
     const c = ['menu-trigger', ...this.baseButtonClasses()];
-    if (this.fullWidth()) c.push('button--full-width');
     if (this.hasMenuItems() && this.isMenuOpen()) c.push('menu-trigger--open');
     return c.join(' ');
   });
