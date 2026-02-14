@@ -159,8 +159,25 @@ export class DsSidebarComponent {
       return;
     }
 
-    const match = this.allNavItems.find(item => item.id === activeId);
+    const match = this.findNavItemById(activeId, this.allNavItems);
     this.selectedItemId.set(match ? (match.id as string) : null);
+  }
+
+  private findNavItemById(id: string, items: NavNode[]): NavNode | null {
+    for (const item of items) {
+      if (item.id === id) {
+        return item;
+      }
+
+      if (item.children?.length) {
+        const childMatch = this.findNavItemById(id, item.children);
+        if (childMatch) {
+          return childMatch;
+        }
+      }
+    }
+
+    return null;
   }
 
   private getLastPrimarySegment(url: string): string | null {
