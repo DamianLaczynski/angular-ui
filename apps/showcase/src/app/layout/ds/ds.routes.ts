@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AccordionShowcaseComponent } from '@showcase/accordion/accordion.showcase';
-import { AvatarShowcaseComponent } from '@showcase/avatar/avatar.showcase.component';
+import { AvatarShowcaseComponent } from '@showcase/avatar/avatar.showcase';
 import { ButtonShowcaseComponent } from '@showcase/button/button.showcase';
 import { CalendarShowcaseComponent } from '@showcase/calendar/calendar.showcase';
 import { CommandPaletteShowcaseComponent } from '@showcase/command-palette/command-palette.showcase.component';
