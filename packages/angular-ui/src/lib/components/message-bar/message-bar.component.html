@@ -1,4 +1,9 @@
-<div [class]="messageBarClasses()" role="status" [attr.aria-live]="ariaLive()" aria-atomic="true">
+<div
+  [class]="messageBarClasses()"
+  [attr.role]="ariaLive() === 'assertive' ? 'alert' : 'status'"
+  [attr.aria-live]="ariaLive()"
+  aria-atomic="true"
+>
   @if (showIcon()) {
     <div class="message-bar__icon" aria-hidden="true">
       <ui-icon [icon]="iconName()" [size]="size()" variant="filled" />

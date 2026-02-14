@@ -247,7 +247,7 @@
     grid-template-areas:
       'icon content dismiss'
       'icon actions actions';
-    align-items: start;
+    align-items: flex-start;
     gap: $spacing-2;
 
     &__icon {
