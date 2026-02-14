@@ -12,7 +12,6 @@ import {
 
 import { Router, RouterOutlet } from '@angular/router';
 import { DsSidebarComponent } from './components/ds-sidebar/ds-sidebar.component';
-import { SplitterPanel } from 'angular-ui';
 import { ButtonComponent } from 'angular-ui';
 import { IconComponent } from 'angular-ui';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -48,17 +47,6 @@ export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
       'Theme',
   );
   private breakpointSubscription?: Subscription;
-
-  panels = signal<SplitterPanel[]>([
-    {
-      id: 'sidebar',
-      size: 15,
-    },
-    {
-      id: 'content',
-      size: 85,
-    },
-  ]);
 
   isSidebarOpen = signal<boolean>(false);
   isMobile = signal<boolean>(false);

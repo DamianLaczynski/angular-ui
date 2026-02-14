@@ -6,38 +6,86 @@
 @use 'utils/mixins' as *;
 
 :root {
-  --ds-header-bg-start: #f7f8fc;
-  --ds-header-bg-mid: #f2f4fa;
-  --ds-header-bg-end: #eef1f9;
-  --ds-header-border: #d7deee;
-  --ds-header-text: #1f2533;
-  --ds-header-text-muted: #56607a;
-  --ds-header-accent: #4f6bff;
-  --ds-header-accent-strong: #3953d8;
-  --ds-header-glow-1: rgba(79, 107, 255, 0.2);
-  --ds-header-glow-2: rgba(57, 83, 216, 0.16);
-  --ds-header-switcher-bg: rgba(255, 255, 255, 0.82);
-  --ds-header-switcher-border: #c9d3ea;
-  --ds-header-switcher-button: rgba(79, 107, 255, 0.1);
-  --ds-header-switcher-button-hover: rgba(79, 107, 255, 0.18);
+  --ds-header-bg-start: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-background-rest)
+  );
+  --ds-header-bg-mid: var(--color-neutral-background-rest);
+  --ds-header-bg-end: color-mix(
+    in srgb,
+    var(--color-brand-primary) 14%,
+    var(--color-neutral-background-rest)
+  );
+  --ds-header-border: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-stroke-rest)
+  );
+  --ds-header-text: var(--color-neutral-foreground-rest);
+  --ds-header-text-muted: var(--color-neutral-foreground2-rest);
+  --ds-header-accent: var(--color-brand-primary);
+  --ds-header-accent-strong: var(--color-brand-primary-pressed);
+  --ds-header-glow-1: color-mix(in srgb, var(--color-brand-primary) 25%, transparent);
+  --ds-header-glow-2: color-mix(in srgb, var(--color-brand-primary-pressed) 20%, transparent);
+  --ds-header-switcher-bg: color-mix(
+    in srgb,
+    var(--color-neutral-background-rest) 86%,
+    var(--color-brand-primary) 14%
+  );
+  --ds-header-switcher-border: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-stroke-rest)
+  );
+  --ds-header-switcher-button: color-mix(in srgb, var(--color-brand-primary) 12%, transparent);
+  --ds-header-switcher-button-hover: color-mix(
+    in srgb,
+    var(--color-brand-primary) 20%,
+    transparent
+  );
 }
 
 :root[data-theme='dark'],
 :root.dark {
-  --ds-header-bg-start: #151a24;
-  --ds-header-bg-mid: #131823;
-  --ds-header-bg-end: #111621;
-  --ds-header-border: #2a3242;
-  --ds-header-text: #eef2ff;
-  --ds-header-text-muted: #acb7d1;
-  --ds-header-accent: #8ea2ff;
-  --ds-header-accent-strong: #a8b8ff;
-  --ds-header-glow-1: rgba(142, 162, 255, 0.2);
-  --ds-header-glow-2: rgba(168, 184, 255, 0.16);
-  --ds-header-switcher-bg: rgba(17, 23, 35, 0.85);
-  --ds-header-switcher-border: #3a455d;
-  --ds-header-switcher-button: rgba(142, 162, 255, 0.14);
-  --ds-header-switcher-button-hover: rgba(142, 162, 255, 0.22);
+  --ds-header-bg-start: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-background-rest)
+  );
+  --ds-header-bg-mid: var(--color-neutral-background-rest);
+  --ds-header-bg-end: color-mix(
+    in srgb,
+    var(--color-brand-primary) 14%,
+    var(--color-neutral-background-rest)
+  );
+  --ds-header-border: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-stroke-rest)
+  );
+  --ds-header-text: var(--color-neutral-foreground-rest);
+  --ds-header-text-muted: var(--color-neutral-foreground2-rest);
+  --ds-header-accent: var(--color-brand-primary);
+  --ds-header-accent-strong: var(--color-brand-primary-pressed);
+  --ds-header-glow-1: color-mix(in srgb, var(--color-brand-primary) 25%, transparent);
+  --ds-header-glow-2: color-mix(in srgb, var(--color-brand-primary-pressed) 20%, transparent);
+  --ds-header-switcher-bg: color-mix(
+    in srgb,
+    var(--color-neutral-background-rest) 86%,
+    var(--color-brand-primary) 14%
+  );
+  --ds-header-switcher-border: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-stroke-rest)
+  );
+  --ds-header-switcher-button: color-mix(in srgb, var(--color-brand-primary) 12%, transparent);
+  --ds-header-switcher-button-hover: color-mix(
+    in srgb,
+    var(--color-brand-primary) 20%,
+    transparent
+  );
 }
 
 .ds {
@@ -330,58 +378,15 @@
   }
 }
 
-/* Keep showcase header visual identity stable across DS variants */
-:root[data-theme-variant] .ds .ds__header,
-:root[data-theme-variant] .ds .ds__theme-switcher {
-  color: var(--ds-header-text);
-}
-
 :root[data-theme-variant] .ds .ds__header .ds__header__title {
   color: var(--ds-header-text) !important;
-  font-family: $font-family-base;
-  font-size: $font-size-500;
-  font-weight: $font-weight-semibold;
-  line-height: 1.2;
-  letter-spacing: 0;
+  font-family: $font-family-base !important;
+  font-size: $font-size-500 !important;
+  font-weight: $font-weight-semibold !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
 }
 
 :root[data-theme-variant] .ds .ds__header .ds__header__title:hover {
   color: var(--ds-header-accent) !important;
-}
-
-:root[data-theme-variant] .ds .ds__header .ds__header__version,
-:root[data-theme-variant] .ds .ds__header .ds__header__link,
-:root[data-theme-variant] .ds .ds__header .ds__theme-switcher__label,
-:root[data-theme-variant] .ds .ds__header .ds__theme-switcher__mode {
-  color: var(--ds-header-text-muted) !important;
-}
-
-:root[data-theme-variant] .ds .ds__header .ds__theme-switcher__mode {
-  background: var(--ds-header-switcher-button) !important;
-}
-
-:root[data-theme-variant] .ds .ds__header .ds__theme-switcher__mode:hover {
-  background: var(--ds-header-switcher-button-hover) !important;
-  color: var(--ds-header-text) !important;
-}
-
-:root[data-theme-variant] .ds .ds__header .ds__header__menu-button .button {
-  border-radius: $border-radius-circular !important;
-  border: 1px solid var(--ds-header-switcher-border) !important;
-  background: var(--ds-header-switcher-button) !important;
-  color: var(--ds-header-text) !important;
-}
-
-:root[data-theme-variant]
-  .ds
-  .ds__header
-  .ds__header__menu-button
-  .button:hover:not(.button--disabled) {
-  background: var(--ds-header-switcher-button-hover) !important;
-  border-color: var(--ds-header-switcher-border) !important;
-}
-
-:root[data-theme-variant] .ds .ds__header .ds__header__menu-button .button ui-icon,
-:root[data-theme-variant] .ds .ds__header .ds__header__menu-button .button .button__text {
-  color: var(--ds-header-text) !important;
 }
