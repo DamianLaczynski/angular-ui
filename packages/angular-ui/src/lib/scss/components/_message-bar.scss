@@ -279,7 +279,7 @@
   }
 
   .message-bar--single-line {
-    align-items: start;
+    align-items: flex-start;
 
     .message-bar__aside {
       display: contents;

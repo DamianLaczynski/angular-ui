@@ -81,7 +81,7 @@
   $border-selected
 ) {
   color: $fg-color;
-  background-color: transparent;
+  background-color: var(--color-neutral-background-rest);
   border-color: $border-color;
 
   &:hover:not(.button--disabled) {
