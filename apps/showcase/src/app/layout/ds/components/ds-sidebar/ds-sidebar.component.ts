@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, UrlSegment } from '@angular/router';
 import { NavComponent, NavNode } from 'angular-ui';
 import { filter } from 'rxjs/operators';
 import { SearchComponent } from 'angular-ui';
@@ -141,33 +141,57 @@ export class DsSidebarComponent {
 
   // Nav items with handlers applied
   navItems = computed<NavNode[]>(() => {
-    return this.filteredNavItems().map(item => ({
-      ...item,
-      onClick: item.children
-        ? undefined
-        : () => {
-            this.selectedItemId.set(item.id as string);
-            this.router.navigate(['docs', item.id]);
-          },
-      selected: this.selectedItemId() === item.id,
-      children: item.children?.map(child => ({
-        ...child,
-        onClick: () => {
-          this.selectedItemId.set(child.id as string);
-          this.router.navigate(['docs', child.id]);
-        },
-        selected: this.selectedItemId() === child.id,
-      })),
-    }));
+    return this.filteredNavItems().map(item => this.buildNavNode(item));
   });
 
   constructor() {
+    this.syncSelectedItemFromUrl(this.router.url);
+
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
-      const url = event.url;
-      const item = this.navItems().find(item => item.id === url.split('/').pop());
-      if (item) {
-        this.selectedItemId.set(item.id as string);
-      }
+      this.syncSelectedItemFromUrl(event.urlAfterRedirects);
     });
+  }
+
+  private syncSelectedItemFromUrl(url: string): void {
+    const activeId = this.getLastPrimarySegment(url);
+    if (!activeId) {
+      this.selectedItemId.set(null);
+      return;
+    }
+
+    const match = this.allNavItems.find(item => item.id === activeId);
+    this.selectedItemId.set(match ? (match.id as string) : null);
+  }
+
+  private getLastPrimarySegment(url: string): string | null {
+    try {
+      const tree = this.router.parseUrl(url);
+      const primarySegments: UrlSegment[] = tree.root.children['primary']?.segments ?? [];
+      if (primarySegments.length === 0) {
+        return null;
+      }
+      return primarySegments[primarySegments.length - 1].path;
+    } catch {
+      const normalized = url.split(/[?#]/)[0].replace(/\/+$/, '');
+      const parts = normalized.split('/').filter(Boolean);
+      return parts.length > 0 ? parts[parts.length - 1] : null;
+    }
+  }
+
+  private buildNavNode(item: NavNode): NavNode {
+    const itemId = String(item.id);
+    const hasChildren = !!(item.children && item.children.length > 0);
+
+    return {
+      ...item,
+      selected: this.selectedItemId() === itemId,
+      onClick: hasChildren ? undefined : () => this.navigateToItem(itemId),
+      children: item.children?.map(child => this.buildNavNode(child)),
+    };
+  }
+
+  private navigateToItem(itemId: string): void {
+    this.selectedItemId.set(itemId);
+    this.router.navigate(['docs', itemId]);
   }
 }
