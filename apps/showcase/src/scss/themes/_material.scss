@@ -1,0 +1,272 @@
+:root[data-theme-variant='material'] {
+  --color-brand-primary: #6750a4;
+  --color-brand-primary-hover: #5a4591;
+  --color-brand-primary-pressed: #4b397a;
+  --color-brand-primary-selected: #59488d;
+
+  --color-brand-foreground: #6750a4;
+  --color-brand-foreground-hover: #5a4591;
+  --color-brand-foreground-pressed: #4b397a;
+
+  --color-compound-brand-background: #6750a4;
+  --color-compound-brand-background-hover: #5a4591;
+  --color-compound-brand-background-pressed: #4b397a;
+  --color-compound-brand-foreground: #6750a4;
+  --color-compound-brand-foreground-hover: #5a4591;
+  --color-compound-brand-foreground-pressed: #4b397a;
+  --color-compound-brand-stroke: #6750a4;
+  --color-compound-brand-stroke-hover: #5a4591;
+  --color-compound-brand-stroke-pressed: #4b397a;
+
+  --color-accent-primary: #6750a4;
+  --color-accent-primary-hover: #5a4591;
+  --color-accent-primary-pressed: #4b397a;
+  --color-accent-primary-selected: #59488d;
+
+  --color-neutral-foreground-rest: #1d1b20;
+  --color-neutral-foreground-hover: #1d1b20;
+  --color-neutral-foreground-pressed: #1d1b20;
+  --color-neutral-foreground-selected: #1d1b20;
+  --color-neutral-foreground-disabled: #9a959f;
+  --color-neutral-foreground-on-brand: #ffffff;
+
+  --color-neutral-foreground2-rest: #49454f;
+  --color-neutral-foreground2-hover: #3f3b45;
+  --color-neutral-foreground2-pressed: #36323b;
+  --color-neutral-foreground2-selected: #36323b;
+  --color-neutral-foreground2-brand-hover: #5a4591;
+  --color-neutral-foreground2-brand-pressed: #4b397a;
+  --color-neutral-foreground2-brand-selected: #59488d;
+
+  --color-neutral-foreground3-rest: #79747e;
+  --color-neutral-foreground3-hover: #625d67;
+  --color-neutral-foreground3-pressed: #56515b;
+  --color-neutral-foreground3-selected: #56515b;
+  --color-neutral-foreground3-brand-hover: #5a4591;
+  --color-neutral-foreground3-brand-pressed: #4b397a;
+  --color-neutral-foreground3-brand-selected: #59488d;
+
+  --color-neutral-foreground4-rest: #938f99;
+
+  --color-neutral-background-rest: #fffbfe;
+  --color-neutral-background-hover: #f7f2fa;
+  --color-neutral-background-pressed: #ede7f2;
+  --color-neutral-background-selected: #f3edf7;
+  --color-neutral-background-disabled: #f4eff4;
+
+  --color-neutral-background2-rest: #f7f2fa;
+  --color-neutral-background2-hover: #efe9f3;
+  --color-neutral-background2-pressed: #e5dfea;
+  --color-neutral-background2-selected: #ebe5f0;
+
+  --color-neutral-background3-rest: #ede7f2;
+  --color-neutral-background3-hover: #e3dde9;
+  --color-neutral-background3-pressed: #d7d1de;
+  --color-neutral-background3-selected: #dfd9e5;
+
+  --color-neutral-background-brand-selected: #eaddff;
+  --color-neutral-background-brand-hover: #dfd0ff;
+  --color-neutral-background-brand-pressed: #d0bcff;
+
+  --color-subtle-background-hover: #f7f2fa;
+  --color-subtle-background-pressed: #ede7f2;
+  --color-subtle-background-selected: #f3edf7;
+
+  --color-neutral-stroke-rest: #cac4d0;
+  --color-neutral-stroke-hover: #b7b0bd;
+  --color-neutral-stroke-pressed: #a59eaa;
+  --color-neutral-stroke-selected: #a59eaa;
+  --color-neutral-stroke-disabled: #e7e0eb;
+  --color-neutral-stroke-accessible: #605d66;
+  --color-neutral-stroke-accessible-hover: #4f4b55;
+  --color-neutral-stroke-accessible-pressed: #3f3b44;
+  --color-neutral-stroke-accessible-selected: #6750a4;
+
+  --color-brand-stroke-rest: #6750a4;
+  --color-brand-stroke-hover: #5a4591;
+  --color-brand-stroke-pressed: #4b397a;
+  --color-brand-stroke-selected: #59488d;
+
+  --color-shared-red-foreground: #b3261e;
+  --color-shared-red-foreground-hover: #8c1d17;
+  --color-shared-red-foreground-pressed: #751612;
+  --color-shared-red-foreground-selected: #9f2019;
+  --color-shared-red-background: #f9dedc;
+  --color-shared-red-border: #f2b8b5;
+
+  --color-shared-orange-foreground: #b26a00;
+  --color-shared-orange-foreground-hover: #965900;
+  --color-shared-orange-foreground-pressed: #7f4a00;
+  --color-shared-orange-foreground-selected: #a46000;
+  --color-shared-orange-background: #ffddb3;
+  --color-shared-orange-border: #f6c878;
+
+  --color-shared-yellow-foreground: #b78103;
+  --color-shared-yellow-background: #fff1c2;
+  --color-shared-yellow-border: #f2d68a;
+
+  --color-shared-green-foreground: #2e7d32;
+  --color-shared-green-foreground-hover: #256628;
+  --color-shared-green-foreground-pressed: #1f5521;
+  --color-shared-green-foreground-selected: #2a712e;
+  --color-shared-green-background: #d8f0d2;
+  --color-shared-green-border: #a8d8a0;
+
+  --color-shared-cyan-foreground: #00897b;
+  --color-shared-cyan-background: #c6f2ee;
+  --color-shared-cyan-border: #8fded7;
+
+  --color-shared-blue-foreground: #1e88e5;
+  --color-shared-blue-foreground-hover: #1976d2;
+  --color-shared-blue-foreground-pressed: #1565c0;
+  --color-shared-blue-foreground-selected: #187ad9;
+  --color-shared-blue-background: #d7e9ff;
+  --color-shared-blue-border: #a8ccf4;
+
+  --color-shared-purple-foreground: #7e57c2;
+  --color-shared-purple-background: #e4d9f7;
+  --color-shared-purple-border: #c9b4ea;
+
+  --color-shared-pink-foreground: #ad1457;
+  --color-shared-pink-background: #f8d7e8;
+  --color-shared-pink-border: #ecaccd;
+
+  --color-focus-border: #6750a4;
+}
+
+:root[data-theme='dark'][data-theme-variant='material'],
+:root.dark[data-theme-variant='material'] {
+  --color-brand-primary: #d0bcff;
+  --color-brand-primary-hover: #dccdff;
+  --color-brand-primary-pressed: #c2a8ff;
+  --color-brand-primary-selected: #e5d8ff;
+
+  --color-brand-foreground: #d0bcff;
+  --color-brand-foreground-hover: #dccdff;
+  --color-brand-foreground-pressed: #c2a8ff;
+
+  --color-compound-brand-background: #d0bcff;
+  --color-compound-brand-background-hover: #dccdff;
+  --color-compound-brand-background-pressed: #c2a8ff;
+  --color-compound-brand-foreground: #d0bcff;
+  --color-compound-brand-foreground-hover: #dccdff;
+  --color-compound-brand-foreground-pressed: #c2a8ff;
+  --color-compound-brand-stroke: #d0bcff;
+  --color-compound-brand-stroke-hover: #dccdff;
+  --color-compound-brand-stroke-pressed: #c2a8ff;
+
+  --color-accent-primary: #d0bcff;
+  --color-accent-primary-hover: #dccdff;
+  --color-accent-primary-pressed: #c2a8ff;
+  --color-accent-primary-selected: #e5d8ff;
+
+  --color-neutral-foreground-rest: #e6e0e9;
+  --color-neutral-foreground-hover: #f4eff4;
+  --color-neutral-foreground-pressed: #ffffff;
+  --color-neutral-foreground-selected: #ffffff;
+  --color-neutral-foreground-disabled: #938f99;
+  --color-neutral-foreground-on-brand: #381e72;
+
+  --color-neutral-foreground2-rest: #cac4d0;
+  --color-neutral-foreground2-hover: #e6e0e9;
+  --color-neutral-foreground2-pressed: #f4eff4;
+  --color-neutral-foreground2-selected: #f4eff4;
+  --color-neutral-foreground2-brand-hover: #dccdff;
+  --color-neutral-foreground2-brand-pressed: #c2a8ff;
+  --color-neutral-foreground2-brand-selected: #e5d8ff;
+
+  --color-neutral-foreground3-rest: #938f99;
+  --color-neutral-foreground3-hover: #b4afba;
+  --color-neutral-foreground3-pressed: #cac4d0;
+  --color-neutral-foreground3-selected: #cac4d0;
+  --color-neutral-foreground3-brand-hover: #dccdff;
+  --color-neutral-foreground3-brand-pressed: #c2a8ff;
+  --color-neutral-foreground3-brand-selected: #e5d8ff;
+
+  --color-neutral-foreground4-rest: #7a7680;
+
+  --color-neutral-background-rest: #141218;
+  --color-neutral-background-hover: #1d1b20;
+  --color-neutral-background-pressed: #111015;
+  --color-neutral-background-selected: #211f26;
+  --color-neutral-background-disabled: #1a181e;
+
+  --color-neutral-background2-rest: #1d1b20;
+  --color-neutral-background2-hover: #26242b;
+  --color-neutral-background2-pressed: #17161b;
+  --color-neutral-background2-selected: #2b2930;
+
+  --color-neutral-background3-rest: #111015;
+  --color-neutral-background3-hover: #1a181e;
+  --color-neutral-background3-pressed: #0d0c11;
+  --color-neutral-background3-selected: #201e24;
+
+  --color-neutral-background-brand-selected: #4f378b;
+  --color-neutral-background-brand-hover: #624b9a;
+  --color-neutral-background-brand-pressed: #3f2c70;
+
+  --color-subtle-background-hover: #211f26;
+  --color-subtle-background-pressed: #1d1b20;
+  --color-subtle-background-selected: #26242b;
+
+  --color-neutral-stroke-rest: #49454f;
+  --color-neutral-stroke-hover: #5d5863;
+  --color-neutral-stroke-pressed: #746f79;
+  --color-neutral-stroke-selected: #746f79;
+  --color-neutral-stroke-disabled: #2b2930;
+  --color-neutral-stroke-accessible: #cac4d0;
+  --color-neutral-stroke-accessible-hover: #e6e0e9;
+  --color-neutral-stroke-accessible-pressed: #f4eff4;
+  --color-neutral-stroke-accessible-selected: #d0bcff;
+
+  --color-brand-stroke-rest: #d0bcff;
+  --color-brand-stroke-hover: #dccdff;
+  --color-brand-stroke-pressed: #c2a8ff;
+  --color-brand-stroke-selected: #e5d8ff;
+
+  --color-shared-red-foreground: #ffb4ab;
+  --color-shared-red-foreground-hover: #ffc9c2;
+  --color-shared-red-foreground-pressed: #ff9f94;
+  --color-shared-red-foreground-selected: #ffd8d3;
+  --color-shared-red-background: #601410;
+  --color-shared-red-border: #8c1d18;
+
+  --color-shared-orange-foreground: #ffb77d;
+  --color-shared-orange-foreground-hover: #ffc699;
+  --color-shared-orange-foreground-pressed: #ffa75e;
+  --color-shared-orange-foreground-selected: #ffd2b0;
+  --color-shared-orange-background: #5a3400;
+  --color-shared-orange-border: #7a4700;
+
+  --color-shared-yellow-foreground: #e8c76a;
+  --color-shared-yellow-background: #4d3d07;
+  --color-shared-yellow-border: #6f590d;
+
+  --color-shared-green-foreground: #9ed49a;
+  --color-shared-green-foreground-hover: #b2dfad;
+  --color-shared-green-foreground-pressed: #8ac486;
+  --color-shared-green-foreground-selected: #c0e7bc;
+  --color-shared-green-background: #1f3a1d;
+  --color-shared-green-border: #2f592c;
+
+  --color-shared-cyan-foreground: #7edbd1;
+  --color-shared-cyan-background: #123b38;
+  --color-shared-cyan-border: #1f5b56;
+
+  --color-shared-blue-foreground: #90caf9;
+  --color-shared-blue-foreground-hover: #abd8fb;
+  --color-shared-blue-foreground-pressed: #76bcf7;
+  --color-shared-blue-foreground-selected: #bfe3fc;
+  --color-shared-blue-background: #13304b;
+  --color-shared-blue-border: #1f4a73;
+
+  --color-shared-purple-foreground: #cfbcff;
+  --color-shared-purple-background: #34235d;
+  --color-shared-purple-border: #4d357e;
+
+  --color-shared-pink-foreground: #f5b2d0;
+  --color-shared-pink-background: #4a1f36;
+  --color-shared-pink-border: #6d3150;
+
+  --color-focus-border: #dccdff;
+}

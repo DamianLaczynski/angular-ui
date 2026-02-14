@@ -23,14 +23,38 @@
         >
           <ui-icon icon="arrow_download" size="small"></ui-icon>
         </a>
-        <ui-button
-          variant="secondary"
-          appearance="transparent"
-          size="medium"
-          [icon]="themeIcon()"
-          [text]="themeLabel()"
-          (click)="toggleTheme()"
-        />
+        <div class="ds__theme-switcher">
+          <button
+            type="button"
+            class="ds__theme-switcher__mode"
+            (click)="toggleTheme()"
+            [attr.aria-label]="themeLabel()"
+          >
+            <ui-icon [icon]="themeIcon()" size="small"></ui-icon>
+            <span>{{ themeLabel() }}</span>
+          </button>
+
+          <span class="ds__theme-switcher__label">{{ currentThemeVariantLabel() }}</span>
+
+          <div class="ds__theme-switcher__variants" role="radiogroup" aria-label="Theme variants">
+            @for (variant of themeVariants; track variant.id) {
+              <button
+                type="button"
+                class="ds__theme-switcher__variant"
+                [class.ds__theme-switcher__variant--active]="currentThemeVariant() === variant.id"
+                [style.--variant-primary]="variant.previewPrimary"
+                [style.--variant-secondary]="variant.previewSecondary"
+                [attr.aria-label]="variant.label"
+                [attr.title]="variant.label"
+                [attr.aria-checked]="currentThemeVariant() === variant.id"
+                role="radio"
+                (click)="setThemeVariant(variant.id)"
+              >
+                <span class="ds__theme-switcher__swatch"></span>
+              </button>
+            }
+          </div>
+        </div>
       </div>
       @if (isMobile()) {
         <ui-button
