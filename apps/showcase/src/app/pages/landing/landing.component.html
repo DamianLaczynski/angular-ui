@@ -286,10 +286,17 @@
               <div
                 class="landing__carousel__slide__content landing__carousel__slide__content--wide"
               >
-                <ui-skeleton width="100%" height="24px" />
-                <ui-skeleton width="80%" height="20px" />
-                <ui-skeleton width="60%" height="20px" />
-                <ui-skeleton shape="circular" width="48px" height="48px" />
+                <div class="landing__skeleton-list">
+                  @for (item of carouselSkeletonListItems; track item) {
+                    <div class="landing__skeleton-list__item">
+                      <ui-skeleton shape="circular" width="40px" height="40px" />
+                      <div class="landing__skeleton-list__item-content">
+                        <ui-skeleton width="40%" height="16px" />
+                        <ui-skeleton width="80%" height="12px" />
+                      </div>
+                    </div>
+                  }
+                </div>
               </div>
             }
             @case ('card') {
