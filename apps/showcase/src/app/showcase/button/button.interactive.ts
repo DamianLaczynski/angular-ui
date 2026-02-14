@@ -13,7 +13,7 @@ import { BUTTON_SHOWCASE_CONFIG } from './button.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-button

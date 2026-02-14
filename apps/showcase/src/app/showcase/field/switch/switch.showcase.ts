@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -57,7 +57,6 @@ import { SwitchInteractiveComponent } from './switch.interactive';
                     ariaLabel="Switch without visible label"
                     [labelPosition]="pos"
                     [size]="labelPositionForm().size"
-                    [disabled]="labelPositionForm().disabled"
                     [readonly]="labelPositionForm().readonly"
                     [required]="labelPositionForm().required"
                     [formControl]="getLabelPositionControl(pos)"
@@ -67,7 +66,6 @@ import { SwitchInteractiveComponent } from './switch.interactive';
                     [label]="pos + ' label'"
                     [labelPosition]="pos"
                     [size]="labelPositionForm().size"
-                    [disabled]="labelPositionForm().disabled"
                     [readonly]="labelPositionForm().readonly"
                     [required]="labelPositionForm().required"
                     [formControl]="getLabelPositionControl(pos)"
@@ -93,7 +91,6 @@ import { SwitchInteractiveComponent } from './switch.interactive';
                   [label]="size + ' switch'"
                   [labelPosition]="sizeForm().labelPosition"
                   [size]="size"
-                  [disabled]="sizeForm().disabled"
                   [readonly]="sizeForm().readonly"
                   [required]="sizeForm().required"
                   [formControl]="getSizeControl(size)"
@@ -130,7 +127,6 @@ import { SwitchInteractiveComponent } from './switch.interactive';
                     [label]="state.label + ' switch'"
                     [labelPosition]="statesForm().labelPosition"
                     [size]="statesForm().size"
-                    [disabled]="state.disabled"
                     [readonly]="state.readonly"
                     [required]="state.required"
                     [formControl]="getStateControl(state.id)"
@@ -155,7 +151,6 @@ import { SwitchInteractiveComponent } from './switch.interactive';
                   [label]="combo.label"
                   [labelPosition]="combo.labelPosition"
                   [size]="combo.size"
-                  [disabled]="combinationsForm().disabled"
                   [readonly]="combinationsForm().readonly"
                   [required]="combinationsForm().required"
                   [formControl]="getComboControl(combo.id)"
@@ -263,7 +258,7 @@ export class SwitchShowcaseComponent {
   largeSizeControl = new FormControl(false);
 
   normalStateControl = new FormControl(true);
-  disabledStateControl = new FormControl(true);
+  disabledStateControl = new FormControl({ value: true, disabled: true });
   requiredStateControl = new FormControl(false);
   readonlyStateControl = new FormControl(true);
 
@@ -311,6 +306,40 @@ export class SwitchShowcaseComponent {
   });
   combinationsForm = computed(() => this.toSwitchForm(this.combinationsFormValues()));
 
+  constructor() {
+    effect(() => {
+      this.setControlsDisabled(
+        [
+          this.afterPositionControl,
+          this.beforePositionControl,
+          this.abovePositionControl,
+          this.belowPositionControl,
+          this.nonePositionControl,
+        ],
+        this.labelPositionForm().disabled,
+      );
+    });
+
+    effect(() => {
+      this.setControlsDisabled(
+        [this.smallSizeControl, this.mediumSizeControl, this.largeSizeControl],
+        this.sizeForm().disabled,
+      );
+    });
+
+    effect(() => {
+      this.setControlsDisabled(
+        [
+          this.afterSmallControl,
+          this.afterLargeControl,
+          this.beforeSmallControl,
+          this.aboveMediumControl,
+        ],
+        this.combinationsForm().disabled,
+      );
+    });
+  }
+
   private toSwitchForm(v: Record<string, unknown>) {
     return {
       labelPosition: (v['labelPosition'] as ContentPosition) ?? 'after',
@@ -347,5 +376,15 @@ export class SwitchShowcaseComponent {
     if (id === 'after-large') return this.afterLargeControl;
     if (id === 'before-small') return this.beforeSmallControl;
     return this.aboveMediumControl;
+  }
+
+  private setControlsDisabled(controls: FormControl[], shouldDisable: boolean): void {
+    for (const control of controls) {
+      if (shouldDisable && control.enabled) {
+        control.disable({ emitEvent: false });
+      } else if (!shouldDisable && control.disabled) {
+        control.enable({ emitEvent: false });
+      }
+    }
   }
 }

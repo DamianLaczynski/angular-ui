@@ -3,7 +3,7 @@
 
 $interactive-bg: var(--color-neutral-background-rest);
 $interactive-bg-alt: var(--color-neutral-background2-rest);
-$interactive-border: var(--color-neutral-stroke-accessible);
+$interactive-border: var(--color-neutral-stroke-rest);
 $interactive-border-subtle: var(--color-neutral-stroke-rest);
 $interactive-text: var(--color-neutral-foreground-rest);
 $interactive-text-muted: var(--color-neutral-foreground2-rest);
@@ -161,7 +161,6 @@ $interactive-text-dim: var(--color-neutral-foreground3-rest);
     padding: $spacing-3 $spacing-4;
     background: $interactive-bg;
     border: none;
-    border-bottom: 1px solid $interactive-border-subtle;
     cursor: pointer;
     text-align: left;
     transition: background-color $duration-faster $easing-decelerate-mid;
@@ -176,7 +175,6 @@ $interactive-text-dim: var(--color-neutral-foreground3-rest);
 
     &--expanded {
       background: $interactive-bg-alt;
-      border-left: 4px solid $interactive-border;
 
       &:hover {
         background: $interactive-bg-alt;
@@ -258,7 +256,6 @@ $interactive-text-dim: var(--color-neutral-foreground3-rest);
     padding: $spacing-3 $spacing-4;
     background: $interactive-bg;
     border: none;
-    border-left: 4px solid transparent;
     cursor: pointer;
     font-size: $font-size-300;
     font-weight: $font-weight-semibold;
@@ -278,7 +275,6 @@ $interactive-text-dim: var(--color-neutral-foreground3-rest);
 
     &--expanded {
       background: $interactive-bg-alt;
-      border-left-color: $interactive-border;
     }
   }
 

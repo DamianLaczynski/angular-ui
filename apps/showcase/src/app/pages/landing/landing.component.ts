@@ -245,6 +245,7 @@ export class LandingComponent {
 
   carouselRating = 3;
   carouselSearchQuery = '';
+  readonly carouselSkeletonListItems = [1, 2, 3];
 
   carouselPaginationConfig = {
     currentPage: 2,

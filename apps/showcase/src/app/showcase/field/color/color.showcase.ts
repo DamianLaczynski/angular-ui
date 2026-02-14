@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ColorComponent } from 'angular-ui';
@@ -60,7 +60,6 @@ const COLOR_FORMATS = ['hex', 'rgb', 'hsl'] as const;
                   [size]="formatForm().size"
                   [showAlpha]="formatForm().showAlpha"
                   [showEyeDropper]="formatForm().showEyeDropper"
-                  [disabled]="formatForm().disabled"
                   [readonly]="formatForm().readonly"
                   [required]="formatForm().required"
                   [formControl]="getFormatControl(format)"
@@ -87,7 +86,6 @@ const COLOR_FORMATS = ['hex', 'rgb', 'hsl'] as const;
                   [size]="variantForm().size"
                   [showAlpha]="variantForm().showAlpha"
                   [showEyeDropper]="variantForm().showEyeDropper"
-                  [disabled]="variantForm().disabled"
                   [readonly]="variantForm().readonly"
                   [required]="variantForm().required"
                   [formControl]="getVariantControl(variant)"
@@ -114,7 +112,6 @@ const COLOR_FORMATS = ['hex', 'rgb', 'hsl'] as const;
                   [size]="size"
                   [showAlpha]="sizeForm().showAlpha"
                   [showEyeDropper]="sizeForm().showEyeDropper"
-                  [disabled]="sizeForm().disabled"
                   [readonly]="sizeForm().readonly"
                   [required]="sizeForm().required"
                   [formControl]="getSizeControl(size)"
@@ -141,7 +138,6 @@ const COLOR_FORMATS = ['hex', 'rgb', 'hsl'] as const;
                   [size]="featuresForm().size"
                   [showAlpha]="preset.showAlpha"
                   [showEyeDropper]="preset.showEyeDropper"
-                  [disabled]="featuresForm().disabled"
                   [readonly]="featuresForm().readonly"
                   [required]="featuresForm().required"
                   [formControl]="getFeatureControl(preset.id)"
@@ -167,7 +163,6 @@ const COLOR_FORMATS = ['hex', 'rgb', 'hsl'] as const;
                   [size]="statesForm().size"
                   [showAlpha]="statesForm().showAlpha"
                   [showEyeDropper]="statesForm().showEyeDropper"
-                  [disabled]="state.disabled"
                   [readonly]="state.readonly"
                   [required]="state.required"
                   [formControl]="getStateControl(state.id)"
@@ -326,6 +321,41 @@ export class ColorShowcaseComponent {
   });
   statesForm = computed(() => this.toColorForm(this.statesFormValues()));
 
+  constructor() {
+    effect(() => {
+      this.setControlsDisabled(
+        [this.hexColorControl, this.rgbColorControl, this.hslColorControl],
+        this.formatForm().disabled,
+      );
+    });
+
+    effect(() => {
+      this.setControlsDisabled(
+        [
+          this.filledControl,
+          this.filledGrayControl,
+          this.filledLighterControl,
+          this.underlinedControl,
+        ],
+        this.variantForm().disabled,
+      );
+    });
+
+    effect(() => {
+      this.setControlsDisabled(
+        [this.smallSizeControl, this.mediumSizeControl, this.largeSizeControl],
+        this.sizeForm().disabled,
+      );
+    });
+
+    effect(() => {
+      this.setControlsDisabled(
+        [this.defaultFeatureControl, this.alphaFeatureControl, this.noEyedropperFeatureControl],
+        this.featuresForm().disabled,
+      );
+    });
+  }
+
   private toColorForm(v: Record<string, unknown>) {
     return {
       format: (v['format'] as (typeof COLOR_FORMATS)[number]) ?? 'hex',
@@ -369,5 +399,15 @@ export class ColorShowcaseComponent {
     if (id === 'readonly') return this.readonlyStateControl;
     if (id === 'required') return this.requiredStateControl;
     return this.normalStateControl;
+  }
+
+  private setControlsDisabled(controls: FormControl[], shouldDisable: boolean): void {
+    for (const control of controls) {
+      if (shouldDisable && control.enabled) {
+        control.disable({ emitEvent: false });
+      } else if (!shouldDisable && control.disabled) {
+        control.enable({ emitEvent: false });
+      }
+    }
   }
 }

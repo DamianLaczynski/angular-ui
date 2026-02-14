@@ -13,7 +13,7 @@ import { FILE_SHOWCASE_CONFIG } from './file.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-file

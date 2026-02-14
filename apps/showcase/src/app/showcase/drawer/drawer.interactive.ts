@@ -21,7 +21,7 @@ type DrawerSize = 'small' | 'medium' | 'large';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-button variant="primary" (click)="openDrawer()">Open Interactive Drawer</ui-button>

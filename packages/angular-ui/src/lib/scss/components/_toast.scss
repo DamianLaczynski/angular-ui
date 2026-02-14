@@ -119,7 +119,7 @@
   }
 
   &__message {
-    color: var(--color-neutral-foreground2-rest);
+    color: var(--color-neutral-foreground-rest);
   }
 
   &__actions {
@@ -128,21 +128,13 @@
     flex-shrink: 0;
   }
 
-  &__dismiss {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: $spacing-6;
-    height: $spacing-6;
-    border: none;
-    border-radius: $border-radius-200;
-    background: transparent;
-    color: var(--color-neutral-foreground2-rest);
-    cursor: pointer;
+  &--filled .toast__dismiss .button.button--transparent {
+    color: inherit;
 
-    &:hover {
-      color: var(--color-neutral-foreground-rest);
-      background-color: var(--color-neutral-background-hover);
+    &:hover:not(.button--disabled),
+    &:active:not(.button--disabled),
+    &.button--pressed:not(.button--disabled) {
+      color: inherit;
     }
   }
 }
@@ -160,11 +152,6 @@
   .toast__message {
     font-size: $font-size-200;
   }
-
-  .toast__icon {
-    width: 16px;
-    height: 16px;
-  }
 }
 
 .toast--medium {
@@ -176,11 +163,6 @@
   .toast__message {
     font-size: $font-size-300;
   }
-
-  .toast__icon {
-    width: 20px;
-    height: 20px;
-  }
 }
 
 .toast--large {
@@ -191,11 +173,6 @@
   .toast__title,
   .toast__message {
     font-size: $font-size-400;
-  }
-
-  .toast__icon {
-    width: 24px;
-    height: 24px;
   }
 }
 
@@ -252,14 +229,6 @@
   .toast__message {
     color: var(--color-neutral-foreground-on-brand);
     opacity: 0.9;
-  }
-
-  .toast__dismiss {
-    color: var(--color-neutral-foreground-on-brand);
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
   }
 }
 
@@ -354,14 +323,14 @@
   }
 
   .toast__message {
-    color: var(--color-neutral-foreground2-rest);
+    color: var(--color-neutral-foreground-rest);
   }
 }
 
 // Secondary Outline
 .toast--secondary.toast--outline {
   background-color: var(--color-neutral-background-rest);
-  border: 2px solid var(--color-neutral-stroke-accessible);
+  border: 2px solid var(--color-neutral-stroke-rest);
 
   &::after {
     background-color: var(--color-neutral-foreground-rest);
@@ -451,14 +420,6 @@
   .toast__message {
     color: var(--color-neutral-foreground-on-brand);
     opacity: 0.9;
-  }
-
-  .toast__dismiss {
-    color: var(--color-neutral-foreground-on-brand);
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
   }
 }
 
@@ -556,14 +517,6 @@
     color: var(--color-neutral-foreground-on-brand);
     opacity: 0.9;
   }
-
-  .toast__dismiss {
-    color: var(--color-neutral-foreground-on-brand);
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
-  }
 }
 
 // Warning Outline
@@ -660,14 +613,6 @@
     color: var(--color-neutral-foreground-on-brand);
     opacity: 0.9;
   }
-
-  .toast__dismiss {
-    color: var(--color-neutral-foreground-on-brand);
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
-  }
 }
 
 // Danger Outline
@@ -763,14 +708,6 @@
   .toast__message {
     color: var(--color-neutral-foreground-on-brand);
     opacity: 0.9;
-  }
-
-  .toast__dismiss {
-    color: var(--color-neutral-foreground-on-brand);
-
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.15);
-    }
   }
 }
 

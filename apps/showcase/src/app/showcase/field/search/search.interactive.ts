@@ -14,7 +14,7 @@ import { SEARCH_SHOWCASE_CONFIG } from './search.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-search

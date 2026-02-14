@@ -41,7 +41,7 @@ function compareUnknownValues(aVal: unknown, bVal: unknown): number {
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-data-grid [config]="interactiveConfig()">
