@@ -13,6 +13,7 @@ import {
 } from 'angular-ui';
 import { SectionWithDrawerComponent } from '@shared/components/section-with-drawer';
 import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
+import { ShowcaseDemoCardComponent } from '@shared/components/showcase-demo-card';
 import { SIZES } from '@shared/utils/showcase/component-options.utils';
 import { STATE_CONTAINER_DRAWER_CONFIGS } from './state-container.showcase.config';
 import { StateContainerInteractiveComponent } from './state-container.interactive';
@@ -40,6 +41,7 @@ const STATE_PRESETS = [
     TableOfContentComponent,
     SectionWithDrawerComponent,
     ShowcaseHeaderComponent,
+    ShowcaseDemoCardComponent,
     StateContainerInteractiveComponent,
   ],
   template: `
@@ -84,18 +86,18 @@ const STATE_PRESETS = [
                   [errorSecondaryAction]="errorSecondaryAction()"
                   [showEmptyOnInitial]="statesForm().showEmptyOnInitial"
                 >
-                  <div
-                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;"
-                  >
+                  <div class="state-container-user-grid">
                     @for (user of getStateForPreset(preset.id).data ?? []; track user.id) {
-                      <div
-                        style="padding: 16px; border-radius: 12px; border: 1px solid var(--Neutral-Stroke-rest, #EDEBE9); background: var(--Neutral-Background-rest, #FFFFFF); display: flex; flex-direction: column; gap: 4px;"
+                      <app-showcase-demo-card
+                        [title]="user.name"
+                        [subtitle]="user.role"
+                        [badge]="'User #' + user.id"
+                        appearance="filled-alternative"
                       >
-                        <strong>{{ user.name }}</strong>
-                        <span style="color: var(--color-neutral-foreground2-rest, #605E5C);">{{
-                          user.role
-                        }}</span>
-                      </div>
+                        <p class="state-container-user-card-note">
+                          Account is active and ready for assignment.
+                        </p>
+                      </app-showcase-demo-card>
                     }
                   </div>
                 </ui-state-container>

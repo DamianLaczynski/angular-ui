@@ -6,8 +6,8 @@ import {
   SplitterPanel,
   SplitterResizeEvent,
 } from 'angular-ui';
-import { CardComponent } from 'angular-ui';
 import { InteractiveShowcaseComponent } from '@shared/components/interactive-showcase';
+import { ShowcaseDemoCardComponent } from '@shared/components/showcase-demo-card';
 import type { ShowcaseConfig } from '@shared/components/interactive-showcase';
 import { SPLITTER_SHOWCASE_CONFIG } from './splitter.showcase.config';
 import type { Orientation } from 'angular-ui';
@@ -18,8 +18,8 @@ import type { Orientation } from 'angular-ui';
     CommonModule,
     SplitterComponent,
     SplitterPanelDirective,
-    CardComponent,
     InteractiveShowcaseComponent,
+    ShowcaseDemoCardComponent,
   ],
   template: `
     <app-interactive-showcase
@@ -36,38 +36,50 @@ import type { Orientation } from 'angular-ui';
           (panelResize)="onInteractivePanelResize($event)"
         >
           <ng-template uiSplitterPanel="panel-1">
-            <div class="panel-content">
-              <ui-card>
-                <div class="card-content">
-                  <h3>Panel 1</h3>
-                  <p>Resizable panel with interactive controls.</p>
-                  <p>Current size: {{ interactivePanelSizes()[0] | number: '1.0-1' }}%</p>
-                </div>
-              </ui-card>
+            <div class="splitter-panel-content">
+              <app-showcase-demo-card
+                title="Panel 1"
+                subtitle="Interactive panel"
+                badge="Live"
+                appearance="outline"
+              >
+                <p>Resizable panel with interactive controls.</p>
+                <p class="splitter-panel-stat">
+                  Current size: {{ interactivePanelSizes()[0] | number: '1.0-1' }}%
+                </p>
+              </app-showcase-demo-card>
             </div>
           </ng-template>
 
           <ng-template uiSplitterPanel="panel-2">
-            <div class="panel-content">
-              <ui-card>
-                <div class="card-content">
-                  <h3>Panel 2</h3>
-                  <p>Middle panel.</p>
-                  <p>Current size: {{ interactivePanelSizes()[1] | number: '1.0-1' }}%</p>
-                </div>
-              </ui-card>
+            <div class="splitter-panel-content">
+              <app-showcase-demo-card
+                title="Panel 2"
+                subtitle="Center panel"
+                badge="Live"
+                appearance="filled-alternative"
+              >
+                <p>Middle panel.</p>
+                <p class="splitter-panel-stat">
+                  Current size: {{ interactivePanelSizes()[1] | number: '1.0-1' }}%
+                </p>
+              </app-showcase-demo-card>
             </div>
           </ng-template>
 
           <ng-template uiSplitterPanel="panel-3">
-            <div class="panel-content">
-              <ui-card>
-                <div class="card-content">
-                  <h3>Panel 3</h3>
-                  <p>Right/bottom panel.</p>
-                  <p>Current size: {{ interactivePanelSizes()[2] | number: '1.0-1' }}%</p>
-                </div>
-              </ui-card>
+            <div class="splitter-panel-content">
+              <app-showcase-demo-card
+                title="Panel 3"
+                subtitle="End panel"
+                badge="Live"
+                appearance="outline"
+              >
+                <p>Right or bottom panel depending on orientation.</p>
+                <p class="splitter-panel-stat">
+                  Current size: {{ interactivePanelSizes()[2] | number: '1.0-1' }}%
+                </p>
+              </app-showcase-demo-card>
             </div>
           </ng-template>
         </ui-splitter>

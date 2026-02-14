@@ -531,7 +531,8 @@
     padding: $spacing-4;
 
     &--vertical {
-      display: block;
+      display: grid;
+      gap: $spacing-3;
     }
 
     &--horizontal {
@@ -542,6 +543,15 @@
     &--both {
       padding: $spacing-4;
       min-width: 800px;
+    }
+  }
+
+  .scroll-panel-card-wrapper {
+    min-width: 0;
+
+    &--horizontal {
+      min-width: 300px;
+      flex-shrink: 0;
     }
   }
 
@@ -626,6 +636,40 @@
     border-radius: $border-radius-400;
     font-size: $font-size-300;
     color: var(--color-neutral-foreground-rest);
+  }
+
+  .splitter-panel-content {
+    height: 100%;
+    padding: $spacing-3;
+    box-sizing: border-box;
+  }
+
+  .splitter-panel-content--flush {
+    padding: 0;
+  }
+
+  .splitter-panel-stat {
+    margin-top: auto;
+    font-weight: $font-weight-semibold;
+    color: var(--color-neutral-foreground-rest);
+  }
+
+  .splitter-panel-list {
+    margin: 0;
+    padding-inline-start: $spacing-5;
+    display: grid;
+    gap: $spacing-1;
+  }
+
+  .state-container-user-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: $spacing-4;
+  }
+
+  .state-container-user-card-note {
+    font-size: $font-size-200;
+    color: var(--color-neutral-foreground2-rest);
   }
 
   // Password strength bar (used in password showcase)
