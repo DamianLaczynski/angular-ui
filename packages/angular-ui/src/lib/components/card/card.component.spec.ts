@@ -27,6 +27,30 @@ class CardNoTabHostComponent {}
 })
 class CardTabOnlyHostComponent {}
 
+@Component({
+  standalone: true,
+  imports: [CardComponent],
+  template: `
+    <ui-card focusMode="no-tab" ariaLabel="Focusable no-tab card with many actions">
+      <button type="button" uiCardFooter id="no-tab-first">First action</button>
+      <button type="button" uiCardFooter id="no-tab-second">Second action</button>
+    </ui-card>
+  `,
+})
+class CardNoTabManyActionsHostComponent {}
+
+@Component({
+  standalone: true,
+  imports: [CardComponent],
+  template: `
+    <ui-card focusMode="tab-exit" ariaLabel="Focusable tab-exit card">
+      <button type="button" uiCardFooter id="tab-exit-first">First action</button>
+      <button type="button" uiCardFooter id="tab-exit-second">Second action</button>
+    </ui-card>
+  `,
+})
+class CardTabExitHostComponent {}
+
 describe('CardComponent', () => {
   let fixture: ComponentFixture<CardComponent>;
   let component: CardComponent;
@@ -240,6 +264,62 @@ describe('CardComponent', () => {
       cardElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
 
       expect(document.activeElement).toBe(targetButton);
+    });
+
+    it('should cycle focus with Tab/Shift+Tab in no-tab mode', async () => {
+      const hostFixture = TestBed.createComponent(CardNoTabManyActionsHostComponent);
+      hostFixture.detectChanges();
+      await hostFixture.whenStable();
+
+      const cardElement = getCardElement(hostFixture);
+      const firstButton = hostFixture.debugElement.query(By.css('#no-tab-first'))
+        .nativeElement as HTMLButtonElement;
+      const secondButton = hostFixture.debugElement.query(By.css('#no-tab-second'))
+        .nativeElement as HTMLButtonElement;
+
+      cardElement.focus();
+      cardElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+      expect(document.activeElement).toBe(firstButton);
+
+      firstButton.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true }));
+      expect(document.activeElement).toBe(secondButton);
+
+      secondButton.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, shiftKey: true }),
+      );
+      expect(document.activeElement).toBe(firstButton);
+    });
+
+    it('should leave focus trap and focus card root on Escape in no-tab mode', async () => {
+      const hostFixture = TestBed.createComponent(CardNoTabHostComponent);
+      hostFixture.detectChanges();
+      await hostFixture.whenStable();
+
+      const cardElement = getCardElement(hostFixture);
+      const targetButton = hostFixture.debugElement.query(By.css('#no-tab-focus-target'))
+        .nativeElement as HTMLButtonElement;
+
+      cardElement.focus();
+      cardElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+      expect(document.activeElement).toBe(targetButton);
+
+      targetButton.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+      expect(document.activeElement).toBe(cardElement);
+    });
+
+    it('should activate tab-exit mode on Enter and move focus inside card', async () => {
+      const hostFixture = TestBed.createComponent(CardTabExitHostComponent);
+      hostFixture.detectChanges();
+      await hostFixture.whenStable();
+
+      const cardElement = getCardElement(hostFixture);
+      const firstButton = hostFixture.debugElement.query(By.css('#tab-exit-first'))
+        .nativeElement as HTMLButtonElement;
+
+      cardElement.focus();
+      cardElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+
+      expect(document.activeElement).toBe(firstButton);
     });
   });
 });
