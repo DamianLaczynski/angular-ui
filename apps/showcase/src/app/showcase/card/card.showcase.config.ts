@@ -1,9 +1,15 @@
+import type { ShowcaseConfig } from '@shared/components/interactive-showcase';
 import type { CardAppearance, CardFocusMode, Size } from 'angular-ui';
-import { SIZES, ORIENTATIONS } from '@shared/utils/showcase/component-options.utils';
+import {
+  SIZES,
+  ORIENTATIONS,
+  SHOWCASE_GROUP_ICONS,
+} from '@shared/utils/showcase/component-options.utils';
 import { createDrawerFormConfigs } from '@shared/utils/showcase/drawer-form-config.utils';
 import {
   toOptions,
   toDrawerFormControls,
+  toShowcaseControls,
   type SharedControlDef,
 } from '@shared/utils/showcase/showcase-controls.utils';
 
@@ -75,7 +81,7 @@ const CARD_CONTROL_DEFS: SharedControlDef[] = [
     label: 'Disabled',
     type: 'switch',
     defaultValue: false,
-    group: 'behavior',
+    group: 'state',
   },
 ];
 
@@ -88,3 +94,19 @@ export const CARD_DRAWER_CONFIGS = createDrawerFormConfigs(CARD_FORM_CONTROLS, {
   focusMode: { excludeKey: 'focusMode' },
   states: { excludeKeys: ['interactive', 'selectable', 'checkbox', 'disabled'] },
 });
+
+export const CARD_SHOWCASE_CONFIG: ShowcaseConfig = {
+  componentSelector: 'ui-card',
+  controlGroups: [
+    {
+      id: 'appearance',
+      label: 'Appearance',
+      icon: SHOWCASE_GROUP_ICONS['appearance'],
+      expanded: true,
+    },
+    { id: 'layout', label: 'Layout', icon: SHOWCASE_GROUP_ICONS['layout'] },
+    { id: 'behavior', label: 'Behavior', icon: SHOWCASE_GROUP_ICONS['behavior'] },
+    { id: 'state', label: 'State', icon: SHOWCASE_GROUP_ICONS['state'] },
+  ],
+  controls: toShowcaseControls(CARD_CONTROL_DEFS),
+};

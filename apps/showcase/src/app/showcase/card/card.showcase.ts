@@ -19,6 +19,7 @@ import {
 
 import { SectionWithDrawerComponent } from '@shared/components/section-with-drawer';
 import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
+import { CardInteractiveComponent } from './card.interactive';
 import {
   CARD_APPEARANCES,
   CARD_DRAWER_CONFIGS,
@@ -50,6 +51,7 @@ interface CardFormState {
     TableOfContentComponent,
     SectionWithDrawerComponent,
     ShowcaseHeaderComponent,
+    CardInteractiveComponent,
   ],
   template: `
     <div class="showcase showcase--responsive showcase__with-toc">
@@ -674,6 +676,15 @@ interface CardFormState {
               <div class="event-log-empty">No events yet.</div>
             }
           </div>
+        </section>
+
+        <section id="interactive-demo" class="showcase__section">
+          <h2 class="showcase__section__title">Interactive Demo</h2>
+          <p class="showcase__section__description">
+            Test Card props live: appearance, size, orientation, focus mode, interactivity, and
+            selection behavior.
+          </p>
+          <app-card-interactive />
         </section>
       </div>
     </div>

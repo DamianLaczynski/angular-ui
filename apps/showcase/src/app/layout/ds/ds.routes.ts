@@ -30,7 +30,7 @@ import { StateContainerShowcaseComponent } from '@showcase/state-container/state
 import { SliderShowcaseComponent } from '@showcase/field/slider/slider.showcase';
 import { DividerShowcaseComponent } from '@showcase/divider/divider.showcase';
 import { BadgeShowcaseComponent } from '@showcase/badge/badge.showcase';
-import { CardShowcaseComponent } from '@showcase/card/card.showcase.component';
+import { CardShowcaseComponent } from '@showcase/card/card.showcase';
 import { CheckboxShowcaseComponent } from '@showcase/field/checkbox/checkbox.showcase';
 import { ColorShowcaseComponent } from '@showcase/field/color/color.showcase';
 import { SwitchShowcaseComponent } from '@showcase/field/switch/switch.showcase';
