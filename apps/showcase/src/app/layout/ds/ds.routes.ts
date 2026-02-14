@@ -4,7 +4,7 @@ import { AvatarShowcaseComponent } from '@showcase/avatar/avatar.showcase';
 import { ButtonShowcaseComponent } from '@showcase/button/button.showcase';
 import { CalendarShowcaseComponent } from '@showcase/calendar/calendar.showcase';
 import { CommandPaletteShowcaseComponent } from '@showcase/command-palette/command-palette.showcase.component';
-import { TimeShowcaseComponent } from '@showcase/time/time.showcase.component';
+import { TimeShowcaseComponent } from '@showcase/time/time.showcase';
 import { DateShowcaseComponent } from '@showcase/field/date/date.showcase';
 import { TimeSpanShowcaseComponent } from '@showcase/field/time-span/time-span.showcase';
 import { DateRangeShowcaseComponent } from '@showcase/field/date-range/date-range.showcase';
