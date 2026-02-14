@@ -12,7 +12,6 @@ import {
 
 import { Router, RouterOutlet } from '@angular/router';
 import { DsSidebarComponent } from './components/ds-sidebar/ds-sidebar.component';
-import { SplitterPanel } from 'angular-ui';
 import { ButtonComponent } from 'angular-ui';
 import { IconComponent } from 'angular-ui';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -43,16 +42,6 @@ export class DsComponent implements OnInit, OnDestroy, AfterViewInit {
   themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));
   private breakpointSubscription?: Subscription;
 
-  panels = signal<SplitterPanel[]>([
-    {
-      id: 'sidebar',
-      size: 15,
-    },
-    {
-      id: 'content',
-      size: 85,
-    },
-  ]);
   private headerResizeObserver?: ResizeObserver;
 
   isSidebarOpen = signal<boolean>(false);
