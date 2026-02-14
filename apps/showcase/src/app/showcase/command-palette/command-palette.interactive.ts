@@ -19,8 +19,10 @@ import {
       (valuesChange)="onValuesChange($event)"
       (reset)="onReset()"
     >
-      <div preview class="showcase__preview showcase__preview--column">
-        <ui-button variant="primary" (click)="openPalette()">Open Command Palette</ui-button>
+      <div preview class="showcase__preview">
+        <div class="showcase__button-row">
+          <ui-button variant="primary" (click)="openPalette()">Open Command Palette</ui-button>
+        </div>
 
         <ui-command-palette
           [(visible)]="visible"

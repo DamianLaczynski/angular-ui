@@ -3,6 +3,7 @@ import {
   ButtonComponent,
   CommandPaletteComponent,
   CommandPaletteItem,
+  KbdComponent,
   TableOfContentComponent,
 } from 'angular-ui';
 import { SectionWithDrawerComponent } from '@shared/components/section-with-drawer';
@@ -28,6 +29,7 @@ import { CommandPaletteInteractiveComponent } from './command-palette.interactiv
     SectionWithDrawerComponent,
     ShowcaseHeaderComponent,
     TableOfContentComponent,
+    KbdComponent,
     CommandPaletteInteractiveComponent,
   ],
   template: `
@@ -53,10 +55,12 @@ import { CommandPaletteInteractiveComponent } from './command-palette.interactiv
           [formValues]="overviewFormValues()"
           (formValuesChange)="overviewFormValues.set($event)"
         >
-          <div class="showcase__preview showcase__preview--column">
-            <ui-button variant="primary" (click)="overviewVisible.set(true)">
-              Open {{ overviewForm().datasetLabel }} Palette
-            </ui-button>
+          <div class="showcase__preview">
+            <div class="showcase__button-row">
+              <ui-button variant="primary" (click)="overviewVisible.set(true)">
+                Open {{ overviewForm().datasetLabel }} Palette
+              </ui-button>
+            </div>
 
             <ui-command-palette
               [(visible)]="overviewVisible"
@@ -77,13 +81,15 @@ import { CommandPaletteInteractiveComponent } from './command-palette.interactiv
           [formValues]="groupingFormValues()"
           (formValuesChange)="groupingFormValues.set($event)"
         >
-          <div class="showcase__preview showcase__preview--row">
-            <ui-button variant="primary" appearance="outline" (click)="groupedVisible.set(true)">
-              Open Grouped List
-            </ui-button>
-            <ui-button variant="secondary" appearance="outline" (click)="flatVisible.set(true)">
-              Open Flat List
-            </ui-button>
+          <div class="showcase__preview">
+            <div class="showcase__button-row">
+              <ui-button variant="primary" appearance="outline" (click)="groupedVisible.set(true)">
+                Open Grouped List
+              </ui-button>
+              <ui-button variant="secondary" appearance="outline" (click)="flatVisible.set(true)">
+                Open Flat List
+              </ui-button>
+            </div>
 
             <ui-command-palette
               [(visible)]="groupedVisible"
@@ -114,10 +120,12 @@ import { CommandPaletteInteractiveComponent } from './command-palette.interactiv
           [formValues]="optionsFormValues()"
           (formValuesChange)="optionsFormValues.set($event)"
         >
-          <div class="showcase__preview showcase__preview--column">
-            <ui-button variant="primary" (click)="optionsVisible.set(true)">
-              Open Configured Palette
-            </ui-button>
+          <div class="showcase__preview">
+            <div class="showcase__button-row">
+              <ui-button variant="primary" (click)="optionsVisible.set(true)">
+                Open Configured Palette
+              </ui-button>
+            </div>
 
             <ui-command-palette
               [(visible)]="optionsVisible"
@@ -137,24 +145,24 @@ import { CommandPaletteInteractiveComponent } from './command-palette.interactiv
             The command palette supports full keyboard navigation for command discovery and
             execution.
           </p>
-          <div class="showcase__keyboard-shortcuts">
-            <div class="showcase__keyboard-shortcut">
-              <kbd>Up / Down</kbd>
+          <div class="showcase__shortcuts">
+            <div class="showcase__shortcut-row">
+              <ui-kbd text="Up" />
+              <span>/</span>
+              <ui-kbd text="Down" />
               <span>Move selection between command items</span>
             </div>
-            <div class="showcase__keyboard-shortcut">
-              <kbd>Enter</kbd>
+            <div class="showcase__shortcut-row">
+              <ui-kbd text="Enter" />
               <span>Execute the currently selected command</span>
             </div>
-            <div class="showcase__keyboard-shortcut">
-              <kbd>Esc</kbd>
+            <div class="showcase__shortcut-row">
+              <ui-kbd text="Esc" />
               <span>Close the command palette</span>
             </div>
           </div>
           @if (lastEvent()) {
-            <p class="showcase__section__feedback">
-              <strong>Last event:</strong> {{ lastEvent() }}
-            </p>
+            <p class="showcase__feedback"><strong>Last event:</strong> {{ lastEvent() }}</p>
           }
         </section>
 
@@ -168,62 +176,6 @@ import { CommandPaletteInteractiveComponent } from './command-palette.interactiv
       </div>
     </div>
   `,
-  styles: [
-    `
-      .showcase__preview--row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        align-items: center;
-      }
-
-      .showcase__preview--column {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-
-      .showcase__keyboard-shortcuts {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 16px;
-      }
-
-      .showcase__keyboard-shortcut {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 8px 12px;
-        background: var(--color-neutral-background2-rest);
-        border-radius: 4px;
-      }
-
-      .showcase__keyboard-shortcut kbd {
-        background: var(--color-neutral-background-rest);
-        border: 1px solid var(--color-neutral-stroke-rest);
-        border-radius: 3px;
-        padding: 2px 6px;
-        font-size: 12px;
-        font-family: monospace;
-        color: var(--color-neutral-foreground-rest);
-      }
-
-      .showcase__keyboard-shortcut span {
-        color: var(--color-neutral-foreground2-rest);
-        font-size: 14px;
-      }
-
-      .showcase__section__feedback {
-        margin-top: 16px;
-        padding: 12px;
-        border-radius: 4px;
-        background: var(--color-neutral-background2-rest);
-        font-size: 14px;
-      }
-    `,
-  ],
 })
 export class CommandPaletteShowcaseComponent {
   overviewVisible = signal(false);
