@@ -199,49 +199,45 @@ export class TabsComponent<T extends Tab> {
    */
   onKeyDown(event: KeyboardEvent): void {
     const tabs = this.tabs().filter(t => !t.disabled);
+    if (tabs.length === 0) {
+      return;
+    }
+
     const currentSelectedId = this._selectedTabId();
     const currentIndex = tabs.findIndex(t => t.id === currentSelectedId);
     const isVertical = this.orientation() === 'vertical';
-
-    // Only handle if there's a selected tab
-    if (currentIndex === -1 && tabs.length > 0) {
-      return;
-    }
+    const safeIndex = currentIndex === -1 ? 0 : currentIndex;
 
     switch (event.key) {
       case 'ArrowLeft':
         if (!isVertical) {
           event.preventDefault();
-          if (currentIndex > 0) {
-            this.onTabClick(tabs[currentIndex - 1]);
-          }
+          const nextIndex = (safeIndex - 1 + tabs.length) % tabs.length;
+          this.onTabClick(tabs[nextIndex]);
         }
         break;
 
       case 'ArrowRight':
         if (!isVertical) {
           event.preventDefault();
-          if (currentIndex < tabs.length - 1) {
-            this.onTabClick(tabs[currentIndex + 1]);
-          }
+          const nextIndex = (safeIndex + 1) % tabs.length;
+          this.onTabClick(tabs[nextIndex]);
         }
         break;
 
       case 'ArrowUp':
         if (isVertical) {
           event.preventDefault();
-          if (currentIndex > 0) {
-            this.onTabClick(tabs[currentIndex - 1]);
-          }
+          const nextIndex = (safeIndex - 1 + tabs.length) % tabs.length;
+          this.onTabClick(tabs[nextIndex]);
         }
         break;
 
       case 'ArrowDown':
         if (isVertical) {
           event.preventDefault();
-          if (currentIndex < tabs.length - 1) {
-            this.onTabClick(tabs[currentIndex + 1]);
-          }
+          const nextIndex = (safeIndex + 1) % tabs.length;
+          this.onTabClick(tabs[nextIndex]);
         }
         break;
 

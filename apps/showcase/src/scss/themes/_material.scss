@@ -270,3 +270,2424 @@
 
   --color-focus-border: #dccdff;
 }
+
+/* -------------------------------------------------------------------------- */
+/* Material Design Characteristics                                            */
+/* -------------------------------------------------------------------------- */
+/* 1) Typography: Roboto + Material rhythm.                                  */
+/* 2) Spacing: skala 4px, duzy nacisk na vertical rhythm.                     */
+/* 3) Radius: mniejszy (4px) dla bardziej „clean” surface.                    */
+/* 4) Focus: mocny, cienszy ring 2px (bardziej precyzyjny).                   */
+/* 5) Inputs: outlined styl, focus przez kolor obrysu i ring.                 */
+
+:root[data-theme-variant='material'] {
+  --theme-font-family-base: Roboto, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
+  --theme-font-family-mono: 'Roboto Mono', 'Fira Code', Consolas, monospace;
+
+  --theme-radius-control: 0.25rem;
+  --theme-radius-surface: 0.5rem;
+  --theme-focus-ring: 0 0 0 0.125rem color-mix(in srgb, var(--color-brand-primary) 50%, transparent);
+  --theme-control-border-width: 1px;
+
+  --border-radius-400: 0.25rem;
+  --spacing-horizontal-xxs: 0.125rem;
+  --spacing-horizontal-xs: 0.25rem;
+  --spacing-horizontal-s: 0.5rem;
+  --spacing-horizontal-m: 0.75rem;
+  --spacing-horizontal-l: 1rem;
+  --spacing-vertical-xxs: 0.125rem;
+  --spacing-vertical-xs: 0.25rem;
+  --spacing-vertical-s: 0.5rem;
+  --spacing-vertical-m: 0.75rem;
+  --spacing-vertical-l: 1rem;
+}
+
+:root[data-theme='dark'][data-theme-variant='material'],
+:root.dark[data-theme-variant='material'] {
+  --theme-focus-ring: 0 0 0 0.125rem color-mix(in srgb, var(--color-brand-primary) 60%, transparent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Buttons                                                           */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .button {
+  font-family: var(--theme-font-family-base);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-width: var(--theme-control-border-width);
+  border-radius: 1.25rem;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--theme-focus-ring);
+  }
+}
+
+:root[data-theme-variant='material'] .button--small {
+  min-height: 28px;
+  padding: 0.25rem 0.625rem;
+}
+
+:root[data-theme-variant='material'] .button--medium {
+  min-height: 36px;
+  padding: 0.375rem 1rem;
+}
+
+:root[data-theme-variant='material'] .button--large {
+  min-height: 44px;
+  padding: 0.5rem 1.125rem;
+}
+
+:root[data-theme-variant='material'] .button--primary.button--filled {
+  color: var(--color-neutral-foreground-on-brand);
+}
+
+:root[data-theme-variant='material'] .button--outline {
+  border-color: var(--color-neutral-stroke-accessible);
+}
+
+:root[data-theme-variant='material'] .button--subtle,
+:root[data-theme-variant='material'] .button--transparent {
+  border-color: transparent;
+}
+
+:root[data-theme-variant='material'] .button--disabled {
+  opacity: 0.38;
+  box-shadow: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Tabs                                                              */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .tabs {
+  gap: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 85%, transparent);
+}
+
+:root[data-theme-variant='material'] .tabs .node__content {
+  border-radius: 0;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  color: var(--color-neutral-foreground2-rest);
+}
+
+:root[data-theme-variant='material'] .tabs .node__content:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-brand-primary) 8%, transparent);
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .tabs .node__content:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-brand-primary) 36%, transparent);
+}
+
+:root[data-theme-variant='material'] .tabs .node__label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.006em;
+}
+
+:root[data-theme-variant='material'] .tabs .node--selected .node__content {
+  color: var(--color-brand-primary);
+  background: color-mix(in srgb, var(--color-brand-primary) 10%, transparent);
+}
+
+:root[data-theme-variant='material'] .tabs .node--selected .node__label,
+:root[data-theme-variant='material'] .tabs .node--selected .node__icon {
+  color: var(--color-brand-primary) !important;
+}
+
+:root[data-theme-variant='material'] .tabs .node__indicator {
+  height: 3px;
+  width: calc(100% - 1.5rem);
+  left: 50%;
+  bottom: 0;
+  border-radius: 9999px;
+  background: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .tabs .node__selection-indicator {
+  display: none;
+}
+
+:root[data-theme-variant='material'] .tabs .node--disabled .node__content {
+  opacity: 0.38;
+  cursor: default;
+  color: var(--color-neutral-foreground-disabled);
+}
+
+:root[data-theme-variant='material'] .tabs .node--disabled .node__label,
+:root[data-theme-variant='material'] .tabs .node--disabled .node__icon {
+  color: var(--color-neutral-foreground-disabled) !important;
+}
+
+:root[data-theme-variant='material'] .tabs--vertical {
+  border-bottom: 0;
+  border-inline-end: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 85%, transparent);
+}
+
+:root[data-theme-variant='material'] .tabs--vertical .node__indicator {
+  width: 3px;
+  height: calc(100% - 1rem);
+  left: auto;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Inputs + Focus                                                    */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .input-wrapper::after,
+:root[data-theme-variant='material'] .input-wrapper--underlined::after {
+  content: none !important;
+  display: none !important;
+}
+
+:root[data-theme-variant='material'] .input-wrapper {
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-neutral-stroke-rest);
+  background: var(--color-neutral-background2-rest);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+
+  &--filled-gray {
+    background: var(--color-neutral-background2-rest);
+  }
+
+  &--underlined {
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 2px solid var(--color-neutral-stroke-accessible);
+    border-radius: 0;
+    background: transparent;
+  }
+
+  &:hover {
+    border-color: var(--color-neutral-stroke-hover);
+  }
+
+  &:focus-within {
+    border-color: var(--color-brand-primary);
+    box-shadow: none;
+  }
+
+  &--underlined:focus-within {
+    border-bottom-color: var(--color-brand-primary);
+    box-shadow: 0 1px 0 0 var(--color-brand-primary);
+  }
+
+  &--error,
+  &--error.input-wrapper--underlined {
+    border-color: var(--color-shared-red-foreground) !important;
+    box-shadow: none;
+  }
+
+  &--error:focus-within {
+    box-shadow: 0 0 0 0.125rem
+      color-mix(in srgb, var(--color-shared-red-foreground) 34%, transparent);
+  }
+}
+
+:root[data-theme-variant='material'] .checkbox-container:has(.checkbox-input:focus-visible),
+:root[data-theme-variant='material'] .radio-container:has(.radio-input:focus-visible) {
+  outline: none;
+}
+
+:root[data-theme-variant='material']
+  .checkbox-container:has(.checkbox-input:focus-visible)
+  .checkbox-visual,
+:root[data-theme-variant='material'] .radio-container:has(.radio-input:focus-visible) .radio-visual,
+:root[data-theme-variant='material'] .switch-input:focus-visible ~ .switch-visual {
+  box-shadow: var(--theme-focus-ring);
+  border-radius: 0.5rem;
+}
+
+:root[data-theme-variant='material'] .input-wrapper {
+  &--small {
+    min-height: 2.5rem;
+
+    .input {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      padding: 0 0.75rem;
+    }
+
+    .field__actions {
+      gap: 0.25rem;
+      padding-right: 0.5rem;
+    }
+
+    .field__action {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 9999px;
+    }
+  }
+
+  &--medium {
+    min-height: 3.5rem;
+
+    .input {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    .field__actions {
+      gap: 0.375rem;
+      padding-right: 0.625rem;
+    }
+
+    .field__action {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+    }
+  }
+
+  &--large {
+    min-height: 4rem;
+
+    .input {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    .field__actions {
+      gap: 0.375rem;
+      padding-right: 0.75rem;
+    }
+
+    .field__action {
+      width: 2.125rem;
+      height: 2.125rem;
+      border-radius: 9999px;
+    }
+  }
+}
+
+:root[data-theme-variant='material'] .input-wrapper.input-wrapper--filled:focus-within,
+:root[data-theme-variant='material'] .input-wrapper.input-wrapper--filled-gray:focus-within {
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .input-wrapper--disabled {
+  background: var(--color-neutral-background-disabled);
+  border-color: var(--color-neutral-stroke-disabled);
+
+  .input::placeholder {
+    color: var(--color-neutral-foreground-disabled);
+  }
+}
+
+:root[data-theme-variant='material'] .input-wrapper--read-only {
+  background: color-mix(in srgb, var(--color-neutral-background2-rest) 80%, transparent);
+}
+
+/* Material floating labels (wrapper-based) */
+:root[data-theme-variant='material']
+  .input-container:has(
+    > .input-wrapper--filled:not(.input-wrapper--color) > input.input,
+    > .input-wrapper--filled-gray:not(.input-wrapper--color) > input.input
+  ):has(> label.input-label) {
+  position: relative;
+}
+
+:root[data-theme-variant='material']
+  .input-container:has(
+    > .input-wrapper--filled:not(.input-wrapper--color) > input.input,
+    > .input-wrapper--filled-gray:not(.input-wrapper--color) > input.input
+  ):has(> label.input-label)
+  > label.input-label {
+  position: absolute;
+  left: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0 0.25rem;
+  z-index: 2;
+  pointer-events: none;
+  background: var(--color-neutral-background2-rest);
+  color: var(--color-neutral-foreground3-rest);
+  transform-origin: left center;
+  transition:
+    top 180ms ease,
+    transform 180ms ease,
+    color 180ms ease;
+}
+
+:root[data-theme-variant='material']
+  .input-container:has(
+    > .input-wrapper--filled:not(.input-wrapper--color) > input.input,
+    > .input-wrapper--filled-gray:not(.input-wrapper--color) > input.input
+  ):has(> label.input-label)
+  > .input-wrapper
+  > .input::placeholder {
+  opacity: 0;
+}
+
+:root[data-theme-variant='material']
+  .input-container:has(
+    > .input-wrapper--filled:not(.input-wrapper--color):focus-within,
+    > .input-wrapper--filled-gray:not(.input-wrapper--color):focus-within,
+    > .input-wrapper--filled:not(.input-wrapper--color) > input.input:not(:placeholder-shown),
+    > .input-wrapper--filled-gray:not(.input-wrapper--color) > input.input:not(:placeholder-shown)
+  ):has(> label.input-label)
+  > label.input-label {
+  top: 0.4rem;
+  transform: translateY(0) scale(0.82);
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material']
+  .input-container:has(
+    > .input-wrapper--filled:not(.input-wrapper--color):focus-within,
+    > .input-wrapper--filled-gray:not(.input-wrapper--color):focus-within
+  ):has(> label.input-label)
+  > .input-wrapper
+  > .input::placeholder {
+  opacity: 1;
+}
+
+:root[data-theme-variant='material']
+  .input-container:has(> .input-wrapper--error):has(> label.input-label)
+  > label.input-label {
+  color: var(--color-shared-red-foreground);
+}
+
+:root[data-theme-variant='material']
+  .input-container:has(
+    > .input-wrapper--small.input-wrapper--filled:not(.input-wrapper--color) > input.input,
+    > .input-wrapper--small.input-wrapper--filled-gray:not(.input-wrapper--color) > input.input
+  ):has(> label.input-label)
+  > .input-wrapper
+  > .input {
+  padding-top: 0.875rem;
+  padding-bottom: 0.125rem;
+}
+
+:root[data-theme-variant='material']
+  .input-container:has(
+    > .input-wrapper--medium.input-wrapper--filled:not(.input-wrapper--color) > input.input,
+    > .input-wrapper--medium.input-wrapper--filled-gray:not(.input-wrapper--color) > input.input
+  ):has(> label.input-label)
+  > .input-wrapper
+  > .input {
+  padding-top: 1rem;
+  padding-bottom: 0.25rem;
+}
+
+:root[data-theme-variant='material']
+  .input-container:has(
+    > .input-wrapper--large.input-wrapper--filled:not(.input-wrapper--color) > input.input,
+    > .input-wrapper--large.input-wrapper--filled-gray:not(.input-wrapper--color) > input.input
+  ):has(> label.input-label)
+  > .input-wrapper
+  > .input {
+  padding-top: 1.125rem;
+  padding-bottom: 0.375rem;
+}
+
+/* Reset label layout for textarea - keep classic label above field */
+:root[data-theme-variant='material']
+  .input-container:has(> .input-wrapper > textarea.input)
+  > label.input-label {
+  position: static !important;
+  left: auto !important;
+  top: auto !important;
+  transform: none !important;
+  margin-bottom: 0.25rem !important;
+  padding: 0 !important;
+  background: transparent !important;
+  z-index: auto !important;
+  pointer-events: auto !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Radio Button Group                                                */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .radio-button-group-wrapper {
+  gap: 0.5rem;
+}
+
+:root[data-theme-variant='material'] .radio-button-group {
+  gap: 0.375rem;
+}
+
+:root[data-theme-variant='material'] .radio-button-group ui-button .button {
+  transition:
+    color 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease,
+    transform 160ms ease;
+}
+
+:root[data-theme-variant='material'] .radio-button-group--separate ui-button .button {
+  border-radius: 0.625rem;
+}
+
+:root[data-theme-variant='material'] .radio-button-group--segmented {
+  padding: 0.25rem;
+  border-radius: 0.875rem;
+  background: var(--color-neutral-background2-rest);
+  border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 80%, transparent);
+  gap: 0.25rem;
+}
+
+:root[data-theme-variant='material'] .radio-button-group--segmented ui-button .button {
+  border-radius: 0.625rem !important;
+  border-color: transparent;
+}
+
+:root[data-theme-variant='material']
+  .radio-button-group--segmented
+  ui-button
+  .button:hover:not(.button--disabled) {
+  background: var(--color-neutral-background2-hover);
+}
+
+:root[data-theme-variant='material'] .radio-button-group ui-button .button.button--selected {
+  background: var(--color-neutral-background-brand-selected);
+  border-color: color-mix(in srgb, var(--color-brand-primary) 36%, transparent);
+  color: var(--color-brand-primary);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.14);
+}
+
+:root[data-theme-variant='material']
+  .radio-button-group
+  ui-button
+  .button.button--selected
+  .button__text,
+:root[data-theme-variant='material']
+  .radio-button-group
+  ui-button
+  .button.button--selected
+  .button__content,
+:root[data-theme-variant='material']
+  .radio-button-group
+  ui-button
+  .button.button--selected
+  ui-icon {
+  color: var(--color-brand-primary) !important;
+}
+
+:root[data-theme-variant='material'] .radio-button-group ui-button .button:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Menu                                                              */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .menu {
+  padding: 0.25rem;
+  border: 1px solid var(--color-neutral-stroke-rest);
+  border-radius: 0.75rem;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.16);
+  background: var(--color-neutral-background-rest);
+}
+
+:root[data-theme-variant='material'] .menu__section-header {
+  padding: 0.625rem 0.875rem 0.25rem;
+}
+
+:root[data-theme-variant='material'] .menu__section-header-text {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--color-neutral-foreground3-rest);
+}
+
+:root[data-theme-variant='material'] .menu-trigger.button,
+:root[data-theme-variant='material'] .menu-trigger-split__primary.button,
+:root[data-theme-variant='material'] .menu-trigger-split__dropdown.button {
+  border-radius: 1.25rem;
+  border: 1px solid transparent;
+}
+
+:root[data-theme-variant='material'] .menu-trigger.button:focus-visible,
+:root[data-theme-variant='material'] .menu-trigger-split__primary.button:focus-visible,
+:root[data-theme-variant='material'] .menu-trigger-split__dropdown.button:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .menu-trigger-host--split .menu-trigger-split {
+  display: inline-flex;
+  align-items: stretch;
+  min-height: 2rem;
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 82%, transparent);
+  background: var(--color-neutral-background2-rest);
+  overflow: hidden;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--small {
+  min-height: 1.5rem;
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--medium {
+  min-height: 2rem;
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--large {
+  min-height: 2.5rem;
+}
+
+:root[data-theme-variant='material'] .menu-trigger-host--split .menu-trigger-split:focus-within {
+  border-color: color-mix(in srgb, var(--color-brand-primary) 72%, transparent);
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--rounded.menu-trigger-split--small {
+  border-radius: 1rem;
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--rounded.menu-trigger-split--medium {
+  border-radius: 1.25rem;
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--rounded.menu-trigger-split--large {
+  border-radius: 1.5rem;
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--circular {
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--disabled {
+  opacity: 0.72;
+  background: var(--color-neutral-background-disabled);
+}
+
+:root[data-theme-variant='material'] .menu-trigger-host--split .menu-trigger-split__primary.button,
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split__dropdown.button {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--color-neutral-foreground2-rest);
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split__dropdown.button {
+  min-width: 2.5rem;
+  padding-inline: 0.625rem;
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled {
+  border-color: var(--color-brand-primary);
+  background: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__primary.button,
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__dropdown.button {
+  color: var(--color-neutral-foreground-on-brand);
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__primary.button
+  .button__text,
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__dropdown.button
+  .button__text,
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__primary.button
+  ui-icon,
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__dropdown.button
+  ui-icon {
+  color: var(--color-neutral-foreground-on-brand) !important;
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split__primary.button:hover:not(.button--disabled),
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split__dropdown.button:hover:not(.button--disabled) {
+  background: var(--color-neutral-background2-hover);
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split__primary.button:active:not(.button--disabled),
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split__dropdown.button:active:not(.button--disabled),
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split__dropdown.button.menu-trigger-split__dropdown--open {
+  background: var(--color-neutral-background2-pressed);
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split__primary.button:focus-visible,
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split__dropdown.button:focus-visible {
+  box-shadow: none;
+}
+
+:root[data-theme-variant='material'] .menu-trigger-split__divider {
+  width: 1px;
+  margin: 0;
+  background: var(--color-neutral-stroke-rest);
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__primary.button:hover:not(.button--disabled),
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__dropdown.button:hover:not(.button--disabled) {
+  background: color-mix(in srgb, #fff 8%, transparent);
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__primary.button:active:not(.button--disabled),
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__dropdown.button:active:not(.button--disabled),
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__dropdown.button.menu-trigger-split__dropdown--open {
+  background: color-mix(in srgb, #fff 14%, transparent);
+}
+
+:root[data-theme-variant='material']
+  .menu-trigger-host--split
+  .menu-trigger-split.menu-trigger-split--primary.menu-trigger-split--filled
+  .menu-trigger-split__divider {
+  background: color-mix(in srgb, #fff 44%, transparent);
+}
+
+:root[data-theme-variant='material'] .menu-trigger__shortcut {
+  color: var(--color-neutral-foreground3-rest);
+  font-size: 0.75rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Kbd                                                               */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] kbd,
+:root[data-theme-variant='material'] .kbd {
+  font-family: var(--theme-font-family-mono);
+  font-weight: 500;
+  border-radius: 0.375rem;
+  border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 84%, transparent);
+  background: var(--color-neutral-background2-rest);
+  color: var(--color-neutral-foreground2-rest);
+  box-shadow:
+    inset 0 -1px 0 color-mix(in srgb, #000 12%, transparent),
+    0 1px 1px color-mix(in srgb, #000 8%, transparent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Dialog                                                            */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .dialog__backdrop {
+  background-color: rgba(32, 26, 46, 0.52);
+}
+
+:root[data-theme-variant='material'] .dialog__content {
+  border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 75%, transparent);
+  border-radius: 1rem;
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.24),
+    0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+:root[data-theme-variant='material'] .dialog__header {
+  padding: 1.25rem 1.5rem 0;
+}
+
+:root[data-theme-variant='material'] .dialog__title {
+  font-family: var(--theme-font-family-base);
+  font-size: 1.375rem;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+:root[data-theme-variant='material'] .dialog__body {
+  padding: 1rem 1.5rem;
+}
+
+:root[data-theme-variant='material'] .dialog__footer {
+  padding: 1rem 1.5rem 1.25rem;
+  border-top: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 65%, transparent);
+}
+
+:root[data-theme-variant='material'] .dialog__close-button .button {
+  border-radius: 50%;
+}
+
+:root[data-theme-variant='material'] .dialog__close-button .button:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Typography + Base                                                 */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] body {
+  font-family: var(--theme-font-family-base);
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.009375em;
+  font-weight: 400;
+}
+
+:root[data-theme-variant='material'] h1,
+:root[data-theme-variant='material'] h2,
+:root[data-theme-variant='material'] h3,
+:root[data-theme-variant='material'] h4,
+:root[data-theme-variant='material'] h5,
+:root[data-theme-variant='material'] h6 {
+  font-family: var(--theme-font-family-base);
+  letter-spacing: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+:root[data-theme-variant='material'] h1 {
+  font-size: 2.25rem;
+  line-height: 2.75rem;
+  font-weight: 400;
+}
+
+:root[data-theme-variant='material'] h2 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+}
+
+:root[data-theme-variant='material'] h3 {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+}
+
+:root[data-theme-variant='material'] h4 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+:root[data-theme-variant='material'] h5 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+:root[data-theme-variant='material'] h6 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+:root[data-theme-variant='material'] p,
+:root[data-theme-variant='material'] ul,
+:root[data-theme-variant='material'] ol,
+:root[data-theme-variant='material'] pre,
+:root[data-theme-variant='material'] blockquote {
+  margin-bottom: 1rem;
+}
+
+:root[data-theme-variant='material'] a {
+  color: var(--color-brand-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+:root[data-theme-variant='material'] a:hover {
+  color: var(--color-brand-primary-hover);
+  text-decoration: underline;
+  text-underline-offset: 0.1em;
+}
+
+:root[data-theme-variant='material'] code {
+  font-family: var(--theme-font-family-mono);
+  padding: 0.125rem 0.3125rem;
+  border-radius: 0.25rem;
+  background: var(--color-neutral-background-selected);
+  color: var(--color-shared-blue-foreground);
+}
+
+:root[data-theme-variant='material'] pre {
+  font-family: var(--theme-font-family-mono);
+  border-radius: 0.5rem;
+  background: var(--color-neutral-background-selected);
+  border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 70%, transparent);
+}
+
+:root[data-theme-variant='material'] blockquote {
+  padding: 0.875rem 1rem;
+  border-left: 0.1875rem solid var(--color-brand-primary);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: color-mix(in srgb, var(--color-neutral-background-brand-selected) 45%, transparent);
+}
+
+:root[data-theme-variant='material'] hr {
+  margin: 1rem 0;
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 80%, transparent);
+}
+
+:root[data-theme-variant='material'] :focus-visible:not(input):not(textarea):not(select) {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] ::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Pagination                                                        */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .pagination {
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  font-family: var(--theme-font-family-base);
+}
+
+:root[data-theme-variant='material'] .pagination--small {
+  gap: 0.5rem;
+}
+
+:root[data-theme-variant='material'] .pagination--large {
+  gap: 0.875rem;
+}
+
+:root[data-theme-variant='material'] .pagination__info-text {
+  color: var(--color-neutral-foreground2-rest);
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.015em;
+}
+
+:root[data-theme-variant='material'] .pagination__controls,
+:root[data-theme-variant='material'] .pagination__pages {
+  gap: 0.25rem;
+}
+
+:root[data-theme-variant='material'] .pagination__ellipsis {
+  min-width: 2rem;
+  height: 2rem;
+  color: var(--color-neutral-foreground3-rest);
+  font-weight: 500;
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .pagination--small .pagination__ellipsis {
+  min-width: 1.75rem;
+  height: 1.75rem;
+}
+
+:root[data-theme-variant='material'] .pagination--large .pagination__ellipsis {
+  min-width: 2.5rem;
+  height: 2.5rem;
+}
+
+:root[data-theme-variant='material'] .pagination__button .button {
+  border-radius: 9999px;
+  min-width: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+:root[data-theme-variant='material'] .pagination--small .pagination__button .button {
+  min-width: 1.75rem;
+}
+
+:root[data-theme-variant='material'] .pagination--large .pagination__button .button {
+  min-width: 2.5rem;
+}
+
+:root[data-theme-variant='material'] .pagination__button .button:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .pagination__button--page .button--primary.button--filled {
+  border-color: transparent;
+  box-shadow: 0 1px 2px color-mix(in srgb, #000 12%, transparent);
+}
+
+:root[data-theme-variant='material'] .pagination__button--page .button--secondary.button--subtle {
+  color: var(--color-neutral-foreground2-rest);
+}
+
+:root[data-theme-variant='material']
+  .pagination__button--page
+  .button--secondary.button--subtle:hover {
+  background: var(--color-neutral-background2-hover);
+  color: var(--color-neutral-foreground-rest);
+}
+
+:root[data-theme-variant='material'] .pagination__page-size {
+  margin-left: auto;
+}
+
+:root[data-theme-variant='material'] .pagination__page-size-selector .input-wrapper {
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-neutral-stroke-rest);
+  background: var(--color-neutral-background2-rest);
+}
+
+:root[data-theme-variant='material'] .pagination__page-size-selector .input-wrapper:focus-within {
+  border-color: var(--color-brand-primary);
+  box-shadow: var(--theme-focus-ring);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Table                                                             */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--theme-font-family-base);
+  color: var(--color-neutral-foreground-rest);
+}
+
+:root[data-theme-variant='material'] :where(th, td) {
+  text-align: left;
+  vertical-align: middle;
+}
+
+:root[data-theme-variant='material'] th {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-neutral-foreground2-rest);
+  background: color-mix(in srgb, var(--color-neutral-background3-rest) 60%, transparent);
+  border-bottom: 1px solid var(--color-neutral-stroke-rest);
+  padding: 0.75rem 1rem;
+}
+
+:root[data-theme-variant='material'] td {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 82%, transparent);
+  padding: 0.75rem 1rem;
+}
+
+:root[data-theme-variant='material'] tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+:root[data-theme-variant='material'] tbody tr:hover {
+  background: color-mix(in srgb, var(--color-neutral-background2-hover) 80%, transparent);
+}
+
+:root[data-theme-variant='material'] tbody tr:focus-within {
+  background: color-mix(in srgb, var(--color-neutral-background-brand-selected) 40%, transparent);
+}
+
+:root[data-theme-variant='material'] tbody tr:last-child td {
+  border-bottom: none;
+}
+
+:root[data-theme-variant='material'] .interactive-showcase__props-table {
+  border: 1px solid var(--color-neutral-stroke-rest);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--color-neutral-background-rest);
+}
+
+:root[data-theme-variant='material'] .interactive-showcase__th {
+  text-transform: none;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+}
+
+:root[data-theme-variant='material'] .interactive-showcase__td {
+  padding: 0.875rem 1rem;
+}
+
+:root[data-theme-variant='material'] .interactive-showcase__prop-row:nth-child(even) {
+  background: transparent;
+}
+
+:root[data-theme-variant='material'] .interactive-showcase__prop-row:hover {
+  background: color-mix(
+    in srgb,
+    var(--color-neutral-background2-hover) 70%,
+    transparent
+  ) !important;
+}
+
+:root[data-theme-variant='material'] .interactive-showcase__prop-row:focus-within {
+  background: color-mix(
+    in srgb,
+    var(--color-neutral-background-brand-selected) 45%,
+    transparent
+  ) !important;
+}
+
+:root[data-theme-variant='material'] .interactive-showcase__prop-name {
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 78%, transparent);
+  background: var(--color-neutral-background2-rest);
+  color: var(--color-neutral-foreground2-rest);
+}
+
+:root[data-theme-variant='material'] .interactive-showcase__color-input {
+  border-radius: 0.5rem;
+}
+
+:root[data-theme-variant='material'] .data-grid {
+  border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 86%, transparent);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--color-neutral-background-rest);
+}
+
+:root[data-theme-variant='material'] .data-grid__header {
+  background: var(--color-neutral-background2-rest);
+}
+
+:root[data-theme-variant='material'] .data-grid__header-cell {
+  min-height: 3.5rem;
+}
+
+:root[data-theme-variant='material'] .data-grid__header-text {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+:root[data-theme-variant='material'] .data-grid__filter-row {
+  background: color-mix(in srgb, var(--color-neutral-background2-rest) 82%, transparent);
+}
+
+:root[data-theme-variant='material'] .data-grid__row {
+  min-height: 3.25rem;
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+:root[data-theme-variant='material'] .data-grid__row:hover:not(.data-grid__row--disabled) {
+  background: color-mix(in srgb, var(--color-brand-primary) 8%, transparent);
+}
+
+:root[data-theme-variant='material'] .data-grid__row--selected {
+  background: color-mix(in srgb, var(--color-neutral-background-brand-selected) 78%, transparent);
+}
+
+:root[data-theme-variant='material']
+  .data-grid__row--selected:hover:not(.data-grid__row--disabled) {
+  background: color-mix(in srgb, var(--color-neutral-background-brand-selected) 90%, transparent);
+}
+
+:root[data-theme-variant='material'] .data-grid__row:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .data-grid__cell {
+  padding: 0.75rem 1rem;
+}
+
+:root[data-theme-variant='material'] .data-grid__header-resize-handle:hover,
+:root[data-theme-variant='material'] .data-grid__header-resize-handle:active {
+  background: var(--color-brand-primary);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Badge                                                             */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .badge {
+  font-family: var(--theme-font-family-base);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  outline: none;
+}
+
+:root[data-theme-variant='material'] .badge--small {
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0 0.25rem;
+
+  .badge__text {
+    font-size: 0.625rem;
+    line-height: 0.75rem;
+  }
+}
+
+:root[data-theme-variant='material'] .badge--medium {
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.375rem;
+
+  .badge__text {
+    font-size: 0.6875rem;
+    line-height: 0.875rem;
+  }
+}
+
+:root[data-theme-variant='material'] .badge--large {
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.5rem;
+
+  .badge__text {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+}
+
+:root[data-theme-variant='material'] .badge--rounded {
+  border-radius: 0.625rem;
+}
+
+:root[data-theme-variant='material'] .badge--circular {
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .badge--square {
+  border-radius: 0.25rem;
+}
+
+:root[data-theme-variant='material'] .badge--primary.badge--filled {
+  background: var(--color-brand-primary);
+  color: var(--color-neutral-foreground-on-brand);
+  box-shadow: 0 1px 2px color-mix(in srgb, #000 18%, transparent);
+}
+
+:root[data-theme-variant='material'] .badge--primary.badge--tint {
+  background: var(--color-neutral-background-brand-selected);
+  border-color: color-mix(in srgb, var(--color-brand-primary) 36%, transparent);
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .badge--primary.badge--outline {
+  background: transparent;
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .badge--primary.badge--subtle,
+:root[data-theme-variant='material'] .badge--primary.badge--transparent {
+  background: transparent;
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .badge--secondary.badge--filled {
+  background: var(--color-neutral-background3-rest);
+  color: var(--color-neutral-foreground-rest);
+}
+
+:root[data-theme-variant='material'] .badge--secondary.badge--tint {
+  background: var(--color-neutral-background2-rest);
+  border-color: var(--color-neutral-stroke-rest);
+  color: var(--color-neutral-foreground2-rest);
+}
+
+:root[data-theme-variant='material'] .badge--secondary.badge--outline {
+  background: transparent;
+  border-color: var(--color-neutral-stroke-accessible);
+  color: var(--color-neutral-foreground2-rest);
+}
+
+:root[data-theme-variant='material'] .badge--secondary.badge--subtle,
+:root[data-theme-variant='material'] .badge--secondary.badge--transparent {
+  background: transparent;
+  color: var(--color-neutral-foreground2-rest);
+}
+
+:root[data-theme-variant='material'] .badge--success.badge--filled {
+  background: var(--color-shared-green-foreground);
+  color: var(--color-neutral-foreground-on-brand);
+}
+
+:root[data-theme-variant='material'] .badge--success.badge--tint {
+  background: var(--color-shared-green-background);
+  border-color: var(--color-shared-green-border);
+  color: var(--color-shared-green-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--success.badge--outline {
+  background: transparent;
+  border-color: var(--color-shared-green-foreground);
+  color: var(--color-shared-green-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--success.badge--subtle,
+:root[data-theme-variant='material'] .badge--success.badge--transparent {
+  background: transparent;
+  color: var(--color-shared-green-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--warning.badge--filled {
+  background: var(--color-shared-orange-foreground);
+  color: var(--color-neutral-foreground-on-brand);
+}
+
+:root[data-theme-variant='material'] .badge--warning.badge--tint {
+  background: var(--color-shared-orange-background);
+  border-color: var(--color-shared-orange-border);
+  color: var(--color-shared-orange-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--warning.badge--outline {
+  background: transparent;
+  border-color: var(--color-shared-orange-foreground);
+  color: var(--color-shared-orange-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--warning.badge--subtle,
+:root[data-theme-variant='material'] .badge--warning.badge--transparent {
+  background: transparent;
+  color: var(--color-shared-orange-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--danger.badge--filled {
+  background: var(--color-shared-red-foreground);
+  color: var(--color-neutral-foreground-on-brand);
+}
+
+:root[data-theme-variant='material'] .badge--danger.badge--tint {
+  background: var(--color-shared-red-background);
+  border-color: var(--color-shared-red-border);
+  color: var(--color-shared-red-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--danger.badge--outline {
+  background: transparent;
+  border-color: var(--color-shared-red-foreground);
+  color: var(--color-shared-red-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--danger.badge--subtle,
+:root[data-theme-variant='material'] .badge--danger.badge--transparent {
+  background: transparent;
+  color: var(--color-shared-red-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--info.badge--filled {
+  background: var(--color-shared-blue-foreground);
+  color: var(--color-neutral-foreground-on-brand);
+}
+
+:root[data-theme-variant='material'] .badge--info.badge--tint {
+  background: var(--color-shared-blue-background);
+  border-color: var(--color-shared-blue-border);
+  color: var(--color-shared-blue-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--info.badge--outline {
+  background: transparent;
+  border-color: var(--color-shared-blue-foreground);
+  color: var(--color-shared-blue-foreground);
+}
+
+:root[data-theme-variant='material'] .badge--info.badge--subtle,
+:root[data-theme-variant='material'] .badge--info.badge--transparent {
+  background: transparent;
+  color: var(--color-shared-blue-foreground);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Splitter                                                          */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .splitter__panel {
+  background: var(--color-neutral-background-rest);
+}
+
+:root[data-theme-variant='material'] .splitter__gutter {
+  border: 0;
+  background: var(--color-neutral-background2-rest);
+}
+
+:root[data-theme-variant='material'] .splitter__gutter:hover:not(.splitter__gutter--disabled) {
+  background: color-mix(in srgb, var(--color-neutral-background3-rest) 75%, transparent);
+}
+
+:root[data-theme-variant='material']
+  .splitter__gutter:focus-visible:not(.splitter__gutter--disabled) {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+  background: color-mix(in srgb, var(--color-neutral-background3-rest) 82%, transparent);
+}
+
+:root[data-theme-variant='material'] .splitter__gutter--dragging {
+  background: color-mix(in srgb, var(--color-neutral-background-brand-selected) 70%, transparent);
+}
+
+:root[data-theme-variant='material'] .splitter__gutter--disabled {
+  background: color-mix(in srgb, var(--color-neutral-background-disabled) 88%, transparent);
+}
+
+:root[data-theme-variant='material'] .splitter__gutter-handle {
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--color-neutral-stroke-accessible) 70%, transparent);
+}
+
+:root[data-theme-variant='material']
+  .splitter__gutter:hover:not(.splitter__gutter--disabled)
+  .splitter__gutter-handle,
+:root[data-theme-variant='material']
+  .splitter__gutter:focus-visible:not(.splitter__gutter--disabled)
+  .splitter__gutter-handle {
+  background: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .splitter__gutter--dragging .splitter__gutter-handle {
+  background: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material']
+  .splitter--horizontal
+  > .splitter__gutter
+  .splitter__gutter-handle {
+  width: 2px;
+  height: 28px;
+}
+
+:root[data-theme-variant='material']
+  .splitter--horizontal
+  > .splitter__gutter:hover:not(.splitter__gutter--disabled)
+  .splitter__gutter-handle,
+:root[data-theme-variant='material']
+  .splitter--horizontal
+  > .splitter__gutter:focus-visible:not(.splitter__gutter--disabled)
+  .splitter__gutter-handle,
+:root[data-theme-variant='material']
+  .splitter--horizontal
+  > .splitter__gutter.splitter__gutter--dragging
+  .splitter__gutter-handle {
+  width: 3px;
+  height: 34px;
+}
+
+:root[data-theme-variant='material']
+  .splitter--vertical
+  > .splitter__gutter
+  .splitter__gutter-handle {
+  width: 28px;
+  height: 2px;
+}
+
+:root[data-theme-variant='material']
+  .splitter--vertical
+  > .splitter__gutter:hover:not(.splitter__gutter--disabled)
+  .splitter__gutter-handle,
+:root[data-theme-variant='material']
+  .splitter--vertical
+  > .splitter__gutter:focus-visible:not(.splitter__gutter--disabled)
+  .splitter__gutter-handle,
+:root[data-theme-variant='material']
+  .splitter--vertical
+  > .splitter__gutter.splitter__gutter--dragging
+  .splitter__gutter-handle {
+  width: 34px;
+  height: 3px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Calendar                                                          */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .calendar,
+:root[data-theme-variant='material'] .calendar__month-picker,
+:root[data-theme-variant='material'] .calendar__year-picker {
+  font-family: var(--theme-font-family-base);
+  gap: 0.5rem;
+}
+
+:root[data-theme-variant='material'] .calendar__header {
+  margin-bottom: 0.25rem;
+}
+
+:root[data-theme-variant='material'] .calendar__header > ui-button .button {
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .calendar__title,
+:root[data-theme-variant='material'] .calendar__title-button .button {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.006em;
+}
+
+:root[data-theme-variant='material'] .calendar__title-button .button:hover {
+  background: var(--color-neutral-background2-hover);
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .calendar__weekdays {
+  gap: 0.125rem;
+}
+
+:root[data-theme-variant='material'] .calendar__weekday {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.01em;
+  color: var(--color-neutral-foreground3-rest);
+}
+
+:root[data-theme-variant='material'] .calendar__grid {
+  gap: 0.125rem;
+}
+
+:root[data-theme-variant='material'] .calendar__day {
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+  font-weight: 400;
+}
+
+:root[data-theme-variant='material'] .calendar__day:hover:not(.calendar__day--disabled) {
+  background: var(--color-neutral-background2-hover);
+}
+
+:root[data-theme-variant='material'] .calendar__day:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .calendar__day--today {
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+  font-weight: 500;
+}
+
+:root[data-theme-variant='material'] .calendar__day--in-range {
+  background: color-mix(in srgb, var(--color-neutral-background-brand-selected) 65%, transparent);
+  border-radius: 0;
+}
+
+:root[data-theme-variant='material'] .calendar__day--range-start,
+:root[data-theme-variant='material'] .calendar__day--range-end,
+:root[data-theme-variant='material']
+  .calendar__day--selected:not(.calendar__day--range-start):not(.calendar__day--range-end) {
+  background: var(--color-brand-primary);
+  color: var(--color-neutral-foreground-on-brand);
+  font-weight: 500;
+}
+
+:root[data-theme-variant='material'] .calendar__day--range-start {
+  border-top-left-radius: 9999px;
+  border-bottom-left-radius: 9999px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+:root[data-theme-variant='material'] .calendar__day--range-end {
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+:root[data-theme-variant='material'] .calendar__day--range-start.calendar__day--range-end {
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .calendar__day--other-month {
+  color: var(--color-neutral-foreground3-rest);
+  opacity: 0.7;
+}
+
+:root[data-theme-variant='material'] .calendar__day--disabled {
+  opacity: 0.38;
+}
+
+:root[data-theme-variant='material'] .calendar__months,
+:root[data-theme-variant='material'] .calendar__years {
+  gap: 0.5rem;
+}
+
+:root[data-theme-variant='material'] .calendar__month,
+:root[data-theme-variant='material'] .calendar__year {
+  border-radius: 9999px;
+  border: 1px solid var(--color-neutral-stroke-rest);
+  background: transparent;
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+  font-weight: 500;
+  color: var(--color-neutral-foreground-rest);
+}
+
+:root[data-theme-variant='material'] .calendar__month:hover,
+:root[data-theme-variant='material'] .calendar__year:hover {
+  background: var(--color-neutral-background2-hover);
+  border-color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .calendar__month:focus-visible,
+:root[data-theme-variant='material'] .calendar__year:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .calendar__month--selected,
+:root[data-theme-variant='material'] .calendar__year--selected {
+  background: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  color: var(--color-neutral-foreground-on-brand);
+}
+
+:root[data-theme-variant='material'] .calendar__year--current {
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Breadcrumb                                                        */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .breadcrumb {
+  font-family: var(--theme-font-family-base);
+}
+
+:root[data-theme-variant='material'] .breadcrumb__list {
+  gap: 0;
+}
+
+:root[data-theme-variant='material'] .breadcrumb__item .node__content {
+  min-height: auto;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  background: transparent;
+  color: var(--color-neutral-foreground2-rest);
+}
+
+:root[data-theme-variant='material'] .breadcrumb__item .node__label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+:root[data-theme-variant='material'] .breadcrumb__item .node__content:hover {
+  background: color-mix(in srgb, var(--color-brand-primary) 10%, transparent);
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .breadcrumb__item .node__content:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .breadcrumb__item .node--selected .node__content {
+  background: transparent;
+  color: var(--color-neutral-foreground3-rest);
+  pointer-events: none;
+}
+
+:root[data-theme-variant='material'] .breadcrumb__divider {
+  margin: 0 0.25rem;
+}
+
+:root[data-theme-variant='material'] .breadcrumb__divider ui-icon {
+  color: var(--color-neutral-foreground3-rest);
+  opacity: 0.75;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Toolbar                                                           */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .toolbar {
+  background: var(--color-neutral-background2-rest);
+  border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 75%, transparent);
+  border-radius: 0.875rem;
+  gap: 0.25rem;
+  padding: 0.25rem;
+}
+
+:root[data-theme-variant='material'] .toolbar--small {
+  min-height: 2rem;
+}
+
+:root[data-theme-variant='material'] .toolbar--medium {
+  min-height: 2.5rem;
+}
+
+:root[data-theme-variant='material'] .toolbar--large {
+  min-height: 3rem;
+}
+
+:root[data-theme-variant='material'] .toolbar__divider {
+  opacity: 0.65;
+}
+
+:root[data-theme-variant='material'] .toolbar__item .button,
+:root[data-theme-variant='material'] .toolbar__menu .button {
+  border-radius: 0.625rem;
+}
+
+:root[data-theme-variant='material'] .toolbar__item .button:focus-visible,
+:root[data-theme-variant='material'] .toolbar__menu .button:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme='dark'][data-theme-variant='material'] .toolbar,
+:root.dark[data-theme-variant='material'] .toolbar {
+  background: color-mix(in srgb, var(--color-neutral-background2-rest) 90%, transparent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Tree                                                              */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .tree {
+  padding: 0.375rem;
+  border-radius: 0.75rem;
+  background: var(--color-neutral-background-rest);
+}
+
+:root[data-theme-variant='material'] .tree-node__children {
+  padding-left: 1.5rem;
+  gap: 0.125rem;
+}
+
+:root[data-theme-variant='material'] .tree .tree-node__content-wrapper {
+  gap: 0.375rem;
+}
+
+:root[data-theme-variant='material'] .tree .node__content {
+  border-radius: 0.625rem;
+  min-height: 2rem;
+  padding: 0.25rem 0.625rem;
+  color: var(--color-neutral-foreground2-rest);
+}
+
+:root[data-theme-variant='material'] .tree .node__content:hover:not(:disabled) {
+  background: var(--color-neutral-background2-hover);
+}
+
+:root[data-theme-variant='material'] .tree .node__content:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .tree .node--selected .node__content {
+  background: var(--color-neutral-background-brand-selected);
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .tree .node__label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+
+:root[data-theme-variant='material'] .tree .node--selected .node__label {
+  font-weight: 500;
+}
+
+:root[data-theme-variant='material'] .tree .tree-node__chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  color: var(--color-neutral-foreground3-rest);
+}
+
+:root[data-theme-variant='material'] .tree .tree-node__chevron:hover {
+  background: var(--color-neutral-background2-hover);
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .tree .node__drop-indicator::before {
+  height: 3px;
+  border-radius: 9999px;
+  background: var(--color-brand-primary);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Accordion                                                         */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .accordion {
+  border-radius: 0.875rem;
+  border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 78%, transparent);
+  background: var(--color-neutral-background-rest);
+  overflow: hidden;
+}
+
+:root[data-theme-variant='material'] .accordion .node__content {
+  min-height: 3rem;
+  padding: 0.625rem 0.875rem;
+  border-radius: 0;
+  background: var(--color-neutral-background2-rest);
+}
+
+:root[data-theme-variant='material'] .accordion .node__content:hover:not(:disabled) {
+  background: var(--color-neutral-background2-hover);
+}
+
+:root[data-theme-variant='material'] .accordion .node__content:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .accordion .node__label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+:root[data-theme-variant='material'] .accordion .tree-node__chevron {
+  color: var(--color-neutral-foreground3-rest);
+}
+
+:root[data-theme-variant='material'] .accordion--expanded .node__content {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 75%, transparent);
+}
+
+:root[data-theme-variant='material'] .accordion__panel {
+  padding: 0 0.875rem;
+  background: var(--color-neutral-background-rest);
+}
+
+:root[data-theme-variant='material'] .accordion__panel-content {
+  padding: 0.875rem 0 1rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Avatar                                                            */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .avatar {
+  border-width: 1px;
+  border-style: solid;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 160ms ease;
+}
+
+:root[data-theme-variant='material'] .avatar--small {
+  width: 2rem;
+  height: 2rem;
+}
+
+:root[data-theme-variant='material'] .avatar--medium {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+:root[data-theme-variant='material'] .avatar--large {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+:root[data-theme-variant='material'] .avatar--rounded {
+  border-radius: 0.75rem;
+}
+
+:root[data-theme-variant='material'] .avatar--circular {
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .avatar--square {
+  border-radius: 0.25rem;
+}
+
+:root[data-theme-variant='material'] .avatar--secondary.avatar--filled {
+  background: var(--color-neutral-background3-rest);
+  color: var(--color-neutral-foreground-rest);
+  border-color: transparent;
+}
+
+:root[data-theme-variant='material'] .avatar--success.avatar--filled,
+:root[data-theme-variant='material'] .avatar--info.avatar--filled,
+:root[data-theme-variant='material'] .avatar--danger.avatar--filled {
+  color: #fff;
+}
+
+:root[data-theme-variant='material'] .avatar--warning.avatar--filled {
+  color: #1d1b20;
+}
+
+:root[data-theme-variant='material'] .avatar--loading .avatar__loading-overlay {
+  background: color-mix(in srgb, var(--color-neutral-background-rest) 82%, transparent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Toast                                                             */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .toast-container {
+  gap: 0.5rem;
+}
+
+:root[data-theme-variant='material'] .toast {
+  border-radius: 0.875rem;
+  border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 70%, transparent);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.18),
+    0 2px 4px rgba(0, 0, 0, 0.12);
+  padding: 0.875rem 1rem;
+  min-width: 320px;
+}
+
+:root[data-theme-variant='material'] .toast::after {
+  height: 3px;
+  border-radius: 0 0 0.875rem 0.875rem;
+}
+
+:root[data-theme-variant='material'] .toast__title {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+:root[data-theme-variant='material'] .toast__message {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+}
+
+:root[data-theme-variant='material'] .toast--small {
+  min-width: 272px;
+  padding: 0.625rem 0.75rem;
+  gap: 0.5rem;
+}
+
+:root[data-theme-variant='material'] .toast--small .toast__icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+:root[data-theme-variant='material'] .toast--small .toast__title {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+:root[data-theme-variant='material'] .toast--small .toast__message {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+:root[data-theme-variant='material'] .toast--medium {
+  min-width: 320px;
+  padding: 0.875rem 1rem;
+  gap: 0.75rem;
+}
+
+:root[data-theme-variant='material'] .toast--large {
+  min-width: 360px;
+  padding: 1rem 1.125rem;
+  gap: 0.875rem;
+}
+
+:root[data-theme-variant='material'] .toast--large .toast__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+:root[data-theme-variant='material'] .toast--large .toast__title {
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+}
+
+:root[data-theme-variant='material'] .toast--large .toast__message {
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+}
+
+:root[data-theme-variant='material'] .toast__dismiss {
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .toast__dismiss:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .toast--info.toast--tint,
+:root[data-theme-variant='material']
+  .toast--info:not(.toast--filled):not(.toast--outline):not(.toast--subtle):not(
+    .toast--transparent
+  ) {
+  background: color-mix(
+    in srgb,
+    var(--color-shared-blue-background) 80%,
+    var(--color-neutral-background-rest)
+  );
+}
+
+:root[data-theme-variant='material'] .toast--success.toast--tint,
+:root[data-theme-variant='material']
+  .toast--success:not(.toast--filled):not(.toast--outline):not(.toast--subtle):not(
+    .toast--transparent
+  ) {
+  background: color-mix(
+    in srgb,
+    var(--color-shared-green-background) 80%,
+    var(--color-neutral-background-rest)
+  );
+}
+
+:root[data-theme-variant='material'] .toast--warning.toast--tint,
+:root[data-theme-variant='material']
+  .toast--warning:not(.toast--filled):not(.toast--outline):not(.toast--subtle):not(
+    .toast--transparent
+  ) {
+  background: color-mix(
+    in srgb,
+    var(--color-shared-orange-background) 82%,
+    var(--color-neutral-background-rest)
+  );
+}
+
+:root[data-theme-variant='material'] .toast--danger.toast--tint,
+:root[data-theme-variant='material']
+  .toast--danger:not(.toast--filled):not(.toast--outline):not(.toast--subtle):not(
+    .toast--transparent
+  ) {
+  background: color-mix(
+    in srgb,
+    var(--color-shared-red-background) 82%,
+    var(--color-neutral-background-rest)
+  );
+}
+
+/* Filled contrast per variant */
+:root[data-theme-variant='material'] .toast--secondary.toast--filled .toast__title,
+:root[data-theme-variant='material'] .toast--secondary.toast--filled .toast__message,
+:root[data-theme-variant='material'] .toast--secondary.toast--filled .toast__icon,
+:root[data-theme-variant='material'] .toast--secondary.toast--filled .toast__dismiss {
+  color: var(--color-neutral-foreground-rest);
+}
+
+:root[data-theme-variant='material'] .toast--secondary.toast--filled::after {
+  background: color-mix(in srgb, var(--color-neutral-foreground-rest) 65%, transparent);
+}
+
+:root[data-theme-variant='material'] .toast--success.toast--filled,
+:root[data-theme-variant='material'] .toast--info.toast--filled,
+:root[data-theme-variant='material'] .toast--danger.toast--filled {
+  color: #fff;
+}
+
+:root[data-theme-variant='material'] .toast--success.toast--filled .toast__title,
+:root[data-theme-variant='material'] .toast--success.toast--filled .toast__message,
+:root[data-theme-variant='material'] .toast--success.toast--filled .toast__icon,
+:root[data-theme-variant='material'] .toast--success.toast--filled .toast__dismiss,
+:root[data-theme-variant='material'] .toast--info.toast--filled .toast__title,
+:root[data-theme-variant='material'] .toast--info.toast--filled .toast__message,
+:root[data-theme-variant='material'] .toast--info.toast--filled .toast__icon,
+:root[data-theme-variant='material'] .toast--info.toast--filled .toast__dismiss,
+:root[data-theme-variant='material'] .toast--danger.toast--filled .toast__title,
+:root[data-theme-variant='material'] .toast--danger.toast--filled .toast__message,
+:root[data-theme-variant='material'] .toast--danger.toast--filled .toast__icon,
+:root[data-theme-variant='material'] .toast--danger.toast--filled .toast__dismiss {
+  color: #fff;
+}
+
+:root[data-theme-variant='material'] .toast--success.toast--filled::after,
+:root[data-theme-variant='material'] .toast--info.toast--filled::after,
+:root[data-theme-variant='material'] .toast--danger.toast--filled::after {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+:root[data-theme-variant='material'] .toast--success.toast--filled .toast__dismiss:hover,
+:root[data-theme-variant='material'] .toast--info.toast--filled .toast__dismiss:hover,
+:root[data-theme-variant='material'] .toast--danger.toast--filled .toast__dismiss:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+:root[data-theme-variant='material'] .toast--warning.toast--filled {
+  background: #b26a00;
+  border-color: #b26a00;
+  color: #fff;
+}
+
+:root[data-theme-variant='material'] .toast--warning.toast--filled .toast__title,
+:root[data-theme-variant='material'] .toast--warning.toast--filled .toast__message,
+:root[data-theme-variant='material'] .toast--warning.toast--filled .toast__icon,
+:root[data-theme-variant='material'] .toast--warning.toast--filled .toast__dismiss {
+  color: #fff;
+}
+
+:root[data-theme-variant='material'] .toast--warning.toast--filled::after {
+  background: rgba(255, 255, 255, 0.78);
+}
+
+:root[data-theme='dark'][data-theme-variant='material'] .toast--warning.toast--filled,
+:root.dark[data-theme-variant='material'] .toast--warning.toast--filled {
+  background: #d28a17;
+  border-color: #d28a17;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Carousel                                                          */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .carousel {
+  border-radius: 1rem;
+  background: var(--color-neutral-background-rest);
+}
+
+:root[data-theme-variant='material'] .carousel__content {
+  border-radius: 1rem 1rem 0 0;
+}
+
+:root[data-theme-variant='material'] .carousel__track {
+  transition-duration: 260ms;
+}
+
+:root[data-theme-variant='material'] .carousel__overlay {
+  padding: 1.25rem 1rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.62) 0%,
+    rgba(0, 0, 0, 0.2) 60%,
+    transparent 100%
+  );
+}
+
+:root[data-theme-variant='material'] .carousel__title {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+}
+
+:root[data-theme-variant='material'] .carousel__description {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+:root[data-theme-variant='material'] .carousel__navigation {
+  gap: 0.75rem;
+  padding: 0.625rem 1rem 0.875rem;
+}
+
+:root[data-theme-variant='material'] .carousel__control-wrapper .button {
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .carousel__indicator {
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .carousel__indicator:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .carousel__indicator-bar {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: var(--color-neutral-foreground3-rest);
+  opacity: 0.45;
+}
+
+:root[data-theme-variant='material'] .carousel__indicator--active .carousel__indicator-bar {
+  width: 1.25rem;
+  height: 0.375rem;
+  background: var(--color-brand-primary);
+  opacity: 1;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Stepper                                                           */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .stepper {
+  font-family: var(--theme-font-family-base);
+}
+
+:root[data-theme-variant='material'] .stepper-step {
+  border-radius: 0.625rem;
+}
+
+:root[data-theme-variant='material'] .stepper-step:focus-visible .stepper-indicator {
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .stepper-indicator {
+  border-radius: 9999px;
+  border-width: 2px;
+}
+
+:root[data-theme-variant='material'] .stepper-step--active .stepper-indicator,
+:root[data-theme-variant='material'] .stepper-step--completed .stepper-indicator {
+  background: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material']
+  .stepper-step--visited:not(.stepper-step--completed)
+  .stepper-indicator {
+  border-color: var(--color-brand-primary);
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .stepper-label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+}
+
+:root[data-theme-variant='material'] .stepper-description {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+:root[data-theme-variant='material'] .stepper-connector-line {
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .stepper-connector--active .stepper-connector-line,
+:root[data-theme-variant='material'] .stepper-connector--completed .stepper-connector-line {
+  background: var(--color-brand-primary);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Switch                                                            */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .switch-label {
+  font-family: var(--theme-font-family-base);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+:root[data-theme-variant='material'] .switch--unchecked .switch-stroke {
+  fill: color-mix(in srgb, var(--color-neutral-stroke-accessible) 82%, transparent);
+}
+
+:root[data-theme-variant='material'] .switch--unchecked .switch-thumb {
+  fill: var(--color-neutral-stroke-accessible);
+}
+
+:root[data-theme-variant='material'] .switch--checked .switch-background {
+  fill: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .switch--checked .switch-thumb-checked {
+  fill: #ffffff;
+}
+
+:root[data-theme-variant='material']
+  .switch-container:hover:not(:has(.switch-input:disabled))
+  .switch--unchecked
+  .switch-stroke {
+  fill: var(--color-neutral-stroke-hover);
+}
+
+:root[data-theme-variant='material']
+  .switch-container:hover:not(:has(.switch-input:disabled))
+  .switch--checked
+  .switch-background {
+  fill: var(--color-brand-primary-hover);
+}
+
+:root[data-theme-variant='material']
+  .switch-container:active:not(:has(.switch-input:disabled))
+  .switch--checked
+  .switch-background {
+  fill: var(--color-brand-primary-pressed);
+}
+
+:root[data-theme-variant='material'] .switch-input:focus-visible ~ .switch-visual .switch-svg {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .switch--disabled .switch-svg {
+  opacity: 0.56;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Material Color Panel                                                       */
+/* -------------------------------------------------------------------------- */
+
+:root[data-theme-variant='material'] .color-preview {
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-neutral-stroke-rest);
+}
+
+:root[data-theme-variant='material'] .input-wrapper:has(.color-preview) {
+  gap: 0.375rem;
+}
+
+:root[data-theme-variant='material'] .input-wrapper:has(.color-preview) .input {
+  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+:root[data-theme-variant='material'] .input-wrapper:has(.color-preview) .field__actions {
+  gap: 0.25rem;
+  padding-right: 0.375rem;
+}
+
+:root[data-theme-variant='material'] .input-wrapper:has(.color-preview) .field__action {
+  border-radius: 9999px;
+  color: var(--color-neutral-foreground2-rest);
+}
+
+:root[data-theme-variant='material'] .input-wrapper:has(.color-preview) .field__action:hover {
+  background: color-mix(in srgb, var(--color-brand-primary) 10%, transparent);
+  color: var(--color-brand-primary);
+}
+
+:root[data-theme-variant='material'] .input-wrapper:has(.color-preview) .field__action:active {
+  background: color-mix(in srgb, var(--color-brand-primary) 16%, transparent);
+  color: var(--color-brand-primary-pressed);
+}
+
+:root[data-theme-variant='material'] .color-panel {
+  border: 1px solid var(--color-neutral-stroke-rest);
+  border-radius: 1rem;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+:root[data-theme='dark'][data-theme-variant='material'] .color-panel,
+:root.dark[data-theme-variant='material'] .color-panel {
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.34),
+    0 2px 10px rgba(0, 0, 0, 0.26);
+}
+
+:root[data-theme-variant='material'] .color-picker {
+  border-radius: 0.75rem;
+  border-color: var(--color-neutral-stroke-rest);
+}
+
+:root[data-theme-variant='material'] .color-picker__handle {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #fff;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.28),
+    0 2px 6px rgba(0, 0, 0, 0.22);
+}
+
+:root[data-theme-variant='material'] .color-slider__label {
+  font-family: var(--theme-font-family-base);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+:root[data-theme-variant='material'] .color-slider__alpha-wrapper {
+  border-radius: 9999px;
+}
+
+:root[data-theme-variant='material'] .color-slider__input {
+  border-radius: 9999px;
+  border: 1px solid var(--color-neutral-stroke-rest);
+}
+
+:root[data-theme-variant='material'] .color-slider__input--alpha {
+  border: 0;
+}
+
+:root[data-theme-variant='material'] .color-slider__input:focus-visible {
+  outline: none;
+  box-shadow: var(--theme-focus-ring);
+}
+
+:root[data-theme-variant='material'] .color-slider__input::-webkit-slider-thumb {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #fff;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-brand-primary) 72%, transparent),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme-variant='material'] .color-slider__input::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #fff;
+  background: #fff;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-brand-primary) 72%, transparent),
+    0 2px 6px rgba(0, 0, 0, 0.2);
+}

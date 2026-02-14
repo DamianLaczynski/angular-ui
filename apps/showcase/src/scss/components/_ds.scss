@@ -5,6 +5,89 @@
 @use 'utils/variables' as *;
 @use 'utils/mixins' as *;
 
+:root {
+  --ds-header-bg-start: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-background-rest)
+  );
+  --ds-header-bg-mid: var(--color-neutral-background-rest);
+  --ds-header-bg-end: color-mix(
+    in srgb,
+    var(--color-brand-primary) 14%,
+    var(--color-neutral-background-rest)
+  );
+  --ds-header-border: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-stroke-rest)
+  );
+  --ds-header-text: var(--color-neutral-foreground-rest);
+  --ds-header-text-muted: var(--color-neutral-foreground2-rest);
+  --ds-header-accent: var(--color-brand-primary);
+  --ds-header-accent-strong: var(--color-brand-primary-pressed);
+  --ds-header-glow-1: color-mix(in srgb, var(--color-brand-primary) 25%, transparent);
+  --ds-header-glow-2: color-mix(in srgb, var(--color-brand-primary-pressed) 20%, transparent);
+  --ds-header-switcher-bg: color-mix(
+    in srgb,
+    var(--color-neutral-background-rest) 86%,
+    var(--color-brand-primary) 14%
+  );
+  --ds-header-switcher-border: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-stroke-rest)
+  );
+  --ds-header-switcher-button: color-mix(in srgb, var(--color-brand-primary) 12%, transparent);
+  --ds-header-switcher-button-hover: color-mix(
+    in srgb,
+    var(--color-brand-primary) 20%,
+    transparent
+  );
+}
+
+:root[data-theme='dark'],
+:root.dark {
+  --ds-header-bg-start: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-background-rest)
+  );
+  --ds-header-bg-mid: var(--color-neutral-background-rest);
+  --ds-header-bg-end: color-mix(
+    in srgb,
+    var(--color-brand-primary) 14%,
+    var(--color-neutral-background-rest)
+  );
+  --ds-header-border: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-stroke-rest)
+  );
+  --ds-header-text: var(--color-neutral-foreground-rest);
+  --ds-header-text-muted: var(--color-neutral-foreground2-rest);
+  --ds-header-accent: var(--color-brand-primary);
+  --ds-header-accent-strong: var(--color-brand-primary-pressed);
+  --ds-header-glow-1: color-mix(in srgb, var(--color-brand-primary) 25%, transparent);
+  --ds-header-glow-2: color-mix(in srgb, var(--color-brand-primary-pressed) 20%, transparent);
+  --ds-header-switcher-bg: color-mix(
+    in srgb,
+    var(--color-neutral-background-rest) 86%,
+    var(--color-brand-primary) 14%
+  );
+  --ds-header-switcher-border: color-mix(
+    in srgb,
+    var(--color-brand-primary) 18%,
+    var(--color-neutral-stroke-rest)
+  );
+  --ds-header-switcher-button: color-mix(in srgb, var(--color-brand-primary) 12%, transparent);
+  --ds-header-switcher-button-hover: color-mix(
+    in srgb,
+    var(--color-brand-primary) 20%,
+    transparent
+  );
+}
+
 .ds {
   display: flex;
   flex-direction: column;
@@ -22,12 +105,11 @@
     overflow: hidden;
     background: linear-gradient(
       135deg,
-      color-mix(in srgb, var(--color-brand-primary) 18%, var(--color-neutral-background-rest)) 0%,
-      var(--color-neutral-background-rest) 50%,
-      color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-neutral-background-rest)) 100%
+      var(--ds-header-bg-start) 0%,
+      var(--ds-header-bg-mid) 50%,
+      var(--ds-header-bg-end) 100%
     );
-    border-bottom: 2px solid
-      color-mix(in srgb, var(--color-brand-primary) 18%, var(--color-neutral-stroke-rest));
+    border-bottom: 2px solid var(--ds-header-border);
     flex-shrink: 0;
 
     &::before {
@@ -37,11 +119,7 @@
       left: 10%;
       width: 300px;
       height: 300px;
-      background: radial-gradient(
-        circle,
-        color-mix(in srgb, var(--color-brand-primary) 25%, transparent),
-        transparent 70%
-      );
+      background: radial-gradient(circle, var(--ds-header-glow-1), transparent 70%);
       pointer-events: none;
     }
 
@@ -52,11 +130,7 @@
       right: 10%;
       width: 250px;
       height: 250px;
-      background: radial-gradient(
-        circle,
-        color-mix(in srgb, var(--color-brand-primary-pressed) 20%, transparent),
-        transparent 70%
-      );
+      background: radial-gradient(circle, var(--ds-header-glow-2), transparent 70%);
       pointer-events: none;
     }
 
@@ -78,18 +152,18 @@
 
     &__version {
       font-size: $font-size-200;
-      color: var(--color-neutral-foreground2-rest);
+      color: var(--ds-header-text-muted);
     }
 
     &__link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      color: var(--color-neutral-foreground2-rest);
+      color: var(--ds-header-text-muted);
       transition: color $duration-fast $easing-ease-in-out;
 
       &:hover {
-        color: var(--color-brand-primary);
+        color: var(--ds-header-accent);
       }
     }
 
@@ -98,14 +172,14 @@
       z-index: 1;
       font-size: $font-size-500;
       font-weight: $font-weight-semibold;
-      color: var(--color-neutral-foreground-rest);
+      color: var(--ds-header-text);
       margin: 0;
       line-height: 1.2;
       cursor: pointer;
       transition: color $duration-fast $easing-ease-in-out;
 
       &:hover {
-        color: var(--color-brand-primary);
+        color: var(--ds-header-accent);
       }
 
       @include respond-to(small) {
@@ -125,14 +199,9 @@
     align-items: center;
     gap: $spacing-2;
     padding: $spacing-1 $spacing-2;
-    border: 1px solid
-      color-mix(in srgb, var(--color-brand-primary) 18%, var(--color-neutral-stroke-rest));
+    border: 1px solid var(--ds-header-switcher-border);
     border-radius: $border-radius-circular;
-    background: color-mix(
-      in srgb,
-      var(--color-neutral-background-rest) 86%,
-      var(--color-brand-primary) 14%
-    );
+    background: var(--ds-header-switcher-bg);
     box-shadow: $elevation-2;
 
     &__mode {
@@ -142,8 +211,8 @@
       border: 0;
       border-radius: $border-radius-circular;
       padding: $spacing-1 $spacing-3;
-      background: color-mix(in srgb, var(--color-brand-primary) 12%, transparent);
-      color: var(--color-neutral-foreground-rest);
+      background: var(--ds-header-switcher-button);
+      color: var(--ds-header-text);
       font-size: $font-size-200;
       font-weight: $font-weight-medium;
       cursor: pointer;
@@ -153,7 +222,7 @@
 
       &:hover {
         transform: translateY(-1px);
-        background: color-mix(in srgb, var(--color-brand-primary) 20%, transparent);
+        background: var(--ds-header-switcher-button-hover);
       }
 
       @include respond-to(small) {
@@ -173,7 +242,7 @@
 
     &__label {
       font-size: $font-size-200;
-      color: var(--color-neutral-foreground2-rest);
+      color: var(--ds-header-text-muted);
       white-space: nowrap;
 
       @include respond-to(small) {
@@ -191,7 +260,7 @@
       width: 24px;
       height: 24px;
       padding: 0;
-      border: 1px solid color-mix(in srgb, var(--color-neutral-stroke-rest) 75%, transparent);
+      border: 1px solid var(--ds-header-switcher-border);
       border-radius: 50%;
       background: transparent;
       cursor: pointer;
@@ -204,7 +273,7 @@
         border-color: color-mix(
           in srgb,
           var(--variant-primary) 35%,
-          var(--color-neutral-stroke-rest)
+          var(--ds-header-switcher-border)
         );
       }
 
@@ -307,4 +376,17 @@
       }
     }
   }
+}
+
+:root[data-theme-variant] .ds .ds__header .ds__header__title {
+  color: var(--ds-header-text) !important;
+  font-family: $font-family-base !important;
+  font-size: $font-size-500 !important;
+  font-weight: $font-weight-semibold !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+}
+
+:root[data-theme-variant] .ds .ds__header .ds__header__title:hover {
+  color: var(--ds-header-accent) !important;
 }

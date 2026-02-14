@@ -12,7 +12,10 @@
   [size]="size()"
   [inputVariant]="inputVariant()"
 >
-  <div class="input-wrapper" [class]="wrapperClasses">
+  <div
+    class="input-wrapper input-wrapper--color"
+    [class]="wrapperClasses + ' input-wrapper--color'"
+  >
     <!-- Color Preview -->
     @if (value) {
       <ui-icon

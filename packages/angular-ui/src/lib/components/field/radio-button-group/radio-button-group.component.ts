@@ -119,6 +119,14 @@ export class RadioButtonGroupComponent extends FieldComponent implements Control
       }
     }
 
+    if (event.key === 'Home') {
+      nextIndex = focusable[0];
+      event.preventDefault();
+    } else if (event.key === 'End') {
+      nextIndex = focusable[focusable.length - 1];
+      event.preventDefault();
+    }
+
     if (nextIndex !== null) {
       const item = this.items()[nextIndex];
       if (item && !item.disabled) {
@@ -142,13 +150,13 @@ export class RadioButtonGroupComponent extends FieldComponent implements Control
   private getNextIndex(focusable: number[], current: number): number {
     const idx = focusable.indexOf(current);
     if (idx < 0) return focusable[0];
-    if (idx >= focusable.length - 1) return focusable[focusable.length - 1];
+    if (idx >= focusable.length - 1) return focusable[0];
     return focusable[idx + 1];
   }
 
   private getPrevIndex(focusable: number[], current: number): number {
     const idx = focusable.indexOf(current);
-    if (idx <= 0) return focusable[0];
+    if (idx <= 0) return focusable[focusable.length - 1];
     return focusable[idx - 1];
   }
 }

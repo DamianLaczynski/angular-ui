@@ -2,7 +2,7 @@
   [class]="toastClasses()"
   role="alert"
   [attr.aria-live]="variant() === 'danger' ? 'assertive' : 'polite'"
-  [style.--toast-progress-duration]="showProgress() && duration() > 0 ? duration() + 'ms' : 'none'"
+  [style.--toast-progress-duration]="duration() > 0 ? duration() + 'ms' : '0ms'"
 >
   <!-- Icon -->
   @if (showIcon()) {
