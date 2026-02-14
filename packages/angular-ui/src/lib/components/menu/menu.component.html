@@ -15,7 +15,7 @@
     @if (text()) {
       <span class="button__text">{{ text() }}</span>
     }
-    <span class="button__text"><ng-content></ng-content></span>
+    <span class="button__content"><ng-content></ng-content></span>
     @if (shortcut()) {
       <span class="menu-trigger__shortcut">{{ shortcut() }}</span>
     }
@@ -37,7 +37,7 @@
       @if (text()) {
         <span class="button__text">{{ text() }}</span>
       }
-      <span class="button__text"><ng-content></ng-content></span>
+      <span class="button__content"><ng-content></ng-content></span>
       @if (shortcut()) {
         <span class="menu-trigger__shortcut">{{ shortcut() }}</span>
       }
@@ -76,7 +76,7 @@
     @if (text()) {
       <span class="button__text">{{ text() }}</span>
     }
-    <span class="button__text"><ng-content></ng-content></span>
+    <span class="button__content"><ng-content></ng-content></span>
     @if (shortcut()) {
       <span class="menu-trigger__shortcut">{{ shortcut() }}</span>
     }

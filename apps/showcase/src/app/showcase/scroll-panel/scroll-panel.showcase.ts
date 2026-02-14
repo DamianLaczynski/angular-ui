@@ -65,15 +65,24 @@ import type { ScrollPanelOrientation, ScrollPanelBehavior } from 'angular-ui';
                   <div [class]="getOrientationContentClass(orientation)">
                     @for (item of items; track item.id) {
                       <ui-card
-                        [title]="item.title"
-                        [subtitle]="item.subtitle"
-                        [bodyText]="orientation === 'horizontal' ? '' : item.body"
                         [attr.style]="
                           orientation === 'horizontal'
                             ? 'min-width: 300px; flex-shrink: 0;'
                             : 'margin-bottom: 12px;'
                         "
-                      />
+                      >
+                        <div uiCardHeader style="display: flex; flex-direction: column; gap: 2px;">
+                          <strong>{{ item.title }}</strong>
+                          <span
+                            style="font-size: 12px; color: var(--color-neutral-foreground3-rest);"
+                          >
+                            {{ item.subtitle }}
+                          </span>
+                        </div>
+                        @if (orientation !== 'horizontal') {
+                          <p uiCardBody>{{ item.body }}</p>
+                        }
+                      </ui-card>
                     }
                   </div>
                 </ui-scroll-panel>

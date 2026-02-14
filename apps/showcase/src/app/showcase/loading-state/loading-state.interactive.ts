@@ -25,11 +25,10 @@ import { LOADING_STATE_SHOWCASE_CONFIG } from './loading-state.showcase.config';
             [blurContent]="currentBlurContent()"
             [isLoading]="true"
           >
-            <ui-card
-              title="Sample Content"
-              bodyText="This content will be covered by the loading overlay."
-              [showFooter]="false"
-            />
+            <ui-card appearance="filled" ariaLabel="Sample content card">
+              <div uiCardHeader><strong>Sample Content</strong></div>
+              <p uiCardBody>This content will be covered by the loading overlay.</p>
+            </ui-card>
           </ui-loading-state>
         } @else {
           <ui-loading-state

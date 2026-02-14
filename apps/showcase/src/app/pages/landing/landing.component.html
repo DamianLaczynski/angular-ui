@@ -293,13 +293,44 @@
               </div>
             }
             @case ('card') {
-              <div class="landing__carousel__slide__content">
+              <div
+                class="landing__carousel__slide__content landing__carousel__slide__content--card-examples"
+              >
                 <ui-card
-                  title="Card Title"
-                  subtitle="Subtitle"
-                  bodyText="Card content with description"
-                  [showFooter]="false"
-                />
+                  ariaLabel="User profile preview"
+                  class="landing__card-demo landing__card-demo--compact"
+                >
+                  <div uiCardBody class="landing__card-demo__compact-body">
+                    <div class="landing__card-demo__user">
+                      <ui-avatar name="Anna Kowalska" size="small" />
+                      <div class="landing__card-demo__user-info">
+                        <strong>Anna Kowalska</strong>
+                        <span>Product Designer</span>
+                      </div>
+                    </div>
+                  </div>
+                </ui-card>
+
+                <ui-card
+                  ariaLabel="Product card preview"
+                  class="landing__card-demo landing__card-demo--product"
+                  [selectable]="true"
+                  [checkbox]="true"
+                >
+                  <div uiCardHeader class="landing__card-demo__product-header">
+                    <strong>Wireless Headphones X2</strong>
+                    <span>Adaptive ANC, 40h battery, Bluetooth 5.3</span>
+                  </div>
+                  <div uiCardBody class="landing__card-demo__product-media">
+                    <img
+                      src="https://picsum.photos/560/320?random=42"
+                      alt="Wireless headphones on a desk"
+                    />
+                  </div>
+                  <div uiCardFooter class="landing__card-demo__product-footer">
+                    <ui-button variant="primary" size="small">View details</ui-button>
+                  </div>
+                </ui-card>
               </div>
             }
             @case ('accordion') {
