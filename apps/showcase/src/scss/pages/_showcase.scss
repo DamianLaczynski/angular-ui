@@ -1441,11 +1441,46 @@
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: $spacing-6;
       }
+
+      .showcase__section__header-row {
+        gap: $spacing-3;
+      }
+
+      .showcase__example {
+        padding: $spacing-5;
+      }
     }
 
     // Medium breakpoint
     @include respond-to(medium) {
       padding: $spacing-4;
+      max-width: 100%;
+      overflow-x: hidden;
+
+      .showcase__header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: $spacing-3;
+      }
+
+      .showcase__header__main {
+        align-items: flex-start;
+      }
+
+      .showcase__quick-actions {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .showcase__section__header-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .showcase__section__title {
+        margin-bottom: $spacing-4;
+      }
 
       .showcase__grid {
         grid-template-columns: 1fr;
@@ -1456,6 +1491,79 @@
         grid-template-columns: 1fr;
       }
 
+      .showcase__card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-content,
+      .showcase__section,
+      .showcase__stack,
+      .showcase__card,
+      .showcase__card-link {
+        min-width: 0;
+        max-width: 100%;
+      }
+
+      .showcase__controls {
+        gap: $spacing-3;
+        padding: $spacing-3;
+      }
+
+      .showcase__controls label {
+        width: 100%;
+      }
+
+      .showcase__form-field--row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .showcase__example {
+        padding: $spacing-4;
+      }
+
+      .showcase__code {
+        max-width: 100%;
+        overflow-x: auto;
+      }
+
+      .showcase__code code {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .showcase__card,
+      .showcase__card-link {
+        padding: $spacing-4;
+      }
+
+      .showcase__card-link h3,
+      .showcase__card h3 {
+        font-size: $font-size-400;
+      }
+
+      .showcase__button-row {
+        flex-wrap: wrap;
+      }
+
+      .showcase__icons-matrix {
+        grid-template-columns: 96px repeat(6, minmax(112px, 1fr));
+      }
+
+      .showcase__icons-matrix--3-cols {
+        grid-template-columns: 96px repeat(3, minmax(112px, 1fr));
+      }
+
+      .showcase__icons-matrix--4-cols {
+        grid-template-columns: 96px repeat(3, minmax(112px, 1fr));
+      }
+
+      .showcase__icons-matrix__cell {
+        padding: $spacing-1 $spacing-2;
+        min-height: 44px;
+      }
+
       .showcase__color-system__color-group__grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       }
@@ -1464,6 +1572,8 @@
     // Small breakpoint
     @include respond-to(small) {
       padding: $spacing-3;
+      max-width: 100%;
+      overflow-x: hidden;
 
       .showcase__title {
         font-size: $font-size-700;
@@ -1471,6 +1581,107 @@
 
       .showcase__section-title {
         font-size: $font-size-500;
+      }
+
+      .showcase__description {
+        margin-bottom: $spacing-6;
+      }
+
+      .showcase__section {
+        margin-bottom: $spacing-10;
+      }
+
+      .showcase__section__description {
+        font-size: $font-size-300;
+      }
+
+      .showcase__header__main {
+        gap: $spacing-2;
+      }
+
+      .showcase__header__aka,
+      .showcase__header__demo-link {
+        font-size: $font-size-200;
+      }
+
+      .showcase__interactive {
+        padding: $spacing-3;
+      }
+
+      .showcase__interactive__preview {
+        padding: $spacing-3;
+      }
+
+      .showcase__example {
+        padding: $spacing-3;
+      }
+
+      .showcase__card,
+      .showcase__card-link {
+        padding: $spacing-3;
+        border-radius: $border-radius-400;
+      }
+
+      .showcase__item-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: $spacing-1;
+      }
+
+      .showcase__status-pill {
+        margin-inline-start: 0;
+      }
+
+      .showcase__meta {
+        margin-bottom: $spacing-1;
+      }
+
+      .showcase__card-link h3,
+      .showcase__card h3 {
+        font-size: $font-size-300;
+        margin-bottom: $spacing-2;
+      }
+
+      .showcase__card-link p,
+      .showcase__card p,
+      .showcase__card li {
+        font-size: $font-size-300;
+      }
+
+      .showcase__code {
+        padding: $spacing-3;
+      }
+
+      .showcase__code code {
+        font-size: $font-size-200;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+
+      .showcase__controls {
+        padding: $spacing-2;
+      }
+
+      .showcase__icons-matrix {
+        grid-template-columns: 88px repeat(6, minmax(100px, 1fr));
+      }
+
+      .showcase__icons-matrix--3-cols {
+        grid-template-columns: 88px repeat(3, minmax(100px, 1fr));
+      }
+
+      .showcase__icons-matrix--4-cols {
+        grid-template-columns: 88px repeat(3, minmax(100px, 1fr));
+      }
+
+      .showcase__icons-matrix__cell {
+        min-height: 40px;
+        font-size: $font-size-200;
+      }
+
+      .showcase__icons-matrix__cell--label {
+        font-size: $font-size-200;
       }
 
       .showcase__color-system__color-group__grid {
