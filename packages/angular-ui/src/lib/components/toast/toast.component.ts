@@ -35,6 +35,10 @@ export class ToastComponent {
     classes.push(`toast--${this.appearance()}`);
     classes.push(`toast--${this.size()}`);
 
+    if (!this.showProgress() || this.duration() <= 0) {
+      classes.push('toast--no-progress');
+    }
+
     if (!this.visible()) {
       classes.push('toast--hidden');
     }

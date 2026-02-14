@@ -1,6 +1,6 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { ThemeMode, ThemeService } from '@shared/theme/theme.service';
+import { ThemeMode, ThemeService, ThemeVariant } from '@shared/theme/theme.service';
 import { FormsModule } from '@angular/forms';
 import {
   ButtonComponent,
@@ -274,9 +274,20 @@ export class LandingComponent {
   isDarkMode = computed(() => this.themeService.$themeMode() === ThemeMode.Dark);
   themeLabel = computed(() => (this.isDarkMode() ? 'Light mode' : 'Dark mode'));
   themeIcon = computed(() => (this.isDarkMode() ? 'weather_sunny' : 'weather_moon'));
+  readonly themeVariants = this.themeService.themeVariants;
+  currentThemeVariant = computed(() => this.themeService.$themeVariant());
+  currentThemeVariantLabel = computed(
+    () =>
+      this.themeVariants.find(variant => variant.id === this.currentThemeVariant())?.label ??
+      'Theme',
+  );
 
   toggleTheme(): void {
     this.themeService.toggleTheme();
+  }
+
+  setThemeVariant(variant: ThemeVariant): void {
+    this.themeService.setThemeVariant(variant);
   }
 
   navigateToComponents(): void {
