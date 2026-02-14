@@ -76,6 +76,7 @@ const ALL_SHOWCASE_COMPONENTS: ShowcaseComponent[] = [
   { id: 'icon', name: 'Icon', icon: 'star' },
   { id: 'kbd', name: 'Kbd', icon: 'keyboard' },
   { id: 'loading-state', name: 'Loading State', icon: 'arrow_sync' },
+  { id: 'message-bar', name: 'Message Bar', icon: 'alert_badge' },
   { id: 'menu', name: 'Menu', icon: 'group_list' },
   { id: 'nav', name: 'Nav', icon: 'navigation' },
   { id: 'node', name: 'Node', icon: 'circle' },

@@ -1316,6 +1316,12 @@
     gap: $spacing-4;
   }
 
+  &__rows {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+  }
+
   &__list {
     font-size: $font-size-400;
     line-height: 1.7;
