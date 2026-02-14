@@ -19,7 +19,7 @@ import { BADGE_SHOWCASE_CONFIG } from './badge.showcase.config';
     <app-interactive-showcase
       [config]="showcaseConfig"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-badge

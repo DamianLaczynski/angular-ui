@@ -12,7 +12,7 @@ import { TOOLTIP_SHOWCASE_CONFIG } from './tooltip.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="false"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-tooltip

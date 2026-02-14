@@ -17,33 +17,46 @@
         <ui-search
           [placeholder]="placeholder()"
           [size]="'large'"
-          variant="filled"
           [(ngModel)]="_searchQuery"
           [ngModelOptions]="{ standalone: true }"
           (ngModelChange)="onSearchChange($event)"
-          class="command-palette__search-input"
         ></ui-search>
       </div>
 
       <!-- Results -->
-      <div class="command-palette__results">
+      <div
+        class="command-palette__results"
+        role="listbox"
+        [attr.aria-activedescendant]="selectedItemId()"
+        aria-label="Command results"
+      >
         @if (filteredItems().length > 0) {
           @for (group of groupedItems(); track trackByGroupId($index, group)) {
             @if (group.items.length > 0) {
               <!-- Group Header -->
               @if (group.label) {
-                <div class="command-palette__group-header">{{ group.label }}</div>
+                <div class="command-palette__group-header" [id]="groupHeaderId(group)">
+                  {{ group.label }}
+                </div>
               }
 
               <!-- Group Items -->
-              <div class="command-palette__group-items">
+              <div
+                class="command-palette__group-items"
+                role="group"
+                [attr.aria-labelledby]="group.label ? groupHeaderId(group) : null"
+              >
                 @for (item of group.items; track trackByItemId($index, item)) {
                   <button
                     type="button"
+                    role="option"
+                    [id]="itemId(item)"
                     class="command-palette__item"
                     [class.command-palette__item--selected]="isItemSelected(item)"
                     [class.command-palette__item--disabled]="item.disabled"
                     [disabled]="item.disabled"
+                    [attr.aria-selected]="isItemSelected(item)"
+                    [attr.aria-disabled]="item.disabled || null"
                     (click)="onItemClick(item)"
                     [attr.aria-label]="item.description || item.label"
                   >
@@ -62,7 +75,7 @@
 
                     @if (item.disabled) {
                       <div class="command-palette__item-status">
-                        <ui-icon icon="lock_closed" [size]="'small'"></ui-icon>
+                        <ui-icon icon="lock_closed" [size]="'small'" aria-hidden="true"></ui-icon>
                       </div>
                     }
                   </button>

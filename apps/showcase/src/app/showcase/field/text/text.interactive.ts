@@ -14,7 +14,7 @@ import { TEXT_SHOWCASE_CONFIG } from './text.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-text

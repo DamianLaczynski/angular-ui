@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DateComponent, DateFieldType, Size } from 'angular-ui';
@@ -54,7 +54,6 @@ const DATE_TYPES: DateFieldType[] = ['date', 'datetime-local', 'time', 'month', 
                   [label]="dateType"
                   [dateType]="dateType"
                   [size]="dateTypeForm().size"
-                  [disabled]="dateTypeForm().disabled"
                   [readonly]="dateTypeForm().readonly"
                   [required]="dateTypeForm().required"
                   [formControl]="getDateTypeControl(dateType)"
@@ -79,7 +78,6 @@ const DATE_TYPES: DateFieldType[] = ['date', 'datetime-local', 'time', 'month', 
                   [label]="size"
                   [dateType]="sizeForm().dateType"
                   [size]="size"
-                  [disabled]="sizeForm().disabled"
                   [readonly]="sizeForm().readonly"
                   [required]="sizeForm().required"
                   [formControl]="getSizeControl(size)"
@@ -102,7 +100,6 @@ const DATE_TYPES: DateFieldType[] = ['date', 'datetime-local', 'time', 'month', 
                   [label]="state.label"
                   [dateType]="statesForm().dateType"
                   [size]="statesForm().size"
-                  [disabled]="state.disabled"
                   [readonly]="state.readonly"
                   [required]="state.required"
                   [formControl]="getStateControl(state.id)"
@@ -211,6 +208,16 @@ export class DateShowcaseComponent {
   });
   statesForm = computed(() => this.toDateForm(this.statesFormValues()));
 
+  constructor() {
+    effect(() => {
+      this.setControlsDisabled(Object.values(this.dateTypeControls), this.dateTypeForm().disabled);
+    });
+
+    effect(() => {
+      this.setControlsDisabled(Object.values(this.sizeControls), this.sizeForm().disabled);
+    });
+  }
+
   private toDateForm(v: Record<string, unknown>) {
     return {
       dateType: (v['dateType'] as DateFieldType) ?? 'date',
@@ -231,5 +238,18 @@ export class DateShowcaseComponent {
 
   getStateControl(id: string): FormControl<string | null> {
     return this.stateControls[id] ?? new FormControl<string | null>('');
+  }
+
+  private setControlsDisabled(
+    controls: FormControl<string | null>[],
+    shouldDisable: boolean,
+  ): void {
+    for (const control of controls) {
+      if (shouldDisable && control.enabled) {
+        control.disable({ emitEvent: false });
+      } else if (!shouldDisable && control.disabled) {
+        control.enable({ emitEvent: false });
+      }
+    }
   }
 }

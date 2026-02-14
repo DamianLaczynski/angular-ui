@@ -88,14 +88,6 @@ const MENU_CONTROL_DEFS: SharedControlDef[] = [
     group: 'layout',
   },
   {
-    key: 'fullWidth',
-    label: 'Full Width',
-    type: 'switch',
-    description: 'Full width button',
-    defaultValue: false,
-    group: 'layout',
-  },
-  {
     key: 'disabled',
     label: 'Disabled',
     type: 'switch',
@@ -140,7 +132,7 @@ export const MENU_DRAWER_CONFIGS = createDrawerFormConfigs(ALL_CONTROLS, {
   triggerVariant: { excludeKey: 'triggerVariant' },
   appearanceVariant: { excludeKeys: ['appearance', 'variant'] },
   size: { excludeKey: 'size' },
-  states: { excludeKeys: ['disabled', 'selected', 'fullWidth'] },
+  states: { excludeKeys: ['disabled', 'selected'] },
 });
 
 export const MENU_SHOWCASE_CONFIG: ShowcaseConfig = {

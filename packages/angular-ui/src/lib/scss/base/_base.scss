@@ -157,9 +157,9 @@
 
 // Body
 body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+  text-rendering: auto;
   background-color: var(--color-neutral-background-rest);
   color: var(--color-neutral-foreground-rest);
 }

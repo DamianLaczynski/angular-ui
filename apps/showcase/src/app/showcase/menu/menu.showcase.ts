@@ -56,7 +56,7 @@ import { MenuInteractiveComponent } from './menu.interactive';
 
         <app-section-with-drawer
           sectionTitle="Overview"
-          sectionDescription="Matrix of menu trigger combinations: variants and appearances. Use Customize to switch text, icon, and toggle disabled, selected, or fullWidth across all menus."
+          sectionDescription="Matrix of menu trigger combinations: variants and appearances. Use Customize to switch text, icon, and toggle disabled and selected across all menus."
           [formConfig]="overviewDrawerFormConfig"
           [formValues]="overviewFormValues()"
           (formValuesChange)="overviewFormValues.set($event)"
@@ -86,7 +86,6 @@ import { MenuInteractiveComponent } from './menu.interactive';
                       [appearance]="appearance"
                       [size]="overviewForm().size"
                       [shape]="overviewForm().shape"
-                      [fullWidth]="overviewForm().fullWidth"
                       [disabled]="overviewForm().disabled"
                       [selected]="overviewForm().selected"
                       (menuItemClick)="onItemClick($event)"
@@ -149,7 +148,7 @@ import { MenuInteractiveComponent } from './menu.interactive';
                 @for (variant of variants; track variant) {
                   <div class="showcase__icons-matrix__cell">
                     <ui-menu
-                      triggerVariant="dropdown"
+                      [triggerVariant]="appearanceVariantForm().triggerVariant"
                       [text]="appearanceVariantForm().text"
                       [icon]="appearanceVariantForm().icon"
                       [menuItems]="overviewMenuItems"
@@ -178,7 +177,7 @@ import { MenuInteractiveComponent } from './menu.interactive';
           <div class="showcase__grid">
             @for (size of sizes; track size) {
               <ui-menu
-                triggerVariant="dropdown"
+                [triggerVariant]="sizeForm().triggerVariant"
                 [text]="sizeForm().text"
                 [icon]="sizeForm().icon"
                 [menuItems]="overviewMenuItems"
@@ -204,7 +203,7 @@ import { MenuInteractiveComponent } from './menu.interactive';
           <div class="showcase__grid">
             @for (state of statePresets; track state.id) {
               <ui-menu
-                triggerVariant="dropdown"
+                [triggerVariant]="statesForm().triggerVariant"
                 [text]="statesForm().text"
                 [icon]="statesForm().icon"
                 [menuItems]="overviewMenuItems"
@@ -315,7 +314,7 @@ import { MenuInteractiveComponent } from './menu.interactive';
           <h2 class="showcase__section__title">Interactive Demo</h2>
           <p class="showcase__section__description">
             Try all menu options: trigger variant (dropdown, split, button), text, icon, variant,
-            appearance, size, shape. Toggle disabled, selected, fullWidth. Events (menuItemClick,
+            appearance, size, shape. Toggle disabled and selected. Events (menuItemClick,
             primaryClick, menuOpened, menuClosed) are logged below.
           </p>
           <app-menu-interactive />
@@ -390,7 +389,6 @@ export class MenuShowcaseComponent {
     icon: '',
     size: 'medium',
     shape: 'rounded',
-    fullWidth: false,
     disabled: false,
     selected: false,
   });
@@ -402,7 +400,6 @@ export class MenuShowcaseComponent {
       icon: (v['icon'] as IconName) || undefined,
       size: (v['size'] as Size) ?? 'medium',
       shape: (v['shape'] as Shape) ?? 'rounded',
-      fullWidth: !!v['fullWidth'],
       disabled: !!v['disabled'],
       selected: !!v['selected'],
     };
@@ -434,6 +431,7 @@ export class MenuShowcaseComponent {
   });
 
   appearanceVariantFormValues = signal<Record<string, unknown>>({
+    triggerVariant: 'dropdown',
     text: 'Open',
     icon: '',
     size: 'medium',
@@ -445,6 +443,8 @@ export class MenuShowcaseComponent {
   appearanceVariantForm = computed(() => {
     const v = this.appearanceVariantFormValues();
     return {
+      triggerVariant:
+        (v['triggerVariant'] as 'dropdown' | 'split' | 'button' | undefined) ?? 'dropdown',
       text: (v['text'] as string) ?? 'Open',
       icon: (v['icon'] as IconName) || undefined,
       size: (v['size'] as Size) ?? 'medium',
@@ -455,6 +455,7 @@ export class MenuShowcaseComponent {
   });
 
   sizeFormValues = signal<Record<string, unknown>>({
+    triggerVariant: 'dropdown',
     text: 'Open',
     icon: '',
     variant: 'primary',
@@ -469,6 +470,8 @@ export class MenuShowcaseComponent {
     return {
       text: (v['text'] as string) ?? 'Open',
       icon: (v['icon'] as IconName) || undefined,
+      triggerVariant:
+        (v['triggerVariant'] as 'dropdown' | 'split' | 'button' | undefined) ?? 'dropdown',
       variant: (v['variant'] as Variant) ?? 'primary',
       appearance: (v['appearance'] as Appearance) ?? 'filled',
       shape: (v['shape'] as Shape) ?? 'rounded',
@@ -478,6 +481,7 @@ export class MenuShowcaseComponent {
   });
 
   statesFormValues = signal<Record<string, unknown>>({
+    triggerVariant: 'dropdown',
     text: 'Open',
     icon: '',
     variant: 'primary',
@@ -491,6 +495,8 @@ export class MenuShowcaseComponent {
     return {
       text: (v['text'] as string) ?? 'Open',
       icon: (v['icon'] as IconName) || undefined,
+      triggerVariant:
+        (v['triggerVariant'] as 'dropdown' | 'split' | 'button' | undefined) ?? 'dropdown',
       variant: (v['variant'] as Variant) ?? 'primary',
       appearance: (v['appearance'] as Appearance) ?? 'filled',
       size: (v['size'] as Size) ?? 'medium',

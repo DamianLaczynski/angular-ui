@@ -14,7 +14,7 @@ import { DIALOG_SHOWCASE_CONFIG } from './dialog.showcase.config';
       [config]="showcaseConfig"
       [showEventLog]="false"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-button variant="primary" (click)="openDialog()">Open Interactive Dialog</ui-button>

@@ -1,11 +1,6 @@
 import { Component, signal, computed, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  ScrollPanelComponent,
-  ButtonComponent,
-  CardComponent,
-  TableOfContentComponent,
-} from 'angular-ui';
+import { ScrollPanelComponent, ButtonComponent, TableOfContentComponent } from 'angular-ui';
 import {
   SCROLL_PANEL_ORIENTATIONS,
   SCROLL_PANEL_BEHAVIORS,
@@ -13,6 +8,7 @@ import {
 } from '@shared/utils/showcase/component-options.utils';
 import { SectionWithDrawerComponent } from '@shared/components/section-with-drawer';
 import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
+import { ShowcaseDemoCardComponent } from '@shared/components/showcase-demo-card';
 import { SCROLL_PANEL_DRAWER_CONFIGS } from './scroll-panel.showcase.config';
 import { ScrollPanelInteractiveComponent } from './scroll-panel.interactive';
 import type { ScrollPanelOrientation, ScrollPanelBehavior } from 'angular-ui';
@@ -22,11 +18,11 @@ import type { ScrollPanelOrientation, ScrollPanelBehavior } from 'angular-ui';
   imports: [
     ScrollPanelComponent,
     ButtonComponent,
-    CardComponent,
     TableOfContentComponent,
     CommonModule,
     SectionWithDrawerComponent,
     ShowcaseHeaderComponent,
+    ShowcaseDemoCardComponent,
     ScrollPanelInteractiveComponent,
   ],
   template: `
@@ -64,16 +60,21 @@ import type { ScrollPanelOrientation, ScrollPanelBehavior } from 'angular-ui';
                 >
                   <div [class]="getOrientationContentClass(orientation)">
                     @for (item of items; track item.id) {
-                      <ui-card
-                        [title]="item.title"
-                        [subtitle]="item.subtitle"
-                        [bodyText]="orientation === 'horizontal' ? '' : item.body"
-                        [attr.style]="
-                          orientation === 'horizontal'
-                            ? 'min-width: 300px; flex-shrink: 0;'
-                            : 'margin-bottom: 12px;'
-                        "
-                      />
+                      <div
+                        class="scroll-panel-card-wrapper"
+                        [class.scroll-panel-card-wrapper--horizontal]="orientation === 'horizontal'"
+                      >
+                        <app-showcase-demo-card
+                          [title]="item.title"
+                          [subtitle]="item.subtitle"
+                          [badge]="orientation | titlecase"
+                          appearance="outline"
+                        >
+                          @if (orientation !== 'horizontal') {
+                            <p>{{ item.body }}</p>
+                          }
+                        </app-showcase-demo-card>
+                      </div>
                     }
                   </div>
                 </ui-scroll-panel>
@@ -100,7 +101,14 @@ import type { ScrollPanelOrientation, ScrollPanelBehavior } from 'angular-ui';
                 >
                   <div class="scroll-panel-demo-content">
                     @for (item of shortItems; track item.id) {
-                      <p class="scroll-panel-demo-item">{{ item.title }}</p>
+                      <div class="scroll-panel-card-wrapper">
+                        <app-showcase-demo-card
+                          [title]="item.title"
+                          subtitle="Compact row item"
+                          [badge]="behavior | titlecase"
+                          appearance="subtle"
+                        />
+                      </div>
                     }
                   </div>
                 </ui-scroll-panel>
@@ -127,7 +135,14 @@ import type { ScrollPanelOrientation, ScrollPanelBehavior } from 'angular-ui';
                 >
                   <div class="scroll-panel-demo-content scroll-panel-demo-content--vertical">
                     @for (item of items; track item.id) {
-                      <p class="scroll-panel-demo-item">{{ item.title }} - {{ item.subtitle }}</p>
+                      <div class="scroll-panel-card-wrapper">
+                        <app-showcase-demo-card
+                          [title]="item.title"
+                          [subtitle]="item.subtitle"
+                          [badge]="preset.label"
+                          appearance="filled-alternative"
+                        />
+                      </div>
                     }
                   </div>
                 </ui-scroll-panel>
@@ -149,9 +164,13 @@ import type { ScrollPanelOrientation, ScrollPanelBehavior } from 'angular-ui';
             <ui-scroll-panel #programmaticScroll maxHeight="400px">
               <div class="scroll-panel-demo-content scroll-panel-demo-content--vertical">
                 @for (item of items; track item.id) {
-                  <p class="scroll-panel-demo-item">
-                    {{ item.id }}. {{ item.title }} - {{ item.subtitle }}
-                  </p>
+                  <div class="scroll-panel-card-wrapper">
+                    <app-showcase-demo-card
+                      [title]="item.id + '. ' + item.title"
+                      [subtitle]="item.subtitle"
+                      appearance="outline"
+                    />
+                  </div>
                 }
               </div>
             </ui-scroll-panel>
@@ -173,7 +192,13 @@ import type { ScrollPanelOrientation, ScrollPanelBehavior } from 'angular-ui';
             >
               <div class="scroll-panel-demo-content scroll-panel-demo-content--vertical">
                 @for (item of items; track item.id) {
-                  <p class="scroll-panel-demo-item">{{ item.title }} - {{ item.subtitle }}</p>
+                  <div class="scroll-panel-card-wrapper">
+                    <app-showcase-demo-card
+                      [title]="item.title"
+                      [subtitle]="item.subtitle"
+                      appearance="outline"
+                    />
+                  </div>
                 }
               </div>
             </ui-scroll-panel>

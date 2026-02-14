@@ -6,9 +6,9 @@ import {
   SplitterPanel,
   SplitterResizeEvent,
 } from 'angular-ui';
-import { CardComponent } from 'angular-ui';
 import { TableOfContentComponent } from 'angular-ui';
 import { ShowcaseHeaderComponent } from '@shared/components/showcase-header';
+import { ShowcaseDemoCardComponent } from '@shared/components/showcase-demo-card';
 import { SplitterInteractiveComponent } from './splitter.interactive';
 
 @Component({
@@ -17,9 +17,9 @@ import { SplitterInteractiveComponent } from './splitter.interactive';
     CommonModule,
     SplitterComponent,
     SplitterPanelDirective,
-    CardComponent,
     TableOfContentComponent,
     ShowcaseHeaderComponent,
+    ShowcaseDemoCardComponent,
     SplitterInteractiveComponent,
   ],
   template: `
@@ -55,42 +55,50 @@ import { SplitterInteractiveComponent } from './splitter.interactive';
                   (panelResize)="onPanelResize($event)"
                 >
                   <ng-template uiSplitterPanel="panel-1">
-                    <div class="panel-content">
-                      <ui-card>
-                        <div class="card-content">
-                          <h3>Panel 1</h3>
-                          <p>This is the left panel. It has a minimum width of 200px.</p>
-                          <p>
-                            Try resizing by dragging the gutter or using keyboard navigation (Tab +
-                            Arrow keys).
-                          </p>
-                          <p>Current size: {{ panelSizes()[0] | number: '1.0-1' }}%</p>
-                        </div>
-                      </ui-card>
+                    <div class="splitter-panel-content">
+                      <app-showcase-demo-card
+                        title="Panel 1"
+                        subtitle="Left panel with min width 200px"
+                        badge="Horizontal"
+                        appearance="outline"
+                      >
+                        <p>Resize using gutter drag or keyboard (Tab + Arrow keys).</p>
+                        <p class="splitter-panel-stat">
+                          Current size: {{ panelSizes()[0] | number: '1.0-1' }}%
+                        </p>
+                      </app-showcase-demo-card>
                     </div>
                   </ng-template>
 
                   <ng-template uiSplitterPanel="panel-2">
-                    <div class="panel-content">
-                      <ui-card>
-                        <div class="card-content">
-                          <h3>Panel 2</h3>
-                          <p>This is the middle panel with no size restrictions.</p>
-                          <p>Current size: {{ panelSizes()[1] | number: '1.0-1' }}%</p>
-                        </div>
-                      </ui-card>
+                    <div class="splitter-panel-content">
+                      <app-showcase-demo-card
+                        title="Panel 2"
+                        subtitle="Flexible middle panel"
+                        badge="Resizable"
+                        appearance="filled-alternative"
+                      >
+                        <p>This panel has no min/max constraints.</p>
+                        <p class="splitter-panel-stat">
+                          Current size: {{ panelSizes()[1] | number: '1.0-1' }}%
+                        </p>
+                      </app-showcase-demo-card>
                     </div>
                   </ng-template>
 
                   <ng-template uiSplitterPanel="panel-3">
-                    <div class="panel-content">
-                      <ui-card>
-                        <div class="card-content">
-                          <h3>Panel 3</h3>
-                          <p>This is the right panel. It has a maximum width of 400px.</p>
-                          <p>Current size: {{ panelSizes()[2] | number: '1.0-1' }}%</p>
-                        </div>
-                      </ui-card>
+                    <div class="splitter-panel-content">
+                      <app-showcase-demo-card
+                        title="Panel 3"
+                        subtitle="Right panel with max width 400px"
+                        badge="Constrained"
+                        appearance="outline"
+                      >
+                        <p>Useful for side panels that should not grow too wide.</p>
+                        <p class="splitter-panel-stat">
+                          Current size: {{ panelSizes()[2] | number: '1.0-1' }}%
+                        </p>
+                      </app-showcase-demo-card>
                     </div>
                   </ng-template>
                 </ui-splitter>
@@ -112,26 +120,34 @@ import { SplitterInteractiveComponent } from './splitter.interactive';
                   (panelResize)="onVerticalPanelResize($event)"
                 >
                   <ng-template uiSplitterPanel="top-panel">
-                    <div class="panel-content">
-                      <ui-card>
-                        <div class="card-content">
-                          <h3>Top Panel</h3>
-                          <p>This is the top panel.</p>
-                          <p>Current size: {{ verticalPanelSizes()[0] | number: '1.0-1' }}%</p>
-                        </div>
-                      </ui-card>
+                    <div class="splitter-panel-content">
+                      <app-showcase-demo-card
+                        title="Top Panel"
+                        subtitle="Upper region"
+                        badge="Vertical"
+                        appearance="outline"
+                      >
+                        <p>Ideal for headers, filters, or summary widgets.</p>
+                        <p class="splitter-panel-stat">
+                          Current size: {{ verticalPanelSizes()[0] | number: '1.0-1' }}%
+                        </p>
+                      </app-showcase-demo-card>
                     </div>
                   </ng-template>
 
                   <ng-template uiSplitterPanel="bottom-panel">
-                    <div class="panel-content">
-                      <ui-card>
-                        <div class="card-content">
-                          <h3>Bottom Panel</h3>
-                          <p>This is the bottom panel. It has a minimum height of 150px.</p>
-                          <p>Current size: {{ verticalPanelSizes()[1] | number: '1.0-1' }}%</p>
-                        </div>
-                      </ui-card>
+                    <div class="splitter-panel-content">
+                      <app-showcase-demo-card
+                        title="Bottom Panel"
+                        subtitle="Lower region with min height 150px"
+                        badge="Vertical"
+                        appearance="filled-alternative"
+                      >
+                        <p>Keeps enough space for content-heavy sections.</p>
+                        <p class="splitter-panel-stat">
+                          Current size: {{ verticalPanelSizes()[1] | number: '1.0-1' }}%
+                        </p>
+                      </app-showcase-demo-card>
                     </div>
                   </ng-template>
                 </ui-splitter>
@@ -154,60 +170,67 @@ import { SplitterInteractiveComponent } from './splitter.interactive';
                   [gutterSize]="6"
                 >
                   <ng-template uiSplitterPanel="left">
-                    <div class="panel-content">
-                      <ui-card>
-                        <div class="card-content">
-                          <h3>Sidebar</h3>
-                          <p>This is a fixed-width sidebar (min 150px, max 300px).</p>
-                          <ul>
-                            <li>Navigation Item 1</li>
-                            <li>Navigation Item 2</li>
-                            <li>Navigation Item 3</li>
-                            <li>Navigation Item 4</li>
-                          </ul>
-                        </div>
-                      </ui-card>
+                    <div class="splitter-panel-content">
+                      <app-showcase-demo-card
+                        title="Sidebar"
+                        subtitle="Min 150px / max 300px"
+                        badge="Navigation"
+                        appearance="outline"
+                      >
+                        <ul class="splitter-panel-list">
+                          <li>Navigation Item 1</li>
+                          <li>Navigation Item 2</li>
+                          <li>Navigation Item 3</li>
+                          <li>Navigation Item 4</li>
+                        </ul>
+                      </app-showcase-demo-card>
                     </div>
                   </ng-template>
 
                   <ng-template uiSplitterPanel="main">
-                    <div class="panel-content" style="padding: 0;">
+                    <div class="splitter-panel-content splitter-panel-content--flush">
                       <ui-splitter
                         [panels]="nestedInnerPanels()"
                         orientation="vertical"
                         [gutterSize]="6"
                       >
                         <ng-template uiSplitterPanel="header">
-                          <div class="panel-content">
-                            <ui-card>
-                              <div class="card-content">
-                                <h3>Header</h3>
-                                <p>This is the header section with minimum height of 100px.</p>
-                              </div>
-                            </ui-card>
+                          <div class="splitter-panel-content">
+                            <app-showcase-demo-card
+                              title="Header"
+                              subtitle="Minimum height 100px"
+                              badge="Nested"
+                              appearance="outline"
+                            >
+                              <p>Place summary controls or quick actions here.</p>
+                            </app-showcase-demo-card>
                           </div>
                         </ng-template>
 
                         <ng-template uiSplitterPanel="content">
-                          <div class="panel-content">
-                            <ui-card>
-                              <div class="card-content">
-                                <h3>Main Content</h3>
-                                <p>This is the main content area.</p>
-                                <p>It takes up the remaining vertical space.</p>
-                              </div>
-                            </ui-card>
+                          <div class="splitter-panel-content">
+                            <app-showcase-demo-card
+                              title="Main Content"
+                              subtitle="Flexible center panel"
+                              badge="Nested"
+                              appearance="filled-alternative"
+                            >
+                              <p>This area expands to fill remaining vertical space.</p>
+                              <p>Perfect for editors, tables, or dashboards.</p>
+                            </app-showcase-demo-card>
                           </div>
                         </ng-template>
 
                         <ng-template uiSplitterPanel="footer">
-                          <div class="panel-content">
-                            <ui-card>
-                              <div class="card-content">
-                                <h3>Footer</h3>
-                                <p>Fixed height footer (min 80px, max 150px).</p>
-                              </div>
-                            </ui-card>
+                          <div class="splitter-panel-content">
+                            <app-showcase-demo-card
+                              title="Footer"
+                              subtitle="Min 80px / max 150px"
+                              badge="Nested"
+                              appearance="outline"
+                            >
+                              <p>Use this zone for status info and secondary controls.</p>
+                            </app-showcase-demo-card>
                           </div>
                         </ng-template>
                       </ui-splitter>

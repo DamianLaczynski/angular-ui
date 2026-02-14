@@ -24,7 +24,7 @@ import type { SectionDrawerFormControl } from './section-with-drawer.types';
   template: `
     <div class="showcase__section">
       <div class="showcase__section__header-row">
-        <h2 class="showcase__section__title">{{ sectionTitle() }}</h2>
+        <h2 class="showcase__section__title" [id]="sectionHeadingId()">{{ sectionTitle() }}</h2>
         <ui-button
           variant="secondary"
           appearance="outline"
@@ -97,9 +97,13 @@ export class SectionWithDrawerComponent {
 
   drawerVisible = model(false);
 
+  sectionHeadingId(): string {
+    const sectionSlug = this.slugify(this.sectionTitle());
+    return `${sectionSlug || 'untitled'}`;
+  }
+
   fieldId(key: string): string {
-    const slug = this.sectionTitle().toLowerCase().replace(/\s+/g, '-');
-    return `${slug}-form-${key}`;
+    return `${this.sectionHeadingId()}-form-${key}`;
   }
 
   toRadioItems(options: { value: string | number | boolean; label: string }[]): RadioButtonItem[] {
@@ -112,5 +116,14 @@ export class SectionWithDrawerComponent {
 
   onControlChange(key: string, value: unknown): void {
     this.formValuesChange.emit({ ...this.formValues(), [key]: value });
+  }
+
+  private slugify(value: string): string {
+    return value
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
   }
 }

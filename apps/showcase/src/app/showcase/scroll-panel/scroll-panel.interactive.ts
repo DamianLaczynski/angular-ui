@@ -1,20 +1,27 @@
 import { Component, signal, computed, viewChild } from '@angular/core';
-import { ScrollPanelComponent, CardComponent } from 'angular-ui';
+import { ScrollPanelComponent } from 'angular-ui';
 import { InteractiveShowcaseComponent } from '@shared/components/interactive-showcase';
+import { ShowcaseDemoCardComponent } from '@shared/components/showcase-demo-card';
 import type { ShowcaseConfig } from '@shared/components/interactive-showcase';
 import { SCROLL_PANEL_SHOWCASE_CONFIG } from './scroll-panel.showcase.config';
 import type { ScrollPanelOrientation, ScrollPanelBehavior } from 'angular-ui';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-scroll-panel-interactive',
-  imports: [ScrollPanelComponent, CardComponent, InteractiveShowcaseComponent],
+  imports: [
+    ScrollPanelComponent,
+    InteractiveShowcaseComponent,
+    ShowcaseDemoCardComponent,
+    TitleCasePipe,
+  ],
   template: `
     <app-interactive-showcase
       #showcase
       [config]="showcaseConfig"
       [showEventLog]="true"
       (valuesChange)="onValuesChange($event)"
-      (reset)="onReset()"
+      (resetRequested)="onReset()"
     >
       <div preview>
         <ui-scroll-panel
@@ -26,16 +33,23 @@ import type { ScrollPanelOrientation, ScrollPanelBehavior } from 'angular-ui';
         >
           <div [class]="getContentClass()">
             @for (item of demoItems; track item.id) {
-              <ui-card
-                [title]="item.title"
-                [subtitle]="item.subtitle"
-                [bodyText]="currentOrientation() === 'horizontal' ? '' : item.body"
-                [attr.style]="
+              <div
+                class="scroll-panel-card-wrapper"
+                [class.scroll-panel-card-wrapper--horizontal]="
                   currentOrientation() === 'horizontal'
-                    ? 'min-width: 300px; flex-shrink: 0;'
-                    : 'margin-bottom: 12px;'
                 "
-              />
+              >
+                <app-showcase-demo-card
+                  [title]="item.title"
+                  [subtitle]="item.subtitle"
+                  [badge]="currentOrientation() | titlecase"
+                  appearance="outline"
+                >
+                  @if (currentOrientation() !== 'horizontal') {
+                    <p>{{ item.body }}</p>
+                  }
+                </app-showcase-demo-card>
+              </div>
             }
           </div>
         </ui-scroll-panel>

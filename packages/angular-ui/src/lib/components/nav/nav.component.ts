@@ -1,10 +1,20 @@
-import { Component, input, output, TemplateRef } from '@angular/core';
+import {
+  Component,
+  input,
+  output,
+  TemplateRef,
+  ElementRef,
+  inject,
+  effect,
+  OnDestroy,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TreeNode, TreeNodeComponent } from '../tree-node/tree-node.component';
 import { NavSectionHeaderComponent } from './nav-section-header.component';
 import { DividerComponent } from '../divider';
 import { Size, Shape, ChevronPosition, Appearance, Orientation, Variant } from '../utils';
 import { IconName } from '../icon';
+import { scrollSelectedNavItemIntoView } from './nav-scroll.utils';
 
 export interface NavNode<T extends NavNode<T> = NavNode<any>> extends TreeNode<T> {
   isDivider?: boolean;
@@ -25,9 +35,14 @@ export interface NavNode<T extends NavNode<T> = NavNode<any>> extends TreeNode<T
   `,
   imports: [CommonModule, TreeNodeComponent, NavSectionHeaderComponent, DividerComponent],
 })
-export class NavComponent {
+export class NavComponent implements OnDestroy {
+  private readonly elementRef = inject(ElementRef<HTMLElement>);
+  private scrollFrameId?: number;
+  private retryTimeoutId?: number;
+
   // Configuration inputs
   collapsedWidth = input<number>(56);
+  autoScrollToSelected = input<boolean>(true);
 
   items = input<NavNode[]>([]);
 
@@ -49,6 +64,28 @@ export class NavComponent {
   contentTemplate = input<TemplateRef<any> | null>(null);
 
   nodeClick = output<NavNode>();
+
+  constructor() {
+    effect(() => {
+      if (!this.autoScrollToSelected()) {
+        return;
+      }
+
+      this.items();
+      this.scheduleScrollToSelected();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.scrollFrameId !== undefined) {
+      cancelAnimationFrame(this.scrollFrameId);
+      this.scrollFrameId = undefined;
+    }
+    if (this.retryTimeoutId !== undefined) {
+      clearTimeout(this.retryTimeoutId);
+      this.retryTimeoutId = undefined;
+    }
+  }
 
   // Handle item click
   onItemClick(item: NavNode): void {
@@ -79,5 +116,27 @@ export class NavComponent {
 
   getItemSize(item: NavNode): Size {
     return item.size || this.size();
+  }
+
+  private scheduleScrollToSelected(retriesLeft: number = 4): void {
+    if (this.scrollFrameId !== undefined) {
+      cancelAnimationFrame(this.scrollFrameId);
+    }
+    if (this.retryTimeoutId !== undefined) {
+      clearTimeout(this.retryTimeoutId);
+      this.retryTimeoutId = undefined;
+    }
+
+    this.scrollFrameId = requestAnimationFrame(() => {
+      const didScroll = scrollSelectedNavItemIntoView(this.elementRef.nativeElement);
+      this.scrollFrameId = undefined;
+
+      if (!didScroll && retriesLeft > 0) {
+        this.retryTimeoutId = window.setTimeout(() => {
+          this.retryTimeoutId = undefined;
+          this.scheduleScrollToSelected(retriesLeft - 1);
+        }, 50);
+      }
+    });
   }
 }
