@@ -25,7 +25,6 @@ import { MENU_SHOWCASE_CONFIG } from './menu.showcase.config';
           [appearance]="currentAppearance()"
           [size]="currentSize()"
           [shape]="currentShape()"
-          [fullWidth]="currentFullWidth()"
           [disabled]="currentDisabled()"
           [selected]="currentSelected()"
           [ariaLabel]="currentAriaLabel()"
@@ -59,7 +58,6 @@ export class MenuInteractiveComponent {
     appearance: 'filled',
     size: 'medium',
     shape: 'rounded',
-    fullWidth: false,
     disabled: false,
     selected: false,
     ariaLabel: 'Open menu',
@@ -78,7 +76,6 @@ export class MenuInteractiveComponent {
   currentAppearance = computed(() => this.values()['appearance'] as Appearance);
   currentSize = computed(() => this.values()['size'] as Size);
   currentShape = computed(() => (this.values()['shape'] as Shape) ?? 'rounded');
-  currentFullWidth = computed(() => this.values()['fullWidth'] as boolean);
   currentDisabled = computed(() => this.values()['disabled'] as boolean);
   currentSelected = computed(() => this.values()['selected'] as boolean);
   currentAriaLabel = computed(() => (this.values()['ariaLabel'] as string) ?? 'Open menu');

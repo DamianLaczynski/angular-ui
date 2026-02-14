@@ -10,7 +10,7 @@
     (click)="onTriggerClick($event)"
   >
     @if (icon()) {
-      <ui-icon [icon]="icon()!" [size]="size()" variant="regular" />
+      <ui-icon [icon]="icon()!" [size]="size()" [variant]="selected() ? 'filled' : 'regular'" />
     }
     @if (text()) {
       <span class="button__text">{{ text() }}</span>
@@ -42,7 +42,6 @@
         <span class="menu-trigger__shortcut">{{ shortcut() }}</span>
       }
     </button>
-    <div class="menu-trigger-split__divider" aria-hidden="true"></div>
     <button
       #splitDropdownPart
       type="button"
